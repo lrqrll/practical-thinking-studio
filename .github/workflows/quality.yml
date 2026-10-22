@@ -19,6 +19,8 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm test
       - run: npm audit --audit-level=high
+      - name: Verify deployed Pages baseline with TLS verification
+        run: node scripts/live-smoke.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

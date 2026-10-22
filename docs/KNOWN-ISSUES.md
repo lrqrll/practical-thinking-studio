@@ -16,7 +16,7 @@
 
 ## 待驗收／限制
 
-- **RELEASE-01（P1 發布門檻）**：GitHub API 與公開 Pages 請求目前被執行環境以 Forbidden／403 阻擋。尚未取得實際 Pages 設定、GitHub Actions 結果或部署後驗證；本機通過不等於線上通過。環境草稿已加入 api.github.com、lrqrll.github.io，需套用後重試具體操作。這不代表已確認需要新的 GitHub token。
+- **RELEASE-01（P1 發布門檻）**：PR #4 首次 GitHub Actions 未通過，正在調查；不得合併發布。GitHub API／Pages HTTPS 存取已恢復，確認 Pages 從 main 根目錄部署；CI 日誌下載的額外目的地主機仍受環境限制，已新增 GitHub reporter 讓失敗原因直接出現在可讀的 check annotations。候選版尚未部署，不能把現有 3.2.0 網站當成候選版的部署驗證。
 - **COMPAT-01（P2）**：File System Access 的實機選擇器、OS 權限拒絕、Firefox／Safari 下載匯入替代路徑尚未完成實機驗收。自動測試驗證 Chromium UI 和 API 替身協定，不冒稱已測 OS 對話框。
 - **PRINT-01（P2）**：已驗證列印 frame 與由同內容產生的 PDF 結構；實際列印視窗、實體印表機、Word／LibreOffice 排版精確度仍需發布前檢視，不能保證完全還原 DOCX 版型。
 - **VENDOR-01（P2）**：vendor bundle 缺少可重建的原始 lockfile／build 腳本；授權清單含多個版本，不能據此推定實際 bundle 精確版本。npm audit 僅涵蓋新加入的 QA 依賴，不能代表所有嵌入式依賴已稽核。

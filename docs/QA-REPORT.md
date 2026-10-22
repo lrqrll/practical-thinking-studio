@@ -50,6 +50,6 @@ npm audit --audit-level=high
 
 ## 未驗證與發布門檻
 
-GitHub API／Pages 目前遭環境 Forbidden／403，尚不能證實實際 Pages 部署設定、遠端 Actions 或部署後行為。本機結果不代表遠端已通過。原生 OS 選擇器／權限、列印視窗、Word／LibreOffice 排版、Safari／Firefox／真實手機與螢幕閱讀器未驗收。PDF 測試沒有冒稱已完成 OS 的「另存 PDF」視窗操作。
+重新檢查後 GitHub API／Pages HTTPS 已可存取，確認 Pages 是 legacy 模式、來源 main 根目錄，現有網站仍為 3.2.0。草稿 PR #4 已建立；首次遠端 Actions 失敗，正在取得診斷，不能稱遠端已通過。原生 OS 選擇器／權限、列印視窗、Word／LibreOffice 排版、Safari／Firefox／真實手機與螢幕閱讀器未驗收。PDF 測試沒有冒稱已完成 OS 的「另存 PDF」視窗操作。
 
 詳細限制與分級見 KNOWN-ISSUES.md。**目前不得正式發布或開始大型編輯器**；先解除 RELEASE-01 並完成發布驗收，再依 ROADMAP 前進。
