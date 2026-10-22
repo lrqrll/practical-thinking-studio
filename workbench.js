@@ -1,5 +1,4 @@
 'use strict';
-const TOOL_LIST=[['budget','預算試算'],['tasks','任務管理'],['report','工作報告'],['quotes','報價比較'],['slides','簡報大綱'],['minutes','會議紀錄']];
 function workDraft(k){return state.drafts['work-'+k]||'';}
 function workField(k,label,hint='',rows=3){return '<label for="work-'+k+'">'+label+'</label><textarea id="work-'+k+'" data-work="'+k+'" rows="'+rows+'" placeholder="'+esc(hint)+'">'+esc(workDraft(k))+'</textarea>';}
 function quoteData(){try{const q=JSON.parse(workDraft('quotes'));if(Array.isArray(q)&&q.length===2&&q.every(x=>x&&['name','base','delivery','extra','tax','scope','date','terms'].every(k=>typeof x[k]==='string')))return q;}catch(e){}return [{name:'',base:'',delivery:'',extra:'',tax:'',scope:'',date:'',terms:''},{name:'',base:'',delivery:'',extra:'',tax:'',scope:'',date:'',terms:''}];}
