@@ -338,5 +338,15 @@
       "status": "passed",
       "duration_ms": 849
     }
-  ]
+  ],
+  "remote_ci": {
+    "commit": "15c9285de62e1d9c7f646c34e265d895469459da",
+    "run_url": "https://github.com/lrqrll/practical-thinking-studio/actions/runs/39820642271",
+    "conclusion": "success",
+    "browser_passed": 46,
+    "browser_duration_seconds": 29.7,
+    "deployed_baseline_smoke": "passed via GitHub runner with TLS verification",
+    "earlier_failed_run": 39820174844,
+    "earlier_failure_diagnosis": "blocked downloading logs/artifact; retain release gate"
+  }
 }

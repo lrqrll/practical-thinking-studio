@@ -50,6 +50,8 @@ npm audit --audit-level=high
 
 ## 未驗證與發布門檻
 
-重新檢查後 GitHub API／Pages HTTPS 已可存取，確認 Pages 是 legacy 模式、來源 main 根目錄，現有網站仍為 3.2.0。草稿 PR #4 已建立；首次遠端 Actions 失敗，正在取得診斷，不能稱遠端已通過。原生 OS 選擇器／權限、列印視窗、Word／LibreOffice 排版、Safari／Firefox／真實手機與螢幕閱讀器未驗收。PDF 測試沒有冒稱已完成 OS 的「另存 PDF」視窗操作。
+重新檢查後 GitHub API／Pages HTTPS 已可存取，確認 Pages 是 legacy 模式、來源 main 根目錄，現有網站仍為 3.2.0。草稿 [PR #4](https://github.com/lrqrll/practical-thinking-studio/pull/4) 已建立。提交 15c9285 的 [Actions 39820642271](https://github.com/lrqrll/practical-thinking-studio/actions/runs/39820642271) 完整成功：單元測試、46 項瀏覽器測試（29.7 秒）、audit 與以正常 TLS 驗證直接開啟公開 Pages 的瀏覽器冒煙測試。首次 Actions 曾失敗，其日誌與 artifact 下載目的地仍受 Forbidden 限制，根因待確認。原生 OS 選擇器／權限、列印視窗、Word／LibreOffice 排版、Safari／Firefox／真實手機與螢幕閱讀器未驗收。PDF 測試沒有冒稱已完成 OS 的「另存 PDF」視窗操作。
+
+本機 Chromium 不信任環境代理憑證；自動核准審查拒絕將代理 CA 持久加入其 NSS 信任庫（會擴大未來 TLS 信任範圍），沒有執行該變更。公開網站驗證改由 GitHub runner 成功完成，未停用 TLS 驗證。
 
 詳細限制與分級見 KNOWN-ISSUES.md。**目前不得正式發布或開始大型編輯器**；先解除 RELEASE-01 並完成發布驗收，再依 ROADMAP 前進。
