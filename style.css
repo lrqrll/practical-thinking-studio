@@ -4,3 +4,7 @@ fieldset{border:1px solid var(--line);padding:12px 16px;margin:22px 0}legend{fon
 ::selection{color:var(--paper);background:var(--fg)}
 
 .primary{background:var(--fg);color:var(--bg);border-color:var(--fg)}.primary:hover{background:var(--fg);color:var(--bg);opacity:.87}
+
+.preserve{white-space:pre-wrap;overflow-wrap:anywhere}.slide-sheet{border:1px solid var(--line);background:var(--paper);padding:22px;margin:14px 0}.slide-sheet h2{font-size:22px}.slide-sheet p{margin-bottom:0}[data-work]{min-height:100px}.panel+.panel{margin-top:28px}
+
+.grid>.panel+.panel{margin-top:0}
