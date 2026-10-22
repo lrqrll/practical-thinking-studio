@@ -4,7 +4,7 @@ function loadDocumentLibraries() {
   if (documentLibraryPromise) return documentLibraryPromise;
   documentLibraryPromise = Promise.all(["document-vendor.js", "docx-vendor.js", "mammoth-vendor.js", "purify-vendor.js"].map((src) => new Promise((ok, no) => {
     const e = document.createElement("script");
-    e.src = src + "?v=3.2.0";
+    e.src = src + "?v=" + encodeURIComponent(BRAND.version);
     e.onload = ok;
     e.onerror = () => {
       e.remove();

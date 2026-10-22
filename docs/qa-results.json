@@ -1,0 +1,342 @@
+{
+  "candidate": "3.2.1-rc.1",
+  "baseline": "c5786f3d753f6c0ddd35f50a1267dc912299eb44",
+  "date_taipei": "2026-10-23",
+  "command": "NEXUS_CHROMIUM=/usr/bin/chromium npm test",
+  "unit": {
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "passed": 46,
+    "failed": 0,
+    "skipped": 0,
+    "retries": 0,
+    "duration_ms": 65409.805
+  },
+  "tests": [
+    {
+      "name": "responsive and accessibility at 390px in both themes",
+      "file": "accessibility.spec.cjs",
+      "line": 4,
+      "status": "passed",
+      "duration_ms": 5876
+    },
+    {
+      "name": "responsive and accessibility at 1280px in both themes",
+      "file": "accessibility.spec.cjs",
+      "line": 4,
+      "status": "passed",
+      "duration_ms": 5739
+    },
+    {
+      "name": "document sanitizer removes executable markup and remote images",
+      "file": "accessibility.spec.cjs",
+      "line": 15,
+      "status": "passed",
+      "duration_ms": 1789
+    },
+    {
+      "name": "notes: mobile layout and accessible editor",
+      "file": "accessibility.spec.cjs",
+      "line": 20,
+      "status": "passed",
+      "duration_ms": 2925
+    },
+    {
+      "name": "tasks: mobile layout and accessible editor",
+      "file": "accessibility.spec.cjs",
+      "line": 20,
+      "status": "passed",
+      "duration_ms": 3474
+    },
+    {
+      "name": "budget: mobile layout and accessible editor",
+      "file": "accessibility.spec.cjs",
+      "line": 20,
+      "status": "passed",
+      "duration_ms": 3945
+    },
+    {
+      "name": "quotes: mobile layout and accessible editor",
+      "file": "accessibility.spec.cjs",
+      "line": 20,
+      "status": "passed",
+      "duration_ms": 3154
+    },
+    {
+      "name": "slides: mobile layout and accessible editor",
+      "file": "accessibility.spec.cjs",
+      "line": 20,
+      "status": "passed",
+      "duration_ms": 3011
+    },
+    {
+      "name": "report: mobile layout and accessible editor",
+      "file": "accessibility.spec.cjs",
+      "line": 20,
+      "status": "passed",
+      "duration_ms": 2354
+    },
+    {
+      "name": "minutes: mobile layout and accessible editor",
+      "file": "accessibility.spec.cjs",
+      "line": 20,
+      "status": "passed",
+      "duration_ms": 2312
+    },
+    {
+      "name": "bold italic underline: actual marks, CSS, persistence and DOCX XML",
+      "file": "document.spec.cjs",
+      "line": 5,
+      "status": "passed",
+      "duration_ms": 2884
+    },
+    {
+      "name": "font, size, heading, alignment, list, undo/redo and find/replace survive reopening",
+      "file": "document.spec.cjs",
+      "line": 14,
+      "status": "passed",
+      "duration_ms": 3021
+    },
+    {
+      "name": "table creation, row/column operations and persistence",
+      "file": "document.spec.cjs",
+      "line": 20,
+      "status": "passed",
+      "duration_ms": 2890
+    },
+    {
+      "name": "image insertion and resize; page settings; safe hyperlink",
+      "file": "document.spec.cjs",
+      "line": 23,
+      "status": "passed",
+      "duration_ms": 3190
+    },
+    {
+      "name": "DOCX roundtrip imports as a copy; malformed DOCX rejected",
+      "file": "document.spec.cjs",
+      "line": 28,
+      "status": "passed",
+      "duration_ms": 2662
+    },
+    {
+      "name": "print frame contains content and generated PDF has a valid signature",
+      "file": "document.spec.cjs",
+      "line": 32,
+      "status": "passed",
+      "duration_ms": 2722
+    },
+    {
+      "name": "table merge and split persist actual cell structure",
+      "file": "document.spec.cjs",
+      "line": 37,
+      "status": "passed",
+      "duration_ms": 3599
+    },
+    {
+      "name": "ordered lists, font persistence, find one, and unlink have real editing effects",
+      "file": "document.spec.cjs",
+      "line": 43,
+      "status": "passed",
+      "duration_ms": 3864
+    },
+    {
+      "name": "rename copy move multi-select trash restore and folder management",
+      "file": "files.spec.cjs",
+      "line": 4,
+      "status": "passed",
+      "duration_ms": 3286
+    },
+    {
+      "name": "file search preserves insertion cursor and matches content",
+      "file": "files.spec.cjs",
+      "line": 11,
+      "status": "passed",
+      "duration_ms": 1796
+    },
+    {
+      "name": "portable file download and import work without native file APIs",
+      "file": "files.spec.cjs",
+      "line": 14,
+      "status": "passed",
+      "duration_ms": 1217
+    },
+    {
+      "name": "native file write, reuse, cancellation, write errors and open picker contract",
+      "file": "files.spec.cjs",
+      "line": 18,
+      "status": "passed",
+      "duration_ms": 2707
+    },
+    {
+      "name": "categories, fuzzy cross-category search, favorite and recent tools remain separate",
+      "file": "files.spec.cjs",
+      "line": 26,
+      "status": "passed",
+      "duration_ms": 2807
+    },
+    {
+      "name": "permanent deletion requires confirmation, protects live records and clears trash",
+      "file": "files.spec.cjs",
+      "line": 29,
+      "status": "passed",
+      "duration_ms": 2995
+    },
+    {
+      "name": "history snapshots restore copies and backup retains history",
+      "file": "files.spec.cjs",
+      "line": 33,
+      "status": "passed",
+      "duration_ms": 1741
+    },
+    {
+      "name": "local file download remains available when IndexedDB saving fails",
+      "file": "files.spec.cjs",
+      "line": 37,
+      "status": "passed",
+      "duration_ms": 1611
+    },
+    {
+      "name": "full backup UI downloads valid history and restores copies",
+      "file": "files.spec.cjs",
+      "line": 40,
+      "status": "passed",
+      "duration_ms": 1695
+    },
+    {
+      "name": "quota failure retries latest data without poisoning queue",
+      "file": "storage.spec.cjs",
+      "line": 3,
+      "status": "passed",
+      "duration_ms": 2551
+    },
+    {
+      "name": "debounce immediately protects drafts and latest edit survives in-flight save",
+      "file": "storage.spec.cjs",
+      "line": 16,
+      "status": "passed",
+      "duration_ms": 2982
+    },
+    {
+      "name": "conflicting tabs never overwrite newer revision and recovery becomes independent copy",
+      "file": "storage.spec.cjs",
+      "line": 25,
+      "status": "passed",
+      "duration_ms": 3919
+    },
+    {
+      "name": "failed navigation preserves editor and recovery when localStorage also fills",
+      "file": "storage.spec.cjs",
+      "line": 37,
+      "status": "passed",
+      "duration_ms": 3944
+    },
+    {
+      "name": "backup restore retains original data and rejects malformed backup atomically",
+      "file": "storage.spec.cjs",
+      "line": 43,
+      "status": "passed",
+      "duration_ms": 3074
+    },
+    {
+      "name": "navigation drains an edit made during an in-flight write",
+      "file": "storage.spec.cjs",
+      "line": 48,
+      "status": "passed",
+      "duration_ms": 4484
+    },
+    {
+      "name": "real IndexedDB transaction abort rolls back both history and file then retries",
+      "file": "storage.spec.cjs",
+      "line": 56,
+      "status": "passed",
+      "duration_ms": 1660
+    },
+    {
+      "name": "history retention is bounded and import preserves snapshot values",
+      "file": "storage.spec.cjs",
+      "line": 62,
+      "status": "passed",
+      "duration_ms": 1313
+    },
+    {
+      "name": "legacy migration preserves original local data and runs only once",
+      "file": "storage.spec.cjs",
+      "line": 66,
+      "status": "passed",
+      "duration_ms": 1566
+    },
+    {
+      "name": "restored history keeps revisions increasing on the next edit",
+      "file": "storage.spec.cjs",
+      "line": 71,
+      "status": "passed",
+      "duration_ms": 1433
+    },
+    {
+      "name": "notes: edit, reload, export, independent copy, escaped input",
+      "file": "tools.spec.cjs",
+      "line": 12,
+      "status": "passed",
+      "duration_ms": 2082
+    },
+    {
+      "name": "report: edit, reload, export, independent copy, escaped input",
+      "file": "tools.spec.cjs",
+      "line": 12,
+      "status": "passed",
+      "duration_ms": 2132
+    },
+    {
+      "name": "quotes: edit, reload, export, independent copy, escaped input",
+      "file": "tools.spec.cjs",
+      "line": 12,
+      "status": "passed",
+      "duration_ms": 2040
+    },
+    {
+      "name": "slides: edit, reload, export, independent copy, escaped input",
+      "file": "tools.spec.cjs",
+      "line": 12,
+      "status": "passed",
+      "duration_ms": 2227
+    },
+    {
+      "name": "minutes: edit, reload, export, independent copy, escaped input",
+      "file": "tools.spec.cjs",
+      "line": 12,
+      "status": "passed",
+      "duration_ms": 2066
+    },
+    {
+      "name": "tasks: add, update, sort, persisted values and CSV injection protection",
+      "file": "tools.spec.cjs",
+      "line": 21,
+      "status": "passed",
+      "duration_ms": 2838
+    },
+    {
+      "name": "budget: invalid input, calculations, XLSX formulas, persisted and independent values",
+      "file": "tools.spec.cjs",
+      "line": 27,
+      "status": "passed",
+      "duration_ms": 2913
+    },
+    {
+      "name": "quotes reject negative costs in result",
+      "file": "tools.spec.cjs",
+      "line": 33,
+      "status": "passed",
+      "duration_ms": 1236
+    },
+    {
+      "name": "note rejects unsupported image without data mutation",
+      "file": "tools.spec.cjs",
+      "line": 34,
+      "status": "passed",
+      "duration_ms": 849
+    }
+  ]
+}
