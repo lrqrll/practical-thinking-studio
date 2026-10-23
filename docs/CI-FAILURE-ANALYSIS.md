@@ -12,3 +12,11 @@
 | 資料夾刪除逾時 | 新增名稱 dialog 關閉後，IndexedDB／選項重繪未完成；測試讀取 option nth(1)，當時是垃圾桶。最終 snapshot 顯示新資料夾存在，但目前仍選垃圾桶，故沒有 delete-folder 按鈕。 | 等待名稱相符的新選項，禁止以可變排序索引推測 id；新增資料夾期間工作區 inert，完成後才可操作。原本永久刪除、取消、資料層保護、清空等斷言全部保留。 |
 
 新增兩項控制時序的回歸測試，曾在未修復程式上 2/2 失敗，再於修復後通過。最新全套結果與重複驗證結果見 QA-REPORT.md；不把後續偶然成功當成根因分析。
+
+## 首輪修正後遠端再現與補強
+
+39974712148（bd6b26c）仍有清單／刪資料夾 2 項失敗，48 項通過；沒有忽略這次失敗。同步 focus 本身不足：瀏覽器的原生 DOM range 已變，但 selectionchange 尚未更新 ProseMirror model 時，view.focus 仍可能把舊的全文件範圍寫回 DOM。新增同一 JS task 內製造兩者不同步的測試，舊版確實把 trailing paragraph 變成第二個 li。現在先透過公開 posAtDOM／setTextSelection 同步可見範圍，再 focus；NodeSelection／CellSelection 保留原語意。工具列值在同步前擷取，避免 selection callback 改回 select 的值。
+
+資料夾後半段失敗則是刪除尚在 await 交易／refresh 時，測試已切換垃圾桶，之後刪除回呼又把 currentFolder 改回 all。現在非同步工作區操作把控制項真正 disabled（不只 inert），且刪除資料夾也套用同一保護；完成交易／重繪才恢復。測試另等待已刪資料夾選項消失，驗證操作確實完成才繼續。
+
+上述兩個新增控制案例在補強前 2/2 失敗，補強後與既有文件／檔案案例共 21/21 通過。最終全套及遠端結果見 QA-REPORT.md。

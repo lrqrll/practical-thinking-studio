@@ -39,5 +39,35 @@
       "flaky": 0
     }
   },
-  "ci_comparison": "afc977f to bc328f0 did not change tests or document-editor/workspace logic; later green alone was not a fix"
+  "ci_comparison": "afc977f to bc328f0 did not change tests or document-editor/workspace logic; later green alone was not a fix",
+  "final_full_browser": {
+    "startTime": "2026-10-23T15:06:45.098Z",
+    "duration": 87566.594,
+    "expected": 52,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "second_controlled_before_fix": {
+    "startTime": "2026-10-23T15:05:19.317Z",
+    "duration": 10445.53,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "second_controlled_after_fix": {
+    "startTime": "2026-10-23T15:05:52.269Z",
+    "duration": 31621.082,
+    "expected": 21,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "remote_partial_fix_failure": {
+    "run": 39974712148,
+    "passed": 48,
+    "failed": 2,
+    "resolution": "DOM selection synchronization before focus; disabled controls during folder deletion"
+  }
 }

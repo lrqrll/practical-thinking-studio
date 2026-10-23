@@ -9,6 +9,7 @@ const version=JSON.parse(fs.readFileSync(path.join(root,'package.json'))).versio
 if(fs.existsSync(out)&&fs.readdirSync(out).length)throw Error('Output must be an empty directory; existing files are preserved');
 fs.mkdirSync(out,{recursive:true});
 for(const file of files)fs.copyFileSync(path.join(root,file),path.join(out,file));
+const index=path.join(out,'index.html');fs.writeFileSync(index,fs.readFileSync(index,'utf8').replace(/\?v=[^\"]+/g,'?v='+commit));
 const metadata={channel:'preview',commit,version,source:'https://github.com/lrqrll/practical-thinking-studio/tree/'+commit};
 fs.writeFileSync(path.join(out,'deployment.js'),"'use strict';\nwindow.NEXUS_DEPLOYMENT=Object.freeze("+JSON.stringify(metadata)+');\n');
 fs.writeFileSync(path.join(out,'deployment.json'),JSON.stringify(metadata,null,2)+'\n');
