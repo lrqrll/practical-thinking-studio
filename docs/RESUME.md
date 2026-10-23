@@ -6,6 +6,8 @@
 
 當前追加修正在 codex/nexus-document-selection-followup：原生導覽 keyup 即時同步選取，避免延後 focus 把 AllSelection 寫回；保留反向 anchor/head，新增控制／反向回歸。修正前本機原案例 14/15 通過，控制案例失敗；修正後原案例和控制案例各15次共30/30通過。GitHub artifact 403 時未降低 TLS，改用本機原案例重現與 trace 取得根因。
 
+PR #5 https://github.com/lrqrll/practical-thinking-studio/pull/5 已建立並可審查。應用提交87feee59aade651fd06ee0f076920b038fcaa9e0 的 CI 39979908311 全通過：6單元＋54瀏覽器＋15次選取重複、audit、預覽包與正式／預覽HTTPS。正式冒煙確為3.2.1；正式站尚無追加修正。預覽來源以最新 deployment.json 和 PR head 為準，純文件補記後也須重新部署metadata。
+
 追加修正必須獨立 PR、CI、HTTPS 預覽，具體候選完成後再請使用者批准新 PR 合併／部署；原批准明確針對 PR #4 的 head。不能自行假設包含新提交。
 
 預覽 https://lrqrll.github.io/practical-thinking-studio-preview/，只推送 practical-thinking-studio-preview repo，不動正式 Pages 來源。metadata／橫幅顯示來源 SHA，獨立 DB、草稿 namespace，缺失 metadata fail closed。建置用 scripts/build-preview.cjs 全新空目錄；部署 checkout /tmp/nexus-preview-publish-321，先核對 origin/main 未分歧。

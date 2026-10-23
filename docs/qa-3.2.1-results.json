@@ -121,6 +121,17 @@
     },
     "unit_passed": 6,
     "audit_vulnerabilities": 0,
-    "remote_ci": "pending"
+    "remote_ci": {
+      "run": 39979908311,
+      "commit": "87feee59aade651fd06ee0f076920b038fcaa9e0",
+      "conclusion": "success",
+      "unit_passed": 6,
+      "browser_passed": 54,
+      "timing_repeat_passed": 15,
+      "file_preview": "passed",
+      "production_https_version_3_2_1": "passed",
+      "preview_https_source_sha": "passed",
+      "audit_vulnerabilities": 0
+    }
   }
 }
