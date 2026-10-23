@@ -18,3 +18,7 @@
 - 本機NEXUS_TEST_PORT=8012 NEXUS_CHROMIUM=/usr/bin/chromium npm test，npm cache /tmp/nexus-npm-cache。預設8000舊server可能無回應。
 - 正式HTTPS瀏覽器由GitHub runner驗證；不降低TLS或持久加入CA。依賴下載的Azure Ubuntu mirror偶爾很慢，有限重試與環境修正要有界線，不刪測試或假通過。
 - 預覽：https://lrqrll.github.io/practical-thinking-studio-preview/，metadata／橫幅為真實來源SHA；獨立DB／草稿。預覽部署只改preview庫，絕不覆蓋正式站。建置用scripts/build-preview.cjs全新空目錄。
+
+## Excel M1 已保存的進度
+
+獨立分支codex/nexus-spreadsheet以QA／策略分支為基底；其PR應以codex/nexus-qa-policy-report為base，待PR #6合併後再轉main，不假設已批准。新增spreadsheet-model.js與25個核心單元測試，全部單元31/31通過。未載入網站、未改儲存系統或工具註冊。範圍、限制、剩餘M2—M5見SPREADSHEET-PLAN。下一步先做真正網格與鍵盤／多表／列欄／貼上，注意公式參照調整與既有資料保護。
