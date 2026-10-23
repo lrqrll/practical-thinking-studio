@@ -1,7 +1,7 @@
 name: NEXUS production document acceptance
 on:
   push:
-    branches: [codex/nexus-release-acceptance]
+    branches: [codex/nexus-release-acceptance, codex/nexus-qa-policy]
 permissions:
   contents: read
   actions: read

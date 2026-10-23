@@ -13,7 +13,7 @@ const files = execFileSync('git', ['ls-tree', '-r', '--name-only', commit], {enc
   for (const name of files) {
     const expected = execFileSync('git', ['show', `${commit}:${name}`], {maxBuffer: 16 * 1024 * 1024});
     const response = await fetch(new URL(name, site));
-    if (!response.ok()) throw Error(`Published asset HTTP ${response.status()}: ${name}`);
+    if (!response.ok) throw Error(`Published asset HTTP ${response.status}: ${name}`);
     const actual = Buffer.from(await response.arrayBuffer());
     if (!actual.equals(expected)) throw Error(`Published asset differs from ${commit}: ${name}`);
     verified.push({name, bytes: actual.length, sha256: createHash('sha256').update(actual).digest('hex')});
