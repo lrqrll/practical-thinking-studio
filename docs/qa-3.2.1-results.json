@@ -80,5 +80,58 @@
     "preview_https_smoke": "success",
     "production_baseline_https_smoke": "success",
     "audit": "success"
+  },
+  "post_merge": {
+    "commit": "c400e6f57403490337c9435548be02459a1eac1c",
+    "pages_run": 39978438967,
+    "qa_run": 39978439742,
+    "unit_passed": 6,
+    "browser_passed": 51,
+    "browser_failed": 1,
+    "release_acceptance": "blocked by DOC-SELECT-02"
+  },
+  "selection_followup": {
+    "original_repeat_before": {
+      "passed": 14,
+      "failed": 1
+    },
+    "instrumented_diagnostic_before": {
+      "passed": 16,
+      "failed": 4
+    },
+    "controlled_before": {
+      "passed": 0,
+      "failed": 1
+    },
+    "repeat_after": {
+      "startTime": "2026-10-23T15:34:25.636Z",
+      "duration": 64838.98,
+      "expected": 30,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "local_full_after": {
+      "startTime": "2026-10-23T15:35:46.122Z",
+      "duration": 64804.519,
+      "expected": 54,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "unit_passed": 6,
+    "audit_vulnerabilities": 0,
+    "remote_ci": {
+      "run": 39979908311,
+      "commit": "87feee59aade651fd06ee0f076920b038fcaa9e0",
+      "conclusion": "success",
+      "unit_passed": 6,
+      "browser_passed": 54,
+      "timing_repeat_passed": 15,
+      "file_preview": "passed",
+      "production_https_version_3_2_1": "passed",
+      "preview_https_source_sha": "passed",
+      "audit_vulnerabilities": 0
+    }
   }
 }

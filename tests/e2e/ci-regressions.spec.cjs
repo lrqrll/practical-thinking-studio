@@ -1,5 +1,33 @@
 const {test,expect}=require('./fixtures.cjs');
 const {create,saved}=require('./helpers.cjs');
+test('backward native navigation retains its anchor and focus direction',async({page})=>{
+ await create(page,'document');await page.locator('.tiptap').fill('方向不能反轉');
+ const result=await page.locator('.tiptap').evaluate(el=>{
+  const text=el.querySelector('p').firstChild,selection=getSelection();selection.collapse(text,text.length);selection.extend(text,0);
+  el.dispatchEvent(new KeyboardEvent('keyup',{key:'Home',shiftKey:true,bubbles:true}));el.editor.view.focus();
+  return {anchor:el.editor.state.selection.anchor,head:el.editor.state.selection.head,text:selection.toString()};
+ });
+ expect(result.anchor).toBeGreaterThan(result.head);expect(result.text).toBe('方向不能反轉');
+ await page.locator('[data-doc-command=italic]').click();await expect(page.locator('.tiptap em')).toHaveText('方向不能反轉');await saved(page);await page.reload();await expect(page.locator('.tiptap em')).toHaveText('方向不能反轉');
+});
+test('native navigation updates the model before a pending focus restores its old selection',async({page})=>{
+ await create(page,'document');
+ await page.locator('.tiptap').evaluate(el=>{el.editor.commands.setContent({type:'doc',content:[{type:'heading',attrs:{level:2},content:[{type:'text',text:'只選第一段'}]},{type:'paragraph'}]});});
+ await page.locator('.tiptap').focus();await page.keyboard.press('ControlOrMeta+a');
+ await page.locator('.tiptap').evaluate(el=>{
+  // Chromium moves its native caret immediately; selectionchange can arrive
+  // after ProseMirror's delayed focus transaction restores the old AllSelection.
+  const text=el.querySelector('h2').firstChild,selection=getSelection();selection.collapse(text,0);
+  el.dispatchEvent(new KeyboardEvent('keyup',{key:'Home',bubbles:true}));
+  el.editor.view.focus();
+  selection.extend(text,text.length);
+  el.dispatchEvent(new KeyboardEvent('keyup',{key:'End',shiftKey:true,bubbles:true}));
+  el.editor.view.focus();
+ });
+ expect(await page.evaluate(()=>getSelection().toString())).toBe('只選第一段');
+ await page.locator('#doc-block').selectOption('paragraph');await page.locator('[data-doc-command=bulletList]').click();
+ await expect(page.locator('.tiptap ul li')).toHaveCount(1);await saved(page);await page.reload();await expect(page.locator('.tiptap ul li')).toHaveCount(1);
+});
 test('find selects its result synchronously even when animation frames are delayed',async({page})=>{
  await create(page,'document');await page.locator('.tiptap').fill('alpha alpha');
  await page.getByText('尋找與取代',{exact:true}).click();await page.locator('#doc-find').fill('alpha');

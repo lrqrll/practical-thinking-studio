@@ -1,6 +1,6 @@
 # NEXUS 候選版預覽
 
-正式站仍由 practical-thinking-studio 的 main 根目錄部署；未取得合併／正式部署批准前，不修改 Pages 來源，不合併 PR #4。
+正式站由 practical-thinking-studio 的 main 根目錄部署；PR #4 已經使用者批准合併並部署 3.2.1。PR #5 的追加選取修正僅在獨立預覽，尚未批准合併。
 
 ## 可操作替代方案
 
@@ -24,4 +24,6 @@ GitHub Pages 的不同儲存庫路徑仍共用 lrqrll.github.io origin。預覽�
 
 ## 已發布並驗證
 
-HTTPS 預覽：https://lrqrll.github.io/practical-thinking-studio-preview/ 。Actions 39976684098 已驗證版本、實際 source SHA、獨立資料庫及編輯保存重開；同時驗證可下載 artifact 的 file:// 文件操作。來源 SHA 以部署時 deployment.json／橫幅為準，每次更新都重新產生資產查詢 SHA 以防混用舊快取，實際 JS／CSS 亦由對應提交複製。正式站設定與資產未改。
+HTTPS 預覽：https://lrqrll.github.io/practical-thinking-studio-preview/ 。Actions 39976684098 已驗證版本、實際 source SHA、獨立資料庫及編輯保存重開；同時驗證可下載 artifact 的 file:// 文件操作。來源 SHA 以部署時 deployment.json／橫幅為準，每次更新都重新產生資產查詢 SHA 以防混用舊快取，實際 JS／CSS 亦由對應提交複製。這次預覽更新未更動正式站設定或資產；正式站先前經批准的 3.2.1 部署是獨立動作。
+
+追加修正 PR #5 的應用提交 87feee59aade651fd06ee0f076920b038fcaa9e0 已通過 Actions 39979908311 的公開 HTTPS 身份／版本／隔離資料及保存重開驗證，公開 index／deployment.js／document-editor.js／storage.js 也逐位元符合建置包。最新純文件提交部署後，仍以 metadata／橫幅的完整 SHA 為準。
