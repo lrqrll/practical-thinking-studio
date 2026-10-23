@@ -1,17 +1,20 @@
-# 下一個 Codex 任務接續點
+# NEXUS 接續點
 
-先讀 AGENTS、QA-REPORT、KNOWN-ISSUES、CI-FAILURE-ANALYSIS、RELEASE-CHECKLIST；不要重建。
+2026-10-24（Asia/Taipei）。先讀AGENTS、MODEL-STRATEGY、QA-REPORT、KNOWN-ISSUES，不重建、不重做已完成修復。
 
-使用者已批准 PR #4 的 0e27cdc 合併及正式部署，已完成：main c400e6f，Pages run 39978438967，公開站 3.2.1。不要再索取這次已執行合併的批准。但合併後 QA run 39978439742 為 6 單元通過、51 瀏覽器通過／1 清單失敗，不能宣稱驗收完成。
+## 已完成正式發布
 
-當前追加修正在 codex/nexus-document-selection-followup：原生導覽 keyup 即時同步選取，避免延後 focus 把 AllSelection 寫回；保留反向 anchor/head，新增控制／反向回歸。修正前本機原案例 14/15 通過，控制案例失敗；修正後原案例和控制案例各15次共30/30通過。GitHub artifact 403 時未降低 TLS，改用本機原案例重現與 trace 取得根因。
+- PR #5已依批准的cb7c8a5合併，正式main與Pages為a0edd157ef1a01572e296db01c23f9a8b9651a76，3.2.1。
+- main CI39983494640（6單元＋54瀏覽器＋15重複＋audit）及Pages39983494187通過。
+- 正式文件驗收39985267265通過：26個公開實際資產逐位元符合a0edd15；正式HTTPS原清單／受控焦點／反向選取，各5次保存重開共15/15，無跳過／重試。P1已解除，可以恢復Excel。
+- 39983688217 attempt1安裝5分鐘逾時；一次有限重試attempt2安裝成功、但原生fetch ok當方法造成驗收腳本錯誤。測試分支c49c4d4修正ok/status屬性後新執行成功。失敗保留，不能誤寫為正式功能失敗。
+- Artifact12514418883有assets及測試報告（30天）；本環境代理對blob下載403，未繞過TLS；GitHub日誌已核對。不要因下載artifact失敗而否定或虛構瀏覽器結果。
 
-PR #5 https://github.com/lrqrll/practical-thinking-studio/pull/5 已建立並可審查。應用提交87feee59aade651fd06ee0f076920b038fcaa9e0 的 CI 39979908311 全通過：6單元＋54瀏覽器＋15次選取重複、audit、預覽包與正式／預覽HTTPS。正式冒煙確為3.2.1；正式站尚無追加修正。預覽來源以最新 deployment.json 和 PR head 為準，純文件補記後也須重新部署metadata。
+## 開發與授權
 
-追加修正必須獨立 PR、CI、HTTPS 預覽，具體候選完成後再請使用者批准新 PR 合併／部署；原批准明確針對 PR #4 的 head。不能自行假設包含新提交。
-
-預覽 https://lrqrll.github.io/practical-thinking-studio-preview/，只推送 practical-thinking-studio-preview repo，不動正式 Pages 來源。metadata／橫幅顯示來源 SHA，獨立 DB、草稿 namespace，缺失 metadata fail closed。建置用 scripts/build-preview.cjs 全新空目錄；部署 checkout /tmp/nexus-preview-publish-321，先核對 origin/main 未分歧。
-
-Excel branch codex/nexus-spreadsheet 已建於 c400e6f，目前無已提交的編輯器。純模型草稿暫存 /tmp/nexus-spreadsheet-model-next.js，未測、未載入網站；不可當成完成。解除 DOC-SELECT-02 並正式驗證後才恢復，勿遺失這份草稿；完整多表／網格／公式／格式／列欄／貼上／排序篩選／CSV XLSX／保存重開歷史都需驗收。
-
-本機測試 NEXUS_TEST_PORT=8012 NEXUS_CHROMIUM=/usr/bin/chromium npm test；預設8000舊server可能無回應。npm cache 用 /tmp/nexus-npm-cache。HTTPS瀏覽器用GitHub runner，不能忽略憑證錯誤或持久更動信任庫。CI Ubuntu24.04／安裝5分鐘上限保持。無額外AI審查或模型切換。
+- QA／策略／發布證據在codex/nexus-qa-policy-report，尚未合併。新的合併須具體批准；PR #5原批准已執行，不再索取。
+- 使用者授權必要時指定模型代理；主代理模型／推理與切換工具未提供可確認資訊，不假裝切換。能力與升降級規則見MODEL-STRATEGY；一般工作不用多代理審查。
+- 下一項是真正Excel：純核心資料模型／安全公式與測試先行，之後網格、多表／列欄／貼上／格式／排序篩選、CSV/XLSX、保存重開歷史與瀏覽器驗收。未完成不上架，不用預算工具冒充。
+- 本機NEXUS_TEST_PORT=8012 NEXUS_CHROMIUM=/usr/bin/chromium npm test，npm cache /tmp/nexus-npm-cache。預設8000舊server可能無回應。
+- 正式HTTPS瀏覽器由GitHub runner驗證；不降低TLS或持久加入CA。依賴下載的Azure Ubuntu mirror偶爾很慢，有限重試與環境修正要有界線，不刪測試或假通過。
+- 預覽：https://lrqrll.github.io/practical-thinking-studio-preview/，metadata／橫幅為真實來源SHA；獨立DB／草稿。預覽部署只改preview庫，絕不覆蓋正式站。建置用scripts/build-preview.cjs全新空目錄。

@@ -1,4 +1,41 @@
-# NEXUS 3.2.1 驗收報告
+# NEXUS 3.2.1 正式驗收報告
+
+最新狀態（2026-10-24，Asia/Taipei）：**PR #5 已批准合併、部署並完成正式專項驗收，DOC-SELECT-02 的 P1 阻擋解除。** 正式 main `a0edd157ef1a01572e296db01c23f9a8b9651a76`，版本 3.2.1。
+
+## 本次可核對證據
+
+| 驗證 | 結果／證據 |
+| --- | --- |
+| main 全站 CI | [39983494640](https://github.com/lrqrll/practical-thinking-studio/actions/runs/39983494640) 成功：6 單元、54 瀏覽器、15 次選取重複、audit 0 弱點。 |
+| Pages | [39983494187](https://github.com/lrqrll/practical-thinking-studio/actions/runs/39983494187) 成功，build API commit 與 main 的 a0edd15 完全相同。 |
+| 公開實際資產 | [39985267265](https://github.com/lrqrll/practical-thinking-studio/actions/runs/39985267265) 的 verify-release-assets：26 個根目錄公開資產逐位元符合 a0edd15，並保存每檔 SHA-256。不是只核對版本參數。 |
+| 正式 HTTPS 文件 | 同次 Actions：原清單失敗流程、受控焦點競態、反向選取各 5 次，共 **15 通過、0 失敗／跳過／重試**。每測試使用全新隔離 context；清單數量、反向 anchor/head、斜體實際結果及保存重開均有斷言。未使用 ignoreHTTPSErrors 或注入代理 CA。 |
+| 可下載證據 | Actions artifact `production-document-acceptance`，ID 12514418883，保留30天，含 assets.json、JSON／HTML測試報告。環境代理拒絕此 blob 下載（403），未繞過；已核對正常 GitHub API／完整執行日誌與工作流程來源。 |
+
+## 失敗分類及有限重試
+
+- 39983688217 attempt 1：OS／字型依賴下載逾5分鐘，文件未測，屬環境失敗。
+- 使用者批准的一次有限重試 attempt 2：安裝成功，25.9 MB 依賴約3秒完成；Azure Ubuntu mirror 的慢速下載未再次發生。接著驗收腳本把原生 fetch 的 response.ok 屬性誤當方法，屬驗收程式失敗，文件仍未測。
+- 測試分支 c49c4d4 只修正原生 fetch 的 ok／status 屬性存取；正式程式及 SHA 未改、未放寬斷言。新執行39985267265完成資產與15項正式文件測試，全部成功。
+- 不是無限重跑；兩次失敗保留，沒有算成網站功能失敗或通過。既有5分鐘安裝限制此次足夠，未跳過依賴、降低TLS或另啟付費資源。
+
+## 發布界線
+
+本次 P1 已解除，可以恢復獨立 Excel 分支；沒有新的正式合併授權。Safari／Firefox／實機觸控與螢幕閱讀器、OS原生檔案選擇器、真實列印與Word精確版型、vendor可重建性仍為已揭露P2限制。既有儲存與八工具回歸證據見上列main CI；不以此宣稱所有實機場景已測。
+
+## 先前階段歷史紀錄（不是目前狀態）
+
+
+## 2026-10-24 正式部署追蹤（最新狀態）
+
+- 目前環境 GitHub 身分已恢復為 lrqrll；不需重新授權。使用者對 PR #5 指定 cb7c8a595295eaf301ad629f1e48c646559eb71d 的批准仍有效，已依批准合併。
+- PR #5 合併提交：a0edd157ef1a01572e296db01c23f9a8b9651a76。Pages 39983494187 成功，Pages build API 的 commit 亦符合；正式站為 3.2.1。
+- main CI 39983494640 成功：6 單元、54 瀏覽器、15 次選取重複、audit 0 弱點；一般正式 HTTPS 只驗證版本及備忘錄保存重開，不能代替文件專項。
+- 正式文件專項 Actions 39983688217 **失敗**：Install browser 下載 Azure Ubuntu mirror 的 OS／字型依賴逾 5 分鐘；公開全資產比對與原清單／反向選取／保存重開測試均 skipped，沒有任何正式文件通過結果。
+- 已依使用者「若失敗則停止並回報」停止，不重試、不解除 DOC-SELECT-02 驗收阻擋、不恢復 Excel。此為驗收基礎設施失敗，不能聲稱已在正式站重現或排除程式缺陷。
+- 未停用 TLS 或修改憑證信任庫。驗證程式在 codex/nexus-release-acceptance 的 5af39fc；目前 codex/nexus-release-status 保存此結果，未合併、不部署，推送不觸發文件專項重跑。
+- 下次接續：先由使用者確認停止後是否恢復工作，再處理依賴下載可靠性，執行相同標準的正式文件專項及實際公開資產比對。PR #5 合併授權已執行，不要再次索取相同授權；其他新提交不能擅自合併。所有門檻通過才恢復 Excel。
+
 
 日期：2026-10-23。使用者已批准 PR #4 的 0e27cdc；已合併為 c400e6f57403490337c9435548be02459a1eac1c，Pages 39978438967 成功部署，HTTPS storage.js 確為 3.2.1。但合併後 CI 39978439742 的清單回歸再失敗，**最終驗收尚未完成**。目前追加修正在獨立分支 codex/nexus-document-selection-followup，尚未合併／部署此修正。
 

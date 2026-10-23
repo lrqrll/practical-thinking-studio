@@ -16,8 +16,10 @@
 
 ## 待驗收／限制
 
-- **DOC-SELECT-02（P1，正式站待修正）**：3.2.1 合併後 CI 39978439742 再現清單 2 項而非 1 項，本機也可再現。keyup 前後的 native/model 選取競態已在獨立分支補強；候選 87feee5 的 Actions 39979908311（6 單元＋54 瀏覽器＋15 次重複、HTTPS 預覽）已全部通過；待使用者批准 PR #5 追加合併與正式部署後驗證，不能標為正式解決。
-- **RELEASE-01**：PR #4 已依使用者明確批准合併並部署為 3.2.1；部署成功不等於最終驗收通過，現受 DOC-SELECT-02 阻擋。
+最新：2026-10-24，PR #5 已部署為 a0edd15；main CI、Pages、26 公開資產及正式 HTTPS 文件15項專項全通過，DOC-SELECT-02 的P1阻擋解除。Excel可恢復獨立開發；P2限制繼續保留。
+
+- **DOC-SELECT-02（已解除P1）**：原生導覽keyup後立即同步DOM→model，保留反向anchor/head。PR #5已批准部署a0edd15；main CI39983494640成功，正式專項39985267265驗證26公開資產及原清單／焦點／反向選取與保存重開15/15通過。
+- **RELEASE-01（完成）**：PR #4與#5均經使用者批准合併部署；正式驗收已完成。失敗attempt1（安裝逾時）、attempt2（驗收腳本錯誤）保留分類，未算成網站功能失敗。
 - **COMPAT-01（P2）**：File System Access 的實機選擇器、OS 權限拒絕、Firefox／Safari 下載匯入替代路徑尚未完成實機驗收。自動測試驗證 Chromium UI 和 API 替身協定，不冒稱已測 OS 對話框。
 - **PRINT-01（P2）**：已驗證列印 frame 與由同內容產生的 PDF 結構；實際列印視窗、實體印表機、Word／LibreOffice 排版精確度仍需發布前檢視，不能保證完全還原 DOCX 版型。
 - **VENDOR-01（P2）**：vendor bundle 缺少可重建的原始 lockfile／build 腳本；授權清單含多個版本，不能據此推定實際 bundle 精確版本。npm audit 僅涵蓋新加入的 QA 依賴，不能代表所有嵌入式依賴已稽核。

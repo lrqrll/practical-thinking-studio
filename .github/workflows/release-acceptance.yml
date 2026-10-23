@@ -1,0 +1,48 @@
+name: NEXUS production document acceptance
+on:
+  push:
+    branches: [codex/nexus-release-acceptance, codex/nexus-qa-policy]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  production-document:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      NEXUS_RELEASE_COMMIT: a0edd157ef1a01572e296db01c23f9a8b9651a76
+      NEXUS_LIVE_BASE_URL: https://lrqrll.github.io/practical-thinking-studio/
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Require successful main CI and Pages for the approved release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run watch 39983494640 --exit-status --interval 10
+          gh run watch 39983494187 --exit-status --interval 10
+          test "$(gh api repos/${{ github.repository }}/git/ref/heads/main --jq .object.sha)" = "$NEXUS_RELEASE_COMMIT"
+          test "$(gh run view 39983494640 --json headSha --jq .headSha)" = "$NEXUS_RELEASE_COMMIT"
+          test "$(gh run view 39983494187 --json headSha --jq .headSha)" = "$NEXUS_RELEASE_COMMIT"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Install browser
+        timeout-minutes: 5
+        run: npx playwright install --with-deps chromium
+      - name: Compare actual public assets against the release tree
+        run: node scripts/verify-release-assets.cjs
+      - name: Original list failure, controlled navigation and backward selection with save/reopen
+        run: npx playwright test --config=playwright.release.config.cjs tests/e2e/document.spec.cjs tests/e2e/ci-regressions.spec.cjs --grep 'font, size|native navigation' --repeat-each=5
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: production-document-acceptance
+          path: |
+            release-evidence/
+            test-results/
+            playwright-report/
+          retention-days: 30
