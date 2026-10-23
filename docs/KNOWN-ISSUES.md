@@ -16,7 +16,7 @@
 
 ## 待驗收／限制
 
-- **RELEASE-01（P1 發布門檻）**：最新完整 Actions（39820642271，15c9285）已通過單元／46 項瀏覽器／audit／公開 Pages HTTPS 瀏覽器冒煙測試；但首次 Actions（39820174844）曾失敗，尚未取得其日誌／artifact 確認根因，不能只用下次通過忽略。下載目的地 results-receiver.actions.githubusercontent.com、productionresultssa10.blob.core.windows.net 受環境 Forbidden 限制，已加入環境設定草稿，需套用後取得證據。候選版仍未部署；在根因釐清及發布驗收完成前保持草稿 PR，不合併。
+- **RELEASE-01（已完成根因分析與本機修復）**：首次 artifact 已取得，四項原因與新修復見 CI-FAILURE-ANALYSIS.md；2 個控制案例修復前失敗，修復後 50 項全站與 20 次原案例壓力測試通過。先前綠燈未包含修復的事實已保留。尚待最新 CI／預覽驗證及使用者合併／正式部署批准；不能提前宣稱已發布。
 - **COMPAT-01（P2）**：File System Access 的實機選擇器、OS 權限拒絕、Firefox／Safari 下載匯入替代路徑尚未完成實機驗收。自動測試驗證 Chromium UI 和 API 替身協定，不冒稱已測 OS 對話框。
 - **PRINT-01（P2）**：已驗證列印 frame 與由同內容產生的 PDF 結構；實際列印視窗、實體印表機、Word／LibreOffice 排版精確度仍需發布前檢視，不能保證完全還原 DOCX 版型。
 - **VENDOR-01（P2）**：vendor bundle 缺少可重建的原始 lockfile／build 腳本；授權清單含多個版本，不能據此推定實際 bundle 精確版本。npm audit 僅涵蓋新加入的 QA 依賴，不能代表所有嵌入式依賴已稽核。

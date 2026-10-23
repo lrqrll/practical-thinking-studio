@@ -32,3 +32,5 @@ npm audit --audit-level=high
 每份檔案保留最近十次成功修改前版本，可還原為副本；完整備份包含歷史版本。歷史與圖片也占用瀏覽器配額，請定期下載完整備份。永久刪除會移除相應歷史，無法復原。瀏覽器清除資料、系統強制結束、儲存裝置故障不在自動保存保證範圍。
 
 發布條件與尚未驗證項目見 [docs/QA-REPORT.md](docs/QA-REPORT.md)、[docs/KNOWN-ISSUES.md](docs/KNOWN-ISSUES.md)。
+
+候選版預覽與下載方式見 [docs/PREVIEW.md](docs/PREVIEW.md)，發布批准與驗收進度見 [docs/RELEASE-CHECKLIST.md](docs/RELEASE-CHECKLIST.md)。

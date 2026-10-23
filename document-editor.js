@@ -88,6 +88,9 @@ function documentExtensions() {
 async function bindDocument() {
   const fileId = activeFile.id;
   let editor = null, cancelled = false;
+  // Tiptap focus() defers view.focus() to requestAnimationFrame. Toolbar
+  // selection must be visible now, and must not refocus after later input.
+  const focusedChain = () => { editor.view.focus(); return editor.chain(); };
   viewCleanup = () => {
     cancelled = true;
     editor?.destroy();
@@ -148,7 +151,7 @@ async function bindDocument() {
       const im = await readMedia(file);
       if (cancelled || activeFile?.id !== fileId) return;
       const w = Math.min(im.width, 560);
-      editor.chain().focus().setImage({ src: im.source, alt: im.name, width: w, height: Math.max(1, Math.round(im.height * w / im.width)) }).run();
+      focusedChain().setImage({ src: im.source, alt: im.name, width: w, height: Math.max(1, Math.round(im.height * w / im.width)) }).run();
     };
     $("#document-controls").disabled = false;
     $("#document-loading").hidden = true;
@@ -158,16 +161,16 @@ async function bindDocument() {
     $$(".doc-format button,[data-table-command],#doc-table,#doc-break").forEach((b) => b.onmousedown = (e) => e.preventDefault());
     $$("[data-doc-command]").forEach((b) => b.onclick = () => {
       const cmd = { bold: "toggleBold", italic: "toggleItalic", underline: "toggleUnderline", bulletList: "toggleBulletList", orderedList: "toggleOrderedList" }[b.dataset.docCommand];
-      editor.chain().focus()[cmd]().run();
+      focusedChain()[cmd]().run();
     });
-    $("#doc-block").onchange = (e) => e.target.value === "paragraph" ? editor.chain().focus().setParagraph().run() : editor.chain().focus().setHeading({ level: Number(e.target.value) }).run();
-    $("#doc-font").onchange = (e) => e.target.value ? editor.chain().focus().setFontFamily(e.target.value).run() : editor.chain().focus().unsetFontFamily().run();
-    $("#doc-size").onchange = (e) => e.target.value ? editor.chain().focus().setFontSize(e.target.value + "px").run() : editor.chain().focus().unsetFontSize().run();
-    $("#doc-color").oninput = (e) => editor.chain().focus().setColor(e.target.value).run();
-    $("#doc-align").onchange = (e) => editor.chain().focus().setTextAlign(e.target.value).run();
-    $("#doc-clear").onclick = () => editor.chain().focus().unsetAllMarks().clearNodes().run();
-    $("#doc-undo").onclick = () => editor.chain().focus().undo().run();
-    $("#doc-redo").onclick = () => editor.chain().focus().redo().run();
+    $("#doc-block").onchange = (e) => e.target.value === "paragraph" ? focusedChain().setParagraph().run() : focusedChain().setHeading({ level: Number(e.target.value) }).run();
+    $("#doc-font").onchange = (e) => e.target.value ? focusedChain().setFontFamily(e.target.value).run() : focusedChain().unsetFontFamily().run();
+    $("#doc-size").onchange = (e) => e.target.value ? focusedChain().setFontSize(e.target.value + "px").run() : focusedChain().unsetFontSize().run();
+    $("#doc-color").oninput = (e) => focusedChain().setColor(e.target.value).run();
+    $("#doc-align").onchange = (e) => focusedChain().setTextAlign(e.target.value).run();
+    $("#doc-clear").onclick = () => focusedChain().unsetAllMarks().clearNodes().run();
+    $("#doc-undo").onclick = () => focusedChain().undo().run();
+    $("#doc-redo").onclick = () => focusedChain().redo().run();
     $("#doc-image").onclick = () => $("#doc-image-input").click();
     $("#doc-image-input").onchange = safeAction(async (e) => {
       if (e.target.files[0]) await insertImage(e.target.files[0]);
@@ -179,26 +182,26 @@ async function bindDocument() {
         toast("表格限 1–20 列、1–10 欄");
         return;
       }
-      editor.chain().focus().insertTable({ rows, cols, withHeaderRow: true }).run();
+      focusedChain().insertTable({ rows, cols, withHeaderRow: true }).run();
     };
     $$("[data-table-command]").forEach((b) => b.onclick = () => {
-      const success = editor.chain().focus()[b.dataset.tableCommand]().run();
+      const success = focusedChain()[b.dataset.tableCommand]().run();
       if (!success) toast("請先選取適用的儲存格；合併需選取相鄰儲存格。");
     });
-    $("#doc-break").onclick = () => editor.chain().focus().insertContent({ type: "pageBreak" }).run();
+    $("#doc-break").onclick = () => focusedChain().insertContent({ type: "pageBreak" }).run();
     $("#doc-resize-image").onclick = () => {
       if (!editor.isActive("image")) return toast("先點選文件中的圖片");
       const width = Number($("#doc-image-width").value), a = editor.getAttributes("image");
       if (!Number.isFinite(width) || width < 20 || width > 1e3) return toast("圖片寬度需為 20–1000 px");
-      editor.chain().focus().updateAttributes("image", { width, height: Math.round(a.height * width / a.width) }).run();
+      focusedChain().updateAttributes("image", { width, height: Math.round(a.height * width / a.width) }).run();
     };
     $("#doc-link").onclick = safeAction(async () => {
       const href = await askName(editor.getAttributes("link").href || "https://", "連結網址");
       if (href === null || cancelled) return;
       if (!safeDocumentLink(href)) throw Error("連結限 http、https、mailto 或 tel");
-      editor.chain().focus().extendMarkRange("link").setLink({ href }).run();
+      focusedChain().extendMarkRange("link").setLink({ href }).run();
     });
-    $("#doc-unlink").onclick = () => editor.chain().focus().unsetLink().run();
+    $("#doc-unlink").onclick = () => focusedChain().unsetLink().run();
     for (const [id, key] of [["paper", "paper"], ["margin", "margin"], ["line", "lineHeight"], ["spacing", "spacing"], ["header", "header"], ["footer", "footer"], ["page-numbers", "pageNumbers"]]) {
       $("#doc-" + id).oninput = (e) => {
         let value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
@@ -238,11 +241,11 @@ async function bindDocument() {
     $("#doc-find-next").onclick = () => {
       const list = matches(), m = list.find((x) => x.from >= editor.state.selection.to) || list[0];
       $("#doc-find-result").textContent = list.length + " 處";
-      if (m) editor.chain().focus().setTextSelection(m).scrollIntoView().run();
+      if (m) focusedChain().setTextSelection(m).scrollIntoView().run();
     };
     $("#doc-replace-one").onclick = () => {
       const q = $("#doc-find").value, { from, to } = editor.state.selection;
-      if (q && editor.state.doc.textBetween(from, to) === q) editor.chain().focus().insertContentAt({ from, to }, [{ type: "text", text: $("#doc-replace").value }].filter((n) => n.text)).run();
+      if (q && editor.state.doc.textBetween(from, to) === q) focusedChain().insertContentAt({ from, to }, [{ type: "text", text: $("#doc-replace").value }].filter((n) => n.text)).run();
       else $("#doc-find-next").click();
     };
     $("#doc-replace-all").onclick = () => {

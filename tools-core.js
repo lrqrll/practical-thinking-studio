@@ -14,7 +14,7 @@ function setSaveStatus(text,failed=false){const invalid=activeFile?.type==='budg
 let pendingSaveTimer=null, pendingWrites=0, dirty=false, recoveryError=null;
 // A tab must never remove another tab's unsaved recovery snapshot.
 const recoveryTab=crypto.randomUUID();
-function recoveryKey(id){return 'nexus-recovery:'+id+':'+recoveryTab;}
+function recoveryKey(id){return RECOVERY_PREFIX+id+':'+recoveryTab;}
 function protectDraft(id,data){
   try{localStorage.setItem(recoveryKey(id),JSON.stringify({id,data,at:new Date().toISOString()}));recoveryError=null;}
   catch(error){recoveryError=error;setSaveStatus('草稿備援空間不足；請立即下載目前內容備份',true);}

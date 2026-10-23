@@ -1,9 +1,13 @@
 'use strict';
-const BRAND=Object.freeze({name:'NEXUS',version:'3.2.1-rc.1'});
+const BRAND=Object.freeze({name:'NEXUS',version:'3.2.1'});
+const DEPLOYMENT=Object.freeze(typeof window!=='undefined'&&window.NEXUS_DEPLOYMENT||{channel:'production',commit:null});
+const IS_PREVIEW=DEPLOYMENT.channel==='preview'||(typeof location!=='undefined'&&location.pathname.includes('/practical-thinking-studio-preview/'));
+const DATABASE_NAME=IS_PREVIEW?'nexus-preview-pr4-workspace':'nexus-workspace';
+const RECOVERY_PREFIX=IS_PREVIEW?'nexus-preview-pr4-recovery:':'nexus-recovery:';
 const NexusStore=(()=>{let db;const clone=x=>structuredClone(x);const uid=()=>crypto.randomUUID();const stamp=()=>new Date().toISOString();
 function request(r){return new Promise((ok,no)=>{r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error);});}
 function complete(tx){return new Promise((ok,no)=>{tx.oncomplete=()=>ok();tx.onabort=tx.onerror=()=>no(tx.error||Error('儲存交易未完成'));});}
-async function open(){if(!window.indexedDB)throw Error('此瀏覽器不支援 IndexedDB，工作空間無法啟用。');db=await new Promise((ok,no)=>{const r=indexedDB.open('nexus-workspace',1);r.onupgradeneeded=()=>{for(const name of ['files','folders','meta'])r.result.createObjectStore(name,{keyPath:'id'});};r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error);r.onblocked=()=>no(Error('儲存升級被其他分頁阻擋，請關閉其他 NEXUS 分頁後重新整理。'));});db.onversionchange=()=>db.close();return db;}
+async function open(){if(!window.indexedDB)throw Error('此瀏覽器不支援 IndexedDB，工作空間無法啟用。');db=await new Promise((ok,no)=>{const r=indexedDB.open(DATABASE_NAME,1);r.onupgradeneeded=()=>{for(const name of ['files','folders','meta'])r.result.createObjectStore(name,{keyPath:'id'});};r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error);r.onblocked=()=>no(Error('儲存升級被其他分頁阻擋，請關閉其他 NEXUS 分頁後重新整理。'));});db.onversionchange=()=>db.close();return db;}
 async function readAll(store){return request(db.transaction(store).objectStore(store).getAll());}
 async function get(store,id){return request(db.transaction(store).objectStore(store).get(id));}
 async function write(store,item){const tx=db.transaction(store,'readwrite'),done=complete(tx);tx.objectStore(store).put(clone(item));await done;return item;}

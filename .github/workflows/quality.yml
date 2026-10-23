@@ -11,6 +11,8 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -19,8 +21,23 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm test
       - run: npm audit --audit-level=high
+      - run: npm run build:preview
+      - run: node scripts/preview-smoke.cjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: NEXUS-preview-3.2.1
+          path: dist-preview/
+          include-hidden-files: true
+          retention-days: 30
       - name: Verify deployed Pages baseline with TLS verification
         run: node scripts/live-smoke.cjs
+      - name: Verify isolated candidate preview with TLS verification
+        if: github.event_name == 'pull_request' && github.head_ref == 'codex/nexus-storage-quality'
+        run: node scripts/live-smoke.cjs
+        env:
+          NEXUS_SITE_URL: https://lrqrll.github.io/practical-thinking-studio-preview/
+          NEXUS_EXPECTED_VERSION: '3.2.1'
+          NEXUS_EXPECTED_COMMIT: ${{ github.event.pull_request.head.sha }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:

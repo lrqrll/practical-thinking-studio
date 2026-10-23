@@ -1,0 +1,43 @@
+{
+  "version": "3.2.1",
+  "date_taipei": "2026-10-23",
+  "unit_passed": 6,
+  "full_browser": {
+    "startTime": "2026-10-23T14:52:41.494Z",
+    "duration": 62825.868,
+    "expected": 50,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "timing_stress": {
+    "startTime": "2026-10-23T14:54:17.123Z",
+    "duration": 37384.534,
+    "expected": 20,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "controlled_before_fix": {
+    "startTime": "2026-10-23T14:48:49.072Z",
+    "duration": 10881.585000000001,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "first_ci": {
+    "run": 39820174844,
+    "head": "afc977fe53ac739d22a3c3ca6cf06dfa65d89cff",
+    "artifact": 12445085101,
+    "stats": {
+      "startTime": "2026-10-22T17:09:51.812Z",
+      "duration": 47622.666000000005,
+      "expected": 42,
+      "skipped": 0,
+      "unexpected": 4,
+      "flaky": 0
+    }
+  },
+  "ci_comparison": "afc977f to bc328f0 did not change tests or document-editor/workspace logic; later green alone was not a fix"
+}
