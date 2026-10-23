@@ -1,0 +1,17 @@
+{
+  "name": "nexus-quality",
+  "private": true,
+  "version": "3.2.1",
+  "scripts": {
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "node --test tests/unit/*.test.cjs",
+    "test:e2e": "playwright test",
+    "serve": "python3 -m http.server 8000 --bind 127.0.0.1",
+    "build:preview": "node scripts/build-preview.cjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.64.1",
+    "fflate": "0.8.3"
+  }
+}

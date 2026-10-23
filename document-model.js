@@ -35,7 +35,7 @@ function validDocument(d) {
       if (!Number.isFinite(a.width) || a.width < 1 || a.width > 1e3 || !Number.isFinite(a.height) || a.height < 1 || a.height > 4096) return false;
     }
     if (n.marks && (!Array.isArray(n.marks) || n.marks.some((m) => {
-      if (!["bold", "italic", "underline", "strike", "link", "textStyle"].includes(m.type)) return true;
+      if (!m || typeof m !== "object" || !["bold", "italic", "underline", "strike", "link", "textStyle"].includes(m.type)) return true;
       const z = m.attrs || {};
       if (m.type === "link" && !safeDocumentLink(z.href)) return true;
       if (m.type === "textStyle") {
