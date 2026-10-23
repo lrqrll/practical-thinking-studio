@@ -1,4 +1,30 @@
-# NEXUS 3.2.1 驗收報告
+# NEXUS 3.2.1 正式驗收報告
+
+最新狀態（2026-10-24，Asia/Taipei）：**PR #5 已批准合併、部署並完成正式專項驗收，DOC-SELECT-02 的 P1 阻擋解除。** 正式 main `a0edd157ef1a01572e296db01c23f9a8b9651a76`，版本 3.2.1。
+
+## 本次可核對證據
+
+| 驗證 | 結果／證據 |
+| --- | --- |
+| main 全站 CI | [39983494640](https://github.com/lrqrll/practical-thinking-studio/actions/runs/39983494640) 成功：6 單元、54 瀏覽器、15 次選取重複、audit 0 弱點。 |
+| Pages | [39983494187](https://github.com/lrqrll/practical-thinking-studio/actions/runs/39983494187) 成功，build API commit 與 main 的 a0edd15 完全相同。 |
+| 公開實際資產 | [39985267265](https://github.com/lrqrll/practical-thinking-studio/actions/runs/39985267265) 的 verify-release-assets：26 個根目錄公開資產逐位元符合 a0edd15，並保存每檔 SHA-256。不是只核對版本參數。 |
+| 正式 HTTPS 文件 | 同次 Actions：原清單失敗流程、受控焦點競態、反向選取各 5 次，共 **15 通過、0 失敗／跳過／重試**。每測試使用全新隔離 context；清單數量、反向 anchor/head、斜體實際結果及保存重開均有斷言。未使用 ignoreHTTPSErrors 或注入代理 CA。 |
+| 可下載證據 | Actions artifact `production-document-acceptance`，ID 12514418883，保留30天，含 assets.json、JSON／HTML測試報告。環境代理拒絕此 blob 下載（403），未繞過；已核對正常 GitHub API／完整執行日誌與工作流程來源。 |
+
+## 失敗分類及有限重試
+
+- 39983688217 attempt 1：OS／字型依賴下載逾5分鐘，文件未測，屬環境失敗。
+- 使用者批准的一次有限重試 attempt 2：安裝成功，25.9 MB 依賴約3秒完成；Azure Ubuntu mirror 的慢速下載未再次發生。接著驗收腳本把原生 fetch 的 response.ok 屬性誤當方法，屬驗收程式失敗，文件仍未測。
+- 測試分支 c49c4d4 只修正原生 fetch 的 ok／status 屬性存取；正式程式及 SHA 未改、未放寬斷言。新執行39985267265完成資產與15項正式文件測試，全部成功。
+- 不是無限重跑；兩次失敗保留，沒有算成網站功能失敗或通過。既有5分鐘安裝限制此次足夠，未跳過依賴、降低TLS或另啟付費資源。
+
+## 發布界線
+
+本次 P1 已解除，可以恢復獨立 Excel 分支；沒有新的正式合併授權。Safari／Firefox／實機觸控與螢幕閱讀器、OS原生檔案選擇器、真實列印與Word精確版型、vendor可重建性仍為已揭露P2限制。既有儲存與八工具回歸證據見上列main CI；不以此宣稱所有實機場景已測。
+
+## 先前階段歷史紀錄（不是目前狀態）
+
 
 ## 2026-10-24 正式部署追蹤（最新狀態）
 

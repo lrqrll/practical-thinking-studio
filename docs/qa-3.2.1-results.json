@@ -162,7 +162,29 @@
       "save_reopen_document": "skipped",
       "browser_tests_passed": 0
     },
-    "p1_gate": "blocked; stopped per user instruction",
-    "excel": "paused"
+    "p1_gate": "cleared after exact assets and production document acceptance",
+    "excel": "authorized to resume in independent development branch",
+    "limited_retry": {
+      "run": 39983688217,
+      "attempt": 2,
+      "conclusion": "failure",
+      "environment_installation": "passed",
+      "failure_class": "acceptance script",
+      "reason": "native fetch response.ok treated as function",
+      "document_tests": "skipped"
+    },
+    "final_production_acceptance": {
+      "run": 39985267265,
+      "harness_commit": "c49c4d4",
+      "production_commit": "a0edd157ef1a01572e296db01c23f9a8b9651a76",
+      "conclusion": "success",
+      "public_assets_matched": 26,
+      "https_browser_passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "retries": 0,
+      "cases_per_flow": 5,
+      "artifact_id": 12514418883
+    }
   }
 }
