@@ -8,7 +8,7 @@ GitHub 整合起初拒絕 createRepository；使用者已建立空白公開 `lrq
 
 品質 workflow 會建立 **NEXUS-preview-3.2.1** artifact，包含真實候選版完整靜態檔案、deployment.json、版本／來源 commit 標示，以及 OPEN-PREVIEW.txt。下載、完整解壓後，在 Chromium 開啟 index.html 即可操作；若瀏覽器限制 file:// 儲存，依 OPEN-PREVIEW.txt 使用 Python 提供本機 HTTP 服務。不需 npm、主機帳號或付費 API。此方案需要下載，並非線上代管的 HTTPS 網站。
 
-`node scripts/preview-smoke.cjs` 會以真正的 file:// 預覽包驗證版本／commit、獨立資料庫、文件編輯、自動保存及重新開啟，不只驗證 ZIP 存在。
+`node scripts/preview-smoke.cjs` 在 GitHub runner 以真正的 file:// 預覽包驗證版本／commit、獨立資料庫、文件編輯、自動保存及重新開啟，不只驗證 ZIP 存在。
 
 ## 資料隔離
 
@@ -19,3 +19,5 @@ GitHub Pages 的不同儲存庫路徑仍共用 lrqrll.github.io origin。預覽�
 ## 建立公開 Pages 的必要條件
 
 使用者建立空白公開儲存庫 `lrqrll/practical-thinking-studio-preview`，並授予目前 GitHub 整合存取權後，可將已驗證預覽包推送該庫並啟用免費 Pages。必須實際確認 HTTPS 載入、metadata、獨立資料及編輯保存，才提供網址。不能為了預覽覆寫正式站或切換正式 Pages 來源。
+
+本機受管理 Chromium 政策禁止 file://（ERR_BLOCKED_BY_ADMINISTRATOR），未繞過政策；本機改以 HTTP 提供相同預覽包驗證。CI 另驗證下載包的 file:// 使用，以及公開 HTTPS 預覽。
