@@ -12,3 +12,5 @@
 - 不需要打包；`npm run serve` 提供 HTTP 開發服務。不得把測試依賴或 node_modules 提交到網站。
 - 持續更新 ROADMAP.md、docs/QA-REPORT.md、docs/KNOWN-ISSUES.md。列出未測／失敗／通過，不能用計畫代表實作。
 - 大型編輯器必須等現有系統修復及驗收過關後，依 ROADMAP 順序實作真正核心功能；不得以表單或空殼冒充。
+
+- 預覽須顯示版本及實際來源 SHA，使用獨立資料庫／草稿命名空間，不自動讀入正式資料；不同 GitHub Pages 路徑仍共用 origin。正式站與預覽部署來源不可互相覆蓋。

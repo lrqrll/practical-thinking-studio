@@ -1,71 +1,38 @@
-# QA 驗收報告
+# NEXUS 3.2.1 驗收報告
 
-驗收日期：2026-10-23（Asia/Taipei）。基線 main `c5786f3`／3.2.0；待發布版 `3.2.1`，尚未合併或發布。
+日期：2026-10-23（Asia/Taipei）。正式基線 main c5786f3／3.2.0；3.2.1 已備妥，PR #4 可審查，尚未批准合併／正式部署。
 
-## 驗證環境與方法
+## 實際結果
 
-Linux、Node 24.19.0、Python 3.12.14、系統 Chromium、Playwright 1.64.1。由 Python HTTP server 提供相同靜態檔案；使用隔離 browser context，兩個 worker，不使用真實使用者資料。無自動重跑失敗案例來掩蓋結果。
+- 本機：Node 24.19.0、Python 3.12.14、Chromium；**6/6 單元、52/52 瀏覽器，0 失敗／跳過／重試**。
+- [Actions 39976684098](https://github.com/lrqrll/practical-thinking-studio/actions/runs/39976684098)，已驗證應用提交 `3c51edec480f954a830a2eb92c62edfe50b492c2`：全部測試、audit、預覽建置、file:// 預覽包、正式 HTTPS 基線及獨立 HTTPS 預覽全部成功。PR 最新文件提交的 checks 另以 GitHub 顯示為準。
+- npm audit：QA 鎖定依賴 0 弱點；git diff --check 通過。audit 不涵蓋提交的 vendor bundle。
+- 公開預覽：[NEXUS 3.2.1](https://lrqrll.github.io/practical-thinking-studio-preview/)。畫面與 deployment.json 顯示實際來源 SHA；公開關鍵資產已與建置包逐位元比對。
+- 正式站 index.html／storage.js 在預覽部署前後逐位元相同，仍為 3.2.0，Pages 來源未改。
 
-可重跑：
+## 首次失敗沒有忽略
 
-```sh
-npm ci --ignore-scripts
-NEXUS_CHROMIUM=/usr/bin/chromium npm test
-npm audit --audit-level=high
-```
+已以正常 HTTPS 取得 39820174844 的 artifact：42 通過、4 失敗。比對證明 afc977f 到 bc328f0 未修改該四個測試或功能，因此後續一次綠燈不是修復證據。
 
-一般 CI 使用 Playwright 安裝的 Chromium，不設定 NEXUS_CHROMIUM。HTML、JSON 與失敗 trace 由 runner 產生在忽略目錄，GitHub Actions 設定會保存 artifact。
+本次根因與修復見 [CI-FAILURE-ANALYSIS.md](CI-FAILURE-ANALYSIS.md)：
 
-## 本次修改
+1. 清單：原生 DOM 選取與 ProseMirror model 可能不同步，舊焦點恢復把額外 trailing paragraph 納入。現在格式化前同步畫面可見範圍，保留 NodeSelection／CellSelection。
+2. 尋找：Tiptap focus 延至 animation frame，處理完成時選取仍空白。改為同步焦點與結果選取。
+3. 移動：全選非同步重繪替換目標 select，丟失已選目的地。現在只更新勾選／按鈕，不重建控制項。
+4. 資料夾：測試過早讀取 nth(1) 誤選垃圾桶；刪除交易未完成時切換又被後續回呼重設。改為名稱選項、等待真實刪除結果，且操作期間真正 disabled。
 
-- 保存佇列不再被舊 saveError 永久阻斷；成功後清除錯誤，重試仍保留 rev 衝突檢查。
-- debounce 前立即備援草稿，每分頁獨立 key；僅清除自己的草稿，離開前檢查 dirty。flush 排空等待期間新增的保存。
-- 保存失敗可下載最新草稿，或直接另存 NEXUS 工作檔；不會誤稱瀏覽器已保存。
-- 通用 NEXUS JSON 檔案另存／開啟，File System Access 支援手動重寫同一 handle；替代路徑為下載／檔案上傳匯入。匯入建立副本。
-- 新增最近十次修改前歷史快照，同交易寫入與回滾；完整備份保留歷史，復原為副本；匯入後修訂號繼續遞增。
-- 永久刪除與清空垃圾桶需確認；資料層拒絕永久刪除未進垃圾桶的檔案，刪除時清除歷史。
-- 搜尋只重建結果，保留輸入節點；區分「最近使用工具」和「最近開啟文件」。
-- 防止空白／控制字元前綴 CSV 公式注入；拒絕畸形備份與文件 marks、非整數預算人數。
-- 建立 AGENTS、ROADMAP、架構盤點、已知問題、README、鎖定 QA 依賴及 GitHub Actions。保留既有架構、資料庫名稱與八個工具，不恢復退休圖片工具。
+兩組控制時序測試各取得修復前 2/2 失敗證據，修復後通過。原四案例曾各 5 次共 20/20 通過，但 39974712148 仍在遠端抓出 2 項未完整修復；已繼續補強並保留該失敗，未用本機重複通過取代根因分析。最終 52 項完整遠端通過。統計見 qa-3.2.1-results.json；舊 qa-results.json 為 rc.1 歷史紀錄。
 
-## 已覆蓋範圍
+39975827685 停於 OS 依賴安裝，取消日誌顯示 Azure Ubuntu mirror 的字型下載極慢，尚未執行應用測試，不列入通過。CI 已固定 Ubuntu 24.04 並限制安裝步驟 5 分鐘；後續完整執行成功。
 
-| 項目 | 實際斷言 |
-| --- | --- |
-| 儲存 | 容量不足重試、最新資料、寫入中再次編輯、導覽期間編輯、兩分頁衝突、草稿副本復原、兩層失敗仍可下載、真實 IDB transaction abort 回滾 |
-| 歷史與備份 | 十版上限、版本內容、還原副本、匯入後修訂號、完整 JSON UI 下載／還原、畸形輸入不寫入、舊版遷移一次且保留原資料 |
-| 文件格式 | 粗體／斜體／底線實際 DOM、CSS、重新開啟及 DOCX XML；字型字級、標題、對齊、編號／項目清單、復原重做、尋找全部／單次取代、連結與移除 |
-| 文件結構 | 表格增刪列欄、合併／分割後重新開啟；圖片插入／調整與頁面設定保存 |
-| 文件互通 | DOCX ZIP／XML、HTML 內容、DOCX 回讀副本、損毀 DOCX 拒絕、列印 frame 內容、同內容 PDF 簽章與大小 |
-| 八個工具 | 新增、編輯、保存、重新開啟與輸出；備忘錄／報告／報價／大綱／會議及任務／預算的獨立資料；文字輸入不執行 HTML、負值／不支援圖片等異常 |
-| 檔案管理 | 命名、複製、移動、多選、資料夾建立／刪除、垃圾桶還原、確認取消／永久刪除／清空、搜尋插入游標穩定 |
-| 本機讀寫 | 下載／匯入真實瀏覽器流程；API 替身驗證選擇器、write／close、handle 重用、取消、失敗 abort 與開啟讀入 |
-| 介面與安全 | 390px 八個工具無全頁水平溢出；390／1280px 首頁與文件深淺色、axe WCAG A/AA／2.1 AA 規則；sanitizer 移除 script、事件、危險連結與遠端圖片；未捕捉 JS 錯誤或應用資源 HTTP 失敗即失敗 |
+## 覆蓋
 
-## 結果
+儲存配額／transaction abort 回滾、失敗重試、保存中再次編輯／導覽、跨分頁衝突、草稿副本、十版歷史及版本號、完整備份／還原、舊版遷移保留原資料；八工具新增／編輯／保存／重開／匯出與獨立性；文件格式／清單／表格增刪合併分割／圖片／連結／尋找取代／頁面設定、DOCX 回讀與 ZIP/XML、HTML、列印 frame／PDF 結構；檔案與資料夾管理、垃圾桶、CSV 注入、sanitize、390／1280px 與 axe。
 
-**最終完整執行通過：6/6 單元測試、46/46 瀏覽器測試；0 失敗、0 跳過、0 重試。** 瀏覽器套件約 1.1 分鐘。逐項結果見 [qa-results.json](qa-results.json)。較早的 31 項瀏覽器回歸曾全數通過；擴充測試時發現並修正了測試在資料夾重新繪製前就勾選舊 checkbox 的同步問題，保留永久刪除的所有斷言。另一次初始化逾時的 trace 顯示頁面仍在啟動、未有程式例外，單獨重跑通過；最終結果以固定來源的完整重跑為準，不把這些先前失敗隱藏為從未發生。
+預覽測試證明正式 IndexedDB 與 recovery sentinel 保持原值、不遷移正式 legacy 資料；缺少預覽 metadata 時 fail closed。GitHub runner 已實際操作下載包文件編輯／保存／重開，以及 HTTPS 預覽初始化／備忘錄編輯保存重開。未停用 TLS 驗證或修改持久憑證信任庫。
 
-`npm ci --ignore-scripts` 已成功重建六個 QA 套件；`npm audit --audit-level=high` 回報 0 個弱點（僅 QA 依賴）；`git diff --check` 通過。
+## 發布邊界
 
-## 未驗證與發布門檻
+目前沒有已知未解決的 P0／P1 程式缺陷；正式合併／部署仍需使用者批准。OS 原生選擇器／實體列印、Word 精確版型、Safari／Firefox／真實手機及螢幕閱讀器仍是如實列出的 P2 驗收限制，不能以 headless／API 替身宣稱全部實機通過。
 
-重新檢查後 GitHub API／Pages HTTPS 已可存取，確認 Pages 是 legacy 模式、來源 main 根目錄，現有網站仍為 3.2.0。草稿 [PR #4](https://github.com/lrqrll/practical-thinking-studio/pull/4) 已建立。提交 15c9285 的 [Actions 39820642271](https://github.com/lrqrll/practical-thinking-studio/actions/runs/39820642271) 完整成功：單元測試、46 項瀏覽器測試（29.7 秒）、audit 與以正常 TLS 驗證直接開啟公開 Pages 的瀏覽器冒煙測試。首次 Actions 曾失敗，其日誌與 artifact 下載目的地仍受 Forbidden 限制，根因待確認。原生 OS 選擇器／權限、列印視窗、Word／LibreOffice 排版、Safari／Firefox／真實手機與螢幕閱讀器未驗收。PDF 測試沒有冒稱已完成 OS 的「另存 PDF」視窗操作。
-
-本機 Chromium 不信任環境代理憑證；自動核准審查拒絕將代理 CA 持久加入其 NSS 信任庫（會擴大未來 TLS 信任範圍），沒有執行該變更。公開網站驗證改由 GitHub runner 成功完成，未停用 TLS 驗證。
-
-詳細限制與分級見 KNOWN-ISSUES.md。**目前不得正式發布或開始大型編輯器**；先解除 RELEASE-01 並完成發布驗收，再依 ROADMAP 前進。
-
-## 3.2.1 最終修復（本次接續）
-
-已下載首次 CI 的 JSON、error-context 與 trace，四項逐一分析見 [CI-FAILURE-ANALYSIS.md](CI-FAILURE-ANALYSIS.md)。比對證明 afc977f 到 bc328f0 沒有修改那些測試或功能；先前成功不能算修復。
-
-本次修正同步文件焦點、勾選不重建移動目標控制項、資料夾操作忙碌狀態與名稱選項同步。兩個新增控制時序測試先在舊程式 2/2 失敗；修正後本機 **6/6 單元、50/50 瀏覽器、四個原失敗案例各 5 次共 20/20** 通過，0 跳過／0 重試。版本準備為 3.2.1，但沒有合併或正式發布。統計見 qa-3.2.1-results.json。
-
-新增預覽 namespace、禁止預覽自動遷移正式舊資料、缺少 metadata 時 fail closed；測試已證明同 origin 的正式檔案與 recovery sentinel 保持原值。預覽流程、可操作 artifact 與公開預覽狀態見 PREVIEW.md。使用者已建立並授權獨立公開預覽庫；不改正式站來源。
-
-先前「日誌仍被阻擋」的描述是歷史紀錄，現在已解除並取得證據。P0/P1 程式問題已完成本機修復驗證；還需最新遠端 CI、預覽瀏覽器驗證及使用者合併／部署批准。Excel 必須等正式部署驗收後啟動。
-
-### 遠端再現後的最終補強
-
-39974712148 仍有 2 項失敗，已保留在 CI-FAILURE-ANALYSIS.md；沒有用本機壓力測試通過忽略它們。新增原生 DOM range／ProseMirror model 不同步的控制案例，修復前確實選到兩段，修正後只格式化畫面選取的一段；刪資料夾的控制案例則驗證真正 disabled 的控制項會等待交易／重繪。兩個新增案例補強前 2/2 失敗，補強後與既有案例 21/21 通過。最終本機全套 **6 單元＋52 瀏覽器測試通過，0 失敗／跳過／重試**。最新遠端及 HTTPS 預覽驗證須以 PR #4 checks 為準。
+批准後合併 PR #4，核對 Pages 部署提交，以 NEXUS_EXPECTED_VERSION=3.2.1 驗證正式 HTTPS；成功後才開獨立 Excel 分支。見 RELEASE-CHECKLIST.md 與 RESUME.md。

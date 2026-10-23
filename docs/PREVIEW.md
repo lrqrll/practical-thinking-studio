@@ -21,3 +21,7 @@ GitHub Pages 的不同儲存庫路徑仍共用 lrqrll.github.io origin。預覽�
 使用者建立空白公開儲存庫 `lrqrll/practical-thinking-studio-preview`，並授予目前 GitHub 整合存取權後，可將已驗證預覽包推送該庫並啟用免費 Pages。必須實際確認 HTTPS 載入、metadata、獨立資料及編輯保存，才提供網址。不能為了預覽覆寫正式站或切換正式 Pages 來源。
 
 本機受管理 Chromium 政策禁止 file://（ERR_BLOCKED_BY_ADMINISTRATOR），未繞過政策；本機改以 HTTP 提供相同預覽包驗證。CI 另驗證下載包的 file:// 使用，以及公開 HTTPS 預覽。
+
+## 已發布並驗證
+
+HTTPS 預覽：https://lrqrll.github.io/practical-thinking-studio-preview/ 。Actions 39976684098 已驗證版本、實際 source SHA、獨立資料庫及編輯保存重開；同時驗證可下載 artifact 的 file:// 文件操作。來源 SHA 以部署時 deployment.json／橫幅為準，每次更新都重新產生資產查詢 SHA 以防混用舊快取，實際 JS／CSS 亦由對應提交複製。正式站設定與資產未改。

@@ -13,3 +13,5 @@
 此任務未自行切換模型；使用針對性故障重現、保存證據及 GitHub Actions 控制成本，不額外啟動多個 AI 審查。
 
 CI 固定 Ubuntu 24.04，瀏覽器安裝步驟 5 分鐘上限；不要無故改回滾動 ubuntu-latest。39975827685 停在依賴安裝、未開始測試，已取消並以固定 runner 重新驗證；不能把該次取消標為測試通過。
+
+最新已驗證程式：3c51ede，Actions 39976684098 全部通過（6 單元、52 瀏覽器、audit、file:// 與 HTTPS 預覽）。PR #4 已 ready for review。公開預覽 https://lrqrll.github.io/practical-thinking-studio-preview/；目前沒有正式合併／部署批准。原安裝等待日誌已確認為 Azure Ubuntu mirror 字型下載慢，非應用測試失敗。下一步先取得使用者批准，再合併／驗證正式部署，然後實作 Excel。

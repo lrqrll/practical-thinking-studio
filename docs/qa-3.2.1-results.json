@@ -69,5 +69,16 @@
     "passed": 48,
     "failed": 2,
     "resolution": "DOM selection synchronization before focus; disabled controls during folder deletion"
+  },
+  "verified_ci": {
+    "run": 39976684098,
+    "source_commit": "3c51edec480f954a830a2eb92c62edfe50b492c2",
+    "conclusion": "success",
+    "unit_passed": 6,
+    "browser_passed": 52,
+    "preview_file_smoke": "success",
+    "preview_https_smoke": "success",
+    "production_baseline_https_smoke": "success",
+    "audit": "success"
   }
 }
