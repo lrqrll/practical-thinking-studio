@@ -133,5 +133,36 @@
       "preview_https_source_sha": "passed",
       "audit_vulnerabilities": 0
     }
+  },
+  "approved_followup_deployment": {
+    "date_taipei": "2026-10-24",
+    "pr": 5,
+    "approved_head": "cb7c8a595295eaf301ad629f1e48c646559eb71d",
+    "merge_commit": "a0edd157ef1a01572e296db01c23f9a8b9651a76",
+    "main_ci": {
+      "run": 39983494640,
+      "conclusion": "success",
+      "unit_passed": 6,
+      "browser_passed": 54,
+      "timing_repeat_passed": 15,
+      "audit_vulnerabilities": 0
+    },
+    "pages": {
+      "run": 39983494187,
+      "conclusion": "success",
+      "build_commit_matches": true
+    },
+    "production_document_acceptance": {
+      "run": 39983688217,
+      "conclusion": "failure",
+      "reason": "OS/font dependency installation timeout at 5 minutes; Azure Ubuntu mirror downloads slow",
+      "actual_assets": "skipped",
+      "original_list_flow": "skipped",
+      "backward_selection": "skipped",
+      "save_reopen_document": "skipped",
+      "browser_tests_passed": 0
+    },
+    "p1_gate": "blocked; stopped per user instruction",
+    "excel": "paused"
   }
 }

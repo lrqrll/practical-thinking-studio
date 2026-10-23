@@ -1,5 +1,16 @@
 # 下一個 Codex 任務接續點
 
+## 2026-10-24 正式部署追蹤（最新狀態）
+
+- 目前環境 GitHub 身分已恢復為 lrqrll；不需重新授權。使用者對 PR #5 指定 cb7c8a595295eaf301ad629f1e48c646559eb71d 的批准仍有效，已依批准合併。
+- PR #5 合併提交：a0edd157ef1a01572e296db01c23f9a8b9651a76。Pages 39983494187 成功，Pages build API 的 commit 亦符合；正式站為 3.2.1。
+- main CI 39983494640 成功：6 單元、54 瀏覽器、15 次選取重複、audit 0 弱點；一般正式 HTTPS 只驗證版本及備忘錄保存重開，不能代替文件專項。
+- 正式文件專項 Actions 39983688217 **失敗**：Install browser 下載 Azure Ubuntu mirror 的 OS／字型依賴逾 5 分鐘；公開全資產比對與原清單／反向選取／保存重開測試均 skipped，沒有任何正式文件通過結果。
+- 已依使用者「若失敗則停止並回報」停止，不重試、不解除 DOC-SELECT-02 驗收阻擋、不恢復 Excel。此為驗收基礎設施失敗，不能聲稱已在正式站重現或排除程式缺陷。
+- 未停用 TLS 或修改憑證信任庫。驗證程式在 codex/nexus-release-acceptance 的 5af39fc；目前 codex/nexus-release-status 保存此結果，未合併、不部署，推送不觸發文件專項重跑。
+- 下次接續：先由使用者確認停止後是否恢復工作，再處理依賴下載可靠性，執行相同標準的正式文件專項及實際公開資產比對。PR #5 合併授權已執行，不要再次索取相同授權；其他新提交不能擅自合併。所有門檻通過才恢復 Excel。
+
+
 先讀 AGENTS、QA-REPORT、KNOWN-ISSUES、CI-FAILURE-ANALYSIS、RELEASE-CHECKLIST；不要重建。
 
 使用者已批准 PR #4 的 0e27cdc 合併及正式部署，已完成：main c400e6f，Pages run 39978438967，公開站 3.2.1。不要再索取這次已執行合併的批准。但合併後 QA run 39978439742 為 6 單元通過、51 瀏覽器通過／1 清單失敗，不能宣稱驗收完成。
