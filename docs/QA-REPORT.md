@@ -1,6 +1,16 @@
 # NEXUS 3.2.1 驗收報告
 
-日期：2026-10-23（Asia/Taipei）。正式基線 main c5786f3／3.2.0；3.2.1 已備妥，PR #4 可審查，尚未批准合併／正式部署。
+日期：2026-10-23。使用者已批准 PR #4 的 0e27cdc；已合併為 c400e6f57403490337c9435548be02459a1eac1c，Pages 39978438967 成功部署，HTTPS storage.js 確為 3.2.1。但合併後 CI 39978439742 的清單回歸再失敗，**最終驗收尚未完成**。目前追加修正在獨立分支 codex/nexus-document-selection-followup，尚未合併／部署此修正。
+
+## 合併後追蹤（優先於以下歷史結果）
+
+- main CI：6 單元通過；51 瀏覽器通過、1 失敗；後續 audit／線上冒煙步驟因測試失敗未執行，不能標記通過。
+- 本機原案例重複：14 通過／1 失敗；控制案例修正前失敗；修正後原案例＋控制案例各 15 次，30/30 通過。
+- 追加同步導覽鍵選取、保留反向範圍，新增兩項回歸；本機完整結果為 **6/6 單元＋54/54 瀏覽器，0 失敗／跳過／重試**；npm audit 0 弱點，diff check 通過。遠端 CI 與 HTTPS 預覽仍需核對最新提交。
+- 獨立線上驗證工作流程可核對正式版本 3.2.1 與保存／重開，即使完整 QA 失敗仍會獨立執行；線上冒煙通過不會解除已知清單阻擋。
+- Excel 分支已建立但暫停；試算表草稿未接入網站、未上架。先解除 DOC-SELECT-02。
+
+以下為合併前的歷史證據，保留原始結果，不代表合併後全部通過。
 
 ## 實際結果
 
@@ -8,7 +18,7 @@
 - [Actions 39976684098](https://github.com/lrqrll/practical-thinking-studio/actions/runs/39976684098)，已驗證應用提交 `3c51edec480f954a830a2eb92c62edfe50b492c2`：全部測試、audit、預覽建置、file:// 預覽包、正式 HTTPS 基線及獨立 HTTPS 預覽全部成功。PR 最新文件提交的 checks 另以 GitHub 顯示為準。
 - npm audit：QA 鎖定依賴 0 弱點；git diff --check 通過。audit 不涵蓋提交的 vendor bundle。
 - 公開預覽：[NEXUS 3.2.1](https://lrqrll.github.io/practical-thinking-studio-preview/)。畫面與 deployment.json 顯示實際來源 SHA；公開關鍵資產已與建置包逐位元比對。
-- 正式站 index.html／storage.js 在預覽部署前後逐位元相同，仍為 3.2.0，Pages 來源未改。
+- 合併前預覽部署未改動正式站；當時 index.html／storage.js 逐位元相同、版本為 3.2.0。之後經使用者批准才部署 3.2.1。
 
 ## 首次失敗沒有忽略
 

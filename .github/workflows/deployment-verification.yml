@@ -1,0 +1,30 @@
+name: NEXUS deployed HTTPS verification
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, codex/nexus-document-selection-followup]
+permissions:
+  contents: read
+jobs:
+  deployed:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Install browser
+        timeout-minutes: 5
+        run: npx playwright install --with-deps chromium
+      - name: Verify production version and browser persistence
+        run: node scripts/live-smoke.cjs
+        env:
+          NEXUS_EXPECTED_VERSION: '3.2.1'
+      - name: Verify preview version and browser persistence
+        run: node scripts/live-smoke.cjs
+        env:
+          NEXUS_SITE_URL: https://lrqrll.github.io/practical-thinking-studio-preview/
+          NEXUS_EXPECTED_VERSION: '3.2.1'

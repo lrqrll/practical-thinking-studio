@@ -1,17 +1,15 @@
 # 下一個 Codex 任務接續點
 
-延續 PR #4、codex/nexus-storage-quality；不重建專案。先讀 AGENTS、QA-REPORT、CI-FAILURE-ANALYSIS、PREVIEW、RELEASE-CHECKLIST。
+先讀 AGENTS、QA-REPORT、KNOWN-ISSUES、CI-FAILURE-ANALYSIS、RELEASE-CHECKLIST；不要重建。
 
-首次 CI 四個失敗已取得原始 artifact 並分析；目前修復與新版測試在分支，版本準備為 3.2.1。正式站仍 3.2.0，沒有合併／部署授權；需先讓使用者驗看候選版，再就具體 PR 請求批准。不要在等待批准時重做已完成的功能，也不要提早開發大型 Excel。
+使用者已批准 PR #4 的 0e27cdc 合併及正式部署，已完成：main c400e6f，Pages run 39978438967，公開站 3.2.1。不要再索取這次已執行合併的批准。但合併後 QA run 39978439742 為 6 單元通過、51 瀏覽器通過／1 清單失敗，不能宣稱驗收完成。
 
-使用者已建立公開 practical-thinking-studio-preview 並授權；已確認當時為空白且具 admin／push 權限。預覽包只能部署到此庫，不修改正式 Pages 來源。最新預覽身份見該庫 deployment.json，必須與 PR head／測試證據對照。CI 也會提供可操作下載版。
+當前追加修正在 codex/nexus-document-selection-followup：原生導覽 keyup 即時同步選取，避免延後 focus 把 AllSelection 寫回；保留反向 anchor/head，新增控制／反向回歸。修正前本機原案例 14/15 通過，控制案例失敗；修正後原案例和控制案例各15次共30/30通過。GitHub artifact 403 時未降低 TLS，改用本機原案例重現與 trace 取得根因。
 
-同 origin 的預覽庫路徑不能共享正式資料庫；必須保留預覽 namespace、metadata 橫幅及 fail-closed 檢查。不可降低 TLS 驗證或持久修改憑證信任庫。
+追加修正必須獨立 PR、CI、HTTPS 預覽，具體候選完成後再請使用者批准新 PR 合併／部署；原批准明確針對 PR #4 的 head。不能自行假設包含新提交。
 
-3.2.1 經批准正式部署並驗證後，才建立獨立 Excel 開發分支。依使用者要求，多表、儲存格、列欄、貼上、格式、公式、自動重算、排序篩選、CSV/XLSX、保存／重開／歷史及測試都須真正實作，不使用預算工具冒充。
+預覽 https://lrqrll.github.io/practical-thinking-studio-preview/，只推送 practical-thinking-studio-preview repo，不動正式 Pages 來源。metadata／橫幅顯示來源 SHA，獨立 DB、草稿 namespace，缺失 metadata fail closed。建置用 scripts/build-preview.cjs 全新空目錄；部署 checkout /tmp/nexus-preview-publish-321，先核對 origin/main 未分歧。
 
-此任務未自行切換模型；使用針對性故障重現、保存證據及 GitHub Actions 控制成本，不額外啟動多個 AI 審查。
+Excel branch codex/nexus-spreadsheet 已建於 c400e6f，目前無已提交的編輯器。純模型草稿暫存 /tmp/nexus-spreadsheet-model-next.js，未測、未載入網站；不可當成完成。解除 DOC-SELECT-02 並正式驗證後才恢復，勿遺失這份草稿；完整多表／網格／公式／格式／列欄／貼上／排序篩選／CSV XLSX／保存重開歷史都需驗收。
 
-CI 固定 Ubuntu 24.04，瀏覽器安裝步驟 5 分鐘上限；不要無故改回滾動 ubuntu-latest。39975827685 停在依賴安裝、未開始測試，已取消並以固定 runner 重新驗證；不能把該次取消標為測試通過。
-
-最新已驗證程式：3c51ede，Actions 39976684098 全部通過（6 單元、52 瀏覽器、audit、file:// 與 HTTPS 預覽）。PR #4 已 ready for review。公開預覽 https://lrqrll.github.io/practical-thinking-studio-preview/；目前沒有正式合併／部署批准。原安裝等待日誌已確認為 Azure Ubuntu mirror 字型下載慢，非應用測試失敗。下一步先取得使用者批准，再合併／驗證正式部署，然後實作 Excel。
+本機測試 NEXUS_TEST_PORT=8012 NEXUS_CHROMIUM=/usr/bin/chromium npm test；預設8000舊server可能無回應。npm cache 用 /tmp/nexus-npm-cache。HTTPS瀏覽器用GitHub runner，不能忽略憑證錯誤或持久更動信任庫。CI Ubuntu24.04／安裝5分鐘上限保持。無額外AI審查或模型切換。
