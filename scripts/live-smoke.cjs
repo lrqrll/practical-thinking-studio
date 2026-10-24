@@ -17,8 +17,9 @@ const {chromium}=require('@playwright/test');
    }
    if(!ready)throw Error('Preview did not publish the expected source commit');
   }
+  if(process.env.NEXUS_EXPECTED_VERSION){let ready=false;for(let i=0;i<60;i++){const r=await page.request.get(new URL('storage.js',url).href);if(r.ok()&&(await r.text()).includes("version:'"+process.env.NEXUS_EXPECTED_VERSION+"'")){ready=true;break;}await page.waitForTimeout(3000);}if(!ready)throw Error('Expected deployed version not ready within bounded wait');}
   await page.goto(url);await page.locator('#new-file-type').waitFor();
-  if(process.env.NEXUS_EXPECTED_COMMIT){const banner=await page.locator('#deployment-status').textContent();if(!banner.includes(process.env.NEXUS_EXPECTED_COMMIT))throw Error('Preview banner mismatch');if(await page.evaluate(()=>DATABASE_NAME)!=='nexus-preview-pr4-workspace')throw Error('Preview storage not isolated');}
+  if(process.env.NEXUS_EXPECTED_COMMIT){const banner=await page.locator('#deployment-status').textContent();if(!banner.includes(process.env.NEXUS_EXPECTED_COMMIT))throw Error('Preview banner mismatch');if(await page.evaluate(()=>DATABASE_NAME)!==(process.env.NEXUS_EXPECTED_DATABASE||'nexus-preview-pr4-workspace'))throw Error('Preview storage not isolated');}
   const version=await page.locator('footer .version').textContent();
   if(process.env.NEXUS_EXPECTED_VERSION&&version!==process.env.NEXUS_EXPECTED_VERSION)throw Error(`Expected ${process.env.NEXUS_EXPECTED_VERSION}, deployed ${version}`);
   await page.locator('#new-file-type').selectOption('notes');

@@ -19,12 +19,15 @@ jobs:
       - name: Install browser
         timeout-minutes: 5
         run: npx playwright install --with-deps chromium
+      - name: Read the production release target
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/expected-production-version.cjs
       - name: Verify production version and browser persistence
         run: node scripts/live-smoke.cjs
         env:
-          NEXUS_EXPECTED_VERSION: '3.2.1'
-      - name: Verify preview version and browser persistence
-        run: node scripts/live-smoke.cjs
+          NEXUS_EXPECTED_VERSION: ${{ env.NEXUS_EXPECTED_PRODUCTION_VERSION }}
+      - name: Verify the current preview identity and browser persistence
         env:
-          NEXUS_SITE_URL: https://lrqrll.github.io/practical-thinking-studio-preview/
-          NEXUS_EXPECTED_VERSION: '3.2.1'
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/current-preview-smoke.cjs
