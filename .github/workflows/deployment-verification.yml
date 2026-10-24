@@ -1,33 +1,64 @@
-name: NEXUS deployed HTTPS verification
+name: NEXUS approved release HTTPS acceptance
 on:
   workflow_dispatch:
-  push:
-    branches: [main, codex/nexus-document-selection-followup]
+    inputs:
+      target:
+        description: 'preview-3.2.2, production-3.2.2 or production-3.3.0'
+        required: true
+        type: choice
+        options: [preview-3.2.2, production-3.2.2, production-3.3.0]
+      source_sha:
+        description: 'Exact deployed main merge SHA (approved head for preview dry run)'
+        required: true
+        type: string
 permissions:
   contents: read
+  pages: read
 jobs:
-  deployed:
+  acceptance:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 12
+    env:
+      RELEASE_TARGET: ${{ inputs.target }}
+      RELEASE_SOURCE_SHA: ${{ inputs.source_sha }}
+      GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_sha }}
+          path: source
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
           cache: npm
+          cache-dependency-path: source/package-lock.json
+      - name: Validate exact approved source tree and deployed Pages commit
+        working-directory: source
+        run: node ../scripts/release-identity.cjs
       - run: npm ci --ignore-scripts
-      - name: Install browser
+        working-directory: source
+      - name: Install Chromium with verified downloads
+        working-directory: source
         timeout-minutes: 5
         run: npx playwright install --with-deps chromium
-      - name: Read the production release target
+      - name: Verify public bytes and real HTTPS document and workbench workflows
+        working-directory: source
+        run: node ../scripts/release-live.cjs
+      - name: Restore complete multipart and oversized JSON on production HTTPS in fresh contexts
+        if: inputs.target == 'production-3.3.0'
+        working-directory: source
+        run: npx playwright test tests/e2e/backup-capacity.spec.cjs --workers=1 --reporter=list --output=../verification-results/capacity
         env:
-          GH_TOKEN: ${{ github.token }}
-        run: node scripts/expected-production-version.cjs
-      - name: Verify production version and browser persistence
-        run: node scripts/live-smoke.cjs
-        env:
-          NEXUS_EXPECTED_VERSION: ${{ env.NEXUS_EXPECTED_PRODUCTION_VERSION }}
-      - name: Verify the current preview identity and browser persistence
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: node scripts/current-preview-smoke.cjs
+          NEXUS_CAPACITY_SITE_URL: https://lrqrll.github.io/practical-thinking-studio/#backup
+      - name: Recheck Pages and main did not change during verification
+        working-directory: source
+        run: node ../scripts/release-identity.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: approved-release-acceptance
+          path: verification-results/
+          include-hidden-files: true
+          retention-days: 30
