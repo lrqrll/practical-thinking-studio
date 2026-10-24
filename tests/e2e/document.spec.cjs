@@ -2,14 +2,14 @@ const {test,expect}=require('./fixtures.cjs');
 const {create,saved,documentSelect}=require('./helpers.cjs');
 const {unzipSync,strFromU8}=require('fflate');
 async function bytes(d){const a=[];for await(const c of await d.createReadStream())a.push(c);return Buffer.concat(a);}
-test('bold italic underline: actual marks, CSS, persistence and DOCX XML',async({page})=>{
- await create(page,'document');const editor=page.locator('#document-editor [contenteditable=true]');await editor.fill('格式驗證');await documentSelect(page);
- for(const mark of ['bold','italic','underline'])await page.locator(`[data-doc-command=${mark}]`).click();
+test('legacy italic persists through bold underline edits and DOCX HTML exports',async({page})=>{
+ await create(page,'document');const editor=page.locator('#document-editor [contenteditable=true]');await editor.evaluate(el=>el.editor.commands.setContent({type:'doc',content:[{type:'paragraph',content:[{type:'text',text:'格式驗證',marks:[{type:'italic'}]}]}]}));await documentSelect(page);
+ for(const mark of ['bold','underline'])await page.locator(`[data-doc-command=${mark}]`).click();
  await expect(editor.locator('strong em u, strong u em, em strong u, em u strong, u strong em, u em strong')).toHaveText('格式驗證');
  expect(await editor.locator('em').evaluate(el=>getComputedStyle(el).fontStyle)).toBe('italic');
  await saved(page);await page.reload();await expect(editor.locator('em')).toHaveText('格式驗證');await expect(editor.locator('u')).toHaveText('格式驗證');
- const dl=page.waitForEvent('download');await page.locator('#doc-docx').click();const zip=unzipSync(await bytes(await dl));const xml=strFromU8(zip['word/document.xml']);for(const tag of ['<w:b','<w:i','<w:u'])expect(xml).toContain(tag);expect(xml).toContain('格式驗證');
- const h=page.waitForEvent('download');await page.locator('#doc-html').click();expect((await bytes(await h)).toString()).toContain('<em>');
+ const dl=page.waitForEvent('download');await page.locator('#doc-docx').click();const legacyDocx=await bytes(await dl);const zip=unzipSync(legacyDocx);const xml=strFromU8(zip['word/document.xml']);for(const tag of ['<w:b','<w:i','<w:u'])expect(xml).toContain(tag);expect(xml).toContain('格式驗證');
+ const h=page.waitForEvent('download');await page.locator('#doc-html').click();expect((await bytes(await h)).toString()).toContain('<em>');await page.locator('#doc-import-input').setInputFiles({name:'legacy-italic.docx',mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',buffer:legacyDocx});await expect(editor.locator('em')).toHaveText('格式驗證');await saved(page);await page.reload();await expect(editor.locator('em')).toHaveText('格式驗證');
 });
 test('font, size, heading, alignment, list, undo/redo and find/replace survive reopening',async({page})=>{
  await create(page,'document');const e=page.locator('#document-editor [contenteditable=true]');await e.fill('測試字串 測試字串');await documentSelect(page);await page.locator('#doc-font').selectOption('Arial');await page.locator('#doc-size').selectOption('24');await page.locator('#doc-block').selectOption('2');await page.locator('#doc-align').selectOption('center');
@@ -45,4 +45,10 @@ test('ordered lists, font persistence, find one, and unlink have real editing ef
  await page.getByText('尋找與取代',{exact:true}).click();await page.locator('#doc-find').fill('alpha');await page.locator('#doc-replace').fill('beta');await page.locator('#doc-find-next').click();expect(await page.evaluate(()=>getSelection().toString())).toBe('alpha');await page.locator('#doc-replace-one').click();await expect(e).toHaveText('beta alpha');
  await documentSelect(page);await page.getByText('插入與表格',{exact:true}).click();await page.locator('#doc-link').click();await page.locator('#dialog-name').fill('javascript:alert(1)');await page.getByRole('button',{name:'儲存名稱',exact:true}).click();await expect(page.locator('#toast')).toContainText('連結限');await expect(e.locator('a')).toHaveCount(0);
  await page.locator('#doc-link').click();await page.locator('#dialog-name').fill('https://example.com');await page.getByRole('button',{name:'儲存名稱',exact:true}).click();await expect(e.locator('a')).toHaveCount(1);await page.locator('#doc-unlink').click();await expect(e.locator('a')).toHaveCount(0);await saved(page);await page.reload();await expect(e).toHaveText('beta alpha');
+});
+
+test('italic operation is retired; both shortcuts leave new and legacy marks unchanged',async({page})=>{
+ await create(page,'document');const e=page.locator('.tiptap');await expect(page.locator('[data-doc-command=italic]')).toHaveCount(0);await e.fill('新文字');await documentSelect(page);
+ for(const key of ['Control+i','Meta+i']){await page.keyboard.press(key);await expect(e.locator('em')).toHaveCount(0);}
+ await e.evaluate(el=>el.editor.commands.setContent({type:'doc',content:[{type:'paragraph',content:[{type:'text',text:'舊斜體',marks:[{type:'italic'}]}]}]}));await documentSelect(page);for(const key of ['Control+i','Meta+i']){await page.keyboard.press(key);await expect(e.locator('em')).toHaveText('舊斜體');}await saved(page);await page.reload();await expect(e.locator('em')).toHaveText('舊斜體');
 });

@@ -29,7 +29,7 @@ jobs:
       - run: node scripts/preview-smoke.cjs
       - uses: actions/upload-artifact@v4
         with:
-          name: NEXUS-preview-3.2.1
+          name: NEXUS-candidate-preview
           path: dist-preview/
           include-hidden-files: true
           retention-days: 30

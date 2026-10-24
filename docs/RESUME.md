@@ -1,17 +1,11 @@
-# 下一個 Codex 任務接續點
+# NEXUS 接續點
 
-先讀 AGENTS、QA-REPORT、KNOWN-ISSUES、CI-FAILURE-ANALYSIS、RELEASE-CHECKLIST；不要重建。
+最新使用者決定：取消獨立Excel／試算表產品（不是暫停），保留PR #7與d1bd4e3分支／核心／測試但不合併、不擴網格；預算與XLSX成果方向保留。未上架，所以不能說已從正式站下架。
 
-使用者已批准 PR #4 的 0e27cdc 合併及正式部署，已完成：main c400e6f，Pages run 39978438967，公開站 3.2.1。不要再索取這次已執行合併的批准。但合併後 QA run 39978439742 為 6 單元通過、51 瀏覽器通過／1 清單失敗，不能宣稱驗收完成。
+正式main a0edd157ef1a01572e296db01c23f9a8b9651a76／3.2.1；正式驗收39985267265已通過26公開資產與15文件專項。PR #6仍未合併，PR #7疊在其上；新分支從main建立，未整包帶入兩PR。
 
-當前追加修正在 codex/nexus-document-selection-followup：原生導覽 keyup 即時同步選取，避免延後 focus 把 AllSelection 寫回；保留反向 anchor/head，新增控制／反向回歸。修正前本機原案例 14/15 通過，控制案例失敗；修正後原案例和控制案例各15次共30/30通過。GitHub artifact 403 時未降低 TLS，改用本機原案例重現與 trace 取得根因。
+本輪小PR：斜體操作依決定撤下，保留italic模型／DOCX、HTML與舊文件相容；Ctrl/Cmd+I由編輯器攔截，不改舊marks。原字形問題未修復，沒有font-synthesis或transform修正。
 
-PR #5 https://github.com/lrqrll/practical-thinking-studio/pull/5 已建立並可審查。應用提交87feee59aade651fd06ee0f076920b038fcaa9e0 的 CI 39979908311 全通過：6單元＋54瀏覽器＋15次選取重複、audit、預覽包與正式／預覽HTTPS。正式冒煙確為3.2.1；正式站尚無追加修正。預覽來源以最新 deployment.json 和 PR head 為準，純文件補記後也須重新部署metadata。
+下一個授權範圍：採購報價比較＋決策備忘工作台M1，先精確Money／缺值、穩定來源關聯、備份v2與固定快照，再UI及真實操作測試；保留獨立工具。禁止全面重寫資料層、加入AI或其他大型工具。
 
-追加修正必須獨立 PR、CI、HTTPS 預覽，具體候選完成後再請使用者批准新 PR 合併／部署；原批准明確針對 PR #4 的 head。不能自行假設包含新提交。
-
-預覽 https://lrqrll.github.io/practical-thinking-studio-preview/，只推送 practical-thinking-studio-preview repo，不動正式 Pages 來源。metadata／橫幅顯示來源 SHA，獨立 DB、草稿 namespace，缺失 metadata fail closed。建置用 scripts/build-preview.cjs 全新空目錄；部署 checkout /tmp/nexus-preview-publish-321，先核對 origin/main 未分歧。
-
-Excel branch codex/nexus-spreadsheet 已建於 c400e6f，目前無已提交的編輯器。純模型草稿暫存 /tmp/nexus-spreadsheet-model-next.js，未測、未載入網站；不可當成完成。解除 DOC-SELECT-02 並正式驗證後才恢復，勿遺失這份草稿；完整多表／網格／公式／格式／列欄／貼上／排序篩選／CSV XLSX／保存重開歷史都需驗收。
-
-本機測試 NEXUS_TEST_PORT=8012 NEXUS_CHROMIUM=/usr/bin/chromium npm test；預設8000舊server可能無回應。npm cache 用 /tmp/nexus-npm-cache。HTTPS瀏覽器用GitHub runner，不能忽略憑證錯誤或持久更動信任庫。CI Ubuntu24.04／安裝5分鐘上限保持。無額外AI審查或模型切換。
+授權包含分支開發、測試、PR與獨立預覽，不含合併或正式部署。各候選的實際SHA與CI以PR為準，不能假設為main。

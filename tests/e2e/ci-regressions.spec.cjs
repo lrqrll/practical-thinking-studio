@@ -8,7 +8,7 @@ test('backward native navigation retains its anchor and focus direction',async({
   return {anchor:el.editor.state.selection.anchor,head:el.editor.state.selection.head,text:selection.toString()};
  });
  expect(result.anchor).toBeGreaterThan(result.head);expect(result.text).toBe('方向不能反轉');
- await page.locator('[data-doc-command=italic]').click();await expect(page.locator('.tiptap em')).toHaveText('方向不能反轉');await saved(page);await page.reload();await expect(page.locator('.tiptap em')).toHaveText('方向不能反轉');
+ await page.locator('[data-doc-command=bold]').click();await expect(page.locator('.tiptap strong')).toHaveText('方向不能反轉');await saved(page);await page.reload();await expect(page.locator('.tiptap strong')).toHaveText('方向不能反轉');
 });
 test('native navigation updates the model before a pending focus restores its old selection',async({page})=>{
  await create(page,'document');

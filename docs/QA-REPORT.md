@@ -46,3 +46,9 @@
 正式站仍有 DOC-SELECT-02（P1）；追加修正候選需完成 CI／預覽並經使用者批准合併部署，才可解除發布門檻。OS 原生選擇器／實體列印、Word 精確版型、Safari／Firefox／真實手機及螢幕閱讀器仍是如實列出的 P2 驗收限制，不能以 headless／API 替身宣稱全部實機通過。
 
 PR #4 已批准合併部署；PR #5 追加修正尚未批准。完成追加發布驗證後恢復既有 codex/nexus-spreadsheet 分支。見 RELEASE-CHECKLIST.md 與 RESUME.md。
+
+## 最新候選：撤下斜體操作（尚未發布）
+
+候選3.2.2-rc.1從正式main a0edd15建立，未合併PR #6/#7。依使用者決定移除按鈕及Ctrl/Cmd+I；保留italic模型、舊文件、HTML與DOCX匯入匯出。這是操作入口撤下，不是字形修復。
+
+針對性文件／選取15項通過；新測試驗證兩種快捷鍵不新增或清除italic，舊格式與bold/underline編輯、保存重開及DOCX／HTML相容。新增DOCX實際回讀亦須通過候選CI；最新結果以PR checks為準。獨立Excel產品已取消，沒有從正式站下架，歷史成果保留。
