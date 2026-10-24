@@ -1,0 +1,312 @@
+{
+  "final_version": "3.3.0",
+  "official_url": "https://lrqrll.github.io/practical-thinking-studio/",
+  "final_main": "ff3f8a16cb343b93973bd191003c30ca9c13b996",
+  "pages": {
+    "commit": "ff3f8a16cb343b93973bd191003c30ca9c13b996",
+    "status": "built"
+  },
+  "releases": [
+    {
+      "pr": 8,
+      "approved_head": "a16250ab4b4a355feef8559e44a278ee023ef889",
+      "merge": "fc42560b932e2107e80c2bcfe8a580ef2a280780",
+      "merged_at": "2026-10-24T11:23:39Z",
+      "https_run": 40089881330,
+      "public_assets": 26
+    },
+    {
+      "pr": 9,
+      "approved_head": "25fee3d52f9d8af764b19161479b94027ee8dc44",
+      "merge": "ff3f8a16cb343b93973bd191003c30ca9c13b996",
+      "merged_at": "2026-10-24T11:28:47Z",
+      "https_run": 40090170631,
+      "public_assets": 30
+    }
+  ],
+  "retargeted_diff_unchanged": true,
+  "ordered_gate_confirmed": true,
+  "checks": {
+    "40089725242": {
+      "name": "NEXUS quality",
+      "head_sha": "fc42560b932e2107e80c2bcfe8a580ef2a280780",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lrqrll/practical-thinking-studio/actions/runs/40089725242",
+      "created_at": "2026-10-24T11:23:41Z",
+      "updated_at": "2026-10-24T11:25:16Z"
+    },
+    "40089725245": {
+      "name": "NEXUS deployed HTTPS verification",
+      "head_sha": "fc42560b932e2107e80c2bcfe8a580ef2a280780",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lrqrll/practical-thinking-studio/actions/runs/40089725245",
+      "created_at": "2026-10-24T11:23:41Z",
+      "updated_at": "2026-10-24T11:24:19Z"
+    },
+    "40089725263": {
+      "name": "pages build and deployment",
+      "head_sha": "fc42560b932e2107e80c2bcfe8a580ef2a280780",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lrqrll/practical-thinking-studio/actions/runs/40089725263",
+      "created_at": "2026-10-24T11:23:41Z",
+      "updated_at": "2026-10-24T11:24:06Z"
+    },
+    "40089881330": {
+      "name": "NEXUS approved release HTTPS acceptance",
+      "head_sha": "30ba95756c4ea2dd33ba021ec238618fc216726f",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lrqrll/practical-thinking-studio/actions/runs/40089881330",
+      "created_at": "2026-10-24T11:26:00Z",
+      "updated_at": "2026-10-24T11:26:50Z"
+    },
+    "40090062525": {
+      "name": "NEXUS quality",
+      "head_sha": "ff3f8a16cb343b93973bd191003c30ca9c13b996",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lrqrll/practical-thinking-studio/actions/runs/40090062525",
+      "created_at": "2026-10-24T11:28:49Z",
+      "updated_at": "2026-10-24T11:30:43Z"
+    },
+    "40090062540": {
+      "name": "NEXUS deployed HTTPS verification",
+      "head_sha": "ff3f8a16cb343b93973bd191003c30ca9c13b996",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lrqrll/practical-thinking-studio/actions/runs/40090062540",
+      "created_at": "2026-10-24T11:28:49Z",
+      "updated_at": "2026-10-24T11:29:20Z"
+    },
+    "40090062271": {
+      "name": "pages build and deployment",
+      "head_sha": "ff3f8a16cb343b93973bd191003c30ca9c13b996",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lrqrll/practical-thinking-studio/actions/runs/40090062271",
+      "created_at": "2026-10-24T11:28:49Z",
+      "updated_at": "2026-10-24T11:29:15Z"
+    },
+    "40090170631": {
+      "name": "NEXUS approved release HTTPS acceptance",
+      "head_sha": "30ba95756c4ea2dd33ba021ec238618fc216726f",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lrqrll/practical-thinking-studio/actions/runs/40090170631",
+      "created_at": "2026-10-24T11:30:24Z",
+      "updated_at": "2026-10-24T11:31:38Z"
+    }
+  },
+  "pr6_unmerged": true,
+  "pr7_cancelled_branch_preserved": true,
+  "verification_only_branch": "codex/nexus-approved-release-verification",
+  "verification_scripts_not_merged": true,
+  "tls_verification_preserved": true,
+  "real_user_data_not_accessed": true,
+  "no_new_features": true,
+  "production_assets": {
+    "target": "production-3.3.0",
+    "sha": "ff3f8a16cb343b93973bd191003c30ca9c13b996",
+    "version": "3.3.0",
+    "site": "https://lrqrll.github.io/practical-thinking-studio/",
+    "tlsVerification": true,
+    "retries": 0,
+    "assets": [
+      {
+        "file": ".nojekyll",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "file": "app.js",
+        "bytes": 182,
+        "sha256": "1d97e26387430b4cdc98633118b565fd095a8012b947e4083e6ad9c64ba976de"
+      },
+      {
+        "file": "backup-format.js",
+        "bytes": 3329,
+        "sha256": "07871371a9e1549a61e542b7365b8b53705a1be8701502c69b2b97be129d6c25"
+      },
+      {
+        "file": "deployment.js",
+        "bytes": 166,
+        "sha256": "948d74599f730266574b9d930d45d62d5fa4015c8301878b67e6828ca410129d"
+      },
+      {
+        "file": "document-editor.js",
+        "bytes": 24936,
+        "sha256": "c1a891f01509a138425702b1f8735653cca75ac1439b8b8c28f662374f7658c1"
+      },
+      {
+        "file": "document-export.js",
+        "bytes": 6919,
+        "sha256": "604ec642965a81ded903f9816d66ee9ebb7bb663ee32f2080dd7ac245537a697"
+      },
+      {
+        "file": "document-model.js",
+        "bytes": 6323,
+        "sha256": "ab1f22270511b8c8f4759d9b1bd12dd9070105c16da753e97d8d98c1558ebe6e"
+      },
+      {
+        "file": "document-vendor-LICENSES.txt",
+        "bytes": 172868,
+        "sha256": "c8a054540ff155c5db5b6f2d9c09d06abfaca7414af309f64c8f7c772451212d"
+      },
+      {
+        "file": "document-vendor.js",
+        "bytes": 555051,
+        "sha256": "c220bb396cb9baa4f8a5d86cf3ff45eea182b7f1d2c7285b544c76922bea8d1a"
+      },
+      {
+        "file": "docx-vendor.js",
+        "bytes": 1329743,
+        "sha256": "1c7a1e673d252daae7875c01e5a6164a3e9640c74e98ccda853a941fd259ad26"
+      },
+      {
+        "file": "excel-export.js",
+        "bytes": 4751,
+        "sha256": "2d7dd7bc082dc91b7f63ce7e2ff39938697329bd88933f6a91fe179e0a87b282"
+      },
+      {
+        "file": "index.html",
+        "bytes": 1984,
+        "sha256": "3f702707daae4d29db9b0fadec24829d4a078626dee04d08a38ac3becd60ba60"
+      },
+      {
+        "file": "local-files.js",
+        "bytes": 3995,
+        "sha256": "e57535a770d03d5afde96bc11fa0eaacf27c82090c0ec21c2c76cee255a49988"
+      },
+      {
+        "file": "mammoth-vendor.js",
+        "bytes": 405060,
+        "sha256": "92914a3708cfdf1e62cb553d1856a7fedab21da83d8ee82845de2f897b368cab"
+      },
+      {
+        "file": "media-model.js",
+        "bytes": 2260,
+        "sha256": "e3d55a399a337061e72b22c3edbf237189438629b9baf185286441129e198775"
+      },
+      {
+        "file": "media-tools.js",
+        "bytes": 10076,
+        "sha256": "5fccbd91040a36e84bec45475c890ff23969ae34218eb7ab7c231f642f15efdc"
+      },
+      {
+        "file": "money-model.js",
+        "bytes": 1976,
+        "sha256": "2bbf17372fb2192743f331b3379126631060d5c27857589d388119ff3ee88535"
+      },
+      {
+        "file": "ptm-grotesk.woff2",
+        "bytes": 75248,
+        "sha256": "99c47d599d16097e764db35eb921f3ad5a9a579853cb7d5f42b71de567004fd7"
+      },
+      {
+        "file": "ptm-tc.woff2",
+        "bytes": 330692,
+        "sha256": "2aaabff0bab803fd961aa72ab023e8d41fe9e487b2428e7601d2831caaf543ec"
+      },
+      {
+        "file": "purify-vendor.js",
+        "bytes": 29828,
+        "sha256": "cd37898f9782adf54820c413191b5691803f0f137c799d6edcfd38523b4c2c31"
+      },
+      {
+        "file": "sheetjs-LICENSE.txt",
+        "bytes": 11355,
+        "sha256": "4d2a38ac35cda06a555c84074a819d413339cd3691b822cae50f8f322fe01f64"
+      },
+      {
+        "file": "storage.js",
+        "bytes": 17817,
+        "sha256": "19eb9a60a4c3f972ed7366308c887b83161947445e03ef652484d8de008a815c"
+      },
+      {
+        "file": "style.css",
+        "bytes": 24259,
+        "sha256": "62b5676dcf36a5949718a314e69e8e38ddd00cfa46428f5eeaaef521f8c30c85"
+      },
+      {
+        "file": "tool-registry.js",
+        "bytes": 1621,
+        "sha256": "7a4042ac52f90e6bb4108435e19fc082ab42c596ac436d94fc1c23ca7e816b13"
+      },
+      {
+        "file": "tools-core.js",
+        "bytes": 18729,
+        "sha256": "136dd5ccc0966ecdab4a768ea3bcbfb64ea8edd3c860e35977d121ec2c44dafb"
+      },
+      {
+        "file": "workbench-model.js",
+        "bytes": 5421,
+        "sha256": "c6ab27a451f6a266d8c8f7192ac88eae473624a44f7ceda77a7327d7def506a0"
+      },
+      {
+        "file": "workbench-ui.js",
+        "bytes": 10861,
+        "sha256": "b64926f6275e4f2c6d048523171bc23bbcfd55e681b26c0985e8ce90134336d6"
+      },
+      {
+        "file": "workbench.js",
+        "bytes": 9887,
+        "sha256": "7b4b8b5df52ab93762d185b4ef2d4c611b0c165da2851afefbe284c63a881092"
+      },
+      {
+        "file": "workspace.js",
+        "bytes": 25478,
+        "sha256": "c03b9c712f665a46e36f199a755f5f12c06928cdba7d8a0b6178935eb5c9bcd8"
+      },
+      {
+        "file": "xlsx.full.min.js",
+        "bytes": 951904,
+        "sha256": "cc015130aa8521e7f088f88898eba949ccdcbfb38df0bd129b44b7273c3a6f41"
+      }
+    ],
+    "steps": [
+      "Exact public asset bytes, version and storage identity",
+      "Retired italic button and both shortcuts; legacy italic plus bold/underline save/reopen; DOCX XML, HTML, DOCX import and reopen",
+      "Real workbench UI, two source editors, exact 0.30, persistence, immutable snapshots, CSV/JSON identity, source updates and prior snapshot, mobile layout, full v2 backup/import"
+    ],
+    "result": "passed"
+  },
+  "pr9_retarget": {
+    "head": "25fee3d52f9d8af764b19161479b94027ee8dc44",
+    "base": "main",
+    "base_sha": "fc42560b932e2107e80c2bcfe8a580ef2a280780",
+    "approved_dependency": "a16250ab4b4a355feef8559e44a278ee023ef889",
+    "exact_diff_unchanged": true,
+    "diff_sha256": "02852529c1b65c7ee8bc47b4ba8ec3a30da616dd111305c61bcbbd9ef0c95a95",
+    "files": [
+      ".github/workflows/quality.yml",
+      "backup-format.js",
+      "docs/KNOWN-ISSUES.md",
+      "docs/PREVIEW.md",
+      "docs/QA-REPORT.md",
+      "docs/RESUME.md",
+      "docs/WORKBENCH-M1.md",
+      "index.html",
+      "money-model.js",
+      "package-lock.json",
+      "package.json",
+      "scripts/live-smoke.cjs",
+      "scripts/preview-smoke.cjs",
+      "scripts/workbench-preview-smoke.cjs",
+      "storage.js",
+      "style.css",
+      "tests/e2e/backup-capacity.spec.cjs",
+      "tests/e2e/preview.spec.cjs",
+      "tests/e2e/workbench.spec.cjs",
+      "tests/unit/backup.test.cjs",
+      "tests/unit/workbench.test.cjs",
+      "workbench-model.js",
+      "workbench-ui.js",
+      "workbench.js",
+      "workspace.js"
+    ],
+    "merge_base": "a16250ab4b4a355feef8559e44a278ee023ef889"
+  }
+}

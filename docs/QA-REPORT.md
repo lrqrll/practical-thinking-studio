@@ -1,3 +1,40 @@
+# NEXUS 3.3.0 已批准發布驗收完成（2026-10-24）
+
+正式網址：https://lrqrll.github.io/practical-thinking-studio/
+工作台：https://lrqrll.github.io/practical-thinking-studio/#benches
+最終main／Pages：ff3f8a16cb343b93973bd191003c30ca9c13b996（Pages built）。30個正式公開資產逐位元符合此提交，tree與批准#9 head完全相同。
+
+## 已依批准順序完成
+
+1. PR #8指定a16250ab4b4a355feef8559e44a278ee023ef889，以merge commit fc42560b932e2107e80c2bcfe8a580ef2a280780發布3.2.2。main CI40089725242、Pages40089725263均成功；正式HTTPS驗收40089881330成功，26個公開資產符合main，入口撤下、兩快捷鍵、舊italic與粗體底線保存重開、DOCX／HTML匯出及DOCX匯入重開通過。
+2. 上述正式HTTPS驗收完成後，#9 base改main，head仍25fee3d52f9d8af764b19161479b94027ee8dc44；改base前後完整binary diff完全相同（SHA256 02852529c1b65c7ee8bc47b4ba8ec3a30da616dd111305c61bcbbd9ef0c95a95），沒有額外程式修改。再以merge commit ff3f8a16cb343b93973bd191003c30ca9c13b996發布3.3.0。release-summary.json也核對#8 HTTPS成功時間早於#9 merged_at。
+
+## 最終3.3.0實際證據
+
+- main CI：https://github.com/lrqrll/practical-thinking-studio/actions/runs/40090062525 — 14單元、68瀏覽器、15次原生選取重複通過，audit 0。
+- Pages：https://github.com/lrqrll/practical-thinking-studio/actions/runs/40090062271 — 成功，Pages API commit與最終main一致。
+- 正式HTTPS專項：https://github.com/lrqrll/practical-thinking-studio/actions/runs/40090170631 — 精確來源tree、Pages／main身分前後兩次檢查，30公開資產逐位元一致；隔離Chromium實際文件舊格式、工作台建立與兩來源編輯、0.30精確金額、保存重開、固定成果CSV／JSON、來源更新不改舊快照、新成果2.30及舊版重選、390px畫面、完整v2備份副本還原全部通過。
+- 同一正式HTTPS專項容量2項通過：150份合法成果超過100 MB、7包，中文、圖片／歷史、資料夾、封存與偏好，完整分包在全新context還原並比對來源／歷史／成果內容雜湊與關聯；相同超限單JSON在另一全新context還原。另存大備份、小檔寫入／取消／失敗中止也驗證。
+- TLS／HTTPS憑證驗證保持啟用；測試零重試。測試只使用CI隔離context與合成資料，未讀寫真實使用者瀏覽器資料，沒有伺服器資料寫入。
+- 本機既知DNS／代理憑證限制未繞過；本次正式HTTPS由GitHub-hosted Chromium完成。CI artifact approved-release-acceptance id12557939291含identity／live／capacity證據及截圖。此環境下載artifact blob遭拒，完整CI日誌與PASS JSON已另行保存；不冒稱本機實機驗證。
+
+## 範圍及限制
+
+只合併兩個指定批准head。#6仍未合併；#7取消關閉、不合併，d1bd4e3ff8094b43ffc3716e8106231632d593d7及原分支確認保留。沒有新功能，沒有恢復獨立Excel。預算、既有XLSX、原始資料與歷史保留，未自動刪除、截短或改寫真實使用者資料。
+
+Linux Chromium及模擬手機已驗證；真實Safari／Firefox、手機觸控／螢幕閱讀器、OS原生選擇器、Office／Calc及實體列印仍未驗證。完整分包仍受記憶體／IndexedDB配額限制；成果不含備忘圖片，但來源及完整備份保留。npm audit不等於全部嵌入vendor稽核。
+
+## 接續
+
+本次批准已執行完成，正式3.3.0驗收通過。不開發其他功能；未取得新授權不要擴充或合併其他PR。永久取消Excel，不能從歷史計畫恢復。
+
+驗收工具與本紀錄留在codex/nexus-approved-release-verification，僅供驗收／追溯，不得整包合併main。已批准PR #8／#9的head未被修改；驗證分支程式不在正式產品tree。main來源文件中的「尚未部署／待批准」是發布準備時的歷史快照，此記錄與PR最新發布證據為目前狀態。
+
+
+---
+
+以下為先前階段歷史紀錄：
+
 # 最新：3.3.0正式版本準備（2026-10-24）
 
 使用者已完成獨立QA並解除3772e4ab7246ea9e5abccc53d547711436502f90的BACKUP-CAPACITY-01（P1）。候選CI40087283672已14單元／68瀏覽器／15次選取及公開HTTPS容量2項通過；不以此取代新head驗證，也不表示正式站已部署。
