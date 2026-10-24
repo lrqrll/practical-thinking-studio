@@ -58,6 +58,12 @@ jobs:
         env:
           NEXUS_EXPECTED_COMMIT: ${{ github.event.pull_request.head.sha }}
           NEXUS_RETIRE_COMMIT: 4197a3d267988a31d556c49696de62531faf2c61
+      - name: Restore oversized complete backups on the HTTPS candidate in fresh contexts
+        if: github.event_name == 'pull_request' && github.head_ref == 'codex/nexus-procurement-workbench'
+        run: npx playwright test tests/e2e/backup-capacity.spec.cjs --workers=1 --reporter=list --output=capacity-https-results
+        env:
+          NEXUS_CAPACITY_SITE_URL: https://lrqrll.github.io/practical-thinking-studio-preview/#backup
+          NEXUS_EXPECTED_COMMIT: ${{ github.event.pull_request.head.sha }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -66,4 +72,5 @@ jobs:
             playwright-report/
             test-results/
             timing-stress-results/
+            capacity-https-results/
           retention-days: 14
