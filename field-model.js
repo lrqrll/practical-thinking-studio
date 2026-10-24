@@ -11,7 +11,7 @@ const NexusFields=(()=>{
  function parse(f,input){
   if(!types.includes(f.type))return {status:'invalid',reason:'不支援的欄位型別；原資料保留'};
   if(!raw(input))return {status:'invalid',reason:'原值格式不符或超過20,000字'};
-  if(input===null||!input.trim())return {status:'missing',value:null};
+  if(input===null||input===''||f.type!=='select'&&!input.trim())return {status:'missing',value:null};
   if(f.type==='text')return {status:'ok',value:input};
   const s=input.trim();
   if(f.type==='money'){const x=M.parse(input);return x.status==='ok'?{status:'ok',value:{minor:x.minor,currency:'TWD',scale:2}}:x;}
@@ -42,12 +42,13 @@ const NexusFields=(()=>{
   if(!validState(r,key))throw Error('欄位設定超過上限或格式不符（最多40使用中、100含移除）');return r;
  }
  function capture(r){if(r.schemaVersion===1)return [];if(!validState(r))throw Error('欄位結構不符');if(Object.keys(r.values).some(k=>!r.fields.some(f=>f.id===k)))throw Error('含未辨識欄位值，請先完整備份；未清除原值');return r.fields.filter(f=>!f.deletedAt).map(f=>{const rawValue=value(r,f.id),p=parse(f,rawValue);if(p.status==='invalid')throw Error(f.label+'：'+p.reason);return {field:structuredClone(f),raw:rawValue,value:p.value};});}
- function validCaptured(fields){try{return Array.isArray(fields)&&fields.length<=40&&new Set(fields.map(x=>x?.field?.id)).size===fields.length&&fields.every(x=>x&&validField(x.field)&&x.field.deletedAt===null&&raw(x.raw)&&parse(x.field,x.raw).status!=='invalid'&&JSON.stringify(parse(x.field,x.raw).value)===JSON.stringify(x.value));}catch{return false;}}
- function validTemplate(t){try{return !!t&&id(t.id)&&t.id.startsWith('workbench-template:')&&t.schemaVersion===1&&Number.isSafeInteger(t.rev)&&t.rev>0&&t.rev<Number.MAX_SAFE_INTEGER&&text(t.name,180)&&!!t.name.trim()&&at(t.createdAt)&&at(t.updatedAt)&&(t.deletedAt===null||at(t.deletedAt))&&validState(t,'defaults')&&Object.keys(t.defaults).every(k=>t.fields.some(f=>f.id===k))&&t.fields.every(f=>types.includes(f.type)&&parse(f,own(t.defaults,f.id)?t.defaults[f.id]:null).status!=='invalid');}catch{return false;}}
+ function equalValue(a,b){if(a===null||typeof a!=='object')return a===b;return plain(b)&&Object.keys(b).sort().join(',')==='currency,minor,scale'&&a.minor===b.minor&&a.currency===b.currency&&a.scale===b.scale;}
+ function validCaptured(fields){try{return Array.isArray(fields)&&fields.length<=40&&new Set(fields.map(x=>x?.field?.id)).size===fields.length&&fields.every(x=>x&&validField(x.field)&&x.field.deletedAt===null&&raw(x.raw)&&parse(x.field,x.raw).status!=='invalid'&&equalValue(parse(x.field,x.raw).value,x.value));}catch{return false;}}
+ function validTemplate(t){try{return !!t&&id(t.id)&&t.id.startsWith('workbench-template:')&&t.schemaVersion===1&&Number.isSafeInteger(t.rev)&&t.rev>0&&t.rev<Number.MAX_SAFE_INTEGER&&text(t.name,180)&&!!t.name.trim()&&at(t.createdAt)&&at(t.updatedAt)&&(t.deletedAt===null||at(t.deletedAt))&&validState(t,'defaults')&&Object.keys(t.defaults).every(k=>t.fields.some(f=>f.id===k))&&t.fields.every(f=>types.includes(f.type)&&(f.deletedAt||parse(f,own(t.defaults,f.id)?t.defaults[f.id]:null).status!=='invalid'));}catch{return false;}}
  function mapper(uid){const ids=new Map();return id=>{if(!ids.has(id))ids.set(id,uid());return ids.get(id);};}
  function remapState(record,map,key='values'){
   const r=structuredClone(record);r.fields=r.fields.map(f=>({...f,id:map(f.id),...(f.type==='select'?{options:f.options.map(o=>({...o,id:map(o.id)}))}:{})}));
-  r[key]=Object.fromEntries(Object.entries(record[key]).map(([id,v])=>{const f=record.fields.find(f=>f.id===id);return [map(id),f?.type==='select'&&f.options.some(o=>o.id===v)?map(v):v];}));return r;
+  r[key]=Object.fromEntries(Object.entries(record[key]).map(([id,v])=>{const f=record.fields.find(f=>f.id===id);return [f?map(id):id,f?.type==='select'&&f.options.some(o=>o.id===v)?map(v):v];}));return r;
  }
  function remapCaptured(list,map){return list.map(x=>{const r=remapState({fields:[x.field],values:{[x.field.id]:x.raw}},map);const f=r.fields[0],raw=value(r,f.id);return {...structuredClone(x),field:f,raw,value:parse(f,raw).value};});}
  function makeTemplate(w,name,{uid,now}){
