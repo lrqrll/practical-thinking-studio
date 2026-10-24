@@ -29,14 +29,18 @@ jobs:
       - run: node scripts/preview-smoke.cjs
       - uses: actions/upload-artifact@v4
         with:
-          name: NEXUS-preview-3.2.1
+          name: NEXUS-candidate-preview
           path: dist-preview/
           include-hidden-files: true
           retention-days: 30
+      - name: Read the production release target
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/expected-production-version.cjs
       - name: Verify deployed Pages baseline with TLS verification
         run: node scripts/live-smoke.cjs
         env:
-          NEXUS_EXPECTED_VERSION: '3.2.1'
+          NEXUS_EXPECTED_VERSION: ${{ env.NEXUS_EXPECTED_PRODUCTION_VERSION }}
       - name: Verify isolated candidate preview with TLS verification
         if: github.event_name == 'pull_request' && (github.head_ref == 'codex/nexus-storage-quality' || github.head_ref == 'codex/nexus-document-selection-followup')
         run: node scripts/live-smoke.cjs

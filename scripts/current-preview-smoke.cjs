@@ -1,0 +1,6 @@
+'use strict';
+const {execFileSync}=require('node:child_process');
+(async()=>{const site='https://lrqrll.github.io/practical-thinking-studio-preview/';const r=await fetch(site+'deployment.json');if(!r.ok)throw Error('Preview metadata unavailable');const m=await r.json();if(m.channel!=='preview'||!/^[a-f0-9]{40}$/.test(m.commit)||!/^\d+\.\d+\.\d+(?:-[a-zA-Z0-9.-]+)?$/.test(m.version))throw Error('Invalid preview identity');
+const blob=JSON.parse(execFileSync('gh',['api',`repos/${process.env.GITHUB_REPOSITORY}/contents/storage.js?ref=${m.commit}`],{encoding:'utf8'}));const source=Buffer.from(blob.content,'base64'),response=await fetch(site+'storage.js');if(!response.ok||!Buffer.from(await response.arrayBuffer()).equals(source))throw Error('Preview storage asset differs from declared source');const database=/const DATABASE_NAME=IS_PREVIEW\?'(nexus-preview-[a-z0-9-]+)':'nexus-workspace'/.exec(source.toString())?.[1];if(!database)throw Error('Cannot verify preview database');
+execFileSync(process.execPath,['scripts/live-smoke.cjs'],{stdio:'inherit',env:{...process.env,NEXUS_SITE_URL:site,NEXUS_EXPECTED_VERSION:m.version,NEXUS_EXPECTED_COMMIT:m.commit,NEXUS_EXPECTED_DATABASE:database}});
+})().catch(e=>{console.error(e);process.exitCode=1;});

@@ -1,17 +1,9 @@
-# 下一個 Codex 任務接續點
+# NEXUS 發布準備接續點
 
-先讀 AGENTS、QA-REPORT、KNOWN-ISSUES、CI-FAILURE-ANALYSIS、RELEASE-CHECKLIST；不要重建。
+目前正式main：a0edd157ef1a01572e296db01c23f9a8b9651a76／3.2.1。PR #8以main為基礎，準備3.2.2；PR #9以PR #8為明列依賴，準備3.3.0。兩者都未合併／部署。本次只授權發布準備，需對最終PR／SHA另批准。
 
-使用者已批准 PR #4 的 0e27cdc 合併及正式部署，已完成：main c400e6f，Pages run 39978438967，公開站 3.2.1。不要再索取這次已執行合併的批准。但合併後 QA run 39978439742 為 6 單元通過、51 瀏覽器通過／1 清單失敗，不能宣稱驗收完成。
+順序：先核對／測試PR #8最終提交，批准後用保留祖先的merge方式發布3.2.2，等待main CI、Pages與公開資產／HTTPS文件驗收成功；再將PR #9 base改main，核對差異未變、head仍為批准SHA，發布3.3.0並完成工作台及分包備份正式HTTPS驗收。任何失敗停止擴充。未取得批准前不要執行上述合併或正式部署。
 
-當前追加修正在 codex/nexus-document-selection-followup：原生導覽 keyup 即時同步選取，避免延後 focus 把 AllSelection 寫回；保留反向 anchor/head，新增控制／反向回歸。修正前本機原案例 14/15 通過，控制案例失敗；修正後原案例和控制案例各15次共30/30通過。GitHub artifact 403 時未降低 TLS，改用本機原案例重現與 trace 取得根因。
+PR #8撤下斜體按鈕與Ctrl/Cmd+I，保留舊格式及DOCX／HTML相容，不宣稱字形修復。其正式版本準備只改版本、快取鍵與文件。PR #9成果與容量修正須依其最終提交重新測試，不能沿用候選綠燈。完整SHA與CI記錄於PR，避免文件自我引用提交造成無限改版。
 
-PR #5 https://github.com/lrqrll/practical-thinking-studio/pull/5 已建立並可審查。應用提交87feee59aade651fd06ee0f076920b038fcaa9e0 的 CI 39979908311 全通過：6單元＋54瀏覽器＋15次選取重複、audit、預覽包與正式／預覽HTTPS。正式冒煙確為3.2.1；正式站尚無追加修正。預覽來源以最新 deployment.json 和 PR head 為準，純文件補記後也須重新部署metadata。
-
-追加修正必須獨立 PR、CI、HTTPS 預覽，具體候選完成後再請使用者批准新 PR 合併／部署；原批准明確針對 PR #4 的 head。不能自行假設包含新提交。
-
-預覽 https://lrqrll.github.io/practical-thinking-studio-preview/，只推送 practical-thinking-studio-preview repo，不動正式 Pages 來源。metadata／橫幅顯示來源 SHA，獨立 DB、草稿 namespace，缺失 metadata fail closed。建置用 scripts/build-preview.cjs 全新空目錄；部署 checkout /tmp/nexus-preview-publish-321，先核對 origin/main 未分歧。
-
-Excel branch codex/nexus-spreadsheet 已建於 c400e6f，目前無已提交的編輯器。純模型草稿暫存 /tmp/nexus-spreadsheet-model-next.js，未測、未載入網站；不可當成完成。解除 DOC-SELECT-02 並正式驗證後才恢復，勿遺失這份草稿；完整多表／網格／公式／格式／列欄／貼上／排序篩選／CSV XLSX／保存重開歷史都需驗收。
-
-本機測試 NEXUS_TEST_PORT=8012 NEXUS_CHROMIUM=/usr/bin/chromium npm test；預設8000舊server可能無回應。npm cache 用 /tmp/nexus-npm-cache。HTTPS瀏覽器用GitHub runner，不能忽略憑證錯誤或持久更動信任庫。CI Ubuntu24.04／安裝5分鐘上限保持。無額外AI審查或模型切換。
+獨立Excel產品已取消（不是暫停），PR #7關閉不合併；d1bd4e3ff8094b43ffc3716e8106231632d593d7、分支、核心與測試保留，沒有上架。PR #6不合併，不夾帶其舊路線。預算、XLSX及歷史資料保留，不自動清除或降低TLS。
