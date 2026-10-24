@@ -12,7 +12,7 @@
 
 ## 工作台M1候選進度
 
-已在codex/nexus-procurement-workbench實作完整採購情境，base是PR #8斜體撤下分支c7dd4ee，兩者皆未合併。資料／金額／備份／快照與限制見WORKBENCH-M1.md，請勿重做或把候選當正式。
+已在codex/nexus-procurement-workbench實作完整採購情境，base是PR #8斜體撤下分支（含發布檢查版本參數修正），兩者皆未合併。資料／金額／備份／快照與限制見WORKBENCH-M1.md，請勿重做或把候選當正式。
 
 既有PR #6策略／歷史證據可追溯，但其舊路線敘述需重新整合；PR #7已依取消產品決定關閉且未合併，分支與d1bd4e3程式仍在。不得恢復網格。
 

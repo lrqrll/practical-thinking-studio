@@ -33,10 +33,14 @@ jobs:
           path: dist-preview/
           include-hidden-files: true
           retention-days: 30
+      - name: Read the production release target
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/expected-production-version.cjs
       - name: Verify deployed Pages baseline with TLS verification
         run: node scripts/live-smoke.cjs
         env:
-          NEXUS_EXPECTED_VERSION: '3.2.1'
+          NEXUS_EXPECTED_VERSION: ${{ env.NEXUS_EXPECTED_PRODUCTION_VERSION }}
       - name: Verify isolated candidate preview with TLS verification
         if: github.event_name == 'pull_request' && (github.head_ref == 'codex/nexus-storage-quality' || github.head_ref == 'codex/nexus-document-selection-followup')
         run: node scripts/live-smoke.cjs
@@ -44,12 +48,16 @@ jobs:
           NEXUS_SITE_URL: https://lrqrll.github.io/practical-thinking-studio-preview/
           NEXUS_EXPECTED_VERSION: '3.2.1'
           NEXUS_EXPECTED_COMMIT: ${{ github.event.pull_request.head.sha }}
+      - name: Verify published preview identity against its actual source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/current-preview-smoke.cjs
       - name: Verify procurement and retirement HTTPS candidates
         if: github.event_name == 'pull_request' && github.head_ref == 'codex/nexus-procurement-workbench'
         run: node scripts/workbench-preview-smoke.cjs
         env:
           NEXUS_EXPECTED_COMMIT: ${{ github.event.pull_request.head.sha }}
-          NEXUS_RETIRE_COMMIT: c7dd4ee180c73405f19ce5e280f33d9d4c0a08a1
+          NEXUS_RETIRE_COMMIT: 4197a3d267988a31d556c49696de62531faf2c61
       - uses: actions/upload-artifact@v4
         if: always()
         with:
