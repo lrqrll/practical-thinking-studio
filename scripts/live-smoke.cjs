@@ -18,7 +18,7 @@ const {chromium}=require('@playwright/test');
    if(!ready)throw Error('Preview did not publish the expected source commit');
   }
   await page.goto(url);await page.locator('#new-file-type').waitFor();
-  if(process.env.NEXUS_EXPECTED_COMMIT){const banner=await page.locator('#deployment-status').textContent();if(!banner.includes(process.env.NEXUS_EXPECTED_COMMIT))throw Error('Preview banner mismatch');if(await page.evaluate(()=>DATABASE_NAME)!=='nexus-preview-pr4-workspace')throw Error('Preview storage not isolated');}
+  if(process.env.NEXUS_EXPECTED_COMMIT){const banner=await page.locator('#deployment-status').textContent();if(!banner.includes(process.env.NEXUS_EXPECTED_COMMIT))throw Error('Preview banner mismatch');if(await page.evaluate(()=>DATABASE_NAME)!=='nexus-preview-procurement-m1-workspace')throw Error('Preview storage not isolated');}
   const version=await page.locator('footer .version').textContent();
   if(process.env.NEXUS_EXPECTED_VERSION&&version!==process.env.NEXUS_EXPECTED_VERSION)throw Error(`Expected ${process.env.NEXUS_EXPECTED_VERSION}, deployed ${version}`);
   await page.locator('#new-file-type').selectOption('notes');

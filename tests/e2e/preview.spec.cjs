@@ -4,11 +4,12 @@ const commit='1234567890abcdef1234567890abcdef12345678';
 test('preview isolates files, legacy migration and recovery from the production origin',async({page})=>{
  await create(page,'notes');await page.locator('#note-body').fill('正式資料請保留');await saved(page);
  const production=await page.evaluate(async()=>{localStorage.setItem('nexus-recovery:production-sentinel','production draft');localStorage.setItem('thinking-studio-v1','legacy sentinel');return await NexusStore.readAll('files');});
+ await page.evaluate(async()=>{await new Promise((ok,no)=>{const req=indexedDB.open('nexus-preview-pr4-workspace',1);req.onupgradeneeded=()=>{for(const key of ['files','folders','meta'])req.result.createObjectStore(key,{keyPath:'id'});};req.onerror=()=>no(req.error);req.onsuccess=()=>{const db=req.result,tx=db.transaction('meta','readwrite');tx.objectStore('meta').put({id:'old-preview-sentinel',value:'舊預覽保留'});tx.oncomplete=()=>{db.close();ok();};};});localStorage.setItem('nexus-preview-pr4-recovery:old','舊預覽草稿');});
  await page.route('**/deployment.js*',route=>route.fulfill({contentType:'application/javascript',body:`window.NEXUS_DEPLOYMENT={channel:'preview',commit:'${commit}'};`}));
  await page.goto('/');await expect(page.locator('#new-file-type')).toBeVisible();await expect(page.locator('#deployment-status')).toContainText(commit);
- expect(await page.evaluate(()=>files.length)).toBe(0);expect(await page.evaluate(()=>DATABASE_NAME)).toBe('nexus-preview-pr4-workspace');expect(await page.evaluate(()=>NexusStore.get('meta','archive:legacy-v1'))).toBeUndefined();
+ expect(await page.evaluate(()=>files.length)).toBe(0);expect(await page.evaluate(()=>DATABASE_NAME)).toBe('nexus-preview-procurement-m1-workspace');expect(await page.evaluate(()=>NexusStore.get('meta','archive:legacy-v1'))).toBeUndefined();
  await page.locator('#new-file-type').selectOption('notes');await page.locator('#note-body').fill('預覽資料');await saved(page);await page.reload();await expect(page.locator('#note-body')).toHaveValue('預覽資料');
- expect(await page.evaluate(()=>localStorage.getItem('nexus-recovery:production-sentinel'))).toBe('production draft');
+ expect(await page.evaluate(()=>localStorage.getItem('nexus-recovery:production-sentinel'))).toBe('production draft');expect(await page.evaluate(()=>localStorage.getItem('nexus-preview-pr4-recovery:old'))).toBe('舊預覽草稿');expect(await page.evaluate(()=>new Promise(ok=>{const r=indexedDB.open('nexus-preview-pr4-workspace',1);r.onsuccess=()=>{const d=r.result,g=d.transaction('meta').objectStore('meta').get('old-preview-sentinel');g.onsuccess=()=>{d.close();ok(g.result.value);};};}))).toBe('舊預覽保留');
  await page.unroute('**/deployment.js*');await page.goto('/');await expect(page.locator('#new-file-type')).toBeVisible();
  expect(await page.evaluate(()=>NexusStore.readAll('files'))).toEqual(production);
 });
