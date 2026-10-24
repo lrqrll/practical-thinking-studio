@@ -57,7 +57,7 @@ jobs:
         run: node scripts/workbench-preview-smoke.cjs
         env:
           NEXUS_EXPECTED_COMMIT: ${{ github.event.pull_request.head.sha }}
-          NEXUS_RETIRE_COMMIT: 4197a3d267988a31d556c49696de62531faf2c61
+          NEXUS_RETIRE_COMMIT: a16250ab4b4a355feef8559e44a278ee023ef889
       - name: Restore oversized complete backups on the HTTPS candidate in fresh contexts
         if: github.event_name == 'pull_request' && github.head_ref == 'codex/nexus-procurement-workbench'
         run: npx playwright test tests/e2e/backup-capacity.spec.cjs --workers=1 --reporter=list --output=capacity-https-results
