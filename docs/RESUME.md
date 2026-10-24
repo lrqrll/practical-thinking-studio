@@ -1,3 +1,5 @@
+最新：codex/nexus-m2-persistence依賴PR #10（ede75bd），保存／成果／完整備份v3已實作，4個API瀏覽器案例與11個M1案例通過。index載入field-model以供schema2驗證，但尚無M2操作入口。後續UI必須以本分支為base，不整包帶入其他PR。完整CI及SHA以PR為準。
+
 # 最新接續：M2自訂欄位與可重用範本
 
 正式3.3.0發布與獨立QA結案，main ff3f8a16cb343b93973bd191003c30ca9c13b996；main CI40090062525與正式HTTPS40090170631通過。不可將舊發布準備紀錄當成現況。
