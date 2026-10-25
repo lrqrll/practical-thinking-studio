@@ -1,0 +1,21 @@
+{
+  "role": "developer validation; independent M2-NAV-01 browser review remains pending",
+  "results": [
+    {
+      "sha": "e6f620353c2976f00e7913167d5c4720904c788e",
+      "expectedFocus": true,
+      "observedFocus": true,
+      "outgoingValue": "9",
+      "role": "negative control: old outgoing form remains focusable",
+      "passed": true
+    },
+    {
+      "sha": "59dff72bb55a77c371863d6e8a998529b1997bf0",
+      "expectedFocus": false,
+      "observedFocus": false,
+      "outgoingValue": "",
+      "role": "developer verification: candidate blocks outgoing form",
+      "passed": true
+    }
+  ]
+}

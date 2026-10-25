@@ -1,0 +1,60 @@
+name: M2 frozen candidate QA materials (developer verification)
+on:
+  pull_request:
+    paths:
+      - 'docs/qa/m2-rc2/**'
+      - 'scripts/qa/m2/**'
+      - 'tests/e2e/qa-fixtures.spec.cjs'
+      - '.github/workflows/m2-qa-materials.yml'
+permissions:
+  contents: read
+jobs:
+  reproduce:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: node scripts/qa/m2/verify-fixtures.cjs
+      - run: npm ci --ignore-scripts
+      - name: Install Chromium with TLS verification
+        timeout-minutes: 5
+        run: npx playwright install --with-deps chromium
+      - name: Generate actual complete multipart fixture without private data
+        run: node --max-old-space-size=4096 scripts/qa/m2/generate-large.cjs "$RUNNER_TEMP/synthetic-m2-complete"
+      - name: Confirm unchanged public candidate and 34 actual asset hashes
+        run: node scripts/qa/m2/verify-preview.cjs
+      - name: Restore downloadable fixtures over actual candidate HTTPS in isolated contexts
+        run: npx playwright test tests/e2e/qa-fixtures.spec.cjs --workers=2 --reporter=list --output=qa-fixture-https-results
+        env:
+          NEXUS_QA_SITE_URL: https://lrqrll.github.io/practical-thinking-studio-preview/m2/
+          NEXUS_QA_LARGE_DIR: ${{ runner.temp }}/synthetic-m2-complete
+      - name: Reproduce vulnerable negative control and protected candidate without changing product
+        run: node scripts/qa/m2/nav-negative-control.cjs > nav-negative-control.json
+      - name: Repeat precise NAV-01 candidate cases with zero retries
+        run: npx playwright test tests/e2e/m2-ui.spec.cjs --grep 'delayed template transition|header navigation during a pending|dirty navigation is guarded|two browser tabs never overwrite|recovery quota errors' --workers=2 --repeat-each=3 --reporter=list --output=qa-navigation-https-results
+        env:
+          NEXUS_M2_SITE_URL: https://lrqrll.github.io/practical-thinking-studio-preview/m2/
+          NEXUS_M2_EXPECTED_COMMIT: 59dff72bb55a77c371863d6e8a998529b1997bf0
+      - name: Preserve original in-flight document save draining regression locally
+        run: npx playwright test tests/e2e/storage.spec.cjs --grep 'navigation drains an edit' --repeat-each=3 --reporter=list --output=qa-file-save-results
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: M2-synthetic-backups-and-developer-evidence
+          path: |
+            docs/qa/m2-rc2/fixtures/
+            docs/qa/m2-rc2/fixture-manifest.json
+            ${{ runner.temp }}/synthetic-m2-complete/
+            test-results/
+            qa-fixture-https-results/
+            qa-navigation-https-results/
+            qa-file-save-results/
+            nav-negative-control.json
+          retention-days: 30

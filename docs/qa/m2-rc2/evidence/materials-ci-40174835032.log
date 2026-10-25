@@ -1,0 +1,634 @@
+reproduce	Set up job	﻿2026-10-25T07:59:06.4316782Z Current runner version: '2.338.0'
+reproduce	Set up job	2026-10-25T07:59:06.4339854Z ##[group]Runner Image Provisioner
+reproduce	Set up job	2026-10-25T07:59:06.4340704Z Hosted Compute Agent
+reproduce	Set up job	2026-10-25T07:59:06.4341347Z Version: 20261021.618
+reproduce	Set up job	2026-10-25T07:59:06.4342163Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+reproduce	Set up job	2026-10-25T07:59:06.4342897Z Build Date: 2026-10-21T00:45:21Z
+reproduce	Set up job	2026-10-25T07:59:06.4343566Z Worker ID: {89cbce49-7081-434d-9046-579034706234}
+reproduce	Set up job	2026-10-25T07:59:06.4344219Z Region: centralus
+reproduce	Set up job	2026-10-25T07:59:06.4344778Z Cloud: Azure
+reproduce	Set up job	2026-10-25T07:59:06.4345295Z ##[endgroup]
+reproduce	Set up job	2026-10-25T07:59:06.4346582Z ##[group]Operating System
+reproduce	Set up job	2026-10-25T07:59:06.4347223Z Ubuntu
+reproduce	Set up job	2026-10-25T07:59:06.4347721Z 24.04.5
+reproduce	Set up job	2026-10-25T07:59:06.4348249Z LTS
+reproduce	Set up job	2026-10-25T07:59:06.4348775Z ##[endgroup]
+reproduce	Set up job	2026-10-25T07:59:06.4349302Z ##[group]Runner Image
+reproduce	Set up job	2026-10-25T07:59:06.4349975Z Image: ubuntu-24.04
+reproduce	Set up job	2026-10-25T07:59:06.4350511Z Version: 20261012.334.1
+reproduce	Set up job	2026-10-25T07:59:06.4351528Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+reproduce	Set up job	2026-10-25T07:59:06.4353468Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+reproduce	Set up job	2026-10-25T07:59:06.4354416Z ##[endgroup]
+reproduce	Set up job	2026-10-25T07:59:06.4355427Z ##[group]GITHUB_TOKEN Permissions
+reproduce	Set up job	2026-10-25T07:59:06.4357585Z Contents: read
+reproduce	Set up job	2026-10-25T07:59:06.4358322Z Metadata: read
+reproduce	Set up job	2026-10-25T07:59:06.4359085Z ##[endgroup]
+reproduce	Set up job	2026-10-25T07:59:06.4362061Z Secret source: Actions
+reproduce	Set up job	2026-10-25T07:59:06.4363432Z Cache mode: write
+reproduce	Set up job	2026-10-25T07:59:06.4364314Z Prepare workflow directory
+reproduce	Set up job	2026-10-25T07:59:06.4682592Z Prepare all required actions
+reproduce	Set up job	2026-10-25T07:59:06.4730356Z Getting action download info
+reproduce	Set up job	2026-10-25T07:59:06.7333236Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+reproduce	Set up job	2026-10-25T07:59:06.8221187Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+reproduce	Set up job	2026-10-25T07:59:06.9331366Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+reproduce	Set up job	2026-10-25T07:59:07.2130961Z Complete job name: reproduce
+reproduce	Run actions/checkout@v4	﻿2026-10-25T07:59:07.2952269Z ##[group]Run actions/checkout@v4
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2953160Z with:
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2953673Z   ref: dbb346702696db9b2b19d1a4462d30b90bcdd816
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2954339Z   fetch-depth: 0
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2954897Z   repository: lrqrll/practical-thinking-studio
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2958723Z   token: ***
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2959187Z   ssh-strict: true
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2959659Z   ssh-user: git
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2960171Z   persist-credentials: true
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2960716Z   clean: true
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2961223Z   sparse-checkout-cone-mode: true
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2961905Z   fetch-tags: false
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2962418Z   show-progress: true
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2962916Z   lfs: false
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2963393Z   submodules: false
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2963918Z   set-safe-directory: true
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2964468Z   allow-unsafe-pr-checkout: false
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.2965192Z ##[endgroup]
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.3965140Z Syncing repository: lrqrll/practical-thinking-studio
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.3968362Z ##[group]Getting Git version info
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.3969776Z Working directory is '/home/runner/work/practical-thinking-studio/practical-thinking-studio'
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.3971917Z [command]/usr/bin/git version
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4010662Z git version 2.55.0
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4014344Z ##[endgroup]
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4025320Z Temporarily overriding HOME='/home/runner/work/_temp/ea8e5b2b-937b-4d55-bfa8-7d6ab43050ee' before making global git config changes
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4028444Z Adding repository directory to the temporary git global config as a safe directory
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4033599Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/practical-thinking-studio/practical-thinking-studio
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4130477Z Deleting the contents of '/home/runner/work/practical-thinking-studio/practical-thinking-studio'
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4133082Z ##[group]Initializing the repository
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4141422Z [command]/usr/bin/git init /home/runner/work/practical-thinking-studio/practical-thinking-studio
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4279227Z hint: Using 'master' as the name for the initial branch. This default branch name
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4281680Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4283576Z hint: to use in all of your new repositories, which will suppress this warning,
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4284761Z hint: call:
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4285436Z hint:
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4286213Z hint: 	git config --global init.defaultBranch <name>
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4287171Z hint:
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4288040Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4289518Z hint: 'development'. The just-created branch can be renamed via this command:
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4290793Z hint:
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4291422Z hint: 	git branch -m <name>
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4292349Z hint:
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4293339Z hint: Disable this message with "git config set advice.defaultBranchName false"
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4295591Z Initialized empty Git repository in /home/runner/work/practical-thinking-studio/practical-thinking-studio/.git/
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4298516Z [command]/usr/bin/git remote add origin https://github.com/lrqrll/practical-thinking-studio
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4338399Z ##[endgroup]
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4339807Z ##[group]Disabling automatic garbage collection
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4340857Z [command]/usr/bin/git config --local gc.auto 0
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4445462Z ##[endgroup]
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4447230Z ##[group]Setting up auth
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4449021Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4481012Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4881607Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.4913980Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.5111237Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.5144447Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.5335497Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.5639535Z ##[endgroup]
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.5640632Z ##[group]Fetching the repository
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:07.5649236Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2417946Z From https://github.com/lrqrll/practical-thinking-studio
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2424215Z  * [new branch]      codex/nexus-approved-release-verification -> origin/codex/nexus-approved-release-verification
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2431023Z  * [new branch]      codex/nexus-document-selection-followup -> origin/codex/nexus-document-selection-followup
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2437897Z  * [new branch]      codex/nexus-italic-controls-retired -> origin/codex/nexus-italic-controls-retired
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2443343Z  * [new branch]      codex/nexus-m2-field-contract -> origin/codex/nexus-m2-field-contract
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2447313Z  * [new branch]      codex/nexus-m2-interface -> origin/codex/nexus-m2-interface
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2450774Z  * [new branch]      codex/nexus-m2-persistence -> origin/codex/nexus-m2-persistence
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2455405Z  * [new branch]      codex/nexus-m2-qa-materials -> origin/codex/nexus-m2-qa-materials
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2460057Z  * [new branch]      codex/nexus-procurement-workbench -> origin/codex/nexus-procurement-workbench
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2466180Z  * [new branch]      codex/nexus-qa-policy   -> origin/codex/nexus-qa-policy
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2469077Z  * [new branch]      codex/nexus-qa-policy-report -> origin/codex/nexus-qa-policy-report
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2472985Z  * [new branch]      codex/nexus-release-acceptance -> origin/codex/nexus-release-acceptance
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2475949Z  * [new branch]      codex/nexus-release-status -> origin/codex/nexus-release-status
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2478525Z  * [new branch]      codex/nexus-spreadsheet -> origin/codex/nexus-spreadsheet
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2481644Z  * [new branch]      codex/nexus-storage-quality -> origin/codex/nexus-storage-quality
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2484121Z  * [new branch]      main                    -> origin/main
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2486455Z  * [new branch]      nexus-stage-1           -> origin/nexus-stage-1
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2488524Z  * [new branch]      nexus-stage-2           -> origin/nexus-stage-2
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2490860Z  * [new branch]      nexus-stage-3-document  -> origin/nexus-stage-3-document
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2495875Z [command]/usr/bin/git rev-parse --verify --quiet dbb346702696db9b2b19d1a4462d30b90bcdd816^{object}
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2498303Z dbb346702696db9b2b19d1a4462d30b90bcdd816
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2502595Z ##[endgroup]
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2504777Z ##[group]Determining the checkout info
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2507426Z ##[endgroup]
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2508971Z [command]/usr/bin/git sparse-checkout disable
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2539237Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2571356Z ##[group]Checking out the ref
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2574711Z [command]/usr/bin/git checkout --progress --force dbb346702696db9b2b19d1a4462d30b90bcdd816
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2838421Z Note: switching to 'dbb346702696db9b2b19d1a4462d30b90bcdd816'.
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2840141Z 
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2841331Z You are in 'detached HEAD' state. You can look around, make experimental
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2845182Z changes and commit them, and you can discard any commits you make in this
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2849964Z state without impacting any branches by switching back to a branch.
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2852435Z 
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2854100Z If you want to create a new branch to retain commits you create, you may
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2857590Z do so (now or later) by using -c with the switch command. Example:
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2859996Z 
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2861158Z   git switch -c <new-branch-name>
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2862456Z 
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2863116Z Or undo this operation with:
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2864029Z 
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2864674Z   git switch -
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2865363Z 
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2866656Z Turn off this advice by setting config variable advice.detachedHead to false
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2869183Z 
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2870516Z HEAD is now at dbb3467 test: publish reproducible QA materials for frozen M2 rc.2 candidate
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2875625Z ##[endgroup]
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2889402Z [command]/usr/bin/git log -1 --format=%H
+reproduce	Run actions/checkout@v4	2026-10-25T07:59:08.2911208Z dbb346702696db9b2b19d1a4462d30b90bcdd816
+reproduce	Run actions/setup-node@v4	﻿2026-10-25T07:59:08.3285168Z ##[group]Run actions/setup-node@v4
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.3286448Z with:
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.3287432Z   node-version: 24
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.3288399Z   cache: npm
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.3289373Z   always-auth: false
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.3290435Z   check-latest: false
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.3299340Z   token: ***
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.3300329Z ##[endgroup]
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.4713998Z Found in cache @ /opt/hostedtoolcache/node/24.21.0/x64
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.4717281Z (node:2270) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.4718719Z (Use `node --trace-deprecation ...` to show where the warning was created)
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.4720226Z ##[group]Environment details
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.8725263Z node: v24.21.0
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.8726000Z npm: 11.19.0
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.8726409Z yarn: 1.22.22
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.8727802Z ##[endgroup]
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.8743659Z [command]/opt/hostedtoolcache/node/24.21.0/x64/bin/npm config get cache
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:08.9777348Z /home/runner/.npm
+reproduce	Run actions/setup-node@v4	2026-10-25T07:59:09.1472881Z npm cache is not found
+reproduce	Run node scripts/qa/m2/verify-fixtures.cjs	﻿2026-10-25T07:59:09.1614950Z ##[group]Run node scripts/qa/m2/verify-fixtures.cjs
+reproduce	Run node scripts/qa/m2/verify-fixtures.cjs	2026-10-25T07:59:09.1615676Z [36;1mnode scripts/qa/m2/verify-fixtures.cjs[0m
+reproduce	Run node scripts/qa/m2/verify-fixtures.cjs	2026-10-25T07:59:09.1808886Z shell: /usr/bin/bash -e {0}
+reproduce	Run node scripts/qa/m2/verify-fixtures.cjs	2026-10-25T07:59:09.1809420Z ##[endgroup]
+reproduce	Run node scripts/qa/m2/verify-fixtures.cjs	2026-10-25T07:59:09.2376824Z PASS model, graph, semantic manifest, checksum: workspace-v1.json
+reproduce	Run node scripts/qa/m2/verify-fixtures.cjs	2026-10-25T07:59:09.2394413Z PASS model, graph, semantic manifest, checksum: workbench-v2.json
+reproduce	Run node scripts/qa/m2/verify-fixtures.cjs	2026-10-25T07:59:09.2429441Z PASS model, graph, semantic manifest, checksum: workbench-v3.json
+reproduce	Run node scripts/qa/m2/verify-fixtures.cjs	2026-10-25T07:59:09.2446533Z PASS model, graph, semantic manifest, checksum: opaque-values-v3.json
+reproduce	Run node scripts/qa/m2/verify-fixtures.cjs	2026-10-25T07:59:09.2456804Z PASS frozen candidate product inputs; legacy snapshot; decimal precision; synthetic PNG; invalid graph rejected. Developer validation only.
+reproduce	Run npm ci --ignore-scripts	﻿2026-10-25T07:59:09.2549739Z ##[group]Run npm ci --ignore-scripts
+reproduce	Run npm ci --ignore-scripts	2026-10-25T07:59:09.2550276Z [36;1mnpm ci --ignore-scripts[0m
+reproduce	Run npm ci --ignore-scripts	2026-10-25T07:59:09.2592242Z shell: /usr/bin/bash -e {0}
+reproduce	Run npm ci --ignore-scripts	2026-10-25T07:59:09.2592706Z ##[endgroup]
+reproduce	Run npm ci --ignore-scripts	2026-10-25T07:59:10.1562428Z 
+reproduce	Run npm ci --ignore-scripts	2026-10-25T07:59:10.1563372Z added 6 packages, and audited 7 packages in 842ms
+reproduce	Run npm ci --ignore-scripts	2026-10-25T07:59:10.1569638Z 
+reproduce	Run npm ci --ignore-scripts	2026-10-25T07:59:10.1570013Z found 0 vulnerabilities
+reproduce	Install Chromium with TLS verification	﻿2026-10-25T07:59:10.1825525Z ##[group]Run npx playwright install --with-deps chromium
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:10.1826094Z [36;1mnpx playwright install --with-deps chromium[0m
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:10.1873006Z shell: /usr/bin/bash -e {0}
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:10.1873528Z ##[endgroup]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:10.8676935Z Installing dependencies...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:10.8755063Z Switching to root user to install dependencies...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:10.9603655Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.0123295Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.0163532Z Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.0193541Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.0203907Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.0205451Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.1193771Z Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [598 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.1372869Z Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [660 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.1478949Z Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [12.4 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.1623768Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1400 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.1703920Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [310 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.1763415Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1706 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.1804217Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [342 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.1833745Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1805 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.1913522Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [411 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.2598079Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1146 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.2658494Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [231 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.2674621Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1222 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.2743244Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [246 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.3202482Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1713 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:11.3283684Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [392 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:15.4906550Z Fetched 12.6 MB in 1s (9212 kB/s)
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.4509711Z Reading package lists...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.4789741Z Reading package lists...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.6818066Z Building dependency tree...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.6825255Z Reading state information...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8532540Z libasound2t64 is already the newest version (1.2.11-1ubuntu0.3).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8533883Z libasound2t64 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8534750Z libatk-bridge2.0-0t64 is already the newest version (2.52.0-1build1).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8535620Z libatk-bridge2.0-0t64 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8536574Z libatk1.0-0t64 is already the newest version (2.52.0-1build1).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8537338Z libatk1.0-0t64 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8538240Z libatspi2.0-0t64 is already the newest version (2.52.0-1build1).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8539040Z libatspi2.0-0t64 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8539837Z libcairo2 is already the newest version (1.18.0-3build1).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8540591Z libcairo2 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8541330Z libcups2t64 is already the newest version (2.4.7-1.2ubuntu7.14).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8542276Z libcups2t64 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8544104Z libdbus-1-3 is already the newest version (1.14.10-4ubuntu4.1).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8545048Z libdbus-1-3 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8546067Z libdrm2 is already the newest version (2.4.125-1ubuntu0.1~24.04.2).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8546968Z libdrm2 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8547846Z libgbm1 is already the newest version (25.2.8-0ubuntu0.24.04.4).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8548822Z libgbm1 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8549699Z libnspr4 is already the newest version (2:4.35-1.1build1).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8550361Z libnspr4 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8550959Z libpango-1.0-0 is already the newest version (1.52.1+ds-1build1).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8551584Z libpango-1.0-0 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8552565Z libx11-6 is already the newest version (2:1.8.7-1ubuntu0.1).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8553115Z libx11-6 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8553587Z libxcb1 is already the newest version (1.15-1ubuntu2).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8554151Z libxcb1 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8554770Z libxcomposite1 is already the newest version (1:0.4.5-1build3).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8555293Z libxcomposite1 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8555839Z libxdamage1 is already the newest version (1:1.1.6-1build1).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8556374Z libxdamage1 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8556829Z libxext6 is already the newest version (2:1.3.4-1build2).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8557422Z libxext6 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8557949Z libxfixes3 is already the newest version (1:6.0.0-2build1).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8558469Z libxfixes3 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8558954Z libxkbcommon0 is already the newest version (1.6.0-1build1).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8559534Z libxkbcommon0 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8560099Z libxrandr2 is already the newest version (2:1.5.2-2build1).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8560761Z libxrandr2 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8561504Z fonts-noto-color-emoji is already the newest version (2.047-0ubuntu0.24.04.1).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8562557Z libfontconfig1 is already the newest version (2.15.0-1.1ubuntu2).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8563052Z libfontconfig1 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8563546Z libfreetype6 is already the newest version (2.13.2+dfsg-1ubuntu0.2).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8564310Z libfreetype6 set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8565014Z fonts-liberation is already the newest version (1:2.1.5-3).
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8565742Z fonts-liberation set to manually installed.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8566425Z The following additional packages will be installed:
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8566956Z   gir1.2-glib-2.0 libglib2.0-bin libglib2.0-data libnss3-tools
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8567517Z   xfonts-encodings xfonts-utils xserver-common
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8567914Z Suggested packages:
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8568287Z   low-memory-monitor
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8568682Z Recommended packages:
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8569216Z   fonts-ipafont-mincho fonts-tlwg-loma xfonts-base
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8772548Z The following NEW packages will be installed:
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8773491Z   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8782898Z   fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8783821Z   xfonts-utils
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8786956Z The following packages will be upgraded:
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8789222Z   gir1.2-glib-2.0 libglib2.0-0t64 libglib2.0-bin libglib2.0-data libnss3
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8794189Z   libnss3-tools xserver-common xvfb
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8951579Z 8 upgraded, 9 newly installed, 0 to remove and 92 not upgraded.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8952501Z Need to get 25.9 MB of archives.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8953273Z After this operation, 79.5 MB of additional disk space will be used.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.8954156Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:16.9536341Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-ipafont-gothic all 00303-21ubuntu1 [3513 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.0246436Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-data all 2.80.0-6ubuntu3.10 [50.2 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.0586979Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-bin amd64 2.80.0-6ubuntu3.10 [97.9 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.0941146Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 gir1.2-glib-2.0 amd64 2.80.0-6ubuntu3.10 [183 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.1298851Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-0t64 amd64 2.80.0-6ubuntu3.10 [1548 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.1793018Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-freefont-ttf all 20211204+svn4273-2 [5641 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.2750745Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-tlwg-loma-otf all 1:0.7.3-1 [107 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.3036178Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-unifont all 1:15.1.01-1build1 [2993 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.3593811Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-wqy-zenhei all 0.9.45-8 [7472 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.4534662Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libnss3 amd64 2:3.98-1ubuntu0.3 [1445 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.4936140Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libnss3-tools amd64 2:3.98-1ubuntu0.3 [615 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.5258815Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.5582153Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.5870355Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.6176641Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.6475310Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 xserver-common all 2:21.1.12-1ubuntu1.9 [35.0 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.6755468Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 xvfb amd64 2:21.1.12-1ubuntu1.9 [877 kB]
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.9460821Z Fetched 25.9 MB in 1s (32.6 MB/s)
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:17.9787260Z Selecting previously unselected package fonts-ipafont-gothic.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.0002876Z (Reading database ... 
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.0003474Z (Reading database ... 5%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.0004456Z (Reading database ... 10%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.0004886Z (Reading database ... 15%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.0005228Z (Reading database ... 20%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.0005556Z (Reading database ... 25%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.0005872Z (Reading database ... 30%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.0006617Z (Reading database ... 35%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.0006973Z (Reading database ... 40%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.0007326Z (Reading database ... 45%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.0007657Z (Reading database ... 50%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.0042563Z (Reading database ... 55%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.1260064Z (Reading database ... 60%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.3156185Z (Reading database ... 65%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.5197590Z (Reading database ... 70%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.7219545Z (Reading database ... 75%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:18.9225044Z (Reading database ... 80%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.1105391Z (Reading database ... 85%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.2993279Z (Reading database ... 90%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.4719647Z (Reading database ... 95%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.4720379Z (Reading database ... 100%
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.4720956Z (Reading database ... 203540 files and directories currently installed.)
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.4768536Z Preparing to unpack .../00-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.4927198Z Unpacking fonts-ipafont-gothic (00303-21ubuntu1) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.7749672Z Preparing to unpack .../01-libglib2.0-data_2.80.0-6ubuntu3.10_all.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.7783797Z Unpacking libglib2.0-data (2.80.0-6ubuntu3.10) over (2.80.0-6ubuntu3.9) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.8219569Z Preparing to unpack .../02-libglib2.0-bin_2.80.0-6ubuntu3.10_amd64.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.8250384Z Unpacking libglib2.0-bin (2.80.0-6ubuntu3.10) over (2.80.0-6ubuntu3.9) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.8716797Z Preparing to unpack .../03-gir1.2-glib-2.0_2.80.0-6ubuntu3.10_amd64.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.8746142Z Unpacking gir1.2-glib-2.0:amd64 (2.80.0-6ubuntu3.10) over (2.80.0-6ubuntu3.9) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.9134452Z Preparing to unpack .../04-libglib2.0-0t64_2.80.0-6ubuntu3.10_amd64.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.9206648Z Unpacking libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.10) over (2.80.0-6ubuntu3.9) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.9679874Z Selecting previously unselected package fonts-freefont-ttf.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.9809403Z Preparing to unpack .../05-fonts-freefont-ttf_20211204+svn4273-2_all.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:19.9822817Z Unpacking fonts-freefont-ttf (20211204+svn4273-2) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:20.0828479Z Selecting previously unselected package fonts-tlwg-loma-otf.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:20.0952658Z Preparing to unpack .../06-fonts-tlwg-loma-otf_1%3a0.7.3-1_all.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:20.0965856Z Unpacking fonts-tlwg-loma-otf (1:0.7.3-1) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:20.1150241Z Selecting previously unselected package fonts-unifont.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:20.1274509Z Preparing to unpack .../07-fonts-unifont_1%3a15.1.01-1build1_all.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:20.1287573Z Unpacking fonts-unifont (1:15.1.01-1build1) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:20.3122615Z Selecting previously unselected package fonts-wqy-zenhei.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:20.3246883Z Preparing to unpack .../08-fonts-wqy-zenhei_0.9.45-8_all.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:20.3333528Z Unpacking fonts-wqy-zenhei (0.9.45-8) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:21.3012597Z Preparing to unpack .../09-libnss3_2%3a3.98-1ubuntu0.3_amd64.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:21.3309223Z Unpacking libnss3:amd64 (2:3.98-1ubuntu0.3) over (2:3.98-1ubuntu0.2) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:21.6951688Z Preparing to unpack .../10-libnss3-tools_2%3a3.98-1ubuntu0.3_amd64.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:21.7803963Z Unpacking libnss3-tools (2:3.98-1ubuntu0.3) over (2:3.98-1ubuntu0.2) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:23.8309634Z Selecting previously unselected package xfonts-encodings.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:23.8443463Z Preparing to unpack .../11-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:24.1317584Z Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:24.7902621Z Selecting previously unselected package xfonts-utils.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:24.8061913Z Preparing to unpack .../12-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:24.8074040Z Unpacking xfonts-utils (1:7.7+6build3) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:24.8349856Z Selecting previously unselected package xfonts-cyrillic.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:24.8472380Z Preparing to unpack .../13-xfonts-cyrillic_1%3a1.0.5+nmu1_all.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:24.8485281Z Unpacking xfonts-cyrillic (1:1.0.5+nmu1) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:24.8829988Z Selecting previously unselected package xfonts-scalable.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:24.8957648Z Preparing to unpack .../14-xfonts-scalable_1%3a1.0.3-1.3_all.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:24.8970472Z Unpacking xfonts-scalable (1:1.0.3-1.3) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:24.9305633Z Preparing to unpack .../15-xserver-common_2%3a21.1.12-1ubuntu1.9_all.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:24.9336172Z Unpacking xserver-common (2:21.1.12-1ubuntu1.9) over (2:21.1.12-1ubuntu1.8) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:24.9847598Z Preparing to unpack .../16-xvfb_2%3a21.1.12-1ubuntu1.9_amd64.deb ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:24.9878997Z Unpacking xvfb (2:21.1.12-1ubuntu1.9) over (2:21.1.12-1ubuntu1.8) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.0600452Z Setting up fonts-wqy-zenhei (0.9.45-8) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.0714982Z Setting up fonts-freefont-ttf (20211204+svn4273-2) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.0734477Z Setting up libnss3:amd64 (2:3.98-1ubuntu0.3) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.0756177Z Setting up libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.10) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.0857243Z Setting up libglib2.0-data (2.80.0-6ubuntu3.10) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.0877274Z Setting up fonts-tlwg-loma-otf (1:0.7.3-1) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.0896049Z Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.0916052Z Setting up gir1.2-glib-2.0:amd64 (2.80.0-6ubuntu3.10) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.0934766Z Setting up fonts-ipafont-gothic (00303-21ubuntu1) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.0990509Z update-alternatives: using /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf to provide /usr/share/fonts/truetype/fonts-japanese-gothic.ttf (fonts-japanese-gothic.ttf) in auto mode
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.1007176Z Setting up xserver-common (2:21.1.12-1ubuntu1.9) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.1029991Z Setting up libnss3-tools (2:3.98-1ubuntu0.3) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.1048818Z Setting up fonts-unifont (1:15.1.01-1build1) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.1068316Z Setting up xvfb (2:21.1.12-1ubuntu1.9) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.1087212Z Setting up libglib2.0-bin (2.80.0-6ubuntu3.10) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.1105759Z Setting up xfonts-utils (1:7.7+6build3) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.1143943Z Setting up xfonts-cyrillic (1:1.0.5+nmu1) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.1417780Z Setting up xfonts-scalable (1:1.0.3-1.3) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.1654856Z Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.2072188Z Processing triggers for man-db (2.12.0-4build2) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.2093356Z Not building database; man-db/auto-update is not 'true'.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.2108153Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.7805921Z 
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.7806956Z Running kernel seems to be up-to-date.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.7807310Z 
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.7807607Z Restarting services...
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.8196340Z  systemctl restart packagekit.service php8.3-fpm.service polkit.service udisks2.service
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.9333622Z 
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.9334931Z Service restarts being deferred:
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.9335897Z  systemctl restart ModemManager.service
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.9336689Z  systemctl restart networkd-dispatcher.service
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.9337356Z 
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.9337722Z No containers need to be restarted.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.9338062Z 
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.9338409Z No user sessions are running outdated binaries.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.9338803Z 
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:25.9339226Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:26.8699314Z Downloading Chrome for Testing 156.0.8078.4 (playwright chromium v1248) from https://cdn.playwright.dev/builds/cft/156.0.8078.4/linux64/chrome-linux64.zip
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:27.3132627Z |                                                                                |   0% of 191.1 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:27.5644583Z |■■■■■■■■                                                                        |  10% of 191.1 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:27.6342100Z |■■■■■■■■■■■■■■■■                                                                |  20% of 191.1 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:27.7072641Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 191.1 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:27.7536310Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 191.1 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:27.8178255Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 191.1 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:27.8856193Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 191.1 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:27.9425446Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 191.1 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:28.0200510Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 191.1 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:28.0839610Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 191.1 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:28.1489004Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 191.1 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:31.6650197Z Chrome for Testing 156.0.8078.4 (playwright chromium v1248) downloaded to /home/runner/.cache/ms-playwright/chromium-1248
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:31.6654726Z Downloading FFmpeg (playwright ffmpeg v1013) from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1013/ffmpeg-linux.zip
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:32.1665442Z |                                                                                |   0% of 2.2 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:32.2155252Z |■■■■■■■■                                                                        |  10% of 2.2 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:32.2443151Z |■■■■■■■■■■■■■■■■                                                                |  20% of 2.2 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:32.2643936Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 2.2 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:32.2823372Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 2.2 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:32.3002263Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 2.2 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:32.3060794Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 2.2 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:32.3113235Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 2.2 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:32.3252198Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 2.2 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:32.3299079Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 2.2 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:32.3330316Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 2.2 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:32.3913662Z FFmpeg (playwright ffmpeg v1013) downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1013
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:32.3916563Z Downloading Chrome Headless Shell 156.0.8078.4 (playwright chromium-headless-shell v1248) from https://cdn.playwright.dev/builds/cft/156.0.8078.4/linux64/chrome-headless-shell-linux64.zip
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:32.7997503Z |                                                                                |   0% of 120 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:33.0108521Z |■■■■■■■■                                                                        |  10% of 120 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:33.0819877Z |■■■■■■■■■■■■■■■■                                                                |  20% of 120 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:33.1201627Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 120 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:33.1775868Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 120 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:33.2074866Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 120 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:33.2369430Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 120 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:33.2887859Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 120 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:33.3144032Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 120 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:33.3582065Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 120 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:33.4053925Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 120 MiB
+reproduce	Install Chromium with TLS verification	2026-10-25T07:59:35.8451048Z Chrome Headless Shell 156.0.8078.4 (playwright chromium-headless-shell v1248) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1248
+reproduce	Generate actual complete multipart fixture without private data	﻿2026-10-25T07:59:35.8730830Z ##[group]Run node --max-old-space-size=4096 scripts/qa/m2/generate-large.cjs "$RUNNER_TEMP/synthetic-m2-complete"
+reproduce	Generate actual complete multipart fixture without private data	2026-10-25T07:59:35.8731886Z [36;1mnode --max-old-space-size=4096 scripts/qa/m2/generate-large.cjs "$RUNNER_TEMP/synthetic-m2-complete"[0m
+reproduce	Generate actual complete multipart fixture without private data	2026-10-25T07:59:35.8773565Z shell: /usr/bin/bash -e {0}
+reproduce	Generate actual complete multipart fixture without private data	2026-10-25T07:59:35.8774013Z ##[endgroup]
+reproduce	Generate actual complete multipart fixture without private data	2026-10-25T07:59:39.7649761Z {"role":"developer fixture generation and transport verification; NOT independent browser QA","candidate":"59dff72bb55a77c371863d6e8a998529b1997bf0","bytes":108082768,"parts":7,"expected":{"files":4,"snapshots":151,"templates":1,"historyVersions":7}}
+reproduce	Confirm unchanged public candidate and 34 actual asset hashes	﻿2026-10-25T07:59:39.8122650Z ##[group]Run node scripts/qa/m2/verify-preview.cjs
+reproduce	Confirm unchanged public candidate and 34 actual asset hashes	2026-10-25T07:59:39.8123177Z [36;1mnode scripts/qa/m2/verify-preview.cjs[0m
+reproduce	Confirm unchanged public candidate and 34 actual asset hashes	2026-10-25T07:59:39.8163652Z shell: /usr/bin/bash -e {0}
+reproduce	Confirm unchanged public candidate and 34 actual asset hashes	2026-10-25T07:59:39.8164038Z ##[endgroup]
+reproduce	Confirm unchanged public candidate and 34 actual asset hashes	2026-10-25T07:59:40.9282298Z PASS TLS-verified frozen HTTPS assets 34 59dff72bb55a77c371863d6e8a998529b1997bf0
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	﻿2026-10-25T07:59:40.9434716Z ##[group]Run npx playwright test tests/e2e/qa-fixtures.spec.cjs --workers=2 --reporter=list --output=qa-fixture-https-results
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:40.9435831Z [36;1mnpx playwright test tests/e2e/qa-fixtures.spec.cjs --workers=2 --reporter=list --output=qa-fixture-https-results[0m
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:40.9476728Z shell: /usr/bin/bash -e {0}
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:40.9477135Z env:
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:40.9477589Z   NEXUS_QA_SITE_URL: https://lrqrll.github.io/practical-thinking-studio-preview/m2/
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:40.9478250Z   NEXUS_QA_LARGE_DIR: /home/runner/work/_temp/synthetic-m2-complete
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:40.9478681Z ##[endgroup]
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:41.8592534Z [WebServer] 127.0.0.1 - - [25/Oct/2026 07:59:41] "GET / HTTP/1.1" 200 -
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:41.9245739Z 
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:41.9246851Z Running 7 tests using 2 workers
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:41.9247681Z 
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:44.3244405Z   ✓  2 tests/e2e/qa-fixtures.spec.cjs:9:105 › synthetic restore, image decode, export and second isolated restore: workspace-v1.json (1.7s)
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:44.3273693Z   ✓  1 tests/e2e/qa-fixtures.spec.cjs:9:105 › synthetic restore, image decode, export and second isolated restore: workbench-v2.json (1.7s)
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:45.6634472Z   ✓  3 tests/e2e/qa-fixtures.spec.cjs:9:105 › synthetic restore, image decode, export and second isolated restore: workbench-v3.json (1.3s)
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:45.6709898Z   ✓  4 tests/e2e/qa-fixtures.spec.cjs:9:105 › synthetic restore, image decode, export and second isolated restore: opaque-values-v3.json (1.3s)
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:46.0955719Z   ✓  5 tests/e2e/qa-fixtures.spec.cjs:17:1 › synthetic invalid source cannot partially restore (415ms)
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:46.1174444Z   ✓  6 tests/e2e/qa-fixtures.spec.cjs:18:1 › synthetic original v1 converts six tools without overwriting (425ms)
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:51.4331292Z   ✓  7 tests/e2e/qa-fixtures.spec.cjs:19:1 › downloadable multipart synthetic set restores in a clean browser context (5.3s)
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:51.5054956Z 
+reproduce	Restore downloadable fixtures over actual candidate HTTPS in isolated contexts	2026-10-25T07:59:51.5057965Z   7 passed (9.8s)
+reproduce	Reproduce vulnerable negative control and protected candidate without changing product	﻿2026-10-25T07:59:51.5295546Z ##[group]Run node scripts/qa/m2/nav-negative-control.cjs > nav-negative-control.json
+reproduce	Reproduce vulnerable negative control and protected candidate without changing product	2026-10-25T07:59:51.5296328Z [36;1mnode scripts/qa/m2/nav-negative-control.cjs > nav-negative-control.json[0m
+reproduce	Reproduce vulnerable negative control and protected candidate without changing product	2026-10-25T07:59:51.5337304Z shell: /usr/bin/bash -e {0}
+reproduce	Reproduce vulnerable negative control and protected candidate without changing product	2026-10-25T07:59:51.5337780Z ##[endgroup]
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	﻿2026-10-25T07:59:53.8213701Z ##[group]Run npx playwright test tests/e2e/m2-ui.spec.cjs --grep 'delayed template transition|header navigation during a pending|dirty navigation is guarded|two browser tabs never overwrite|recovery quota errors' --workers=2 --repeat-each=3 --reporter=list --output=qa-navigation-https-results
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T07:59:53.8215701Z [36;1mnpx playwright test tests/e2e/m2-ui.spec.cjs --grep 'delayed template transition|header navigation during a pending|dirty navigation is guarded|two browser tabs never overwrite|recovery quota errors' --workers=2 --repeat-each=3 --reporter=list --output=qa-navigation-https-results[0m
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T07:59:53.8256367Z shell: /usr/bin/bash -e {0}
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T07:59:53.8256752Z env:
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T07:59:53.8257220Z   NEXUS_M2_SITE_URL: https://lrqrll.github.io/practical-thinking-studio-preview/m2/
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T07:59:53.8257979Z   NEXUS_M2_EXPECTED_COMMIT: 59dff72bb55a77c371863d6e8a998529b1997bf0
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T07:59:53.8258431Z ##[endgroup]
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T07:59:54.6705300Z [WebServer] 127.0.0.1 - - [25/Oct/2026 07:59:54] "GET / HTTP/1.1" 200 -
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T07:59:54.8706124Z 
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T07:59:54.8707383Z Running 15 tests using 2 workers
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T07:59:57.5439672Z 
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T07:59:57.5441167Z   ✓   2 tests/e2e/m2-ui.spec.cjs:15:1 › dirty navigation is guarded and reloaded drafts recover as copies without sources; failed saves keep drafts (2.0s)
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T07:59:57.6436574Z   ✓   1 tests/e2e/m2-ui.spec.cjs:19:1 › two browser tabs never overwrite newer field values and recovering the losing draft creates an isolated copy (2.2s)
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T07:59:58.7812616Z   ✓   4 tests/e2e/m2-ui.spec.cjs:22:1 › a delayed template transition cannot focus or edit the outgoing workbench fields (1.1s)
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T07:59:59.1422811Z   ✓   3 tests/e2e/m2-ui.spec.cjs:21:1 › recovery quota errors are visible and a failed field save can retry without clearing or blocking later saves (1.6s)
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T07:59:59.9432867Z   ✓   5 tests/e2e/m2-ui.spec.cjs:23:1 › header navigation during a pending field save does not leave the destination inert or lose the committed value (1.1s)
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T08:00:02.0092386Z   ✓   6 tests/e2e/m2-ui.spec.cjs:15:1 › dirty navigation is guarded and reloaded drafts recover as copies without sources; failed saves keep drafts (2.2s)
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T08:00:02.6036612Z   ✓   7 tests/e2e/m2-ui.spec.cjs:19:1 › two browser tabs never overwrite newer field values and recovering the losing draft creates an isolated copy (2.0s)
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T08:00:03.5405151Z   ✓   8 tests/e2e/m2-ui.spec.cjs:21:1 › recovery quota errors are visible and a failed field save can retry without clearing or blocking later saves (1.5s)
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T08:00:03.7028299Z   ✓   9 tests/e2e/m2-ui.spec.cjs:22:1 › a delayed template transition cannot focus or edit the outgoing workbench fields (1.1s)
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T08:00:04.5920097Z   ✓  10 tests/e2e/m2-ui.spec.cjs:23:1 › header navigation during a pending field save does not leave the destination inert or lose the committed value (1.0s)
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T08:00:07.1664424Z   ✓  11 tests/e2e/m2-ui.spec.cjs:15:1 › dirty navigation is guarded and reloaded drafts recover as copies without sources; failed saves keep drafts (2.5s)
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T08:00:07.7574833Z   ✓  12 tests/e2e/m2-ui.spec.cjs:19:1 › two browser tabs never overwrite newer field values and recovering the losing draft creates an isolated copy (2.0s)
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T08:00:08.9336366Z   ✓  14 tests/e2e/m2-ui.spec.cjs:22:1 › a delayed template transition cannot focus or edit the outgoing workbench fields (1.2s)
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T08:00:08.9390557Z   ✓  13 tests/e2e/m2-ui.spec.cjs:21:1 › recovery quota errors are visible and a failed field save can retry without clearing or blocking later saves (1.8s)
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T08:00:09.9130081Z   ✓  15 tests/e2e/m2-ui.spec.cjs:23:1 › header navigation during a pending field save does not leave the destination inert or lose the committed value (958ms)
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T08:00:09.9594598Z 
+reproduce	Repeat precise NAV-01 candidate cases with zero retries	2026-10-25T08:00:09.9598134Z   15 passed (15.5s)
+reproduce	Preserve original in-flight document save draining regression locally	﻿2026-10-25T08:00:09.9861387Z ##[group]Run npx playwright test tests/e2e/storage.spec.cjs --grep 'navigation drains an edit' --repeat-each=3 --reporter=list --output=qa-file-save-results
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:09.9863316Z [36;1mnpx playwright test tests/e2e/storage.spec.cjs --grep 'navigation drains an edit' --repeat-each=3 --reporter=list --output=qa-file-save-results[0m
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:09.9911100Z shell: /usr/bin/bash -e {0}
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:09.9911539Z ##[endgroup]
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:10.8530184Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:10] "GET / HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:10.9612625Z 
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:10.9613522Z Running 3 tests using 2 workers
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:10.9614191Z 
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6132171Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET / HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6375124Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /style.css?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6397803Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /workbench-model.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6462141Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /backup-format.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6488571Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /field-model.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6490332Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /storage.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6491628Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /ptm-grotesk.woff2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6493145Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /ptm-tc.woff2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6494655Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /media-model.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6530723Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /deployment.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6532633Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /money-model.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6534590Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /document-model.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6537543Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /tool-registry.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6579720Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /tools-core.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6581064Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /workbench.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6582552Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /excel-export.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6623314Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /media-tools.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6673781Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /document-editor.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6699157Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /document-export.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6748003Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /local-files.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6784953Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /workspace.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6851501Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /field-ui.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.6853092Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /workbench-ui.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7163436Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET / HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7326049Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /ptm-tc.woff2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7364051Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /ptm-grotesk.woff2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7446580Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /style.css?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7575165Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /deployment.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7620193Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /money-model.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7646814Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /field-model.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7673034Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /workbench-model.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7703097Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /backup-format.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7705257Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /storage.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7763123Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /media-model.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7792921Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /tool-registry.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7827010Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /tools-core.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7852256Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /workbench.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7863218Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /document-model.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7893282Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /excel-export.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7923466Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /document-editor.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.7957698Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /media-tools.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.8003092Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /document-export.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.8063174Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /local-files.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.8093706Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /field-ui.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.8153029Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /workspace.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:11.8183157Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:11] "GET /workbench-ui.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:13.9237693Z   ✓  1 tests/e2e/storage.spec.cjs:48:1 › navigation drains an edit made during an in-flight write (2.4s)
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.0062989Z   ✓  2 tests/e2e/storage.spec.cjs:48:1 › navigation drains an edit made during an in-flight write (2.4s)
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5195649Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET / HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5303443Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /ptm-tc.woff2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5323887Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /style.css?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5325217Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /ptm-grotesk.woff2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5426381Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /deployment.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5464741Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /money-model.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5503140Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /field-model.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5543576Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /media-model.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5582460Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /workbench-model.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5609210Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /backup-format.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5670815Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /tools-core.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5691986Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /storage.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5718089Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /document-model.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5719556Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /tool-registry.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5721406Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /workbench.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5723017Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /excel-export.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5725480Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /document-editor.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5728092Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /local-files.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5729376Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /document-export.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5730778Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /workbench-ui.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5733151Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /media-tools.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5734600Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /workspace.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:14.5735861Z [WebServer] 127.0.0.1 - - [25/Oct/2026 08:00:14] "GET /field-ui.js?v=3.4.0-rc.2 HTTP/1.1" 200 -
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:16.6099496Z   ✓  3 tests/e2e/storage.spec.cjs:48:1 › navigation drains an edit made during an in-flight write (2.2s)
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:16.6481129Z 
+reproduce	Preserve original in-flight document save draining regression locally	2026-10-25T08:00:16.6485549Z   3 passed (6.0s)
+reproduce	Run actions/upload-artifact@v4	﻿2026-10-25T08:00:16.6765123Z ##[group]Run actions/upload-artifact@v4
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:16.6765570Z with:
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:16.6765951Z   name: M2-synthetic-backups-and-developer-evidence
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:16.6767100Z   path: docs/qa/m2-rc2/fixtures/
+reproduce	Run actions/upload-artifact@v4	docs/qa/m2-rc2/fixture-manifest.json
+reproduce	Run actions/upload-artifact@v4	/home/runner/work/_temp/synthetic-m2-complete/
+reproduce	Run actions/upload-artifact@v4	test-results/
+reproduce	Run actions/upload-artifact@v4	qa-fixture-https-results/
+reproduce	Run actions/upload-artifact@v4	qa-navigation-https-results/
+reproduce	Run actions/upload-artifact@v4	qa-file-save-results/
+reproduce	Run actions/upload-artifact@v4	nav-negative-control.json
+reproduce	Run actions/upload-artifact@v4	
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:16.6768297Z   retention-days: 30
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:16.6768670Z   if-no-files-found: warn
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:16.6769016Z   compression-level: 6
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:16.6769353Z   overwrite: false
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:16.6769717Z   include-hidden-files: false
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:16.6770081Z ##[endgroup]
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:16.8344213Z (node:4597) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:16.8345211Z (Use `node --trace-deprecation ...` to show where the warning was created)
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:16.8492638Z Multiple search paths detected. Calculating the least common ancestor of all paths
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:16.8498378Z The least common ancestor is /home/runner/work. This will be the root directory of the artifact
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:16.8499592Z With the provided path, there will be 22 files uploaded
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:16.8501260Z Artifact name is valid!
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:16.8502203Z Root directory input is valid!
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:17.1300799Z Beginning upload of artifact content to blob storage
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:17.6076066Z (node:4597) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:17.8864975Z Uploaded bytes 434390
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:17.9293466Z Finished uploading artifact content to blob storage!
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:17.9294613Z SHA256 digest of uploaded artifact zip is 4dbbae5e3a31e620c7484e2cbc49be8795a4288f0aebcd69af5466132734de0e
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:17.9296462Z Finalizing artifact upload
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:18.3565298Z Artifact M2-synthetic-backups-and-developer-evidence.zip successfully finalized. Artifact ID 12591478266
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:18.3566485Z Artifact M2-synthetic-backups-and-developer-evidence has been successfully uploaded! Final size is 434390 bytes. Artifact ID is 12591478266
+reproduce	Run actions/upload-artifact@v4	2026-10-25T08:00:18.3571239Z Artifact download URL: https://github.com/lrqrll/practical-thinking-studio/actions/runs/40174835032/artifacts/12591478266
+reproduce	Post Run actions/setup-node@v4	﻿2026-10-25T08:00:18.3781000Z Post job cleanup.
+reproduce	Post Run actions/setup-node@v4	2026-10-25T08:00:18.4977906Z (node:4609) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+reproduce	Post Run actions/setup-node@v4	2026-10-25T08:00:18.4978869Z (Use `node --trace-deprecation ...` to show where the warning was created)
+reproduce	Post Run actions/setup-node@v4	2026-10-25T08:00:18.5189772Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/practical-thinking-studio/practical-thinking-studio --files-from manifest.txt --use-compress-program zstdmt
+reproduce	Post Run actions/setup-node@v4	2026-10-25T08:00:18.6988854Z (node:4609) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+reproduce	Post Run actions/setup-node@v4	2026-10-25T08:00:19.1079423Z Sent 4985731 of 4985731 (100.0%), 11.4 MBs/sec
+reproduce	Post Run actions/setup-node@v4	2026-10-25T08:00:19.2786218Z Cache saved with the key: node-cache-Linux-x64-npm-7b19ea6928e7a8806e485071f14b8f3fea98ee5be2c1ce561b67f63c5c1dbc27
+reproduce	Post Run actions/checkout@v4	﻿2026-10-25T08:00:19.2929543Z Post job cleanup.
+reproduce	Post Run actions/checkout@v4	2026-10-25T08:00:19.3925117Z [command]/usr/bin/git version
+reproduce	Post Run actions/checkout@v4	2026-10-25T08:00:19.3965440Z git version 2.55.0
+reproduce	Post Run actions/checkout@v4	2026-10-25T08:00:19.4006804Z Temporarily overriding HOME='/home/runner/work/_temp/683804b7-90e2-4980-9902-ef1cd8c23394' before making global git config changes
+reproduce	Post Run actions/checkout@v4	2026-10-25T08:00:19.4007758Z Adding repository directory to the temporary git global config as a safe directory
+reproduce	Post Run actions/checkout@v4	2026-10-25T08:00:19.4013728Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/practical-thinking-studio/practical-thinking-studio
+reproduce	Post Run actions/checkout@v4	2026-10-25T08:00:19.4056090Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+reproduce	Post Run actions/checkout@v4	2026-10-25T08:00:19.4089674Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+reproduce	Post Run actions/checkout@v4	2026-10-25T08:00:19.4325907Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+reproduce	Post Run actions/checkout@v4	2026-10-25T08:00:19.4347914Z http.https://github.com/.extraheader
+reproduce	Post Run actions/checkout@v4	2026-10-25T08:00:19.4358834Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+reproduce	Post Run actions/checkout@v4	2026-10-25T08:00:19.4394731Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+reproduce	Post Run actions/checkout@v4	2026-10-25T08:00:19.4608307Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+reproduce	Post Run actions/checkout@v4	2026-10-25T08:00:19.4641119Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+reproduce	Complete job	﻿2026-10-25T08:00:19.4985594Z Cleaning up orphan processes
+reproduce	Complete job	2026-10-25T08:00:19.5345270Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

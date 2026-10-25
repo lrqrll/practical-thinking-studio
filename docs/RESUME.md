@@ -9,3 +9,7 @@ PR依賴：#10 codex/nexus-m2-field-contract（ede75bd，契約與純模型）�
 欄位／模板完整操作、固定成果、v3大容量還原與24單元／84瀏覽器預期驗證詳QA-REPORT.md，實際以最終CI為準。M2預覽使用m2/與nexus-preview-workbench-m2-workspace，不自動移入或更改正式、M1根預覽及舊斜體預覽資料。不要重建或重做已完成功能。
 
 下一步核對最終CI、HTTPS實際操作與公開資產，提供完整SHA、獨立QA操作清單與限制，交獨立QA；開發者通過不等於獨立QA通過，不要擅自合併／發布。
+
+## 最新：凍結M2 rc.2，等待獨立瀏覽器複審
+
+使用者獨立QA已核對程式／依賴／原始CI及10模型測試通過，但沒有受控瀏覽器，完整操作未測。#10 ede75bd60e905f65fbc01f03b4e4806ea89097ef、#11 2381aeb6a484daa4ee2e076bd202b3f3d6498593、#12 59dff72bb55a77c371863d6e8a998529b1997bf0保持；不得因補材料變動其head。材料另在codex/nexus-m2-qa-materials分支／PR，產品及package逐位元保持59。詳[交付材料入口](qa/m2-rc2/README.md)，含合成備份／manifest／七包容量生成器／完整操作與M2-NAV-01負控制及原始CI副本。開發者fixture 7/7不代表獨立瀏覽器QA，門檻仍有效。下一步等待獨立瀏覽器結果，必要修正另列差異再測；無合併／正式部署授權，不開M3，不恢復Excel。

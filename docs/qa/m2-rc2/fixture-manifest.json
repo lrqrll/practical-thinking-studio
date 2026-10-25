@@ -1,0 +1,2105 @@
+{
+  "candidateSha": "59dff72bb55a77c371863d6e8a998529b1997bf0",
+  "fixtureTimestamp": "2026-10-25T00:00:00.000Z",
+  "synthetic": true,
+  "containsRealPrivateData": false,
+  "notes": "日期與UUID固定，資料完全合成；PRIVATE標記用於確認範本不複製來源／現值。不是獨立QA結論。",
+  "files": {
+    "workspace-v1.json": {
+      "sha256": "3c8a3e2acd8732d3d2bd2968b0bed71bcf44f639827cff672cb8e9d209e4c500",
+      "bytes": 10297,
+      "validation": "valid",
+      "expected": {
+        "files": 4,
+        "folders": 1,
+        "archives": 1,
+        "histories": 3,
+        "historyVersions": 6,
+        "trashedFiles": 1,
+        "workbenches": 0,
+        "snapshots": 0,
+        "snapshotSchemas": [],
+        "templates": 0
+      },
+      "projection": {
+        "files": [
+          {
+            "name": "QA 合成垃圾桶備忘",
+            "type": "notes",
+            "rev": 1,
+            "deleted": true,
+            "folder": "QA 合成採購資料夾",
+            "data": {
+              "note": {
+                "text": "QA-TRASH-KEEP",
+                "tags": [],
+                "pinned": false,
+                "checks": [],
+                "images": []
+              }
+            },
+            "history": []
+          },
+          {
+            "name": "QA 合成報價來源",
+            "type": "quotes",
+            "rev": 3,
+            "deleted": false,
+            "folder": "QA 合成採購資料夾",
+            "data": {
+              "drafts": {
+                "work-quotes": "[{\"name\":\"合成廠商甲\",\"base\":\"0.1\",\"delivery\":\"0.2\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"},{\"name\":\"合成廠商乙\",\"base\":\"1.00\",\"delivery\":\"0\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"}]",
+                "work-quote-need": "合成需求：核對逗號、引號與換行\n第二行「測試」",
+                "work-quote-decision": "合成決策：甲總價TWD 0.30"
+              }
+            },
+            "history": [
+              {
+                "rev": 1,
+                "name": "QA 合成報價來源",
+                "data": {
+                  "drafts": {}
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              },
+              {
+                "rev": 2,
+                "name": "QA 合成報價來源",
+                "data": {
+                  "drafts": {
+                    "work-quotes": "[{\"name\":\"合成廠商甲\",\"base\":\"0.1\",\"delivery\":\"0.2\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"},{\"name\":\"合成廠商乙\",\"base\":\"1.00\",\"delivery\":\"0\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"}]",
+                    "work-quote-need": "合成需求：核對逗號、引號與換行\n第二行「測試」",
+                    "work-quote-decision": "合成舊決策"
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              }
+            ]
+          },
+          {
+            "name": "QA 合成決策備忘",
+            "type": "notes",
+            "rev": 4,
+            "deleted": false,
+            "folder": "QA 合成採購資料夾",
+            "data": {
+              "note": {
+                "text": "QA-PRIVATE-SOURCE-MARKER（完全合成，非私人資料）\n合成決策備忘，含圖片及歷史。",
+                "tags": [
+                  "QA合成"
+                ],
+                "pinned": false,
+                "checks": [
+                  {
+                    "id": "qa-check-1",
+                    "text": "已確認合成報價",
+                    "done": true
+                  },
+                  {
+                    "id": "qa-check-2",
+                    "text": "尚待合成核對",
+                    "done": false
+                  }
+                ],
+                "images": [
+                  {
+                    "id": "qa-checkerboard",
+                    "name": "合成16x16黑白棋盤",
+                    "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVR4nGNgYGD4jw8TAgyjBgwLA4iwAT8eNWA4GAAAfKJ9nzxPW2YAAAAASUVORK5CYII=",
+                    "width": 16,
+                    "height": 16
+                  }
+                ]
+              }
+            },
+            "history": [
+              {
+                "rev": 1,
+                "name": "QA 合成決策備忘",
+                "data": {
+                  "note": {
+                    "text": "",
+                    "tags": [],
+                    "pinned": false,
+                    "checks": [],
+                    "images": []
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              },
+              {
+                "rev": 2,
+                "name": "QA 合成決策備忘",
+                "data": {
+                  "note": {
+                    "text": "合成備忘歷史v1",
+                    "tags": [
+                      "QA合成"
+                    ],
+                    "pinned": false,
+                    "checks": [
+                      {
+                        "id": "qa-check-1",
+                        "text": "已確認合成報價",
+                        "done": true
+                      },
+                      {
+                        "id": "qa-check-2",
+                        "text": "尚待合成核對",
+                        "done": false
+                      }
+                    ],
+                    "images": [
+                      {
+                        "id": "qa-checkerboard",
+                        "name": "合成16x16黑白棋盤",
+                        "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVR4nGNgYGD4jw8TAgyjBgwLA4iwAT8eNWA4GAAAfKJ9nzxPW2YAAAAASUVORK5CYII=",
+                        "width": 16,
+                        "height": 16
+                      }
+                    ]
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              },
+              {
+                "rev": 3,
+                "name": "QA 合成決策備忘",
+                "data": {
+                  "note": {
+                    "text": "合成備忘歷史v2",
+                    "tags": [
+                      "QA合成"
+                    ],
+                    "pinned": false,
+                    "checks": [
+                      {
+                        "id": "qa-check-1",
+                        "text": "已確認合成報價",
+                        "done": true
+                      },
+                      {
+                        "id": "qa-check-2",
+                        "text": "尚待合成核對",
+                        "done": false
+                      }
+                    ],
+                    "images": [
+                      {
+                        "id": "qa-checkerboard",
+                        "name": "合成16x16黑白棋盤",
+                        "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVR4nGNgYGD4jw8TAgyjBgwLA4iwAT8eNWA4GAAAfKJ9nzxPW2YAAAAASUVORK5CYII=",
+                        "width": 16,
+                        "height": 16
+                      }
+                    ]
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              }
+            ]
+          },
+          {
+            "name": "QA 合成舊文件",
+            "type": "document",
+            "rev": 2,
+            "deleted": false,
+            "folder": "QA 合成採購資料夾",
+            "data": {
+              "document": {
+                "version": 1,
+                "content": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "合成舊文件斜體",
+                          "marks": [
+                            {
+                              "type": "italic"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "text": "與粗體",
+                          "marks": [
+                            {
+                              "type": "bold"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "image",
+                      "attrs": {
+                        "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVR4nGNgYGD4jw8TAgyjBgwLA4iwAT8eNWA4GAAAfKJ9nzxPW2YAAAAASUVORK5CYII=",
+                        "alt": "合成16x16黑白棋盤",
+                        "width": 128,
+                        "height": 128
+                      }
+                    }
+                  ]
+                },
+                "settings": {
+                  "paper": "A4",
+                  "margin": 20,
+                  "lineHeight": 1.5,
+                  "spacing": 8,
+                  "header": "",
+                  "footer": "",
+                  "pageNumbers": true
+                }
+              }
+            },
+            "history": [
+              {
+                "rev": 1,
+                "name": "QA 合成舊文件",
+                "data": {
+                  "document": {
+                    "version": 1,
+                    "content": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph"
+                        }
+                      ]
+                    },
+                    "settings": {
+                      "paper": "A4",
+                      "margin": 20,
+                      "lineHeight": 1.5,
+                      "spacing": 8,
+                      "header": "",
+                      "footer": "",
+                      "pageNumbers": true
+                    }
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              }
+            ]
+          }
+        ],
+        "folders": [
+          {
+            "name": "QA 合成採購資料夾",
+            "deleted": false
+          }
+        ],
+        "archives": [
+          "{\"kind\":\"qa-synthetic-archive\",\"marker\":\"QA-ARCHIVE-KEEP\"}"
+        ],
+        "preferences": {
+          "favorites": [
+            "quotes",
+            "notes"
+          ],
+          "recent": [
+            {
+              "id": "notes",
+              "at": "2026-10-25T00:00:00.000Z"
+            },
+            {
+              "id": "quotes",
+              "at": "2026-10-25T00:00:00.000Z"
+            }
+          ]
+        },
+        "workbenches": [],
+        "snapshots": [],
+        "templates": []
+      }
+    },
+    "workbench-v2.json": {
+      "sha256": "53005c97365f90599dafb32934d81c0d55bd3ccbadd906502b81b2710019206b",
+      "bytes": 13102,
+      "validation": "valid",
+      "expected": {
+        "files": 4,
+        "folders": 1,
+        "archives": 1,
+        "histories": 3,
+        "historyVersions": 6,
+        "trashedFiles": 1,
+        "workbenches": 1,
+        "snapshots": 1,
+        "snapshotSchemas": [
+          1
+        ],
+        "templates": 0
+      },
+      "projection": {
+        "files": [
+          {
+            "name": "QA 合成垃圾桶備忘",
+            "type": "notes",
+            "rev": 1,
+            "deleted": true,
+            "folder": "QA 合成採購資料夾",
+            "data": {
+              "note": {
+                "text": "QA-TRASH-KEEP",
+                "tags": [],
+                "pinned": false,
+                "checks": [],
+                "images": []
+              }
+            },
+            "history": []
+          },
+          {
+            "name": "QA 合成報價來源",
+            "type": "quotes",
+            "rev": 3,
+            "deleted": false,
+            "folder": "QA 合成採購資料夾",
+            "data": {
+              "drafts": {
+                "work-quotes": "[{\"name\":\"合成廠商甲\",\"base\":\"0.1\",\"delivery\":\"0.2\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"},{\"name\":\"合成廠商乙\",\"base\":\"1.00\",\"delivery\":\"0\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"}]",
+                "work-quote-need": "合成需求：核對逗號、引號與換行\n第二行「測試」",
+                "work-quote-decision": "合成決策：甲總價TWD 0.30"
+              }
+            },
+            "history": [
+              {
+                "rev": 1,
+                "name": "QA 合成報價來源",
+                "data": {
+                  "drafts": {}
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              },
+              {
+                "rev": 2,
+                "name": "QA 合成報價來源",
+                "data": {
+                  "drafts": {
+                    "work-quotes": "[{\"name\":\"合成廠商甲\",\"base\":\"0.1\",\"delivery\":\"0.2\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"},{\"name\":\"合成廠商乙\",\"base\":\"1.00\",\"delivery\":\"0\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"}]",
+                    "work-quote-need": "合成需求：核對逗號、引號與換行\n第二行「測試」",
+                    "work-quote-decision": "合成舊決策"
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              }
+            ]
+          },
+          {
+            "name": "QA 合成決策備忘",
+            "type": "notes",
+            "rev": 4,
+            "deleted": false,
+            "folder": "QA 合成採購資料夾",
+            "data": {
+              "note": {
+                "text": "QA-PRIVATE-SOURCE-MARKER（完全合成，非私人資料）\n合成決策備忘，含圖片及歷史。",
+                "tags": [
+                  "QA合成"
+                ],
+                "pinned": false,
+                "checks": [
+                  {
+                    "id": "qa-check-1",
+                    "text": "已確認合成報價",
+                    "done": true
+                  },
+                  {
+                    "id": "qa-check-2",
+                    "text": "尚待合成核對",
+                    "done": false
+                  }
+                ],
+                "images": [
+                  {
+                    "id": "qa-checkerboard",
+                    "name": "合成16x16黑白棋盤",
+                    "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVR4nGNgYGD4jw8TAgyjBgwLA4iwAT8eNWA4GAAAfKJ9nzxPW2YAAAAASUVORK5CYII=",
+                    "width": 16,
+                    "height": 16
+                  }
+                ]
+              }
+            },
+            "history": [
+              {
+                "rev": 1,
+                "name": "QA 合成決策備忘",
+                "data": {
+                  "note": {
+                    "text": "",
+                    "tags": [],
+                    "pinned": false,
+                    "checks": [],
+                    "images": []
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              },
+              {
+                "rev": 2,
+                "name": "QA 合成決策備忘",
+                "data": {
+                  "note": {
+                    "text": "合成備忘歷史v1",
+                    "tags": [
+                      "QA合成"
+                    ],
+                    "pinned": false,
+                    "checks": [
+                      {
+                        "id": "qa-check-1",
+                        "text": "已確認合成報價",
+                        "done": true
+                      },
+                      {
+                        "id": "qa-check-2",
+                        "text": "尚待合成核對",
+                        "done": false
+                      }
+                    ],
+                    "images": [
+                      {
+                        "id": "qa-checkerboard",
+                        "name": "合成16x16黑白棋盤",
+                        "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVR4nGNgYGD4jw8TAgyjBgwLA4iwAT8eNWA4GAAAfKJ9nzxPW2YAAAAASUVORK5CYII=",
+                        "width": 16,
+                        "height": 16
+                      }
+                    ]
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              },
+              {
+                "rev": 3,
+                "name": "QA 合成決策備忘",
+                "data": {
+                  "note": {
+                    "text": "合成備忘歷史v2",
+                    "tags": [
+                      "QA合成"
+                    ],
+                    "pinned": false,
+                    "checks": [
+                      {
+                        "id": "qa-check-1",
+                        "text": "已確認合成報價",
+                        "done": true
+                      },
+                      {
+                        "id": "qa-check-2",
+                        "text": "尚待合成核對",
+                        "done": false
+                      }
+                    ],
+                    "images": [
+                      {
+                        "id": "qa-checkerboard",
+                        "name": "合成16x16黑白棋盤",
+                        "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVR4nGNgYGD4jw8TAgyjBgwLA4iwAT8eNWA4GAAAfKJ9nzxPW2YAAAAASUVORK5CYII=",
+                        "width": 16,
+                        "height": 16
+                      }
+                    ]
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              }
+            ]
+          },
+          {
+            "name": "QA 合成舊文件",
+            "type": "document",
+            "rev": 2,
+            "deleted": false,
+            "folder": "QA 合成採購資料夾",
+            "data": {
+              "document": {
+                "version": 1,
+                "content": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "合成舊文件斜體",
+                          "marks": [
+                            {
+                              "type": "italic"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "text": "與粗體",
+                          "marks": [
+                            {
+                              "type": "bold"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "image",
+                      "attrs": {
+                        "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVR4nGNgYGD4jw8TAgyjBgwLA4iwAT8eNWA4GAAAfKJ9nzxPW2YAAAAASUVORK5CYII=",
+                        "alt": "合成16x16黑白棋盤",
+                        "width": 128,
+                        "height": 128
+                      }
+                    }
+                  ]
+                },
+                "settings": {
+                  "paper": "A4",
+                  "margin": 20,
+                  "lineHeight": 1.5,
+                  "spacing": 8,
+                  "header": "",
+                  "footer": "",
+                  "pageNumbers": true
+                }
+              }
+            },
+            "history": [
+              {
+                "rev": 1,
+                "name": "QA 合成舊文件",
+                "data": {
+                  "document": {
+                    "version": 1,
+                    "content": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph"
+                        }
+                      ]
+                    },
+                    "settings": {
+                      "paper": "A4",
+                      "margin": 20,
+                      "lineHeight": 1.5,
+                      "spacing": 8,
+                      "header": "",
+                      "footer": "",
+                      "pageNumbers": true
+                    }
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              }
+            ]
+          }
+        ],
+        "folders": [
+          {
+            "name": "QA 合成採購資料夾",
+            "deleted": false
+          }
+        ],
+        "archives": [
+          "{\"kind\":\"qa-synthetic-archive\",\"marker\":\"QA-ARCHIVE-KEEP\"}"
+        ],
+        "preferences": {
+          "favorites": [
+            "quotes",
+            "notes"
+          ],
+          "recent": [
+            {
+              "id": "notes",
+              "at": "2026-10-25T00:00:00.000Z"
+            },
+            {
+              "id": "quotes",
+              "at": "2026-10-25T00:00:00.000Z"
+            }
+          ]
+        },
+        "workbenches": [
+          {
+            "schemaVersion": 1,
+            "name": "QA 合成採購工作台",
+            "rev": 4,
+            "deleted": false,
+            "modules": [
+              {
+                "kind": "notes",
+                "file": "QA 合成決策備忘"
+              },
+              {
+                "kind": "quotes",
+                "file": "QA 合成報價來源"
+              }
+            ],
+            "qaOpaque": null
+          }
+        ],
+        "snapshots": [
+          {
+            "schemaVersion": 1,
+            "name": "QA 合成採購工作台",
+            "workbenchRev": 4,
+            "createdAt": "2026-10-25T00:00:00.000Z",
+            "calculationVersion": "twd-minor-v1",
+            "currency": "TWD",
+            "scale": 2,
+            "quotes": [
+              {
+                "name": "合成廠商甲",
+                "amounts": {
+                  "base": "10",
+                  "delivery": "20",
+                  "extra": "0",
+                  "tax": "0"
+                },
+                "totalMinor": "30",
+                "scope": "yes",
+                "date": "yes",
+                "terms": "僅供合成驗收，非真實報價"
+              },
+              {
+                "name": "合成廠商乙",
+                "amounts": {
+                  "base": "100",
+                  "delivery": "0",
+                  "extra": "0",
+                  "tax": "0"
+                },
+                "totalMinor": "100",
+                "scope": "yes",
+                "date": "yes",
+                "terms": "僅供合成驗收，非真實報價"
+              }
+            ],
+            "need": "合成需求：核對逗號、引號與換行\n第二行「測試」",
+            "decision": "合成決策：甲總價TWD 0.30",
+            "memo": {
+              "text": "QA-PRIVATE-SOURCE-MARKER（完全合成，非私人資料）\n合成決策備忘，含圖片及歷史。",
+              "checks": [
+                {
+                  "text": "已確認合成報價",
+                  "done": true
+                },
+                {
+                  "text": "尚待合成核對",
+                  "done": false
+                }
+              ],
+              "omittedImages": 1
+            },
+            "sources": [
+              {
+                "kind": "notes",
+                "name": "QA 合成決策備忘",
+                "rev": 4
+              },
+              {
+                "kind": "quotes",
+                "name": "QA 合成報價來源",
+                "rev": 3
+              }
+            ]
+          }
+        ],
+        "templates": []
+      }
+    },
+    "workbench-v3.json": {
+      "sha256": "58f24458cdcd7bc842aa14a4488604c7b65c88c09d80855d5c4933fef2948d90",
+      "bytes": 21948,
+      "validation": "valid",
+      "expected": {
+        "files": 4,
+        "folders": 1,
+        "archives": 1,
+        "histories": 3,
+        "historyVersions": 6,
+        "trashedFiles": 1,
+        "workbenches": 1,
+        "snapshots": 2,
+        "snapshotSchemas": [
+          1,
+          2
+        ],
+        "templates": 1
+      },
+      "projection": {
+        "files": [
+          {
+            "name": "QA 合成垃圾桶備忘",
+            "type": "notes",
+            "rev": 1,
+            "deleted": true,
+            "folder": "QA 合成採購資料夾",
+            "data": {
+              "note": {
+                "text": "QA-TRASH-KEEP",
+                "tags": [],
+                "pinned": false,
+                "checks": [],
+                "images": []
+              }
+            },
+            "history": []
+          },
+          {
+            "name": "QA 合成報價來源",
+            "type": "quotes",
+            "rev": 3,
+            "deleted": false,
+            "folder": "QA 合成採購資料夾",
+            "data": {
+              "drafts": {
+                "work-quotes": "[{\"name\":\"合成廠商甲\",\"base\":\"0.1\",\"delivery\":\"0.2\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"},{\"name\":\"合成廠商乙\",\"base\":\"1.00\",\"delivery\":\"0\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"}]",
+                "work-quote-need": "合成需求：核對逗號、引號與換行\n第二行「測試」",
+                "work-quote-decision": "合成決策：甲總價TWD 0.30"
+              }
+            },
+            "history": [
+              {
+                "rev": 1,
+                "name": "QA 合成報價來源",
+                "data": {
+                  "drafts": {}
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              },
+              {
+                "rev": 2,
+                "name": "QA 合成報價來源",
+                "data": {
+                  "drafts": {
+                    "work-quotes": "[{\"name\":\"合成廠商甲\",\"base\":\"0.1\",\"delivery\":\"0.2\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"},{\"name\":\"合成廠商乙\",\"base\":\"1.00\",\"delivery\":\"0\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"}]",
+                    "work-quote-need": "合成需求：核對逗號、引號與換行\n第二行「測試」",
+                    "work-quote-decision": "合成舊決策"
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              }
+            ]
+          },
+          {
+            "name": "QA 合成決策備忘",
+            "type": "notes",
+            "rev": 4,
+            "deleted": false,
+            "folder": "QA 合成採購資料夾",
+            "data": {
+              "note": {
+                "text": "QA-PRIVATE-SOURCE-MARKER（完全合成，非私人資料）\n合成決策備忘，含圖片及歷史。",
+                "tags": [
+                  "QA合成"
+                ],
+                "pinned": false,
+                "checks": [
+                  {
+                    "id": "qa-check-1",
+                    "text": "已確認合成報價",
+                    "done": true
+                  },
+                  {
+                    "id": "qa-check-2",
+                    "text": "尚待合成核對",
+                    "done": false
+                  }
+                ],
+                "images": [
+                  {
+                    "id": "qa-checkerboard",
+                    "name": "合成16x16黑白棋盤",
+                    "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVR4nGNgYGD4jw8TAgyjBgwLA4iwAT8eNWA4GAAAfKJ9nzxPW2YAAAAASUVORK5CYII=",
+                    "width": 16,
+                    "height": 16
+                  }
+                ]
+              }
+            },
+            "history": [
+              {
+                "rev": 1,
+                "name": "QA 合成決策備忘",
+                "data": {
+                  "note": {
+                    "text": "",
+                    "tags": [],
+                    "pinned": false,
+                    "checks": [],
+                    "images": []
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              },
+              {
+                "rev": 2,
+                "name": "QA 合成決策備忘",
+                "data": {
+                  "note": {
+                    "text": "合成備忘歷史v1",
+                    "tags": [
+                      "QA合成"
+                    ],
+                    "pinned": false,
+                    "checks": [
+                      {
+                        "id": "qa-check-1",
+                        "text": "已確認合成報價",
+                        "done": true
+                      },
+                      {
+                        "id": "qa-check-2",
+                        "text": "尚待合成核對",
+                        "done": false
+                      }
+                    ],
+                    "images": [
+                      {
+                        "id": "qa-checkerboard",
+                        "name": "合成16x16黑白棋盤",
+                        "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVR4nGNgYGD4jw8TAgyjBgwLA4iwAT8eNWA4GAAAfKJ9nzxPW2YAAAAASUVORK5CYII=",
+                        "width": 16,
+                        "height": 16
+                      }
+                    ]
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              },
+              {
+                "rev": 3,
+                "name": "QA 合成決策備忘",
+                "data": {
+                  "note": {
+                    "text": "合成備忘歷史v2",
+                    "tags": [
+                      "QA合成"
+                    ],
+                    "pinned": false,
+                    "checks": [
+                      {
+                        "id": "qa-check-1",
+                        "text": "已確認合成報價",
+                        "done": true
+                      },
+                      {
+                        "id": "qa-check-2",
+                        "text": "尚待合成核對",
+                        "done": false
+                      }
+                    ],
+                    "images": [
+                      {
+                        "id": "qa-checkerboard",
+                        "name": "合成16x16黑白棋盤",
+                        "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVR4nGNgYGD4jw8TAgyjBgwLA4iwAT8eNWA4GAAAfKJ9nzxPW2YAAAAASUVORK5CYII=",
+                        "width": 16,
+                        "height": 16
+                      }
+                    ]
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              }
+            ]
+          },
+          {
+            "name": "QA 合成舊文件",
+            "type": "document",
+            "rev": 2,
+            "deleted": false,
+            "folder": "QA 合成採購資料夾",
+            "data": {
+              "document": {
+                "version": 1,
+                "content": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "合成舊文件斜體",
+                          "marks": [
+                            {
+                              "type": "italic"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "text": "與粗體",
+                          "marks": [
+                            {
+                              "type": "bold"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "image",
+                      "attrs": {
+                        "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVR4nGNgYGD4jw8TAgyjBgwLA4iwAT8eNWA4GAAAfKJ9nzxPW2YAAAAASUVORK5CYII=",
+                        "alt": "合成16x16黑白棋盤",
+                        "width": 128,
+                        "height": 128
+                      }
+                    }
+                  ]
+                },
+                "settings": {
+                  "paper": "A4",
+                  "margin": 20,
+                  "lineHeight": 1.5,
+                  "spacing": 8,
+                  "header": "",
+                  "footer": "",
+                  "pageNumbers": true
+                }
+              }
+            },
+            "history": [
+              {
+                "rev": 1,
+                "name": "QA 合成舊文件",
+                "data": {
+                  "document": {
+                    "version": 1,
+                    "content": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph"
+                        }
+                      ]
+                    },
+                    "settings": {
+                      "paper": "A4",
+                      "margin": 20,
+                      "lineHeight": 1.5,
+                      "spacing": 8,
+                      "header": "",
+                      "footer": "",
+                      "pageNumbers": true
+                    }
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              }
+            ]
+          }
+        ],
+        "folders": [
+          {
+            "name": "QA 合成採購資料夾",
+            "deleted": false
+          }
+        ],
+        "archives": [
+          "{\"kind\":\"qa-synthetic-archive\",\"marker\":\"QA-ARCHIVE-KEEP\"}"
+        ],
+        "preferences": {
+          "favorites": [
+            "quotes",
+            "notes"
+          ],
+          "recent": [
+            {
+              "id": "notes",
+              "at": "2026-10-25T00:00:00.000Z"
+            },
+            {
+              "id": "quotes",
+              "at": "2026-10-25T00:00:00.000Z"
+            }
+          ]
+        },
+        "workbenches": [
+          {
+            "schemaVersion": 2,
+            "name": "QA 合成採購工作台",
+            "rev": 13,
+            "deleted": false,
+            "modules": [
+              {
+                "kind": "notes",
+                "file": "QA 合成決策備忘"
+              },
+              {
+                "kind": "quotes",
+                "file": "QA 合成報價來源"
+              }
+            ],
+            "fieldStructureVersion": 1,
+            "fields": [
+              {
+                "field": {
+                  "label": "測試備註",
+                  "type": "text",
+                  "deletedAt": null,
+                  "qaPrivateAttribute": "QA-PRIVATE-FIELD-EXTENSION"
+                },
+                "hasValue": true,
+                "raw": "QA-PRIVATE-WORKING-VALUE（完全合成）"
+              },
+              {
+                "field": {
+                  "label": "精確數量",
+                  "type": "number",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "-00123.4500"
+              },
+              {
+                "field": {
+                  "label": "有效日期",
+                  "type": "date",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "2024-02-29"
+              },
+              {
+                "field": {
+                  "label": "採購區域",
+                  "type": "select",
+                  "deletedAt": null,
+                  "options": [
+                    {
+                      "label": "合成北區"
+                    },
+                    {
+                      "label": "合成南區"
+                    }
+                  ]
+                },
+                "hasValue": true,
+                "raw": "合成南區"
+              },
+              {
+                "field": {
+                  "label": "精確金額",
+                  "type": "money",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "0.30"
+              },
+              {
+                "field": {
+                  "label": "CSV安全測試",
+                  "type": "text",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "=HYPERLINK(\"https://example.invalid\",\"合成安全測試\")"
+              },
+              {
+                "field": {
+                  "label": "已移除欄位",
+                  "type": "text",
+                  "deletedAt": "2026-10-25T00:00:00.000Z"
+                },
+                "hasValue": true,
+                "raw": "QA-ARCHIVED-VALUE-KEEP"
+              }
+            ],
+            "opaqueValues": {},
+            "qaOpaque": {
+              "marker": "QA-OPAQUE-WORKBENCH-KEEP"
+            }
+          }
+        ],
+        "snapshots": [
+          {
+            "schemaVersion": 1,
+            "name": "QA 合成採購工作台",
+            "workbenchRev": 4,
+            "createdAt": "2026-10-25T00:00:00.000Z",
+            "calculationVersion": "twd-minor-v1",
+            "currency": "TWD",
+            "scale": 2,
+            "quotes": [
+              {
+                "name": "合成廠商甲",
+                "amounts": {
+                  "base": "10",
+                  "delivery": "20",
+                  "extra": "0",
+                  "tax": "0"
+                },
+                "totalMinor": "30",
+                "scope": "yes",
+                "date": "yes",
+                "terms": "僅供合成驗收，非真實報價"
+              },
+              {
+                "name": "合成廠商乙",
+                "amounts": {
+                  "base": "100",
+                  "delivery": "0",
+                  "extra": "0",
+                  "tax": "0"
+                },
+                "totalMinor": "100",
+                "scope": "yes",
+                "date": "yes",
+                "terms": "僅供合成驗收，非真實報價"
+              }
+            ],
+            "need": "合成需求：核對逗號、引號與換行\n第二行「測試」",
+            "decision": "合成決策：甲總價TWD 0.30",
+            "memo": {
+              "text": "QA-PRIVATE-SOURCE-MARKER（完全合成，非私人資料）\n合成決策備忘，含圖片及歷史。",
+              "checks": [
+                {
+                  "text": "已確認合成報價",
+                  "done": true
+                },
+                {
+                  "text": "尚待合成核對",
+                  "done": false
+                }
+              ],
+              "omittedImages": 1
+            },
+            "sources": [
+              {
+                "kind": "notes",
+                "name": "QA 合成決策備忘",
+                "rev": 4
+              },
+              {
+                "kind": "quotes",
+                "name": "QA 合成報價來源",
+                "rev": 3
+              }
+            ]
+          },
+          {
+            "schemaVersion": 2,
+            "name": "QA 合成採購工作台",
+            "workbenchRev": 13,
+            "createdAt": "2026-10-25T00:00:01.000Z",
+            "calculationVersion": "twd-minor-v1",
+            "currency": "TWD",
+            "scale": 2,
+            "quotes": [
+              {
+                "name": "合成廠商甲",
+                "amounts": {
+                  "base": "10",
+                  "delivery": "20",
+                  "extra": "0",
+                  "tax": "0"
+                },
+                "totalMinor": "30",
+                "scope": "yes",
+                "date": "yes",
+                "terms": "僅供合成驗收，非真實報價"
+              },
+              {
+                "name": "合成廠商乙",
+                "amounts": {
+                  "base": "100",
+                  "delivery": "0",
+                  "extra": "0",
+                  "tax": "0"
+                },
+                "totalMinor": "100",
+                "scope": "yes",
+                "date": "yes",
+                "terms": "僅供合成驗收，非真實報價"
+              }
+            ],
+            "need": "合成需求：核對逗號、引號與換行\n第二行「測試」",
+            "decision": "合成決策：甲總價TWD 0.30",
+            "memo": {
+              "text": "QA-PRIVATE-SOURCE-MARKER（完全合成，非私人資料）\n合成決策備忘，含圖片及歷史。",
+              "checks": [
+                {
+                  "text": "已確認合成報價",
+                  "done": true
+                },
+                {
+                  "text": "尚待合成核對",
+                  "done": false
+                }
+              ],
+              "omittedImages": 1
+            },
+            "sources": [
+              {
+                "kind": "notes",
+                "name": "QA 合成決策備忘",
+                "rev": 4
+              },
+              {
+                "kind": "quotes",
+                "name": "QA 合成報價來源",
+                "rev": 3
+              }
+            ],
+            "fieldStructureVersion": 1,
+            "customFields": [
+              {
+                "field": {
+                  "label": "測試備註",
+                  "type": "text",
+                  "deletedAt": null,
+                  "qaPrivateAttribute": "QA-PRIVATE-FIELD-EXTENSION"
+                },
+                "raw": "QA-PRIVATE-WORKING-VALUE（完全合成）",
+                "value": "QA-PRIVATE-WORKING-VALUE（完全合成）"
+              },
+              {
+                "field": {
+                  "label": "精確數量",
+                  "type": "number",
+                  "deletedAt": null
+                },
+                "raw": "-00123.4500",
+                "value": "-123.45"
+              },
+              {
+                "field": {
+                  "label": "有效日期",
+                  "type": "date",
+                  "deletedAt": null
+                },
+                "raw": "2024-02-29",
+                "value": "2024-02-29"
+              },
+              {
+                "field": {
+                  "label": "採購區域",
+                  "type": "select",
+                  "deletedAt": null,
+                  "options": [
+                    {
+                      "label": "合成北區"
+                    },
+                    {
+                      "label": "合成南區"
+                    }
+                  ]
+                },
+                "raw": "合成南區",
+                "value": "合成南區"
+              },
+              {
+                "field": {
+                  "label": "精確金額",
+                  "type": "money",
+                  "deletedAt": null
+                },
+                "raw": "0.30",
+                "value": {
+                  "minor": "30",
+                  "currency": "TWD",
+                  "scale": 2
+                }
+              },
+              {
+                "field": {
+                  "label": "CSV安全測試",
+                  "type": "text",
+                  "deletedAt": null
+                },
+                "raw": "=HYPERLINK(\"https://example.invalid\",\"合成安全測試\")",
+                "value": "=HYPERLINK(\"https://example.invalid\",\"合成安全測試\")"
+              }
+            ]
+          }
+        ],
+        "templates": [
+          {
+            "name": "QA 可重用合成範本",
+            "rev": 2,
+            "deleted": false,
+            "fieldStructureVersion": 1,
+            "fields": [
+              {
+                "field": {
+                  "label": "測試備註",
+                  "type": "text",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "明確合成預設值"
+              },
+              {
+                "field": {
+                  "label": "精確數量",
+                  "type": "number",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "0"
+              },
+              {
+                "field": {
+                  "label": "有效日期",
+                  "type": "date",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "2026-10-25"
+              },
+              {
+                "field": {
+                  "label": "採購區域",
+                  "type": "select",
+                  "deletedAt": null,
+                  "options": [
+                    {
+                      "label": "合成北區"
+                    },
+                    {
+                      "label": "合成南區"
+                    }
+                  ]
+                },
+                "hasValue": true,
+                "raw": "合成北區"
+              },
+              {
+                "field": {
+                  "label": "精確金額",
+                  "type": "money",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "10.50"
+              },
+              {
+                "field": {
+                  "label": "CSV安全測試",
+                  "type": "text",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "明確合成預設值"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "opaque-values-v3.json": {
+      "sha256": "0e17e9dfe90860d3242dee15292629d4efe4c7e1fc21646ce07e6a6b990207ec",
+      "bytes": 22038,
+      "validation": "valid",
+      "expected": {
+        "files": 4,
+        "folders": 1,
+        "archives": 1,
+        "histories": 3,
+        "historyVersions": 6,
+        "trashedFiles": 1,
+        "workbenches": 1,
+        "snapshots": 2,
+        "snapshotSchemas": [
+          1,
+          2
+        ],
+        "templates": 1
+      },
+      "projection": {
+        "files": [
+          {
+            "name": "QA 合成垃圾桶備忘",
+            "type": "notes",
+            "rev": 1,
+            "deleted": true,
+            "folder": "QA 合成採購資料夾",
+            "data": {
+              "note": {
+                "text": "QA-TRASH-KEEP",
+                "tags": [],
+                "pinned": false,
+                "checks": [],
+                "images": []
+              }
+            },
+            "history": []
+          },
+          {
+            "name": "QA 合成報價來源",
+            "type": "quotes",
+            "rev": 3,
+            "deleted": false,
+            "folder": "QA 合成採購資料夾",
+            "data": {
+              "drafts": {
+                "work-quotes": "[{\"name\":\"合成廠商甲\",\"base\":\"0.1\",\"delivery\":\"0.2\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"},{\"name\":\"合成廠商乙\",\"base\":\"1.00\",\"delivery\":\"0\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"}]",
+                "work-quote-need": "合成需求：核對逗號、引號與換行\n第二行「測試」",
+                "work-quote-decision": "合成決策：甲總價TWD 0.30"
+              }
+            },
+            "history": [
+              {
+                "rev": 1,
+                "name": "QA 合成報價來源",
+                "data": {
+                  "drafts": {}
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              },
+              {
+                "rev": 2,
+                "name": "QA 合成報價來源",
+                "data": {
+                  "drafts": {
+                    "work-quotes": "[{\"name\":\"合成廠商甲\",\"base\":\"0.1\",\"delivery\":\"0.2\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"},{\"name\":\"合成廠商乙\",\"base\":\"1.00\",\"delivery\":\"0\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"}]",
+                    "work-quote-need": "合成需求：核對逗號、引號與換行\n第二行「測試」",
+                    "work-quote-decision": "合成舊決策"
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              }
+            ]
+          },
+          {
+            "name": "QA 合成決策備忘",
+            "type": "notes",
+            "rev": 4,
+            "deleted": false,
+            "folder": "QA 合成採購資料夾",
+            "data": {
+              "note": {
+                "text": "QA-PRIVATE-SOURCE-MARKER（完全合成，非私人資料）\n合成決策備忘，含圖片及歷史。",
+                "tags": [
+                  "QA合成"
+                ],
+                "pinned": false,
+                "checks": [
+                  {
+                    "id": "qa-check-1",
+                    "text": "已確認合成報價",
+                    "done": true
+                  },
+                  {
+                    "id": "qa-check-2",
+                    "text": "尚待合成核對",
+                    "done": false
+                  }
+                ],
+                "images": [
+                  {
+                    "id": "qa-checkerboard",
+                    "name": "合成16x16黑白棋盤",
+                    "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVR4nGNgYGD4jw8TAgyjBgwLA4iwAT8eNWA4GAAAfKJ9nzxPW2YAAAAASUVORK5CYII=",
+                    "width": 16,
+                    "height": 16
+                  }
+                ]
+              }
+            },
+            "history": [
+              {
+                "rev": 1,
+                "name": "QA 合成決策備忘",
+                "data": {
+                  "note": {
+                    "text": "",
+                    "tags": [],
+                    "pinned": false,
+                    "checks": [],
+                    "images": []
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              },
+              {
+                "rev": 2,
+                "name": "QA 合成決策備忘",
+                "data": {
+                  "note": {
+                    "text": "合成備忘歷史v1",
+                    "tags": [
+                      "QA合成"
+                    ],
+                    "pinned": false,
+                    "checks": [
+                      {
+                        "id": "qa-check-1",
+                        "text": "已確認合成報價",
+                        "done": true
+                      },
+                      {
+                        "id": "qa-check-2",
+                        "text": "尚待合成核對",
+                        "done": false
+                      }
+                    ],
+                    "images": [
+                      {
+                        "id": "qa-checkerboard",
+                        "name": "合成16x16黑白棋盤",
+                        "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVR4nGNgYGD4jw8TAgyjBgwLA4iwAT8eNWA4GAAAfKJ9nzxPW2YAAAAASUVORK5CYII=",
+                        "width": 16,
+                        "height": 16
+                      }
+                    ]
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              },
+              {
+                "rev": 3,
+                "name": "QA 合成決策備忘",
+                "data": {
+                  "note": {
+                    "text": "合成備忘歷史v2",
+                    "tags": [
+                      "QA合成"
+                    ],
+                    "pinned": false,
+                    "checks": [
+                      {
+                        "id": "qa-check-1",
+                        "text": "已確認合成報價",
+                        "done": true
+                      },
+                      {
+                        "id": "qa-check-2",
+                        "text": "尚待合成核對",
+                        "done": false
+                      }
+                    ],
+                    "images": [
+                      {
+                        "id": "qa-checkerboard",
+                        "name": "合成16x16黑白棋盤",
+                        "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVR4nGNgYGD4jw8TAgyjBgwLA4iwAT8eNWA4GAAAfKJ9nzxPW2YAAAAASUVORK5CYII=",
+                        "width": 16,
+                        "height": 16
+                      }
+                    ]
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              }
+            ]
+          },
+          {
+            "name": "QA 合成舊文件",
+            "type": "document",
+            "rev": 2,
+            "deleted": false,
+            "folder": "QA 合成採購資料夾",
+            "data": {
+              "document": {
+                "version": 1,
+                "content": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "合成舊文件斜體",
+                          "marks": [
+                            {
+                              "type": "italic"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "text": "與粗體",
+                          "marks": [
+                            {
+                              "type": "bold"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "image",
+                      "attrs": {
+                        "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVR4nGNgYGD4jw8TAgyjBgwLA4iwAT8eNWA4GAAAfKJ9nzxPW2YAAAAASUVORK5CYII=",
+                        "alt": "合成16x16黑白棋盤",
+                        "width": 128,
+                        "height": 128
+                      }
+                    }
+                  ]
+                },
+                "settings": {
+                  "paper": "A4",
+                  "margin": 20,
+                  "lineHeight": 1.5,
+                  "spacing": 8,
+                  "header": "",
+                  "footer": "",
+                  "pageNumbers": true
+                }
+              }
+            },
+            "history": [
+              {
+                "rev": 1,
+                "name": "QA 合成舊文件",
+                "data": {
+                  "document": {
+                    "version": 1,
+                    "content": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph"
+                        }
+                      ]
+                    },
+                    "settings": {
+                      "paper": "A4",
+                      "margin": 20,
+                      "lineHeight": 1.5,
+                      "spacing": 8,
+                      "header": "",
+                      "footer": "",
+                      "pageNumbers": true
+                    }
+                  }
+                },
+                "at": "2026-10-25T00:00:00.000Z"
+              }
+            ]
+          }
+        ],
+        "folders": [
+          {
+            "name": "QA 合成採購資料夾",
+            "deleted": false
+          }
+        ],
+        "archives": [
+          "{\"kind\":\"qa-synthetic-archive\",\"marker\":\"QA-ARCHIVE-KEEP\"}"
+        ],
+        "preferences": {
+          "favorites": [
+            "quotes",
+            "notes"
+          ],
+          "recent": [
+            {
+              "id": "notes",
+              "at": "2026-10-25T00:00:00.000Z"
+            },
+            {
+              "id": "quotes",
+              "at": "2026-10-25T00:00:00.000Z"
+            }
+          ]
+        },
+        "workbenches": [
+          {
+            "schemaVersion": 2,
+            "name": "QA 合成採購工作台",
+            "rev": 13,
+            "deleted": false,
+            "modules": [
+              {
+                "kind": "notes",
+                "file": "QA 合成決策備忘"
+              },
+              {
+                "kind": "quotes",
+                "file": "QA 合成報價來源"
+              }
+            ],
+            "fieldStructureVersion": 1,
+            "fields": [
+              {
+                "field": {
+                  "label": "測試備註",
+                  "type": "text",
+                  "deletedAt": null,
+                  "qaPrivateAttribute": "QA-PRIVATE-FIELD-EXTENSION"
+                },
+                "hasValue": true,
+                "raw": "QA-PRIVATE-WORKING-VALUE（完全合成）"
+              },
+              {
+                "field": {
+                  "label": "精確數量",
+                  "type": "number",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "-00123.4500"
+              },
+              {
+                "field": {
+                  "label": "有效日期",
+                  "type": "date",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "2024-02-29"
+              },
+              {
+                "field": {
+                  "label": "採購區域",
+                  "type": "select",
+                  "deletedAt": null,
+                  "options": [
+                    {
+                      "label": "合成北區"
+                    },
+                    {
+                      "label": "合成南區"
+                    }
+                  ]
+                },
+                "hasValue": true,
+                "raw": "合成南區"
+              },
+              {
+                "field": {
+                  "label": "精確金額",
+                  "type": "money",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "0.30"
+              },
+              {
+                "field": {
+                  "label": "CSV安全測試",
+                  "type": "text",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "=HYPERLINK(\"https://example.invalid\",\"合成安全測試\")"
+              },
+              {
+                "field": {
+                  "label": "已移除欄位",
+                  "type": "text",
+                  "deletedAt": "2026-10-25T00:00:00.000Z"
+                },
+                "hasValue": true,
+                "raw": "QA-ARCHIVED-VALUE-KEEP"
+              }
+            ],
+            "opaqueValues": {
+              "qa-opaque-value": "QA-OPAQUE-VALUE-KEEP"
+            },
+            "qaOpaque": {
+              "marker": "QA-OPAQUE-WORKBENCH-KEEP",
+              "valueKey": "qa-opaque-value"
+            }
+          }
+        ],
+        "snapshots": [
+          {
+            "schemaVersion": 1,
+            "name": "QA 合成採購工作台",
+            "workbenchRev": 4,
+            "createdAt": "2026-10-25T00:00:00.000Z",
+            "calculationVersion": "twd-minor-v1",
+            "currency": "TWD",
+            "scale": 2,
+            "quotes": [
+              {
+                "name": "合成廠商甲",
+                "amounts": {
+                  "base": "10",
+                  "delivery": "20",
+                  "extra": "0",
+                  "tax": "0"
+                },
+                "totalMinor": "30",
+                "scope": "yes",
+                "date": "yes",
+                "terms": "僅供合成驗收，非真實報價"
+              },
+              {
+                "name": "合成廠商乙",
+                "amounts": {
+                  "base": "100",
+                  "delivery": "0",
+                  "extra": "0",
+                  "tax": "0"
+                },
+                "totalMinor": "100",
+                "scope": "yes",
+                "date": "yes",
+                "terms": "僅供合成驗收，非真實報價"
+              }
+            ],
+            "need": "合成需求：核對逗號、引號與換行\n第二行「測試」",
+            "decision": "合成決策：甲總價TWD 0.30",
+            "memo": {
+              "text": "QA-PRIVATE-SOURCE-MARKER（完全合成，非私人資料）\n合成決策備忘，含圖片及歷史。",
+              "checks": [
+                {
+                  "text": "已確認合成報價",
+                  "done": true
+                },
+                {
+                  "text": "尚待合成核對",
+                  "done": false
+                }
+              ],
+              "omittedImages": 1
+            },
+            "sources": [
+              {
+                "kind": "notes",
+                "name": "QA 合成決策備忘",
+                "rev": 4
+              },
+              {
+                "kind": "quotes",
+                "name": "QA 合成報價來源",
+                "rev": 3
+              }
+            ]
+          },
+          {
+            "schemaVersion": 2,
+            "name": "QA 合成採購工作台",
+            "workbenchRev": 13,
+            "createdAt": "2026-10-25T00:00:01.000Z",
+            "calculationVersion": "twd-minor-v1",
+            "currency": "TWD",
+            "scale": 2,
+            "quotes": [
+              {
+                "name": "合成廠商甲",
+                "amounts": {
+                  "base": "10",
+                  "delivery": "20",
+                  "extra": "0",
+                  "tax": "0"
+                },
+                "totalMinor": "30",
+                "scope": "yes",
+                "date": "yes",
+                "terms": "僅供合成驗收，非真實報價"
+              },
+              {
+                "name": "合成廠商乙",
+                "amounts": {
+                  "base": "100",
+                  "delivery": "0",
+                  "extra": "0",
+                  "tax": "0"
+                },
+                "totalMinor": "100",
+                "scope": "yes",
+                "date": "yes",
+                "terms": "僅供合成驗收，非真實報價"
+              }
+            ],
+            "need": "合成需求：核對逗號、引號與換行\n第二行「測試」",
+            "decision": "合成決策：甲總價TWD 0.30",
+            "memo": {
+              "text": "QA-PRIVATE-SOURCE-MARKER（完全合成，非私人資料）\n合成決策備忘，含圖片及歷史。",
+              "checks": [
+                {
+                  "text": "已確認合成報價",
+                  "done": true
+                },
+                {
+                  "text": "尚待合成核對",
+                  "done": false
+                }
+              ],
+              "omittedImages": 1
+            },
+            "sources": [
+              {
+                "kind": "notes",
+                "name": "QA 合成決策備忘",
+                "rev": 4
+              },
+              {
+                "kind": "quotes",
+                "name": "QA 合成報價來源",
+                "rev": 3
+              }
+            ],
+            "fieldStructureVersion": 1,
+            "customFields": [
+              {
+                "field": {
+                  "label": "測試備註",
+                  "type": "text",
+                  "deletedAt": null,
+                  "qaPrivateAttribute": "QA-PRIVATE-FIELD-EXTENSION"
+                },
+                "raw": "QA-PRIVATE-WORKING-VALUE（完全合成）",
+                "value": "QA-PRIVATE-WORKING-VALUE（完全合成）"
+              },
+              {
+                "field": {
+                  "label": "精確數量",
+                  "type": "number",
+                  "deletedAt": null
+                },
+                "raw": "-00123.4500",
+                "value": "-123.45"
+              },
+              {
+                "field": {
+                  "label": "有效日期",
+                  "type": "date",
+                  "deletedAt": null
+                },
+                "raw": "2024-02-29",
+                "value": "2024-02-29"
+              },
+              {
+                "field": {
+                  "label": "採購區域",
+                  "type": "select",
+                  "deletedAt": null,
+                  "options": [
+                    {
+                      "label": "合成北區"
+                    },
+                    {
+                      "label": "合成南區"
+                    }
+                  ]
+                },
+                "raw": "合成南區",
+                "value": "合成南區"
+              },
+              {
+                "field": {
+                  "label": "精確金額",
+                  "type": "money",
+                  "deletedAt": null
+                },
+                "raw": "0.30",
+                "value": {
+                  "minor": "30",
+                  "currency": "TWD",
+                  "scale": 2
+                }
+              },
+              {
+                "field": {
+                  "label": "CSV安全測試",
+                  "type": "text",
+                  "deletedAt": null
+                },
+                "raw": "=HYPERLINK(\"https://example.invalid\",\"合成安全測試\")",
+                "value": "=HYPERLINK(\"https://example.invalid\",\"合成安全測試\")"
+              }
+            ]
+          }
+        ],
+        "templates": [
+          {
+            "name": "QA 可重用合成範本",
+            "rev": 2,
+            "deleted": false,
+            "fieldStructureVersion": 1,
+            "fields": [
+              {
+                "field": {
+                  "label": "測試備註",
+                  "type": "text",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "明確合成預設值"
+              },
+              {
+                "field": {
+                  "label": "精確數量",
+                  "type": "number",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "0"
+              },
+              {
+                "field": {
+                  "label": "有效日期",
+                  "type": "date",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "2026-10-25"
+              },
+              {
+                "field": {
+                  "label": "採購區域",
+                  "type": "select",
+                  "deletedAt": null,
+                  "options": [
+                    {
+                      "label": "合成北區"
+                    },
+                    {
+                      "label": "合成南區"
+                    }
+                  ]
+                },
+                "hasValue": true,
+                "raw": "合成北區"
+              },
+              {
+                "field": {
+                  "label": "精確金額",
+                  "type": "money",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "10.50"
+              },
+              {
+                "field": {
+                  "label": "CSV安全測試",
+                  "type": "text",
+                  "deletedAt": null
+                },
+                "hasValue": true,
+                "raw": "明確合成預設值"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "invalid-missing-source-v3.json": {
+      "sha256": "f12d8b2014f59195918a6d7df7aff130cc8f11505d5c058f24ec7dc4a4cba480",
+      "bytes": 21926,
+      "validation": "intentionally-invalid"
+    },
+    "legacy-original-v1.json": {
+      "sha256": "c5e1dc03d244793c5a5b18d43f973fd5a5ed222afcf4e0aaa2bb902cca2aecef",
+      "bytes": 1074,
+      "validation": "legacy-ui-converter"
+    }
+  },
+  "image": {
+    "file": "qa-checkerboard.png",
+    "sha256": "ed9862779e968b5c2d237b70845b0286465ed28eba2824439eb0c277b9382b89",
+    "bytes": 89,
+    "width": 16,
+    "height": 16
+  }
+}
