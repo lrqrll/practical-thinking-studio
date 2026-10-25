@@ -24,7 +24,10 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci --ignore-scripts
-      - run: node scripts/qa/m2/verify-release.cjs
+      - name: Verify exact runtime diff before building
+        run: node scripts/qa/m2/verify-release.cjs
+        env:
+          NEXUS_RELEASE_SITE_URL: ''
       - run: node scripts/qa/m2/verify-fixtures.cjs
       - name: Install actual browser with certificate verification
         timeout-minutes: 5

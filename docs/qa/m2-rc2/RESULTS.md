@@ -38,3 +38,5 @@ quality唯一skipped是**新增**可下載容量fixture案例，因該workflow�
 測試分支#14 `520a0653261c8da3625a6408e8adf4b612b0d997`，以#13為base；[完整quality 40177583093](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40177583093)成功。本機最初新文件案例使用錯誤的data-open定位造成逾時，改用實際#file連結後通過，未更動產品。公開候選TLS在本機失敗，GitHub-hosted Chromium正常；未降低TLS。
 
 上述完成開發者操作缺口，M2-NAV-01仍留給獨立審查／發布批准判斷，不冒稱獨立QA解除。依最新授權接續3.4.0發布準備；不合併或正式部署。
+
+最終版本首次CI [40178080686](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40178080686) 在建立預覽包前誤執行需要dist-preview的公開檢查而ENOENT，瀏覽器尚未執行，屬工具順序失敗。修正為先做精確runtime diff、建立包後再公開驗證，並有限等待Pages指定SHA；不是產品修正，也不降低斷言。最終head與新CI以版本PR #15為準。
