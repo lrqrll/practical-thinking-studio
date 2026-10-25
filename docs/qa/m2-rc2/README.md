@@ -4,6 +4,7 @@
 
 - [逐項操作、預期結果及測試映射](OPERATING-CHECKLIST.md)
 - [M2-NAV-01 根因、負控制、重現方式](NAV-01.md)
+- [本次CI結果與完整分包直接下載](RESULTS.md)
 - [原始 CI 與本次材料驗證](EVIDENCE.md)
 - [合成資料逐項內容與 SHA256](fixture-manifest.json)
 - [產品／候選公開資產預期 SHA256](source-identity.json)

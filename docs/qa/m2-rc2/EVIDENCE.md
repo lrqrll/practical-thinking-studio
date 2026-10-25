@@ -26,7 +26,7 @@
 
 補驗工具開發時發現：再次副本還原會再加名稱後綴，錯誤訊息在toast而不是backup-status。修正的是新材料工具的名稱正規化與錯誤UI定位；另加每次副本完整名稱斷言，內容／關聯斷言保留，無產品程式變更。
 
-本材料PR的 `M2 frozen candidate QA materials (developer verification)` workflow會重新生成七包，提供30天artifact（`M2-synthetic-backups-and-developer-evidence`），在真正候選HTTPS跑7個fixture還原案例、5個M2導航／故障案例各3次，雙SHA負控制，以及本機原文件保存追加3次。另跑既有quality完整回歸。原始run連結見本材料PR的checks；本文件不預先宣稱尚未執行的CI成功。
+本材料PR的 `M2 frozen candidate QA materials (developer verification)` workflow會重新生成七包，提供30天artifact（`M2-synthetic-backups-and-developer-evidence`），在真正候選HTTPS跑7個fixture還原案例、5個M2導航／故障案例各3次，雙SHA負控制，以及本機原文件保存追加3次。另跑既有quality完整回歸。原始run連結見本材料PR的checks；本文件不預先宣稱尚未執行的CI成功。已完成的實際run及可下載artifact見[RESULTS](RESULTS.md)。
 
 ## 未測及限制
 
