@@ -1,0 +1,5 @@
+PASS model, graph, semantic manifest, checksum: workspace-v1.json
+PASS model, graph, semantic manifest, checksum: workbench-v2.json
+PASS model, graph, semantic manifest, checksum: workbench-v3.json
+PASS model, graph, semantic manifest, checksum: opaque-values-v3.json
+PASS frozen candidate product inputs; legacy snapshot; decimal precision; synthetic PNG; invalid graph rejected. Developer validation only.

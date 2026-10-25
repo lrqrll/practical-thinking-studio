@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "theme": "light",
+  "budget": {
+    "fixed": 100,
+    "price": 20,
+    "variable": 5,
+    "people": 10,
+    "rows": [
+      [
+        "合成支出",
+        15
+      ]
+    ]
+  },
+  "tasks": [
+    {
+      "name": "合成任務",
+      "owner": "QA合成角色",
+      "due": "2026-10-25",
+      "depends": "",
+      "status": "todo"
+    }
+  ],
+  "drafts": {
+    "work-quotes": "[{\"name\":\"合成廠商甲\",\"base\":\"0.1\",\"delivery\":\"0.2\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"},{\"name\":\"合成廠商乙\",\"base\":\"1.00\",\"delivery\":\"0\",\"extra\":\"0\",\"tax\":\"0\",\"scope\":\"yes\",\"date\":\"yes\",\"terms\":\"僅供合成驗收，非真實報價\"}]",
+    "work-quote-need": "合成需求：核對逗號、引號與換行\n第二行「測試」",
+    "work-quote-decision": "合成決策：甲總價TWD 0.30",
+    "report-result": "合成舊工作報告",
+    "work-slide-title": "合成簡報大綱",
+    "work-meeting-title": "合成會議紀錄"
+  }
+}

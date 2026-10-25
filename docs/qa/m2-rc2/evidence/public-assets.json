@@ -1,0 +1,745 @@
+{
+  "checked_at": "2026-10-25T07:52:36.327904+00:00",
+  "candidates": {
+    "m2": {
+      "url": "https://lrqrll.github.io/practical-thinking-studio-preview/m2/",
+      "source": "59dff72bb55a77c371863d6e8a998529b1997bf0",
+      "version": "3.4.0-rc.2",
+      "files": [
+        {
+          "file": "OPEN-PREVIEW.txt",
+          "matches_package": true,
+          "sha256": "1748e3e27b19cf02055f93b41c5ed36fd99414f7eb4e34c3e3659479b24aa4f4",
+          "bytes": 334
+        },
+        {
+          "file": "deployment.json",
+          "matches_package": true,
+          "sha256": "d5dec7af81d7521353f045396040fb3be2a925221f1909cc410973de8877c0d1",
+          "bytes": 223
+        },
+        {
+          "file": "xlsx.full.min.js",
+          "matches_package": true,
+          "sha256": "cc015130aa8521e7f088f88898eba949ccdcbfb38df0bd129b44b7273c3a6f41",
+          "bytes": 951904
+        },
+        {
+          "file": "workspace.js",
+          "matches_package": true,
+          "sha256": "d99b284f27f7031fb9af73197afbe1270d7f461074c76a38c56e359d35d5791b",
+          "bytes": 26454
+        },
+        {
+          "file": "workbench.js",
+          "matches_package": true,
+          "sha256": "7b4b8b5df52ab93762d185b4ef2d4c611b0c165da2851afefbe284c63a881092",
+          "bytes": 9887
+        },
+        {
+          "file": "workbench-ui.js",
+          "matches_package": true,
+          "sha256": "5095dbfbf706b58b94fa62ad0ca1adba3ae9175d28b3cfa632dc455ba55427ec",
+          "bytes": 11341
+        },
+        {
+          "file": "workbench-model.js",
+          "matches_package": true,
+          "sha256": "685fee6dcc52743f31e482a2abf45a9f1b9261cb8d65ea13553597ccd0e8c169",
+          "bytes": 6596
+        },
+        {
+          "file": "tools-core.js",
+          "matches_package": true,
+          "sha256": "136dd5ccc0966ecdab4a768ea3bcbfb64ea8edd3c860e35977d121ec2c44dafb",
+          "bytes": 18729
+        },
+        {
+          "file": "tool-registry.js",
+          "matches_package": true,
+          "sha256": "7a4042ac52f90e6bb4108435e19fc082ab42c596ac436d94fc1c23ca7e816b13",
+          "bytes": 1621
+        },
+        {
+          "file": "style.css",
+          "matches_package": true,
+          "sha256": "c908da04cf4ab949c9ae41b96a4600387693dab701b0643d65ef832a1a0beba0",
+          "bytes": 25259
+        },
+        {
+          "file": "storage.js",
+          "matches_package": true,
+          "sha256": "8f39069621e06819718ab0eb06ca3c8890534dd0750a53f5fa3e4788ef254ea8",
+          "bytes": 23549
+        },
+        {
+          "file": "sheetjs-LICENSE.txt",
+          "matches_package": true,
+          "sha256": "4d2a38ac35cda06a555c84074a819d413339cd3691b822cae50f8f322fe01f64",
+          "bytes": 11355
+        },
+        {
+          "file": "purify-vendor.js",
+          "matches_package": true,
+          "sha256": "cd37898f9782adf54820c413191b5691803f0f137c799d6edcfd38523b4c2c31",
+          "bytes": 29828
+        },
+        {
+          "file": "ptm-tc.woff2",
+          "matches_package": true,
+          "sha256": "2aaabff0bab803fd961aa72ab023e8d41fe9e487b2428e7601d2831caaf543ec",
+          "bytes": 330692
+        },
+        {
+          "file": "ptm-grotesk.woff2",
+          "matches_package": true,
+          "sha256": "99c47d599d16097e764db35eb921f3ad5a9a579853cb7d5f42b71de567004fd7",
+          "bytes": 75248
+        },
+        {
+          "file": "money-model.js",
+          "matches_package": true,
+          "sha256": "2bbf17372fb2192743f331b3379126631060d5c27857589d388119ff3ee88535",
+          "bytes": 1976
+        },
+        {
+          "file": "media-tools.js",
+          "matches_package": true,
+          "sha256": "5fccbd91040a36e84bec45475c890ff23969ae34218eb7ab7c231f642f15efdc",
+          "bytes": 10076
+        },
+        {
+          "file": "media-model.js",
+          "matches_package": true,
+          "sha256": "e3d55a399a337061e72b22c3edbf237189438629b9baf185286441129e198775",
+          "bytes": 2260
+        },
+        {
+          "file": "mammoth-vendor.js",
+          "matches_package": true,
+          "sha256": "92914a3708cfdf1e62cb553d1856a7fedab21da83d8ee82845de2f897b368cab",
+          "bytes": 405060
+        },
+        {
+          "file": "local-files.js",
+          "matches_package": true,
+          "sha256": "e57535a770d03d5afde96bc11fa0eaacf27c82090c0ec21c2c76cee255a49988",
+          "bytes": 3995
+        },
+        {
+          "file": "index.html",
+          "matches_package": true,
+          "sha256": "2c6e0fbef84d9a601bdd36a02473968d20736b35c93dbc84a817355f4acad96b",
+          "bytes": 2785
+        },
+        {
+          "file": "field-ui.js",
+          "matches_package": true,
+          "sha256": "f18169ea0799688750ed3a50f6cfa67b9de20e7b65551e263142c179a30450f0",
+          "bytes": 16147
+        },
+        {
+          "file": "field-model.js",
+          "matches_package": true,
+          "sha256": "0e2ce73b32d3c0d56c9b0c03024a5c56ed2e6893b69cda43be4b899404135051",
+          "bytes": 9039
+        },
+        {
+          "file": "excel-export.js",
+          "matches_package": true,
+          "sha256": "2d7dd7bc082dc91b7f63ce7e2ff39938697329bd88933f6a91fe179e0a87b282",
+          "bytes": 4751
+        },
+        {
+          "file": "docx-vendor.js",
+          "matches_package": true,
+          "sha256": "1c7a1e673d252daae7875c01e5a6164a3e9640c74e98ccda853a941fd259ad26",
+          "bytes": 1329743
+        },
+        {
+          "file": "document-vendor.js",
+          "matches_package": true,
+          "sha256": "c220bb396cb9baa4f8a5d86cf3ff45eea182b7f1d2c7285b544c76922bea8d1a",
+          "bytes": 555051
+        },
+        {
+          "file": "document-vendor-LICENSES.txt",
+          "matches_package": true,
+          "sha256": "c8a054540ff155c5db5b6f2d9c09d06abfaca7414af309f64c8f7c772451212d",
+          "bytes": 172868
+        },
+        {
+          "file": "document-model.js",
+          "matches_package": true,
+          "sha256": "ab1f22270511b8c8f4759d9b1bd12dd9070105c16da753e97d8d98c1558ebe6e",
+          "bytes": 6323
+        },
+        {
+          "file": "document-export.js",
+          "matches_package": true,
+          "sha256": "604ec642965a81ded903f9816d66ee9ebb7bb663ee32f2080dd7ac245537a697",
+          "bytes": 6919
+        },
+        {
+          "file": "document-editor.js",
+          "matches_package": true,
+          "sha256": "c1a891f01509a138425702b1f8735653cca75ac1439b8b8c28f662374f7658c1",
+          "bytes": 24936
+        },
+        {
+          "file": "deployment.js",
+          "matches_package": true,
+          "sha256": "bb9330166042bdee6e0d16dc5d5cdde556db30e00bb820b5cf318406eb8bf764",
+          "bytes": 260
+        },
+        {
+          "file": "backup-format.js",
+          "matches_package": true,
+          "sha256": "07871371a9e1549a61e542b7365b8b53705a1be8701502c69b2b97be129d6c25",
+          "bytes": 3329
+        },
+        {
+          "file": "app.js",
+          "matches_package": true,
+          "sha256": "1d97e26387430b4cdc98633118b565fd095a8012b947e4083e6ad9c64ba976de",
+          "bytes": 182
+        },
+        {
+          "file": ".nojekyll",
+          "matches_package": true,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    "m1": {
+      "url": "https://lrqrll.github.io/practical-thinking-studio-preview/",
+      "source": "25fee3d52f9d8af764b19161479b94027ee8dc44",
+      "version": "3.3.0",
+      "files": [
+        {
+          "file": "OPEN-PREVIEW.txt",
+          "matches_package": true,
+          "sha256": "598c8b6953184c1b8d11bf50c569e31ecad3cb66dbba3b6eaab1390405bfc1dc",
+          "bytes": 329
+        },
+        {
+          "file": "deployment.json",
+          "matches_package": true,
+          "sha256": "454c4a0bfd325d13cfa04dbd6e9bf377c3f856f49a6b88b7305001d0bf4c24b6",
+          "bytes": 218
+        },
+        {
+          "file": "xlsx.full.min.js",
+          "matches_package": true,
+          "sha256": "cc015130aa8521e7f088f88898eba949ccdcbfb38df0bd129b44b7273c3a6f41",
+          "bytes": 951904
+        },
+        {
+          "file": "workspace.js",
+          "matches_package": true,
+          "sha256": "c03b9c712f665a46e36f199a755f5f12c06928cdba7d8a0b6178935eb5c9bcd8",
+          "bytes": 25478
+        },
+        {
+          "file": "workbench.js",
+          "matches_package": true,
+          "sha256": "7b4b8b5df52ab93762d185b4ef2d4c611b0c165da2851afefbe284c63a881092",
+          "bytes": 9887
+        },
+        {
+          "file": "workbench-ui.js",
+          "matches_package": true,
+          "sha256": "b64926f6275e4f2c6d048523171bc23bbcfd55e681b26c0985e8ce90134336d6",
+          "bytes": 10861
+        },
+        {
+          "file": "workbench-model.js",
+          "matches_package": true,
+          "sha256": "c6ab27a451f6a266d8c8f7192ac88eae473624a44f7ceda77a7327d7def506a0",
+          "bytes": 5421
+        },
+        {
+          "file": "tools-core.js",
+          "matches_package": true,
+          "sha256": "136dd5ccc0966ecdab4a768ea3bcbfb64ea8edd3c860e35977d121ec2c44dafb",
+          "bytes": 18729
+        },
+        {
+          "file": "tool-registry.js",
+          "matches_package": true,
+          "sha256": "7a4042ac52f90e6bb4108435e19fc082ab42c596ac436d94fc1c23ca7e816b13",
+          "bytes": 1621
+        },
+        {
+          "file": "style.css",
+          "matches_package": true,
+          "sha256": "62b5676dcf36a5949718a314e69e8e38ddd00cfa46428f5eeaaef521f8c30c85",
+          "bytes": 24259
+        },
+        {
+          "file": "storage.js",
+          "matches_package": true,
+          "sha256": "19eb9a60a4c3f972ed7366308c887b83161947445e03ef652484d8de008a815c",
+          "bytes": 17817
+        },
+        {
+          "file": "sheetjs-LICENSE.txt",
+          "matches_package": true,
+          "sha256": "4d2a38ac35cda06a555c84074a819d413339cd3691b822cae50f8f322fe01f64",
+          "bytes": 11355
+        },
+        {
+          "file": "purify-vendor.js",
+          "matches_package": true,
+          "sha256": "cd37898f9782adf54820c413191b5691803f0f137c799d6edcfd38523b4c2c31",
+          "bytes": 29828
+        },
+        {
+          "file": "ptm-tc.woff2",
+          "matches_package": true,
+          "sha256": "2aaabff0bab803fd961aa72ab023e8d41fe9e487b2428e7601d2831caaf543ec",
+          "bytes": 330692
+        },
+        {
+          "file": "ptm-grotesk.woff2",
+          "matches_package": true,
+          "sha256": "99c47d599d16097e764db35eb921f3ad5a9a579853cb7d5f42b71de567004fd7",
+          "bytes": 75248
+        },
+        {
+          "file": "money-model.js",
+          "matches_package": true,
+          "sha256": "2bbf17372fb2192743f331b3379126631060d5c27857589d388119ff3ee88535",
+          "bytes": 1976
+        },
+        {
+          "file": "media-tools.js",
+          "matches_package": true,
+          "sha256": "5fccbd91040a36e84bec45475c890ff23969ae34218eb7ab7c231f642f15efdc",
+          "bytes": 10076
+        },
+        {
+          "file": "media-model.js",
+          "matches_package": true,
+          "sha256": "e3d55a399a337061e72b22c3edbf237189438629b9baf185286441129e198775",
+          "bytes": 2260
+        },
+        {
+          "file": "mammoth-vendor.js",
+          "matches_package": true,
+          "sha256": "92914a3708cfdf1e62cb553d1856a7fedab21da83d8ee82845de2f897b368cab",
+          "bytes": 405060
+        },
+        {
+          "file": "local-files.js",
+          "matches_package": true,
+          "sha256": "e57535a770d03d5afde96bc11fa0eaacf27c82090c0ec21c2c76cee255a49988",
+          "bytes": 3995
+        },
+        {
+          "file": "index.html",
+          "matches_package": true,
+          "sha256": "3b4e0cf2c090b992be117ac6cf2698b1dcc0e0b6ccd01e92c4054aa2aa49a088",
+          "bytes": 2614
+        },
+        {
+          "file": "excel-export.js",
+          "matches_package": true,
+          "sha256": "2d7dd7bc082dc91b7f63ce7e2ff39938697329bd88933f6a91fe179e0a87b282",
+          "bytes": 4751
+        },
+        {
+          "file": "docx-vendor.js",
+          "matches_package": true,
+          "sha256": "1c7a1e673d252daae7875c01e5a6164a3e9640c74e98ccda853a941fd259ad26",
+          "bytes": 1329743
+        },
+        {
+          "file": "document-vendor.js",
+          "matches_package": true,
+          "sha256": "c220bb396cb9baa4f8a5d86cf3ff45eea182b7f1d2c7285b544c76922bea8d1a",
+          "bytes": 555051
+        },
+        {
+          "file": "document-vendor-LICENSES.txt",
+          "matches_package": true,
+          "sha256": "c8a054540ff155c5db5b6f2d9c09d06abfaca7414af309f64c8f7c772451212d",
+          "bytes": 172868
+        },
+        {
+          "file": "document-model.js",
+          "matches_package": true,
+          "sha256": "ab1f22270511b8c8f4759d9b1bd12dd9070105c16da753e97d8d98c1558ebe6e",
+          "bytes": 6323
+        },
+        {
+          "file": "document-export.js",
+          "matches_package": true,
+          "sha256": "604ec642965a81ded903f9816d66ee9ebb7bb663ee32f2080dd7ac245537a697",
+          "bytes": 6919
+        },
+        {
+          "file": "document-editor.js",
+          "matches_package": true,
+          "sha256": "c1a891f01509a138425702b1f8735653cca75ac1439b8b8c28f662374f7658c1",
+          "bytes": 24936
+        },
+        {
+          "file": "deployment.js",
+          "matches_package": true,
+          "sha256": "23cd0d719eb34345fb326eee1c304416778a0d815761c8643ae274fd13b96294",
+          "bytes": 255
+        },
+        {
+          "file": "backup-format.js",
+          "matches_package": true,
+          "sha256": "07871371a9e1549a61e542b7365b8b53705a1be8701502c69b2b97be129d6c25",
+          "bytes": 3329
+        },
+        {
+          "file": "app.js",
+          "matches_package": true,
+          "sha256": "1d97e26387430b4cdc98633118b565fd095a8012b947e4083e6ad9c64ba976de",
+          "bytes": 182
+        },
+        {
+          "file": ".nojekyll",
+          "matches_package": true,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    "italic": {
+      "url": "https://lrqrll.github.io/practical-thinking-studio-preview/italic-controls/",
+      "source": "a16250ab4b4a355feef8559e44a278ee023ef889",
+      "version": "3.2.2",
+      "files": [
+        {
+          "file": "OPEN-PREVIEW.txt",
+          "matches_package": true,
+          "sha256": "cdfc99e438e91ccd79b2cd8d12349e04248016022075cb2ed92f2f4a59f06100",
+          "bytes": 329
+        },
+        {
+          "file": "deployment.json",
+          "matches_package": true,
+          "sha256": "020378baef566169d1509134a01f260d0f65e1b6052894a3780f3a0f3b5435c7",
+          "bytes": 218
+        },
+        {
+          "file": "xlsx.full.min.js",
+          "matches_package": true,
+          "sha256": "cc015130aa8521e7f088f88898eba949ccdcbfb38df0bd129b44b7273c3a6f41",
+          "bytes": 951904
+        },
+        {
+          "file": "workspace.js",
+          "matches_package": true,
+          "sha256": "c4d6c53117fae888bd90abe97401fbb8a6649431e340e0eaae84f67b5cd54ded",
+          "bytes": 23807
+        },
+        {
+          "file": "workbench.js",
+          "matches_package": true,
+          "sha256": "7101140d317700aa91f01e2209ad037a8021292a1df4c6fd261fd1ccf60f70c0",
+          "bytes": 9831
+        },
+        {
+          "file": "tools-core.js",
+          "matches_package": true,
+          "sha256": "136dd5ccc0966ecdab4a768ea3bcbfb64ea8edd3c860e35977d121ec2c44dafb",
+          "bytes": 18729
+        },
+        {
+          "file": "tool-registry.js",
+          "matches_package": true,
+          "sha256": "7a4042ac52f90e6bb4108435e19fc082ab42c596ac436d94fc1c23ca7e816b13",
+          "bytes": 1621
+        },
+        {
+          "file": "style.css",
+          "matches_package": true,
+          "sha256": "2a78f801fe58128087cd8111d456498a54f380ee00d89c8dc6037864dff8bdb4",
+          "bytes": 22762
+        },
+        {
+          "file": "storage.js",
+          "matches_package": true,
+          "sha256": "0c1985837cf730888a09284196015d5db47e00ca21179a64553a06dd4a656754",
+          "bytes": 10523
+        },
+        {
+          "file": "sheetjs-LICENSE.txt",
+          "matches_package": true,
+          "sha256": "4d2a38ac35cda06a555c84074a819d413339cd3691b822cae50f8f322fe01f64",
+          "bytes": 11355
+        },
+        {
+          "file": "purify-vendor.js",
+          "matches_package": true,
+          "sha256": "cd37898f9782adf54820c413191b5691803f0f137c799d6edcfd38523b4c2c31",
+          "bytes": 29828
+        },
+        {
+          "file": "ptm-tc.woff2",
+          "matches_package": true,
+          "sha256": "2aaabff0bab803fd961aa72ab023e8d41fe9e487b2428e7601d2831caaf543ec",
+          "bytes": 330692
+        },
+        {
+          "file": "ptm-grotesk.woff2",
+          "matches_package": true,
+          "sha256": "99c47d599d16097e764db35eb921f3ad5a9a579853cb7d5f42b71de567004fd7",
+          "bytes": 75248
+        },
+        {
+          "file": "media-tools.js",
+          "matches_package": true,
+          "sha256": "5fccbd91040a36e84bec45475c890ff23969ae34218eb7ab7c231f642f15efdc",
+          "bytes": 10076
+        },
+        {
+          "file": "media-model.js",
+          "matches_package": true,
+          "sha256": "e3d55a399a337061e72b22c3edbf237189438629b9baf185286441129e198775",
+          "bytes": 2260
+        },
+        {
+          "file": "mammoth-vendor.js",
+          "matches_package": true,
+          "sha256": "92914a3708cfdf1e62cb553d1856a7fedab21da83d8ee82845de2f897b368cab",
+          "bytes": 405060
+        },
+        {
+          "file": "local-files.js",
+          "matches_package": true,
+          "sha256": "e57535a770d03d5afde96bc11fa0eaacf27c82090c0ec21c2c76cee255a49988",
+          "bytes": 3995
+        },
+        {
+          "file": "index.html",
+          "matches_package": true,
+          "sha256": "d4c0280d5b65d8c48b893ce9ab69d5866949b17e31feab5acfc1c945f8ba6339",
+          "bytes": 2227
+        },
+        {
+          "file": "excel-export.js",
+          "matches_package": true,
+          "sha256": "2d7dd7bc082dc91b7f63ce7e2ff39938697329bd88933f6a91fe179e0a87b282",
+          "bytes": 4751
+        },
+        {
+          "file": "docx-vendor.js",
+          "matches_package": true,
+          "sha256": "1c7a1e673d252daae7875c01e5a6164a3e9640c74e98ccda853a941fd259ad26",
+          "bytes": 1329743
+        },
+        {
+          "file": "document-vendor.js",
+          "matches_package": true,
+          "sha256": "c220bb396cb9baa4f8a5d86cf3ff45eea182b7f1d2c7285b544c76922bea8d1a",
+          "bytes": 555051
+        },
+        {
+          "file": "document-vendor-LICENSES.txt",
+          "matches_package": true,
+          "sha256": "c8a054540ff155c5db5b6f2d9c09d06abfaca7414af309f64c8f7c772451212d",
+          "bytes": 172868
+        },
+        {
+          "file": "document-model.js",
+          "matches_package": true,
+          "sha256": "ab1f22270511b8c8f4759d9b1bd12dd9070105c16da753e97d8d98c1558ebe6e",
+          "bytes": 6323
+        },
+        {
+          "file": "document-export.js",
+          "matches_package": true,
+          "sha256": "604ec642965a81ded903f9816d66ee9ebb7bb663ee32f2080dd7ac245537a697",
+          "bytes": 6919
+        },
+        {
+          "file": "document-editor.js",
+          "matches_package": true,
+          "sha256": "c1a891f01509a138425702b1f8735653cca75ac1439b8b8c28f662374f7658c1",
+          "bytes": 24936
+        },
+        {
+          "file": "deployment.js",
+          "matches_package": true,
+          "sha256": "0834fbc4ba5009ec1c950f432351a9f9cae2bfc104a5410cde8ebf2edfb9ce2b",
+          "bytes": 255
+        },
+        {
+          "file": "app.js",
+          "matches_package": true,
+          "sha256": "1d97e26387430b4cdc98633118b565fd095a8012b947e4083e6ad9c64ba976de",
+          "bytes": 182
+        },
+        {
+          "file": ".nojekyll",
+          "matches_package": true,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    }
+  },
+  "production": {
+    "sha": "ff3f8a16cb343b93973bd191003c30ca9c13b996",
+    "files": [
+      {
+        "file": ".nojekyll",
+        "matches_main": true,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "file": "app.js",
+        "matches_main": true,
+        "sha256": "1d97e26387430b4cdc98633118b565fd095a8012b947e4083e6ad9c64ba976de"
+      },
+      {
+        "file": "backup-format.js",
+        "matches_main": true,
+        "sha256": "07871371a9e1549a61e542b7365b8b53705a1be8701502c69b2b97be129d6c25"
+      },
+      {
+        "file": "deployment.js",
+        "matches_main": true,
+        "sha256": "948d74599f730266574b9d930d45d62d5fa4015c8301878b67e6828ca410129d"
+      },
+      {
+        "file": "document-editor.js",
+        "matches_main": true,
+        "sha256": "c1a891f01509a138425702b1f8735653cca75ac1439b8b8c28f662374f7658c1"
+      },
+      {
+        "file": "document-export.js",
+        "matches_main": true,
+        "sha256": "604ec642965a81ded903f9816d66ee9ebb7bb663ee32f2080dd7ac245537a697"
+      },
+      {
+        "file": "document-model.js",
+        "matches_main": true,
+        "sha256": "ab1f22270511b8c8f4759d9b1bd12dd9070105c16da753e97d8d98c1558ebe6e"
+      },
+      {
+        "file": "document-vendor-LICENSES.txt",
+        "matches_main": true,
+        "sha256": "c8a054540ff155c5db5b6f2d9c09d06abfaca7414af309f64c8f7c772451212d"
+      },
+      {
+        "file": "document-vendor.js",
+        "matches_main": true,
+        "sha256": "c220bb396cb9baa4f8a5d86cf3ff45eea182b7f1d2c7285b544c76922bea8d1a"
+      },
+      {
+        "file": "docx-vendor.js",
+        "matches_main": true,
+        "sha256": "1c7a1e673d252daae7875c01e5a6164a3e9640c74e98ccda853a941fd259ad26"
+      },
+      {
+        "file": "excel-export.js",
+        "matches_main": true,
+        "sha256": "2d7dd7bc082dc91b7f63ce7e2ff39938697329bd88933f6a91fe179e0a87b282"
+      },
+      {
+        "file": "index.html",
+        "matches_main": true,
+        "sha256": "3f702707daae4d29db9b0fadec24829d4a078626dee04d08a38ac3becd60ba60"
+      },
+      {
+        "file": "local-files.js",
+        "matches_main": true,
+        "sha256": "e57535a770d03d5afde96bc11fa0eaacf27c82090c0ec21c2c76cee255a49988"
+      },
+      {
+        "file": "mammoth-vendor.js",
+        "matches_main": true,
+        "sha256": "92914a3708cfdf1e62cb553d1856a7fedab21da83d8ee82845de2f897b368cab"
+      },
+      {
+        "file": "media-model.js",
+        "matches_main": true,
+        "sha256": "e3d55a399a337061e72b22c3edbf237189438629b9baf185286441129e198775"
+      },
+      {
+        "file": "media-tools.js",
+        "matches_main": true,
+        "sha256": "5fccbd91040a36e84bec45475c890ff23969ae34218eb7ab7c231f642f15efdc"
+      },
+      {
+        "file": "money-model.js",
+        "matches_main": true,
+        "sha256": "2bbf17372fb2192743f331b3379126631060d5c27857589d388119ff3ee88535"
+      },
+      {
+        "file": "ptm-grotesk.woff2",
+        "matches_main": true,
+        "sha256": "99c47d599d16097e764db35eb921f3ad5a9a579853cb7d5f42b71de567004fd7"
+      },
+      {
+        "file": "ptm-tc.woff2",
+        "matches_main": true,
+        "sha256": "2aaabff0bab803fd961aa72ab023e8d41fe9e487b2428e7601d2831caaf543ec"
+      },
+      {
+        "file": "purify-vendor.js",
+        "matches_main": true,
+        "sha256": "cd37898f9782adf54820c413191b5691803f0f137c799d6edcfd38523b4c2c31"
+      },
+      {
+        "file": "sheetjs-LICENSE.txt",
+        "matches_main": true,
+        "sha256": "4d2a38ac35cda06a555c84074a819d413339cd3691b822cae50f8f322fe01f64"
+      },
+      {
+        "file": "storage.js",
+        "matches_main": true,
+        "sha256": "19eb9a60a4c3f972ed7366308c887b83161947445e03ef652484d8de008a815c"
+      },
+      {
+        "file": "style.css",
+        "matches_main": true,
+        "sha256": "62b5676dcf36a5949718a314e69e8e38ddd00cfa46428f5eeaaef521f8c30c85"
+      },
+      {
+        "file": "tool-registry.js",
+        "matches_main": true,
+        "sha256": "7a4042ac52f90e6bb4108435e19fc082ab42c596ac436d94fc1c23ca7e816b13"
+      },
+      {
+        "file": "tools-core.js",
+        "matches_main": true,
+        "sha256": "136dd5ccc0966ecdab4a768ea3bcbfb64ea8edd3c860e35977d121ec2c44dafb"
+      },
+      {
+        "file": "workbench-model.js",
+        "matches_main": true,
+        "sha256": "c6ab27a451f6a266d8c8f7192ac88eae473624a44f7ceda77a7327d7def506a0"
+      },
+      {
+        "file": "workbench-ui.js",
+        "matches_main": true,
+        "sha256": "b64926f6275e4f2c6d048523171bc23bbcfd55e681b26c0985e8ce90134336d6"
+      },
+      {
+        "file": "workbench.js",
+        "matches_main": true,
+        "sha256": "7b4b8b5df52ab93762d185b4ef2d4c611b0c165da2851afefbe284c63a881092"
+      },
+      {
+        "file": "workspace.js",
+        "matches_main": true,
+        "sha256": "c03b9c712f665a46e36f199a755f5f12c06928cdba7d8a0b6178935eb5c9bcd8"
+      },
+      {
+        "file": "xlsx.full.min.js",
+        "matches_main": true,
+        "sha256": "cc015130aa8521e7f088f88898eba949ccdcbfb38df0bd129b44b7273c3a6f41"
+      }
+    ]
+  }
+}
