@@ -28,3 +28,13 @@ quality唯一skipped是**新增**可下載容量fixture案例，因該workflow�
 候選 [HTTPS m2/](https://lrqrll.github.io/practical-thinking-studio-preview/m2/#benches) 仍3.4.0-rc.2／59dff72，34資產符合；preview庫Pages提交785c432b753810474e215a1aaa052320985ce5fc（built）。DB `nexus-preview-workbench-m2-workspace`，恢復鍵 `nexus-preview-workbench-m2-recovery:`。本輪未推送preview庫或正式main，未覆寫預覽，也未合併任何PR。
 
 下一步由獨立QA按[完整清單](OPERATING-CHECKLIST.md)及[NAV控制](NAV-01.md)記錄瀏覽器結果，再決定是否準備正式版本及具體發布SHA；目前沒有發布批准。
+
+## 本輪恢復操作驗收（開發者實際驗證）
+
+以#13材料、凍結59dff72在真正候選HTTPS重新操作：[40177583100](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40177583100) **21/21通過，0失敗／跳過／重試**。保留原檔下載與SHA256、對話框／導航紀錄、全程trace與截圖，[原始artifact](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40177583100/artifacts/12593077504)（30天，可能需登入）。不是引用舊CI或冒稱獨立QA。
+
+沿用原案例，補強兩個實例互不影響、範本不含來源／成果，以及實際排序後固定CSV／JSON逐位元不變。新增1個真正文件編輯器的保存等待追加輸入案例；原storage同類案例實為備忘錄，仍完整保留。所有確認均實際accept／dismiss，選檔由受控瀏覽器提供合成檔，未移除確認或繞過產品流程。完整v1/v2/v3及108,082,768bytes七包151成果在空白context還原並核對圖片、來源、關聯、歷史、欄位及範本。雙SHA負控制也重新通過。
+
+測試分支#14 `520a0653261c8da3625a6408e8adf4b612b0d997`，以#13為base；[完整quality 40177583093](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40177583093)成功。本機最初新文件案例使用錯誤的data-open定位造成逾時，改用實際#file連結後通過，未更動產品。公開候選TLS在本機失敗，GitHub-hosted Chromium正常；未降低TLS。
+
+上述完成開發者操作缺口，M2-NAV-01仍留給獨立審查／發布批准判斷，不冒稱獨立QA解除。依最新授權接續3.4.0發布準備；不合併或正式部署。

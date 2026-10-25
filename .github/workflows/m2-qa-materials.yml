@@ -13,6 +13,7 @@ permissions:
   contents: read
 jobs:
   reproduce:
+    if: github.head_ref == 'codex/nexus-m2-browser-acceptance'
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:

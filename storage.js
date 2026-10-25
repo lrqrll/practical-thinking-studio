@@ -1,9 +1,9 @@
 'use strict';
-const BRAND=Object.freeze({name:'NEXUS',version:'3.4.0-rc.2'});
+const BRAND=Object.freeze({name:'NEXUS',version:'3.4.0'});
 const DEPLOYMENT=Object.freeze(typeof window!=='undefined'&&window.NEXUS_DEPLOYMENT||{channel:'production',commit:null});
 const IS_PREVIEW=DEPLOYMENT.channel==='preview'||(typeof location!=='undefined'&&location.pathname.includes('/practical-thinking-studio-preview/'));
-const DATABASE_NAME=IS_PREVIEW?'nexus-preview-workbench-m2-workspace':'nexus-workspace';
-const RECOVERY_PREFIX=IS_PREVIEW?'nexus-preview-workbench-m2-recovery:':'nexus-recovery:';
+const DATABASE_NAME=IS_PREVIEW?'nexus-preview-workbench-m2-release-workspace':'nexus-workspace';
+const RECOVERY_PREFIX=IS_PREVIEW?'nexus-preview-workbench-m2-release-recovery:':'nexus-recovery:';
 const NexusStore=(()=>{let db;const clone=x=>structuredClone(x);const uid=()=>crypto.randomUUID();const stamp=()=>new Date().toISOString();
 function request(r){return new Promise((ok,no)=>{r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error);});}
 function complete(tx){return new Promise((ok,no)=>{tx.oncomplete=()=>ok();tx.onabort=tx.onerror=()=>no(tx.error||Error('儲存交易未完成'));});}

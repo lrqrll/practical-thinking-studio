@@ -1,3 +1,11 @@
+# 最新接續：M2 3.4.0發布準備，未合併／未部署
+
+凍結#10/#11/#12不變。#13材料ca3036bd6afb621f8f6dc381b4954d60f62f25ea→#14測試補強520a0653261c8da3625a6408e8adf4b612b0d997→codex/nexus-m2-release-3.4.0版本PR，依序疊加且不含#6/#7。#14在真正rc.2 HTTPS新21/21通過，詳[既有結果](qa/m2-rc2/RESULTS.md)。開發者實際驗證，不冒稱獨立QA。
+
+3.4.0只版本／快取鍵與preview專用DB／草稿命名空間改動；正式nexus-workspace／schema／模型不變，verify-release.cjs逐檔限定diff。原m2/仍rc.2／59；新m2-release/使用nexus-preview-workbench-m2-release-*。Node合成fixture生成需NEXUS_QA_FIXTURE_REF=59dff72bb55a77c371863d6e8a998529b1997bf0，固定舊來源，最終瀏覽器測實際3.4.0而非假裝舊SHA。
+
+最終head／新CI／preview以版本PR為準；尚待審查批准，不合併或正式部署。批准後才依序合併、核對main CI／Pages／公開資產與正式HTTPS。M2-NAV-01保留審查門檻，不開M3、不恢復Excel。以下為歷史接續紀錄。
+
 最新rc.2接續：PR #12的rc.1在CI出現驗證腳本API錯誤及導航時序問題，原失敗40168603581／40168831089保留。已修正fetch.ok與產品UI切換鎖／草稿URL，保存佇列本身不變；5個導航與保存控制各3次通過。新head需完整25單元／86瀏覽器＋15文件選取及14個公開M2 HTTPS流程，詳QA-REPORT.md，不沿用舊SHA綠燈。PR #10／#11依賴head不變，正式3.3.0 main仍ff3f8a1；M2尚未獨立QA／不可合併或正式部署。
 
 # 最新接續：M2完整候選待獨立QA
