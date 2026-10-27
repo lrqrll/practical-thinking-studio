@@ -46,8 +46,8 @@ jobs:
       - name: Install CI-only CJK fallback (no product changes)
         timeout-minutes: 4
         run: |
-          sudo apt-get update
-          sudo apt-get install --no-install-recommends -y fonts-noto-cjk
+          sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=45 -o Acquire::https::Timeout=45 update
+          sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=45 -o Acquire::https::Timeout=45 install --no-install-recommends -y fonts-noto-cjk
           fc-cache -f
       - name: Capture readable CJK rendering and actual platform fonts
         run: node scripts/qa/production/font-evidence.cjs after-cjk
@@ -69,7 +69,7 @@ jobs:
       - name: Raw visual review transport (original PNG bytes, also in artifact)
         if: always()
         run: |
-          node -e 'const fs=require("node:fs"),path=require("node:path");for(const phase of ["before-cjk","after-cjk"]){for(const suffix of [".png","-editor.png"]){const p="test-results/font-diagnosis/"+phase+"/"+phase+suffix;if(fs.existsSync(p))console.log("QA_VISUAL_PNG "+phase+suffix+" "+fs.readFileSync(p).toString("base64"));}}'
+          node scripts/qa/production/print-visual.cjs
       - name: Require exact M CI success and recheck formal Pages and 32 public assets
         run: node scripts/qa/production/identity.cjs after
       - uses: actions/upload-artifact@v4
@@ -78,6 +78,7 @@ jobs:
           name: NEXUS-3.4.0-M-78e90aec-production-evidence
           path: |
             test-results/
+            environment-evidence/
             production-https-results/
             monitor-control-results/
             playwright-report/

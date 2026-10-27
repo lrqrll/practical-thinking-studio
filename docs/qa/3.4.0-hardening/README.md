@@ -70,3 +70,5 @@ npx playwright test tests/e2e/monitor-controls.spec.cjs --workers=1 --reporter=l
 正式整套仍使用原6個spec（document-save-drain新增1個混合字型案例）；負控制輸出獨立`monitor-control-results`，全正式輸出`production-https-results`。原始字型資料在`test-results/font-diagnosis/`。每個run完整工具SHA由checkout與log確認；新結果不得冒稱舊run重寫通過。M2-NAV-01維持未完整獨立驗收；瀏覽器／實機／輔具與原生選檔未測界線如前。
 
 包括`browser-environment.cjs`前置瀏覽器及字型診斷context，也沿用相同正式M監測。套件結束後執行`node scripts/qa/production/verify-monitor.cjs production-https-results`，離線重算所有live-response／實際下載bytes，檢查requestId到browser-response的context/page映射與關閉狀態；結果存`test-results/monitor-integrity.json`。Work可在artifact解壓後用相同指令，參數指向實際解壓的production-https-results目錄。工具負控制請另查monitor-control-results，不混入正式完整性Pass。
+
+取證保存補強：字型與前置context證據改存獨立`environment-evidence/`，不依賴測試輸出目錄生命週期。原始PNG亦以帶SHA256／長度的分段log傳輸，`print-visual.cjs`對before／after、等待中追加、重開及混合reload等7張必要PNG缺失直接失敗，不再以exists跳過。這是取證工具修補，非產品問題。新run才能證明此交付完整性；不能把前一run42 Pass自動延伸。字型安裝維持4分鐘上限，另設單次下載45秒閒置timeout及Acquire::Retries=0，保留套件簽章／TLS驗證，下載失敗記環境失敗。舊run40456795105在Azure Ubuntu fonts-noto-cjk 61.2MB下載超過4分鐘，產品案例尚未執行；run40457032644的42產品案例與4控制通過，但視覺log沒有輸出圖片，不能當作已人工看過。這些歷史不隱藏。

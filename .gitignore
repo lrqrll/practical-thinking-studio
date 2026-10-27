@@ -3,3 +3,6 @@ test-results/
 playwright-report/
 dist-preview/
 timing-stress-results/
+environment-evidence/
+monitor-control-results/
+production-https-results/
