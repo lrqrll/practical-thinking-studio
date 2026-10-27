@@ -3,6 +3,7 @@ const TOOL_CATEGORIES=Object.freeze(['專案','財務','文件','行政']);
 const RETIRED_TOOLS=[{id:'asset',name:'舊版素材（已停用）'}];
 function toolMeta(id){return WORK_TOOLS.find(t=>t.id===id)||RETIRED_TOOLS.find(t=>t.id===id);}
 const WORK_TOOLS=[
+{id:'time-records',name:'工時紀錄',group:'專案',desc:'記錄實際工時、日期與專案合計。',icon:'<circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/>'},
 {id:'document',name:'文件編輯器',group:'文件',desc:'編輯圖文、表格與正式文件。',icon:'<path d="M5 2h10l4 4v16H5zM14 2v5h5M8 11h8M8 15h8M8 19h5"/>'},
 {id:'notes',name:'備忘錄',group:'行政',desc:'記錄文字、清單與圖片。',icon:'<path d="M5 3h14v18H5zM8 7h8M8 11h8M8 15h5"/>'},
 {id:'tasks',name:'任務管理',group:'專案',desc:'安排任務、負責人與期限。',icon:'<path d="M9 6h11M9 12h11M9 18h11M3 6l1 1 2-2M3 12l1 1 2-2M3 18l1 1 2-2"/>'},
