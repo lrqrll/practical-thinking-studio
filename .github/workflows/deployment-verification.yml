@@ -26,9 +26,19 @@ jobs:
       - run: npm ci --ignore-scripts
       - name: Exact M main/parents/tree/Pages/32 assets and original 3.3.0 compatibility validators
         run: node scripts/qa/production/identity.cjs before
-      - name: Install actual browser without bypassing TLS
+      - name: Select existing Chrome or install bounded Chromium prerequisites
         timeout-minutes: 5
-        run: npx playwright install --with-deps chromium
+        run: |
+          for candidate in /usr/bin/google-chrome /usr/bin/google-chrome-stable /opt/google/chrome/chrome; do
+            if [ -x "$candidate" ]; then
+              "$candidate" --version
+              printf 'NEXUS_CHROMIUM=%s\n' "$candidate" >> "$GITHUB_ENV"
+              exit 0
+            fi
+          done
+          npx playwright install --with-deps chromium
+      - name: Verify actual browser dependencies TLS and required application APIs
+        run: node scripts/qa/production/browser-environment.cjs
       - name: Generate complete seven-part synthetic backup from frozen models
         run: node --max-old-space-size=4096 scripts/qa/m2/generate-large.cjs "$NEXUS_QA_LARGE_DIR"
       - name: Actual formal HTTPS old IDs folders documents M2 templates outputs NAV and complete restore
