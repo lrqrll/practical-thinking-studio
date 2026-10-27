@@ -1,0 +1,5 @@
+'use strict';
+// Original synthetic candidate images; same byte/hash evidence principle as PR17.
+const fs=require('node:fs'),path=require('node:path'),{createHash}=require('node:crypto');
+function all(dir){if(!fs.existsSync(dir))return[];return fs.readdirSync(dir,{withFileTypes:true}).flatMap(x=>x.isDirectory()?all(path.join(dir,x.name)):[path.join(dir,x.name)]);}
+const files=all('candidate-https-results');for(const name of ['assembly-selection-390.png','assembly-saved-1280.png','assembly-saved-390.png']){const found=files.filter(p=>path.basename(p)===name);if(found.length!==1)throw Error('Required candidate screenshot missing: '+name);const b=fs.readFileSync(found[0]),encoded=b.toString('base64'),parts=Math.ceil(encoded.length/12000);console.log('QA_PNG_MANIFEST '+JSON.stringify({label:name,file:found[0],bytes:b.length,sha256:createHash('sha256').update(b).digest('hex'),parts}));for(let i=0;i<parts;i++)console.log(`QA_PNG_CHUNK ${name} ${i+1}/${parts} ${encoded.slice(i*12000,(i+1)*12000)}`);}

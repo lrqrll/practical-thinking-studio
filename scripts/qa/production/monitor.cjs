@@ -5,7 +5,7 @@ const required=r=>['document','script','stylesheet','font'].includes(r.resourceT
 async function ready(page){await page.evaluate(async()=>{await document.fonts.ready;await new Promise(ok=>requestAnimationFrame(()=>requestAnimationFrame(ok)));});}
 // One session per test. Install on browser.newContext BEFORE any page/navigation.
 // A supplied fetchResponse is exclusively for separately labelled synthetic negative controls.
-function createMonitor({info,expected,formal=false,capture=false,fetchResponse,control=false}){
+function createMonitor({info,expected,formal=false,preview=false,capture=false,fetchResponse,control=false}){
  if(fetchResponse&&!control)throw Error('Controlled responses are forbidden in formal product acceptance');
  const contexts=new Map(),pages=new Map(),pending=new Set(),events=[],errors=[],requestIds=new WeakMap();let downloads=0,requests=0;
  const record=(kind,ids,data={})=>events.push({event:kind,...ids,...data});
@@ -21,7 +21,7 @@ function createMonitor({info,expected,formal=false,capture=false,fetchResponse,c
   const close=page.close.bind(page);page.close=async options=>{await drain();try{await screenshot(page,ids,'before-close');}catch(e){errors.push({...ids,kind:'screenshot',message:e.message});}await close(options);await drain();};
  }
  async function install(context){if(contexts.has(context))return context;const cs={id:'c'+(contexts.size+1),closed:false};contexts.set(context,cs);context.on('page',page=>installPage(page,cs));context.pages().forEach(p=>installPage(p,cs));
-  if(formal||control)await context.route('**/*',route=>track((async()=>{
+  if(formal||preview||control)await context.route('**/*',route=>track((async()=>{
    const request=route.request();if(!/^https?:/.test(request.url())||!required(request))return route.continue();let page;try{page=request.frame().page();}catch{}const ids=pages.get(page)||{contextId:cs.id,pageId:null};const requestId='r'+(++requests);requestIds.set(request,requestId);
    try{const u=new URL(request.url()),root=new URL(expected.site);if(u.origin!==root.origin||!u.pathname.startsWith(root.pathname))throw Error('Unexpected application resource origin: '+request.url());const name=u.pathname.slice(root.pathname.length)||'index.html',entry=expected.assets[name];if(!entry)throw Error('Resource not in exact M: '+name);
     const headers=Object.fromEntries(Object.entries(request.headers()).filter(([k])=>!['if-none-match','if-modified-since'].includes(k.toLowerCase())));headers['cache-control']='no-cache';
@@ -32,7 +32,7 @@ function createMonitor({info,expected,formal=false,capture=false,fetchResponse,c
    }catch(e){errors.push({...ids,kind:'asset',url:request.url(),message:e.message});try{await route.abort('failed');}catch(abort){errors.push({...ids,kind:'abort',message:abort.message});}}
   })()));
   const close=context.close.bind(context);context.close=async options=>{if(cs.closed)return;await drain();for(const p of context.pages()){
-   try{await screenshot(p,pages.get(p),'final-screen');if(formal&&p.url().startsWith(expected.site)){const identity=await p.evaluate(()=>({channel:DEPLOYMENT.channel,commit:DEPLOYMENT.commit,version:BRAND.version,db:DATABASE_NAME}));record('identity',pages.get(p),identity);if(JSON.stringify(identity)!==JSON.stringify({channel:'production',commit:null,version:'3.4.0',db:'nexus-workspace'}))throw Error('Production identity mismatch');}}
+   try{await screenshot(p,pages.get(p),'final-screen');if((formal||preview)&&p.url().startsWith(expected.site)){const identity=await p.evaluate(()=>({channel:DEPLOYMENT.channel,commit:DEPLOYMENT.commit,version:BRAND.version,db:DATABASE_NAME}));record('identity',pages.get(p),identity);if(JSON.stringify(identity)!==JSON.stringify(expected.identity||{channel:'production',commit:null,version:'3.4.0',db:'nexus-workspace'}))throw Error('Production identity mismatch');}}
    catch(e){errors.push({...pages.get(p),kind:'final-evidence',message:e.message});}
   }await close(options);cs.closed=true;await drain();await report();assertClean();};return context;
  }
