@@ -42,3 +42,29 @@ node scripts/qa/production/identity.cjs after
 只使用新受控context及合成資料。UI取證對正式HTTPS即時回應驗證M雜湊後原樣傳入瀏覽器，不以本機程式替換網站。工具及產品SHA、Chrome版本／TLS、原fixture與大集合manifest／每包SHA256、實際下載與hash、截圖、trace、原始案例結果均在專項artifact；保留30天，可能須GitHub登入。合成原fixtures位於既有`docs/qa/m2-rc2/fixtures/`，生成器與projection沿用#13，不另造相同資料。
 
 未測限制保留：真實Safari／Firefox、手機觸控、完整螢幕閱讀器、OS原生選檔視窗、Office／Calc；瀏覽器記憶體／配額限制仍適用。本輪不宣稱獨立QA完整通過，不合併main／正式部署，不開M3或恢復Excel。
+
+## QA-FONT-01／QA-CONTEXT-01（P2，工具與環境修正）
+
+保留舊工具f737d0a616f283e5ddfc861205da0a706a22dfa8與專項40439317668的41 Pass；Work獨立審查artifact digest、41 trace、28下載及分包內容，不等於親自重演全部案例。原36 Pass＋1 Fail／後續1補驗Pass也不變。這次不預判產品資料遺失，未改產品32資產。
+
+QA-FONT-01修前觀察：舊artifact真正document正文中文為方框，但record文字與bold marks完整。本次在同款新runner、未安裝額外字型前，保存完整／editor原始PNG、fc-list（file/family/style/fontversion）、fc-match zh-tw、OS／Chrome／套件版本、網站FontFace狀態及CDP實際platform fonts；然後只在CI安裝`fonts-noto-cjk`，以新context重做相同合成文件。根因與視覺結果須以這次原始截圖及字型資料判讀，不能只用fonts.ready／textContent宣告通過。另保留真正等待保存追加案例及混合繁中／英數標點／normal／bold／既有italic的保存重開reload截圖與資料斷言。italic marks相容與斜體字形外觀分開判斷；沒有新增斜體入口，不要求終端安裝字型。此次不製作Office／Calc視覺驗證。
+
+QA-CONTEXT-01修前：初始context有route、初始page有error監測；CAS同context route有效，第二還原context已有資料／TLS／trace，不能寫成完全無取證。修正為test自動fixture在任何page／context導航前攔接browser.newContext，透過單一`monitor.cjs`初始化全部context/page；每個contextId/pageId記錄建立、導航、pageerror、必要document/script/stylesheet/font HTTP及requestfailed。所有context固定同M／允許清單／預期hash。關閉前等取證，關閉後再drain、保存錯誤並斷言空集合；同context/page只初始化一次。每個正式live-response都記錄requestId、M、URL、資源類別、status、bytes、sha256、expectedSha256及相對body路徑。`response-bytes/<sha256>.bin`是**當次HTTPS fetch、檢驗後原樣fulfill給該request**的原始bytes，不是本機替換；browser-response以requestId交叉對應。路由停用HTTP快取，TLS開啟、route.fetch maxRetries=0。PDF about:blank新page也有例外與必要資源監測，無正式URL時不冒稱Production身分。
+
+每案`monitor-index.json`與附件列出所有context/page／錯誤；body路徑相對該index目錄，審查者可逐筆讀body重算SHA256，不能只按URL或trace content.size判斷。下載事件另列原檔bytes與SHA256。第二context關閉前也保存截圖，不丟失提前關閉環境的錯誤。取證失敗本身會讓測試失敗。
+
+`monitor-controls.spec.cjs`是獨立的**測試工具負控制**：本機合成server正常第一context，再令第二context app.js hash錯誤／HTTP503，或第二page未捕捉例外；套件斷言monitor應拒絕。第四案正常第二context應通過。受控回應只允許control旗標，與正式產品HTTPS、資料還原及其通過數分開報告，不能當作產品缺陷。原始拒絕errors與body仍保存。
+
+重跑除前述正式指令外，先做：
+
+```sh
+node scripts/qa/production/font-evidence.cjs before-cjk
+# Ubuntu測試環境，保留before後才安裝；不是NEXUS終端需求。
+sudo apt-get update
+sudo apt-get install --no-install-recommends -y fonts-noto-cjk
+fc-cache -f
+node scripts/qa/production/font-evidence.cjs after-cjk
+npx playwright test tests/e2e/monitor-controls.spec.cjs --workers=1 --reporter=list --trace on --output=monitor-control-results
+```
+
+正式整套仍使用原6個spec（document-save-drain新增1個混合字型案例）；負控制輸出獨立`monitor-control-results`，全正式輸出`production-https-results`。原始字型資料在`test-results/font-diagnosis/`。每個run完整工具SHA由checkout與log確認；新結果不得冒稱舊run重寫通過。M2-NAV-01維持未完整獨立驗收；瀏覽器／實機／輔具與原生選檔未測界線如前。
