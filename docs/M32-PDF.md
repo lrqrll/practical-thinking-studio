@@ -19,3 +19,5 @@ Node24、npm ci、Chromium、poppler的pdfinfo/pdffonts/pdftotext/pdftoppm。`NE
 實際下載PDF，pdftotext核對完整中文字、清單順序、65列及總價數量／每頁表頭／頁碼，pdffonts確認粗體與一般字型emb/sub/uni，逐頁渲染PNG及人工檢視。DOCX／HTML及文件保存等待追加保留回歸。本機首輪3通過1失敗是測試工具將故意404控制混入正常零錯誤監測；保留結果，控制移至獨立negative-control suite，未放寬監測器。修後精確CI／下載／SHA與原始截圖在PR，不沿用先前候選綠燈。
 
 以上是開發者驗證，待Work有界複驗；Safari/Firefox、真手機觸控、完整螢幕閱讀器、OS原生選檔、Office/Calc未測。M2-NAV-01完整獨立操作缺口仍保留，不冒稱已解除。舊41及36+1歷史不變；本次不重跑不相關正式42案、不新增備份版本、不碰真實資料。
+
+首輪GitHub Quality 40527353382在安裝Playwright OS依賴時，azure.archive.ubuntu.com下載25.9MB用5分3秒，步驟5分鐘上限中止，功能測試尚未執行；同期候選實際HTTPS20項與獨立負控制1項通過。後續quality改用runner既有相容Chrome，保留無Chrome時的有界安裝後備，未跳過瀏覽器或TLS驗證。此為環境修正，非產品修前故障。

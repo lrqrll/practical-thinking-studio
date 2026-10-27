@@ -20,7 +20,13 @@ jobs:
       - run: npm ci --ignore-scripts
       - name: Install Chromium and OS prerequisites
         timeout-minutes: 5
-        run: npx playwright install --with-deps chromium
+        run: |
+          if [ -x /usr/bin/google-chrome ]; then
+            echo 'NEXUS_CHROMIUM=/usr/bin/google-chrome' >> "$GITHUB_ENV"
+            /usr/bin/google-chrome --version
+          else
+            npx playwright install --with-deps chromium
+          fi
       - name: PDF parser and renderer for actual download tests
         timeout-minutes: 3
         run: sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=45 -o Acquire::https::Timeout=45 install -y poppler-utils
