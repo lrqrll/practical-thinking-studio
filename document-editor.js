@@ -17,6 +17,15 @@ function loadDocumentLibraries() {
   });
   return documentLibraryPromise;
 }
+async function savedDocumentForExport(fileId){
+ await flush();const record=await NexusStore.get('files',fileId);
+ if(!record||record.deletedAt||record.type!=='document'||activeFile?.id!==fileId||record.rev!==activeFile.rev)throw Error('文件版本已變更或失效，請保留輸入並重新開啟後匯出');
+ const copy=structuredClone(record);if(!validDocument(copy.data.document))throw Error('已保存文件格式不符，未匯出');return copy;
+}
+function documentHTMLFromModel(model){
+ const frozen=new NexusDocumentLib.Editor({element:document.createElement('div'),extensions:documentExtensions(),content:structuredClone(model.content),editable:false});
+ try{return frozen.getHTML();}finally{frozen.destroy();}
+}
 function documentView() {
   const s = state.document.settings;
   const btn = (id, label) => '<button type="button" id="' + id + '">' + label + "</button>";
@@ -279,8 +288,8 @@ async function bindDocument() {
       toast("已保存至此瀏覽器");
     });
     $("#doc-docx").onclick = safeAction(async () => {
-      await flush();
-      const model = structuredClone(state.document), name = activeFile.name;
+      const record=await savedDocumentForExport(fileId);
+      const model=record.data.document,name=record.name;
       $("#doc-docx").disabled = true;
       try {
         const blob = await documentDocx(model, name);
@@ -290,12 +299,12 @@ async function bindDocument() {
       }
     });
     $("#doc-html").onclick = safeAction(async () => {
-      await flush();
-      download(activeFile.name + ".html", documentHTMLShell(activeFile.name, editor.getHTML(), state.document.settings), "text/html;charset=utf-8");
+      const record=await savedDocumentForExport(fileId);
+      download(record.name + ".html", documentHTMLShell(record.name,documentHTMLFromModel(record.data.document),record.data.document.settings), "text/html;charset=utf-8");
     });
     $("#doc-print").onclick = safeAction(async () => {
-      await flush();
-      await printDocument(activeFile.name, editor.getHTML(), state.document.settings);
+      const record=await savedDocumentForExport(fileId);
+      await printDocument(record.name,documentHTMLFromModel(record.data.document),record.data.document.settings);
     });
     $("#doc-import").onclick = () => $("#doc-import-input").click();
     $("#doc-import-input").onchange = safeAction(async (e) => {

@@ -10,7 +10,7 @@ const {chromium}=require('@playwright/test');
   await page.goto(process.env.NEXUS_PREVIEW_TEST_URL||pathToFileURL(path.join(folder,'index.html')).href);
   await page.locator('#new-file-type').waitFor();
   const banner=await page.locator('#deployment-status').textContent();if(!banner.includes(metadata.commit)||!banner.includes(metadata.version))throw Error('Preview metadata mismatch');
-  if(await page.evaluate(()=>DATABASE_NAME)!=='nexus-preview-workbench-m2-release-workspace')throw Error('Preview storage is not isolated');
+  if(await page.evaluate(()=>DATABASE_NAME)!=='nexus-preview-'+(metadata.namespace||'workbench-m2-release')+'-workspace')throw Error('Preview storage is not isolated');
   await page.locator('#new-file-type').selectOption('document');await page.locator('#document-editor [contenteditable=true]').fill('可操作預覽文件');await page.evaluate(()=>flush());await page.reload();
   await page.waitForFunction(()=>document.querySelector('#document-editor')?.textContent.includes('可操作預覽文件'));
   if(errors.length)throw Error(JSON.stringify(errors));console.log('PASS preview package: exact commit, isolated storage, document edit/save/reload',metadata.commit);
