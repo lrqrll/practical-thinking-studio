@@ -1,5 +1,7 @@
 # NEXUS
 
+正式版本 **3.4.0**，發布提交 `78e90aec61ca825d45534c93515df4d8f949a431`。目前進行驗收補強與必要修補；獨立驗收門檻與原始失敗／未測範圍見 [QA報告](docs/QA-REPORT.md)。M3尚未授權。
+
 專業本機工作工具平台，部署於 GitHub Pages。八個現有工具與架構見 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)，規則見 [AGENTS.md](AGENTS.md)。
 
 ## 開發
