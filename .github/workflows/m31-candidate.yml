@@ -1,0 +1,88 @@
+name: M3.1 authorized candidate HTTPS (developer verification)
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidate:
+    if: github.head_ref == 'codex/nexus-m31-assembly' || github.head_ref == 'codex/nexus-time-records' || github.ref == 'refs/heads/codex/nexus-m31-assembly' || github.ref == 'refs/heads/codex/nexus-time-records'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      NEXUS_CAPTURE_EVIDENCE: '1'
+      NEXUS_PREVIEW_VERIFY: '1'
+      NEXUS_EXPECTED_ASSETS_FILE: environment-evidence/candidate-assets.json
+      NEXUS_QA_FIXTURE_REF: 59dff72bb55a77c371863d6e8a998529b1997bf0
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Bind exact candidate branch and isolated namespace
+        env:
+          TASK_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          if [ "$TASK_BRANCH" = 'codex/nexus-time-records' ]; then
+            echo 'NEXUS_M2_SITE_URL=https://lrqrll.github.io/practical-thinking-studio-preview/m31/' >> "$GITHUB_ENV"
+            echo 'NEXUS_PREVIEW_NAMESPACE=m31-integrated' >> "$GITHUB_ENV"
+          else
+            echo 'NEXUS_M2_SITE_URL=https://lrqrll.github.io/practical-thinking-studio-preview/m31-assembly/' >> "$GITHUB_ENV"
+            echo 'NEXUS_PREVIEW_NAMESPACE=m31-assembly' >> "$GITHUB_ENV"
+          fi
+          echo "NEXUS_M2_EXPECTED_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+      - run: npm run build:preview
+      - name: Wait bounded preview deployment gate, not a test retry
+        run: |
+          node - <<'JS'
+          (async()=>{for(let i=0;i<12;i++){const r=await fetch(process.env.NEXUS_M2_SITE_URL+'deployment.json',{signal:AbortSignal.timeout(10000),cache:'no-store'});if(r.ok&&(await r.json()).commit===process.env.NEXUS_M2_EXPECTED_COMMIT)return;await new Promise(ok=>setTimeout(ok,10000));}throw Error('Candidate Pages has not deployed this SHA; no product tests ran');})().catch(e=>{console.error(e);process.exitCode=1;});
+          JS
+      - run: node scripts/qa/candidate-assets.cjs
+      - name: Existing Chrome or bounded compatible Chromium
+        timeout-minutes: 5
+        run: |
+          for candidate in /usr/bin/google-chrome /usr/bin/google-chrome-stable /opt/google/chrome/chrome; do
+            if [ -x "$candidate" ]; then
+              printf 'NEXUS_CHROMIUM=%s\n' "$candidate" >> "$GITHUB_ENV"
+              exit 0
+            fi
+          done
+          npx playwright install --with-deps chromium
+      - name: Verified CI CJK fallback
+        timeout-minutes: 5
+        run: |
+          sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=45 -o Acquire::https::Timeout=45 update
+          node scripts/qa/production/install-cjk.cjs
+      - run: npm run test:unit
+      - name: Candidate actual sources to document and preserved formats and backup compatibility
+        run: |
+          export NEXUS_QA_SITE_URL="$NEXUS_M2_SITE_URL"
+          npx playwright test tests/e2e/assembly.spec.cjs tests/e2e/document.spec.cjs tests/e2e/document-save-drain.spec.cjs tests/e2e/qa-fixtures.spec.cjs --workers=2 --reporter=list --trace on --output=candidate-https-results
+      - name: Candidate time-record workflow when present
+        if: github.head_ref == 'codex/nexus-time-records' || github.ref_name == 'codex/nexus-time-records'
+        run: npx playwright test tests/e2e/time-records.spec.cjs --workers=2 --reporter=list --trace on --output=time-https-results
+      - name: Recompute every context asset and download byte hash
+        run: |
+          node scripts/qa/production/verify-monitor.cjs candidate-https-results > environment-evidence/candidate-integrity.json
+          cat environment-evidence/candidate-integrity.json
+          if [ -d time-https-results ]; then
+            node scripts/qa/production/verify-monitor.cjs time-https-results > environment-evidence/time-integrity.json
+            cat environment-evidence/time-integrity.json
+          fi
+      - name: Recheck exact public candidate after tests
+        run: node scripts/qa/candidate-assets.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: M31-candidate-developer-evidence
+          path: |
+            environment-evidence/
+            candidate-https-results/
+            time-https-results/
+            test-results/
+          retention-days: 30

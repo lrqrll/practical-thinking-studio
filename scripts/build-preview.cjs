@@ -10,7 +10,8 @@ if(fs.existsSync(out)&&fs.readdirSync(out).length)throw Error('Output must be an
 fs.mkdirSync(out,{recursive:true});
 for(const file of files)fs.copyFileSync(path.join(root,file),path.join(out,file));
 const index=path.join(out,'index.html');fs.writeFileSync(index,fs.readFileSync(index,'utf8').replace(/\?v=[^\"]+/g,'?v='+commit));
-const metadata={channel:'preview',commit,version,source:'https://github.com/lrqrll/practical-thinking-studio/tree/'+commit};
+const namespace=process.env.NEXUS_PREVIEW_NAMESPACE||'m31-assembly';if(!/^[a-z0-9-]{1,60}$/.test(namespace))throw Error('Invalid preview namespace');
+const metadata={channel:'preview',namespace,commit,version,source:'https://github.com/lrqrll/practical-thinking-studio/tree/'+commit};
 fs.writeFileSync(path.join(out,'deployment.js'),"'use strict';\nwindow.NEXUS_DEPLOYMENT=Object.freeze("+JSON.stringify(metadata)+');\n');
 fs.writeFileSync(path.join(out,'deployment.json'),JSON.stringify(metadata,null,2)+'\n');
 fs.writeFileSync(path.join(out,'OPEN-PREVIEW.txt'),'NEXUS '+version+' preview\nSource commit: '+commit+'\n\nOpen index.html in Chromium, or serve this directory with Python 3:\npython3 -m http.server 8011 --bind 127.0.0.1\n\nPreview storage is separate from the production workspace. Automatic saves stay in this browser. Use JSON export to keep a portable copy.\n');

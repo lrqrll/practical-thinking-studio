@@ -1,7 +1,7 @@
 {
   "name": "nexus-quality",
   "private": true,
-  "version": "3.4.0",
+  "version": "3.5.0-rc.1",
   "scripts": {
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "node --test tests/unit/*.test.cjs",
