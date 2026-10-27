@@ -1,0 +1,25 @@
+const {test,expect}=require('./fixtures.cjs');
+const fs=require('node:fs'),path=require('node:path');
+const {DIRECTORY,identity}=require('../../scripts/qa/m2/support.cjs');
+const manifest=JSON.parse(fs.readFileSync(path.join(DIRECTORY,'fixture-manifest.json')));
+const inspect=path.resolve(__dirname,'../../scripts/qa/m2/inspect-backup.js');
+const site=process.env.NEXUS_QA_SITE_URL||'/';
+async function open(page){await page.goto(site+'#backup');await expect(page.locator('#backup-input')).toBeAttached();if(process.env.NEXUS_QA_SITE_URL)expect(await page.evaluate(()=>DEPLOYMENT.commit)).toBe(process.env.NEXUS_M2_EXPECTED_COMMIT||identity.candidateSha);}
+async function inspectState(page){await page.addScriptTag({path:inspect});return page.evaluate(async()=>{const x=await NexusStore.snapshot();return{projection:qaBackupProjection(x),relations:qaBackupRelations(x),valid:NexusStore.validateBackup(x)};});}
+for(const name of ['workspace-v1.json','workbench-v2.json','workbench-v3.json','opaque-values-v3.json'])test('synthetic restore, image decode, export and second isolated restore: '+name,async({page,browser},info)=>{
+ await open(page);expect(await page.evaluate(()=>NexusStore.readAll('files').then(x=>x.length))).toBe(0);
+ await page.locator('#backup-input').setInputFiles(path.join(DIRECTORY,'fixtures',name));await expect(page.locator('#backup-status')).toContainText('獨立副本');await page.reload();
+ const names=await page.evaluate(()=>NexusStore.readMetaPrefix('workbench:').then(x=>x.map(w=>w.name)));expect(names).toEqual(name==='workspace-v1.json'?[]:['QA 合成採購工作台 還原副本']);const before=await inspectState(page);expect(before.valid).toBe(true);expect(before.relations).toBe(true);expect(before.projection).toEqual(manifest.files[name].projection);
+ expect(await page.evaluate(async()=>{const n=(await NexusStore.readAll('files')).find(f=>f.type==='notes'&&!f.deletedAt),im=new Image();im.src=n.data.note.images[0].source;await im.decode();return[im.naturalWidth,im.naturalHeight];})).toEqual([16,16]);
+ const download=page.waitForEvent('download');await page.locator('#export-backup').click();const d=await download,p=info.outputPath('roundtrip.json');await d.saveAs(p);
+ const context=await browser.newContext({ignoreHTTPSErrors:false});try{const target=await context.newPage();await open(target);expect(await target.evaluate(()=>NexusStore.readAll('files').then(x=>x.length))).toBe(0);await target.locator('#backup-input').setInputFiles(p);await expect(target.locator('#backup-status')).toContainText('獨立副本');await target.reload();expect(await target.evaluate(()=>NexusStore.readMetaPrefix('workbench:').then(x=>x.map(w=>w.name)))).toEqual(name==='workspace-v1.json'?[]:['QA 合成採購工作台 還原副本 還原副本']);expect(await inspectState(target)).toEqual(before);}finally{await context.close();}
+});
+test('synthetic invalid source cannot partially restore',async({page})=>{await open(page);const before=await inspectState(page);await page.locator('#backup-input').setInputFiles(path.join(DIRECTORY,'fixtures/invalid-missing-source-v3.json'));await expect(page.locator('#toast')).toContainText('備份格式不符，原資料未變更');expect(await inspectState(page)).toEqual(before);});
+test('synthetic original v1 converts six tools without overwriting',async({page})=>{await open(page);await page.locator('#backup-input').setInputFiles(path.join(DIRECTORY,'fixtures/legacy-original-v1.json'));await expect(page.locator('#backup-status')).toContainText('獨立副本');const x=await page.evaluate(()=>NexusStore.snapshot());expect(x.files.map(f=>f.type).sort()).toEqual(['budget','minutes','quotes','report','slides','tasks']);expect(x.archives.some(a=>a.raw.includes('合成舊工作報告'))).toBe(true);});
+test('downloadable multipart synthetic set restores in a clean browser context',async({page})=>{
+ const dir=process.env.NEXUS_QA_LARGE_DIR;test.skip(!dir,'Run separately with generated synthetic multipart fixture; not counted as capacity verification when skipped.');test.setTimeout(180000);
+ const m=JSON.parse(fs.readFileSync(path.join(dir,'large-manifest.json')));expect(m.candidateSha).toBe(identity.candidateSha);await open(page);expect(await page.evaluate(()=>NexusStore.readAll('files').then(x=>x.length))).toBe(0);
+ await page.locator('#backup-input').setInputFiles(m.files.map(f=>path.join(dir,f.name)).reverse());await expect(page.locator('#backup-status')).toContainText('獨立副本',{timeout:90000});await page.reload();await page.addScriptTag({path:inspect});
+ const actual=await page.evaluate(async()=>{const x=await NexusStore.snapshot(),bytes=new TextEncoder().encode(JSON.stringify(qaBackupProjection(x))),digest=await crypto.subtle.digest('SHA-256',bytes);return{valid:NexusStore.validateBackup(x),relations:qaBackupRelations(x),files:x.files.length,snapshots:x.workbenchSnapshots.length,templates:x.workbenchTemplates.length,hash:Array.from(new Uint8Array(digest),v=>v.toString(16).padStart(2,'0')).join('')};});
+ expect(actual).toEqual({valid:true,relations:true,files:m.expected.files,snapshots:m.expected.snapshots,templates:m.expected.templates,hash:m.semanticSha256});
+});

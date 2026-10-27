@@ -1,15 +1,23 @@
-# NEXUS 發布準備接續點
+# 最新接續：M2 3.4.0發布準備，未合併／未部署
 
-目前正式main：a0edd157ef1a01572e296db01c23f9a8b9651a76／3.2.1。PR #8以main為基礎，準備3.2.2；PR #9以PR #8為明列依賴，準備3.3.0。兩者都未合併／部署。本次只授權發布準備，需對最終PR／SHA另批准。
+凍結#10/#11/#12不變。#13材料ca3036bd6afb621f8f6dc381b4954d60f62f25ea→#14測試補強520a0653261c8da3625a6408e8adf4b612b0d997→codex/nexus-m2-release-3.4.0版本PR，依序疊加且不含#6/#7。#14在真正rc.2 HTTPS新21/21通過，詳[既有結果](qa/m2-rc2/RESULTS.md)。開發者實際驗證，不冒稱獨立QA。
 
-順序：先核對／測試PR #8最終提交，批准後用保留祖先的merge方式發布3.2.2，等待main CI、Pages與公開資產／HTTPS文件驗收成功；再將PR #9 base改main，核對差異未變、head仍為批准SHA，發布3.3.0並完成工作台及分包備份正式HTTPS驗收。任何失敗停止擴充。未取得批准前不要執行上述合併或正式部署。
+3.4.0只版本／快取鍵與preview專用DB／草稿命名空間改動；正式nexus-workspace／schema／模型不變，verify-release.cjs逐檔限定diff。原m2/仍rc.2／59；新m2-release/使用nexus-preview-workbench-m2-release-*。Node合成fixture生成需NEXUS_QA_FIXTURE_REF=59dff72bb55a77c371863d6e8a998529b1997bf0，固定舊來源，最終瀏覽器測實際3.4.0而非假裝舊SHA。
 
-PR #8撤下斜體按鈕與Ctrl/Cmd+I，保留舊格式及DOCX／HTML相容，不宣稱字形修復。其正式版本準備只改版本、快取鍵與文件。PR #9成果與容量修正須依其最終提交重新測試，不能沿用候選綠燈。完整SHA與CI記錄於PR，避免文件自我引用提交造成無限改版。
+最終head／新CI／preview以版本PR為準；尚待審查批准，不合併或正式部署。批准後才依序合併、核對main CI／Pages／公開資產與正式HTTPS。M2-NAV-01保留審查門檻，不開M3、不恢復Excel。以下為歷史接續紀錄。
 
-獨立Excel產品已取消（不是暫停），PR #7關閉不合併；d1bd4e3ff8094b43ffc3716e8106231632d593d7、分支、核心與測試保留，沒有上架。PR #6不合併，不夾帶其舊路線。預算、XLSX及歷史資料保留，不自動清除或降低TLS。
+最新rc.2接續：PR #12的rc.1在CI出現驗證腳本API錯誤及導航時序問題，原失敗40168603581／40168831089保留。已修正fetch.ok與產品UI切換鎖／草稿URL，保存佇列本身不變；5個導航與保存控制各3次通過。新head需完整25單元／86瀏覽器＋15文件選取及14個公開M2 HTTPS流程，詳QA-REPORT.md，不沿用舊SHA綠燈。PR #10／#11依賴head不變，正式3.3.0 main仍ff3f8a1；M2尚未獨立QA／不可合併或正式部署。
 
-## 工作台正式版本準備
+# 最新接續：M2完整候選待獨立QA
 
-使用者已完成獨立QA，3772e4ab7246ea9e5abccc53d547711436502f90的BACKUP-CAPACITY-01（P1）解除；不代表已正式部署。原head CI40087283672為14單元／68瀏覽器／15重複及公開HTTPS容量2項全通過。3.3.0整合依賴PR #8的a16250ab4b4a355feef8559e44a278ee023ef889，只改正式版號／快取鍵、驗收文件及測試參考SHA，不新增功能。
+正式仍3.3.0 main ff3f8a16cb343b93973bd191003c30ca9c13b996。本輪只授權開發／測試／小PR／隔離預覽，不合併／正式部署，不恢復Excel或開發其他功能。
 
-最終head仍須重新執行所有相關回歸及公開HTTPS容量驗證，結果及完整SHA以PR記錄。#8先發布3.2.2且驗收成功，才改#9 base為main並核對批准head後發布3.3.0。正式HTTPS需實際工作台、精確金額、保存重開、固定成果、CSV／JSON及完整分包還原，不得只測備忘錄。
+PR依賴：#10 codex/nexus-m2-field-contract（ede75bd，契約與純模型）→ #11 codex/nexus-m2-persistence（2381aeb，保存／schema2成果／v3）→ codex/nexus-m2-interface（完整UI／草稿／安全及相容補強，明列base #11）。最終head與CI、預覽證據在各PR描述，避免文件自我引用SHA造成無限重提。
+
+欄位／模板完整操作、固定成果、v3大容量還原與24單元／84瀏覽器預期驗證詳QA-REPORT.md，實際以最終CI為準。M2預覽使用m2/與nexus-preview-workbench-m2-workspace，不自動移入或更改正式、M1根預覽及舊斜體預覽資料。不要重建或重做已完成功能。
+
+下一步核對最終CI、HTTPS實際操作與公開資產，提供完整SHA、獨立QA操作清單與限制，交獨立QA；開發者通過不等於獨立QA通過，不要擅自合併／發布。
+
+## 最新：凍結M2 rc.2，等待獨立瀏覽器複審
+
+使用者獨立QA已核對程式／依賴／原始CI及10模型測試通過，但沒有受控瀏覽器，完整操作未測。#10 ede75bd60e905f65fbc01f03b4e4806ea89097ef、#11 2381aeb6a484daa4ee2e076bd202b3f3d6498593、#12 59dff72bb55a77c371863d6e8a998529b1997bf0保持；不得因補材料變動其head。材料另在codex/nexus-m2-qa-materials分支／PR，產品及package逐位元保持59。詳[交付材料入口](qa/m2-rc2/README.md)，含合成備份／manifest／七包容量生成器／完整操作與M2-NAV-01負控制及原始CI副本。開發者fixture 7/7不代表獨立瀏覽器QA，門檻仍有效。下一步等待獨立瀏覽器結果，必要修正另列差異再測；無合併／正式部署授權，不開M3，不恢復Excel。

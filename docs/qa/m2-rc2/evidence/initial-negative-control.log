@@ -1,0 +1,65 @@
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:54] "GET / HTTP/1.1" 200 -
+
+Running 1 test using 1 worker
+
+(node:221106) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET / HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /style.css?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /ptm-tc.woff2 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /ptm-grotesk.woff2 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /deployment.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /money-model.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /field-model.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /media-model.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /backup-format.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /workbench-model.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /document-model.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /storage.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /tool-registry.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /tools-core.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /workbench.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /excel-export.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /document-export.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /media-tools.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /document-editor.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /local-files.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /field-ui.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /workbench-ui.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /workspace.js?v=3.4.0-rc.1 HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] code 404, message File not found
+[WebServer] 127.0.0.1 - - [25/Oct/2026 06:32:56] "GET /favicon.ico HTTP/1.1" 404 -
+  ✘  1 tests/e2e/m2-ui.spec.cjs:21:1 › a delayed template transition cannot focus or edit the outgoing workbench fields (1.4s)
+
+
+  1) tests/e2e/m2-ui.spec.cjs:21:1 › a delayed template transition cannot focus or edit the outgoing workbench fields 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: false
+    Received: true
+
+      19 | test('custom field labels, values and choice labels render as text and CSV cannot execute formulas',async({page})=>{await bench(page);await sources(page);const label='<img src=x onerror="window.m2Injected=1">';await add(page,label);await add(page,'危險選項','select','=HYPERLINK("x")\n安全');await page.getByLabel(label,{exact:true}).fill('<svg onload="window.m2Injected=1">');await page.getByLabel('危險選項',{exact:true}).selectOption({label:'=HYPERLINK("x")'});await saveFields(page);expect(await page.evaluate(()=>window.m2Injected)).toBeUndefined();await expect(page.locator('#custom-fields img')).toHaveCount(0);await page.locator('#create-bench-snapshot').click();await expect(page.locator('#snapshot-custom-fields')).toContainText('<svg onload=');expect(await page.evaluate(()=>window.m2Injected)).toBeUndefined();const csv=(await download(page,'#download-bench-csv')).toString();expect(csv).toContain("'=HYPERLINK");await page.locator('#save-as-template').click();await namedDialog(page,'<script>window.m2Injected=1</script>');await saveFields(page);await open(page,'templates');await expect(page.locator('#main script')).toHaveCount(0);expect(await page.evaluate(()=>window.m2Injected)).toBeUndefined();});
+      20 | test('recovery quota errors are visible and a failed field save can retry without clearing or blocking later saves',async({page})=>{await bench(page);await add(page,'安全保存');await page.evaluate(()=>{window.origRecovery=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(k.includes(':m2:'))throw new DOMException('recovery quota','QuotaExceededError');return origRecovery.call(this,k,v);};window.origFieldPut=IDBObjectStore.prototype.put;IDBObjectStore.prototype.put=function(v,...args){if(v.id?.startsWith('workbench:'))throw new DOMException('save quota','QuotaExceededError');return origFieldPut.call(this,v,...args);};});await page.getByLabel('安全保存',{exact:true}).fill('必須保留');await expect(page.locator('#m2-draft-status')).toContainText('草稿備援失敗');await page.locator('#save-custom-values').click();await expect(page.locator('#toast')).toContainText('save quota');await expect(page.getByLabel('安全保存',{exact:true})).toHaveValue('必須保留');await page.evaluate(()=>{Storage.prototype.setItem=origRecovery;IDBObjectStore.prototype.put=origFieldPut;});await saveFields(page);await page.reload();await expect(page.getByLabel('安全保存',{exact:true})).toHaveValue('必須保留');await page.getByLabel('安全保存',{exact:true}).fill('後續亦可保存');await saveFields(page);await page.reload();await expect(page.getByLabel('安全保存',{exact:true})).toHaveValue('後續亦可保存');});
+    > 21 | test('a delayed template transition cannot focus or edit the outgoing workbench fields',async({page})=>{await bench(page);await add(page,'切換金額','money');await page.evaluate(()=>{const read=NexusStore.readMetaPrefix;NexusStore.readMetaPrefix=async prefix=>{if(prefix==='workbench-template:'){window.slowTemplateRequested=true;await new Promise(ok=>setTimeout(ok,1000));}return read(prefix);};});await page.locator('#save-as-template').click();await page.locator('#dialog-name').fill('延遲範本');await page.getByRole('button',{name:'儲存名稱',exact:true}).click();await expect.poll(()=>page.evaluate(()=>!!window.slowTemplateRequested)).toBe(true);const focus=await page.getByLabel('切換金額',{exact:true}).evaluate(el=>{el.focus();return document.activeElement===el;});expect(focus).toBe(false);await expect(page.locator('#template-name')).toHaveValue('延遲範本');await expect(page.getByLabel('切換金額',{exact:true})).toHaveValue('');await page.getByLabel('切換金額',{exact:true}).fill('0.001');await page.locator('#save-custom-values').click();await expect(page.locator('#toast')).toContainText('預設值無效');const w=await page.evaluate(()=>NexusStore.readMetaPrefix('workbench:').then(x=>x[0]));expect(w.values).toEqual({});});
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ^
+      22 |
+        at /workspace/practical-thinking-studio/tests/e2e/m2-ui.spec.cjs:21:771
+
+    Error Context: ../../tmp/nexus-m2-transition-before/m2-ui-a-delayed-template-t-62ef6-e-outgoing-workbench-fields/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/nexus-m2-transition-before/m2-ui-a-delayed-template-t-62ef6-e-outgoing-workbench-fields/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/nexus-m2-transition-before/m2-ui-a-delayed-template-t-62ef6-e-outgoing-workbench-fields/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/m2-ui.spec.cjs:21:1 › a delayed template transition cannot focus or edit the outgoing workbench fields 
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
