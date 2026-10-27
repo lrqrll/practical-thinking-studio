@@ -1,6 +1,12 @@
 name: NEXUS 3.4.0 exact production acceptance (developer verification)
 on:
   workflow_dispatch:
+    inputs:
+      suite:
+        description: Full formal suite or the remaining legacy compatibility control
+        type: choice
+        options: [full, legacy]
+        default: full
 permissions:
   contents: read
   actions: read
@@ -40,9 +46,17 @@ jobs:
       - name: Verify actual browser dependencies TLS and required application APIs
         run: node scripts/qa/production/browser-environment.cjs
       - name: Generate complete seven-part synthetic backup from frozen models
+        if: inputs.suite != 'legacy'
         run: node --max-old-space-size=4096 scripts/qa/m2/generate-large.cjs "$NEXUS_QA_LARGE_DIR"
       - name: Actual formal HTTPS old IDs folders documents M2 templates outputs NAV and complete restore
-        run: npx playwright test tests/e2e/production-legacy.spec.cjs tests/e2e/m2-ui.spec.cjs tests/e2e/qa-fixtures.spec.cjs tests/e2e/document-save-drain.spec.cjs tests/e2e/document.spec.cjs tests/e2e/ci-regressions.spec.cjs --workers=2 --reporter=list --trace on --output=production-https-results
+        env:
+          VERIFICATION_SUITE: ${{ inputs.suite }}
+        run: |
+          if [ "$VERIFICATION_SUITE" = legacy ]; then
+            npx playwright test tests/e2e/production-legacy.spec.cjs --workers=1 --reporter=list --trace on --output=production-https-results
+          else
+            npx playwright test tests/e2e/production-legacy.spec.cjs tests/e2e/m2-ui.spec.cjs tests/e2e/qa-fixtures.spec.cjs tests/e2e/document-save-drain.spec.cjs tests/e2e/document.spec.cjs tests/e2e/ci-regressions.spec.cjs --workers=2 --reporter=list --trace on --output=production-https-results
+          fi
       - name: Require exact M CI success and recheck formal Pages and 32 public assets
         run: node scripts/qa/production/identity.cjs after
       - uses: actions/upload-artifact@v4
