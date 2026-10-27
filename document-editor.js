@@ -182,6 +182,7 @@ async function bindDocument() {
       focusedChain().setImage({ src: im.source, alt: im.name, width: w, height: Math.max(1, Math.round(im.height * w / im.width)) }).run();
     };
     $("#document-controls").disabled = false;
+    if(typeof runAssemblyDownload==='function')runAssemblyDownload(fileId);
     $("#document-loading").hidden = true;
     updatePaper();
     controls();
