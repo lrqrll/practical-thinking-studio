@@ -14,6 +14,7 @@ jobs:
       NEXUS_PREVIEW_VERIFY: '1'
       NEXUS_EXPECTED_ASSETS_FILE: environment-evidence/candidate-assets.json
       NEXUS_QA_FIXTURE_REF: 59dff72bb55a77c371863d6e8a998529b1997bf0
+      NEXUS_QA_LARGE_DIR: /tmp/nexus-m31-synthetic-complete
     steps:
       - uses: actions/checkout@v4
         with:
@@ -58,6 +59,8 @@ jobs:
         run: |
           sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=45 -o Acquire::https::Timeout=45 update
           node scripts/qa/production/install-cjk.cjs
+      - name: Existing complete synthetic multipart fixtures for legacy backup regression
+        run: node --max-old-space-size=4096 scripts/qa/m2/generate-large.cjs "$NEXUS_QA_LARGE_DIR"
       - run: npm run test:unit
       - name: Candidate actual sources to document and preserved formats and backup compatibility
         run: |
@@ -66,6 +69,9 @@ jobs:
       - name: Candidate time-record workflow when present
         if: github.head_ref == 'codex/nexus-time-records' || github.ref_name == 'codex/nexus-time-records'
         run: npx playwright test tests/e2e/time-records.spec.cjs --workers=2 --reporter=list --trace on --output=time-https-results
+      - name: Transport original candidate review images
+        if: always()
+        run: node scripts/qa/candidate-review.cjs
       - name: Recompute every context asset and download byte hash
         run: |
           node scripts/qa/production/verify-monitor.cjs candidate-https-results > environment-evidence/candidate-integrity.json
@@ -85,4 +91,5 @@ jobs:
             candidate-https-results/
             time-https-results/
             test-results/
+            /tmp/nexus-m31-synthetic-complete/
           retention-days: 30

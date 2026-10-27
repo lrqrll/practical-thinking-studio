@@ -13,3 +13,5 @@ DOCX／HTML（及列印）在flush後，讀取已保存文件並檢查目前rev�
 測試與取證沿用PR17的全context/page監測，新增可指定候選expected資產檔與preview identity；原正式M模式不改綁候選。候選workflow核對自己head、獨立namespace及實際HTTPS每個根資產，禁止用正式42項當此功能驗收。每頁原始response bytes及實際下載hash可用verify-monitor離線重算，retries0/TLS驗證。舊v1/v2/v3與未知值fixture照舊完整還原；組裝遇未知內容另明確拒絕。新happy-path合成fixture明確移除原測試的未知qaPrivateAttribute以構成已知結構（只在測試記憶體衍生，不改原fixture或使用者資料）；原opaque fixture另有拒絕且原樣保留斷言。
 
 開發者驗證不等於Work親自操作；M2-NAV-01獨立操作等後續待辦保留但不當未重現產品P1停工。Safari/Firefox、實機觸控、完整螢幕閱讀器、原生OS選檔、Office/Calc及中文斜體字形未測。Excel取消／預算XLSX保留；斜體入口維持退休，舊marks相容。
+
+首輪候選161e26e的HTTPS22項通過＋5容量條件skipped，但嚴格取證器拒絕沒有導航的skipped空白context（run40462351872）。不是產品失敗，沒有放寬雜湊／資料比較或忽略空context；後續job提供原本既有108MB七包合成集合，讓該5案真正執行。另保存390px來源選擇與390／1280已保存重開PNG及原始bytes／SHA256傳輸；結果須看新SHA的原始CI，不沿用首輪綠燈。
