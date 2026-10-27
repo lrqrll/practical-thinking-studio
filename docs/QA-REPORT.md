@@ -1,3 +1,22 @@
+# 正式3.4.0：目前驗收狀態（2026-10-27）
+
+產品main／正式提交 `78e90aec61ca825d45534c93515df4d8f949a431`，tree `bba3bb3c0ae02afbfcfbeeeb7cee63f216c086b1`；PR #15已一次合併並部署。DOC-STATE-01（P2）：原文件仍稱正式3.3.0／待發布，與實際3.4.0不符。本文件PR只校正現況，沒有產品功能變更，尚未合併／部署。
+
+| 證據 | 實際狀態與界線 |
+|---|---|
+| [M main CI](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40428696084) | 開發者：25單元、93瀏覽器通過，1容量fixture分工skipped，15選取回歸、audit0；不把skip算通過 |
+| [M deployment verification](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40428696123)／[Pages](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40428695537) | 對應M成功；32公開資產符合M |
+| [正式37項執行](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40430565458) | **36通過＋1失敗**，不是單輪全綠 |
+| [後續舊文件控制補驗](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40430857549) | 1通過；明確核對原資料未改寫、編輯前後標準化段落與格式，未改正式產品 |
+| Work第一輪獨立核對（使用者回報） | main／parents／tree符合；32資產兩輪符合；19項另寫純模型通過，涵蓋金額、恢復、未知值、範本隔離、固定輸出、七包傳輸。**不代表**瀏覽器保存、真實下載、完整IDB還原或M2-NAV-01通過 |
+
+M2-NAV-01保留「未完整獨立驗收」；開發者測試不能自行解除。當前依序補強導航、真正文件含格式保存、多分頁／配額、來源及欄位變動後固定下載不變、舊資料原ID／rev相容、完整備份的實際下載再還原及缺／重／損／混包原子拒絕。新增結果以對應小PR及指定產品／工具SHA為準，不能把計畫當完成。
+
+限制：舊資料使用經3.3.0驗證的合成資料；沒有觸碰真人資料。Safari／Firefox、實機觸控、完整螢幕閱讀器、OS原生選檔視窗與Office／Calc未測。完整備份不含未保存草稿；記憶體／配額與格式上限保留。當前授權不含M3、合併main或再次正式部署。
+
+---
+# 以下為歷史版本、授權與驗證紀錄（非目前狀態）
+
 ## 3.4.0 發布準備（尚未合併／正式部署）
 
 本輪在凍結rc.2／59dff72的真正HTTPS以隔離合成資料執行21項操作全通過，含確認取消／恢復原ID值、兩實例隔離、固定輸出不變、M2-NAV-01、真正文件保存追加及v1/v2/v3／七包完整還原。這是開發者實際驗證，不是獨立QA；原始run40177583100與下載證據詳[既有結果索引](qa/m2-rc2/RESULTS.md)。
