@@ -68,3 +68,5 @@ npx playwright test tests/e2e/monitor-controls.spec.cjs --workers=1 --reporter=l
 ```
 
 正式整套仍使用原6個spec（document-save-drain新增1個混合字型案例）；負控制輸出獨立`monitor-control-results`，全正式輸出`production-https-results`。原始字型資料在`test-results/font-diagnosis/`。每個run完整工具SHA由checkout與log確認；新結果不得冒稱舊run重寫通過。M2-NAV-01維持未完整獨立驗收；瀏覽器／實機／輔具與原生選檔未測界線如前。
+
+包括`browser-environment.cjs`前置瀏覽器及字型診斷context，也沿用相同正式M監測。套件結束後執行`node scripts/qa/production/verify-monitor.cjs production-https-results`，離線重算所有live-response／實際下載bytes，檢查requestId到browser-response的context/page映射與關閉狀態；結果存`test-results/monitor-integrity.json`。Work可在artifact解壓後用相同指令，參數指向實際解壓的production-https-results目錄。工具負控制請另查monitor-control-results，不混入正式完整性Pass。

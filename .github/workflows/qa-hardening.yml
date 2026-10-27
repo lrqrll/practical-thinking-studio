@@ -64,10 +64,12 @@ jobs:
           sha256sum "$NEXUS_QA_LARGE_DIR/large-manifest.json" "$NEXUS_QA_LARGE_DIR/"*.nexuspart
       - name: Actual formal HTTPS hardened acceptance
         run: npx playwright test tests/e2e/production-legacy.spec.cjs tests/e2e/m2-ui.spec.cjs tests/e2e/qa-fixtures.spec.cjs tests/e2e/document-save-drain.spec.cjs tests/e2e/document.spec.cjs tests/e2e/ci-regressions.spec.cjs --workers=2 --reporter=list --trace on --output=production-https-results
+      - name: Recompute every context raw response and download evidence
+        run: node scripts/qa/production/verify-monitor.cjs production-https-results | tee test-results/monitor-integrity.json
       - name: Raw visual review transport (original PNG bytes, also in artifact)
         if: always()
         run: |
-          node -e 'const fs=require("node:fs"),path=require("node:path");for(const phase of ["before-cjk","after-cjk"]){const p="test-results/font-diagnosis/"+phase+"/"+phase+"-editor.png";if(fs.existsSync(p))console.log("QA_VISUAL_PNG "+phase+" "+fs.readFileSync(p).toString("base64"));}'
+          node -e 'const fs=require("node:fs"),path=require("node:path");for(const phase of ["before-cjk","after-cjk"]){for(const suffix of [".png","-editor.png"]){const p="test-results/font-diagnosis/"+phase+"/"+phase+suffix;if(fs.existsSync(p))console.log("QA_VISUAL_PNG "+phase+suffix+" "+fs.readFileSync(p).toString("base64"));}}'
       - name: Require exact M CI success and recheck formal Pages and 32 public assets
         run: node scripts/qa/production/identity.cjs after
       - uses: actions/upload-artifact@v4
