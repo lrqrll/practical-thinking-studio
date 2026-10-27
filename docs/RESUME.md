@@ -2,7 +2,9 @@
 
 先核對main `78e90aec61ca825d45534c93515df4d8f949a431`／tree `bba3bb3c0ae02afbfcfbeeeb7cee63f216c086b1`；正式3.4.0已由PR #15一次合併部署，不重合併#10～#14。工具[PR #17](https://github.com/lrqrll/practical-thinking-studio/pull/17)仍未合併，head `ab0551364946fb11868cc6f5f309ef45dc2fe64d`；文件[PR #16](https://github.com/lrqrll/practical-thinking-studio/pull/16)從 `abee0ab1525cf7b940c2b2e273957ead405a3de3`接續B，最新完整head以PR為準。若基線漂移先列差異，不沿用不符SHA的驗收。
 
-使用者本輪已有限授權A：M3.1文字成果組裝完整可操作閉環、B：結案文件／待辦分級、C：獨立工時紀錄最小版／adapter；[完整範圍及必要驗收](../ROADMAP.md)。A主要開發，B／C並行，不等B；A／C開發中，不標完成。舊「尚未授權M3」不再阻擋範圍內A，但不是整個M3／M4獲准。允許範圍內實作、修補、測試、分支、小PR及隔離預覽；不合併main、不正式部署、不auto-merge、不增AI／後端／帳號或其他大型功能。main更新會觸發Pages。
+A候選[PR #18](https://github.com/lrqrll/practical-thinking-studio/pull/18) head `2ff102580ffa22f5f77f65ff54ef10e385597c8d`（base工具ab055136）已實作凍結來源→document保存重開→DOCX／HTML；C候選[PR #19](https://github.com/lrqrll/practical-thinking-studio/pull/19) head `4992808262c81f12e21252b776384a517a130f68`（base A）已實作第九工時工具、整數合計、CSV／adapter及完整備份。兩者為3.5.0-rc.1開發者驗證，待Work有界複審；[A預覽](https://lrqrll.github.io/practical-thinking-studio-preview/m31-assembly/)與[含A的整合預覽](https://lrqrll.github.io/practical-thinking-studio-preview/m31/)隔離於正式資料，完整SHA、namespace、依賴、CI與歷史失敗見[交付紀錄](../ROADMAP.md)。
+
+使用者本輪已有限授權A：M3.1文字成果組裝完整可操作閉環、B：結案文件／待辦分級、C：獨立工時紀錄最小版／adapter；[完整範圍及必要驗收](../ROADMAP.md)。A主要開發，B／C並行，不等B；A／C候選已實作並經開發者驗證，待Work有界複審，不宣稱正式發布或獨立驗收完成。舊「尚未授權M3」不再阻擋範圍內A，但不是整個M3／M4獲准。允許範圍內實作、修補、測試、分支、小PR及隔離預覽；不合併main、不正式部署、不auto-merge、不增AI／後端／帳號或其他大型功能。main更新會觸發Pages。
 
 Work已對工具ab055136獨立程式／證據審查：42正式HTTPS項與另列4工具控制，47 context／57 page、2,129資源及29下載雜湊／映射，目視中文修後、保存等待追加、重開及混合格式；QA-FONT-01／QA-CONTEXT-01 CLOSED，未發現阻擋PR #17的P0／P1或其他明確問題。不是Work親自重演42項。保留36通過＋1失敗／後續1補驗通過、舊41、環境失敗／skipped；[QA報告](QA-REPORT.md)含原始CI及證據。
 

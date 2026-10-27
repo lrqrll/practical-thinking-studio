@@ -1,6 +1,8 @@
 # NEXUS
 
-正式版本 **3.4.0**，發布提交 `78e90aec61ca825d45534c93515df4d8f949a431`。Work已對未合併[QA工具PR #17](https://github.com/lrqrll/practical-thinking-studio/pull/17)的工具 `ab0551364946fb11868cc6f5f309ef45dc2fe64d`完成獨立證據／程式／視覺審查，QA-FONT-01與QA-CONTEXT-01結案；不代表親自重演42項操作。現已有限授權A：M3.1文字成果組裝、B：文件維護、C：工時紀錄，分線開發中，不宣稱A／C完成；不是整個M3／M4獲授權，不含合併main、正式部署或auto-merge。範圍見[路線圖](ROADMAP.md)，歷史失敗、未測與後續待辦見[QA報告](docs/QA-REPORT.md)及[已知問題](docs/KNOWN-ISSUES.md)。
+正式版本 **3.4.0**，發布提交 `78e90aec61ca825d45534c93515df4d8f949a431`。Work已對未合併[QA工具PR #17](https://github.com/lrqrll/practical-thinking-studio/pull/17)的工具 `ab0551364946fb11868cc6f5f309ef45dc2fe64d`完成獨立證據／程式／視覺審查，QA-FONT-01與QA-CONTEXT-01結案；不代表親自重演42項操作。現已有限授權A：M3.1文字成果組裝、B：文件維護、C：工時紀錄，A／C候選已實作並經開發者驗證，待Work有界複審；不是整個M3／M4獲授權，不含合併main、正式部署或auto-merge。範圍見[路線圖](ROADMAP.md)，歷史失敗、未測與後續待辦見[QA報告](docs/QA-REPORT.md)及[已知問題](docs/KNOWN-ISSUES.md)。
+
+A候選[PR #18](https://github.com/lrqrll/practical-thinking-studio/pull/18) head `2ff102580ffa22f5f77f65ff54ef10e385597c8d`（base工具ab055136）已實作凍結來源→document保存重開→DOCX／HTML；C候選[PR #19](https://github.com/lrqrll/practical-thinking-studio/pull/19) head `4992808262c81f12e21252b776384a517a130f68`（base A）已實作第九工時工具、整數合計、CSV／adapter及完整備份。兩者為3.5.0-rc.1開發者驗證，待Work有界複審；[A預覽](https://lrqrll.github.io/practical-thinking-studio-preview/m31-assembly/)與[含A的整合預覽](https://lrqrll.github.io/practical-thinking-studio-preview/m31/)隔離於正式資料，完整SHA、namespace、依賴、CI與歷史失敗見[交付紀錄](ROADMAP.md)。
 
 專業本機工作工具平台，部署於 GitHub Pages。八個現有工具與架構見 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)，規則見 [AGENTS.md](AGENTS.md)。
 

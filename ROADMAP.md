@@ -2,9 +2,22 @@
 
 正式3.4.0／產品M `78e90aec61ca825d45534c93515df4d8f949a431`／tree `bba3bb3c0ae02afbfcfbeeeb7cee63f216c086b1`已由PR #15部署，保持不變。未合併[工具PR #17](https://github.com/lrqrll/practical-thinking-studio/pull/17)工具head `ab0551364946fb11868cc6f5f309ef45dc2fe64d`的QA-FONT-01及QA-CONTEXT-01已由Work獨立程式／證據／視覺審查結案；42正式項與4工具控制分開，未親自重演全部42項。歷史36通過＋1失敗／後續1補驗通過、舊41、環境失敗及skipped見[QA報告](docs/QA-REPORT.md)。
 
-本次使用者已授權以下三線的程式實作、必要修補、測試、開發分支、小型PR與隔離預覽。A為主線，B／C並行，B不是A的前置條件；A／C仍開發中，不能以規格或入口空殼聲稱完成。此授權取代下方或其他歷史文件「尚未授權M3」對A的限制，僅限M3.1文字成果組裝；不代表整個M3／M4或其他大型功能獲准。不得合併main、正式部署或啟用auto-merge。
+本次使用者已授權以下三線的程式實作、必要修補、測試、開發分支、小型PR與隔離預覽。A為主線，B／C並行，B不是A的前置條件；A／C候選已實作並經開發者驗證，待Work有界複審；不能以候選通過聲稱正式站已更新。此授權取代下方或其他歷史文件「尚未授權M3」對A的限制，僅限M3.1文字成果組裝；不代表整個M3／M4或其他大型功能獲准。不得合併main、正式部署或啟用auto-merge。
 
-## A：M3.1文字成果組裝最小閉環（開發中）
+## 已交付候選與可操作預覽（開發者驗證，待Work有界複審）
+
+正式仍3.4.0／M `78e90aec61ca825d45534c93515df4d8f949a431`；以下為3.5.0-rc.1隔離候選，不是main合併或正式部署，不再擴充其他M3功能。
+
+| 線別 | 精確head及依賴 | 已實作／驗證與預覽 |
+|---|---|---|
+| [A／PR #18](https://github.com/lrqrll/practical-thinking-studio/pull/18) | `2ff102580ffa22f5f77f65ff54ef10e385597c8d`，base工具PR #17 `ab0551364946fb11868cc6f5f309ef45dc2fe64d` | 兩份來源挑選／排序→凍結已保存資料→普通document編輯／保存重開→真實DOCX／HTML下載；來源後改不連動。[預覽m31-assembly](https://lrqrll.github.io/practical-thinking-studio-preview/m31-assembly/)，namespace `m31-assembly` |
+| [C／PR #19](https://github.com/lrqrll/practical-thinking-studio/pull/19) | `4992808262c81f12e21252b776384a517a130f68`，base A `2ff102580ffa22f5f77f65ff54ef10e385597c8d`；整合A開發分支保留歷史，index衝突以新增兩線入口處理 | 第九工具工時紀錄：整數分鐘合計、編輯／篩選／保存重開、真實CSV、版本化adapter及完整備份還原。[整合預覽m31](https://lrqrll.github.io/practical-thinking-studio-preview/m31/)，namespace `m31-integrated`／DB `nexus-preview-m31-integrated-workspace`；含A閉環 |
+
+[A HTTPS 40462812589](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40462812589)成功：27 Pass／0 skipped，含5項舊格式／108MB分包真實下載／第二context還原回歸。[A Quality 40462812660](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40462812660)成功：31單元、104瀏覽器、15選取回歸、audit0，5條件skipped另列，不算通過。[C HTTPS 40463068703](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40463068703)成功：27組裝／舊文件／備份案例及另列5工時案例、37單元；[C Quality 40463068723](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40463068723)成功。以上皆開發者驗證，對應各候選SHA，不借正式M的42項替代；仍待Work有界複審及既有未測邊界。
+
+保留候選失敗：A首候選 `161e26ec933f9bb2958aafb674985950c3314bfa` 的run40462351872為22 Pass／5 skipped，嚴格monitor verifier因skipped空白context沒有資產而失敗；後續供既有108MB fixture實際執行5項，不刪斷言或放寬校驗。C首輪33 Pass／5 skipped／1 Fail為alias問題；修正後針對性14 Pass，再以上述整合候選驗證，不把首次結果改成全綠。
+
+## A：M3.1文字成果組裝最小閉環（候選已實作／開發者驗證，待Work複審）
 
 - 在工作台及工作空間提供「組裝成果」。首批僅既有固定成果schema1／2與文字備忘錄；由使用者挑來源及內容（報價、需求／建議、決策備忘、自訂欄位、備忘文字／清單），填名稱、排序及移除區塊，不預設全選。
 - 建立時以**單次唯讀交易**取得選定來源的已保存版本，驗證後凍結；提示未保存輸入不包含。刪除／失效／未知格式／無法完整呈現須要求修正或重新選擇，無效金額不得變零。取消不得留下半份檔案。凍結後不讀活來源，改名／改值／垃圾桶不得改寫成果。
@@ -18,7 +31,7 @@
 
 接續獨立[PR #16](https://github.com/lrqrll/practical-thinking-studio/pull/16)，一致更新README、AGENTS、QA、KNOWN-ISSUES、RESUME、ROADMAP與M2契約摘要；分開產品M、未合併工具與歷史。記錄Work結案，不宣稱親自重演。待辦分嚴重度、產品問題／驗收缺口、具體驗收及回歸觸發。只做diff、連結、SHA與狀態檢查，不新增產品測試、不重跑42項、不擴成全站QA專案。
 
-## C：工時紀錄最小版（開發中）
+## C：工時紀錄最小版（候選已實作／開發者驗證，待Work複審）
 
 - 新增獨立工時工具並保留原八工具。每列穩定ID、有效YYYY-MM-DD、專案／分類、工作項目、1–1440整數分鐘、備註，最多500列；空白／零／負數／非整數／無效日期明確提示。
 - 用安全整數分鐘合計，顯示小時＋分鐘；新增、編輯、刪除確認或可復原、日期篩選、專案合計、保存重開及真實CSV。篩選、合計與CSV範圍一致且明示，中文／引號／換行／公式字首安全。

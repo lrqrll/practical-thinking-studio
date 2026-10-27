@@ -1,6 +1,6 @@
 # 正式3.4.0：目前驗收狀態（2026-10-27）
 
-產品main／正式提交 `78e90aec61ca825d45534c93515df4d8f949a431`，tree `bba3bb3c0ae02afbfcfbeeeb7cee63f216c086b1`；PR #15已一次合併並部署。文件[PR #16](https://github.com/lrqrll/practical-thinking-studio/pull/16)續作DOC-STATE-01／B維護線，仍為獨立文件候選；[工具PR #17](https://github.com/lrqrll/practical-thinking-studio/pull/17)仍開啟、未合併，工具head `ab0551364946fb11868cc6f5f309ef45dc2fe64d`，不改產品M。A／C開發中，以下正式M結果不能代表新功能候選驗收。
+產品main／正式提交 `78e90aec61ca825d45534c93515df4d8f949a431`，tree `bba3bb3c0ae02afbfcfbeeeb7cee63f216c086b1`；PR #15已一次合併並部署。文件[PR #16](https://github.com/lrqrll/practical-thinking-studio/pull/16)續作DOC-STATE-01／B維護線，仍為獨立文件候選；[工具PR #17](https://github.com/lrqrll/practical-thinking-studio/pull/17)仍開啟、未合併，工具head `ab0551364946fb11868cc6f5f309ef45dc2fe64d`，不改產品M。A／C已有實作及自己的候選驗證，待Work有界複審；以下正式M結果不能代表新功能候選驗收。
 
 | 證據 | 實際狀態與界線 |
 |---|---|
@@ -22,6 +22,19 @@ M2-NAV-01仍未完整獨立操作，是驗收缺口；歷史產品風險及開�
 本輪有限授權A：M3.1文字成果組裝、B：文件維護、C：工時紀錄；實作／驗收範圍見[路線圖](../ROADMAP.md)，不代表整個M3／M4獲准，不含合併main、正式部署或auto-merge。B與A／C並行，只做文件diff、連結、SHA與狀態核對，不新增產品測試。新功能須對自己的候選SHA／隔離預覽驗收，不能用正式M的42項冒充。
 
 未測／限制：Safari／Firefox、實機觸控、完整螢幕閱讀器、OS原生選檔、Office／Calc與中文斜體字形；舊資料僅經3.3.0驗證的合成資料，未碰真人設定檔。完整備份不含未保存草稿；格式、記憶體、配額與容量限制仍在。斜體入口退休、舊marks相容保留；Excel產品取消，預算及XLSX保留。
+
+## 已交付候選與可操作預覽（開發者驗證，待Work有界複審）
+
+正式仍3.4.0／M `78e90aec61ca825d45534c93515df4d8f949a431`；以下為3.5.0-rc.1隔離候選，不是main合併或正式部署，不再擴充其他M3功能。
+
+| 線別 | 精確head及依賴 | 已實作／驗證與預覽 |
+|---|---|---|
+| [A／PR #18](https://github.com/lrqrll/practical-thinking-studio/pull/18) | `2ff102580ffa22f5f77f65ff54ef10e385597c8d`，base工具PR #17 `ab0551364946fb11868cc6f5f309ef45dc2fe64d` | 兩份來源挑選／排序→凍結已保存資料→普通document編輯／保存重開→真實DOCX／HTML下載；來源後改不連動。[預覽m31-assembly](https://lrqrll.github.io/practical-thinking-studio-preview/m31-assembly/)，namespace `m31-assembly` |
+| [C／PR #19](https://github.com/lrqrll/practical-thinking-studio/pull/19) | `4992808262c81f12e21252b776384a517a130f68`，base A `2ff102580ffa22f5f77f65ff54ef10e385597c8d`；整合A開發分支保留歷史，index衝突以新增兩線入口處理 | 第九工具工時紀錄：整數分鐘合計、編輯／篩選／保存重開、真實CSV、版本化adapter及完整備份還原。[整合預覽m31](https://lrqrll.github.io/practical-thinking-studio-preview/m31/)，namespace `m31-integrated`／DB `nexus-preview-m31-integrated-workspace`；含A閉環 |
+
+[A HTTPS 40462812589](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40462812589)成功：27 Pass／0 skipped，含5項舊格式／108MB分包真實下載／第二context還原回歸。[A Quality 40462812660](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40462812660)成功：31單元、104瀏覽器、15選取回歸、audit0，5條件skipped另列，不算通過。[C HTTPS 40463068703](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40463068703)成功：27組裝／舊文件／備份案例及另列5工時案例、37單元；[C Quality 40463068723](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40463068723)成功。以上皆開發者驗證，對應各候選SHA，不借正式M的42項替代；仍待Work有界複審及既有未測邊界。
+
+保留候選失敗：A首候選 `161e26ec933f9bb2958aafb674985950c3314bfa` 的run40462351872為22 Pass／5 skipped，嚴格monitor verifier因skipped空白context沒有資產而失敗；後續供既有108MB fixture實際執行5項，不刪斷言或放寬校驗。C首輪33 Pass／5 skipped／1 Fail為alias問題；修正後針對性14 Pass，再以上述整合候選驗證，不把首次結果改成全綠。
 
 ---
 # 以下為歷史版本、授權與驗證紀錄（非目前狀態）
@@ -170,7 +183,6 @@ PR #4 已批准合併部署；PR #5 追加修正尚未批准。完成追加發�
 12單元、本機65項完整瀏覽器先通過；新增工作台管理與手機捲動修正後，11項M1實際流程及2項響應式／axe再通過。最終66項回歸與HTTPS候選證據以PR checks為準；不把舊有工具回歸當M1驗收。
 
 規格與驗收涵蓋見WORKBENCH-M1.md。手機新增捲動曾被axe正確攔下不可鍵盤聚焦，補region/label/tabindex後通過；管理測試也補了真正保存還原後重開。未刪案例或放寬斷言。
-
 
 ## 2026-10-24 完整備份容量 P1 修正候選
 

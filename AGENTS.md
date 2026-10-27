@@ -20,3 +20,5 @@
 - 正式版本3.4.0，main基線78e90aec61ca825d45534c93515df4d8f949a431／tree bba3bb3c0ae02afbfcfbeeeb7cee63f216c086b1不變。使用者本次已有限授權A：M3.1文字成果組裝完整垂直閉環、B：結案文件及待辦分級、C：獨立工時紀錄最小版及adapter；範圍／驗收見ROADMAP.md。A為主線，B／C並行，不等待B；不把本輪授權擴成整個M3／M4，不含合併main、正式部署、auto-merge或其他大型功能。main更新會觸發Pages。沿用docs/WORKBENCH-M2.md契約，不清除未知欄位、不改寫舊成果。
 - 新結果一律標「開發者驗證」。Work已獨立審查工具ab0551364946fb11868cc6f5f309ef45dc2fe64d的程式、42正式HTTPS項與另列4工具控制之證據，核對47 context／57 page、2,129筆資源及29筆下載與映射並目視中文修後、保存追加／重開／混合格式；QA-FONT-01及QA-CONTEXT-01結案，未發現阻擋PR #17的P0／P1或其他明確問題。PR #17仍未合併，正式產品M未變；不冒稱Work親自重演42項。保留36通過＋1失敗／後續1補驗通過、舊41、環境失敗及skipped。M2-NAV-01未完整獨立操作是驗收缺口，不是已確認未修產品P1，不無限期阻擋A。
 - A／C須使用自己的候選SHA及隔離HTTPS namespace驗收，全新context與合成資料，沿用全context／page監測、TLS及retries=0；先跑相關測試，共用保存／匯入／導航變更才擴到受影響回歸。正式M的42項不得冒充候選驗收。B只做文件diff／連結／SHA／狀態核對，不新增產品測試或重跑42項。
+
+- 當前已實作候選：A PR #18 `2ff102580ffa22f5f77f65ff54ef10e385597c8d`（base工具ab055136）；C PR #19 `4992808262c81f12e21252b776384a517a130f68`（base A）。皆3.5.0-rc.1開發者驗證、待Work有界複審；預覽／依賴／新CI及首次失敗見ROADMAP.md與docs/QA-REPORT.md，不冒稱正式發布或獨立驗收完成。
