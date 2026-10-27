@@ -14,7 +14,7 @@ jobs:
       NEXUS_QA_SITE_URL: https://lrqrll.github.io/practical-thinking-studio/
       NEXUS_QA_FIXTURE_REF: 59dff72bb55a77c371863d6e8a998529b1997bf0
       NEXUS_CAPTURE_EVIDENCE: '1'
-      NEXUS_QA_LARGE_DIR: ${{ runner.temp }}/production-synthetic-complete
+      NEXUS_QA_LARGE_DIR: /tmp/nexus-production-synthetic-complete
     steps:
       - uses: actions/checkout@v4
         with:
@@ -43,5 +43,5 @@ jobs:
             test-results/
             production-https-results/
             playwright-report/
-            ${{ runner.temp }}/production-synthetic-complete/
+            /tmp/nexus-production-synthetic-complete/
           retention-days: 30
