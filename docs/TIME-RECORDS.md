@@ -52,3 +52,9 @@
 專用測試位於 `tests/unit/time-records.test.cjs` 與 `tests/e2e/time-records.spec.cjs`，沿用現有全 context／page monitor，TLS 驗證不關閉，retries=0。瀏覽器涵蓋 390px／桌面、深淺模式、axe、真實 CSV 與完整備份下載、空白第二 context 還原、CAS、保存失敗與無效原始草稿復原。候選 HTTPS 的精確 SHA、原始證據與部署狀態由整合交付記錄提供。
 
 Safari／Firefox、實機觸控、完整螢幕閱讀器及 OS 原生選檔仍未驗；未新增計時器、費率薪資、同步、AI 或後端。
+
+## 本輪開發整合依賴
+
+C平行從QA PR17 ab055136開發，之後以開發分支Merge Commit整合A PR18（codex/nexus-m31-assembly）；C PR以A分支為base，只審查工時增量及必要衝突整合，沒有合併main或#6/#7。index衝突保留A所有載入、版本與組裝入口，再加time-model（storage之前）、time-ui（workspace之前）及time CSS。候選3.5.0-rc.1使用m31-integrated命名空間，DB nexus-preview-m31-integrated-workspace／草稿nexus-preview-m31-integrated-recovery:，不讀正式或A獨立預覽資料。C候選同時可操作A＋C，但不把A舊SHA的結果當C整合SHA通過。
+
+本機整合後37單元、A/C/preview 12瀏覽器通過；最終HTTPS與原始checks另以本PR head為準。舊回歸初次33Pass／5容量skip／1Fail是新增工具搜尋alias缺漏；已修正並通過C＋files14項回歸，不隱藏首輪失敗。條件容量案例在候選workflow供既有完整七包實跑，通用job skip不冒稱通過。所有結果均為開發者驗證，Work後續有界複審。
