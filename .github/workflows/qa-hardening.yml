@@ -1,0 +1,87 @@
+name: NEXUS 3.4.0 QA hardening (developer verification)
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  production:
+    if: github.head_ref == 'codex/nexus-3.4.0-qa-hardening' || github.ref == 'refs/heads/codex/nexus-3.4.0-qa-hardening'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      NEXUS_M2_SITE_URL: https://lrqrll.github.io/practical-thinking-studio/
+      NEXUS_QA_SITE_URL: https://lrqrll.github.io/practical-thinking-studio/
+      NEXUS_QA_FIXTURE_REF: 59dff72bb55a77c371863d6e8a998529b1997bf0
+      NEXUS_CAPTURE_EVIDENCE: '1'
+      NEXUS_FORMAL_VERIFY: '1'
+      NEXUS_QA_LARGE_DIR: /tmp/nexus-production-synthetic-complete
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Exact M main/parents/tree/Pages/32 assets and original 3.3.0 compatibility validators
+        run: node scripts/qa/production/identity.cjs before
+      - name: Select existing Chrome or install bounded Chromium prerequisites
+        timeout-minutes: 5
+        run: |
+          for candidate in /usr/bin/google-chrome /usr/bin/google-chrome-stable /opt/google/chrome/chrome; do
+            if [ -x "$candidate" ]; then
+              "$candidate" --version
+              printf 'NEXUS_CHROMIUM=%s\n' "$candidate" >> "$GITHUB_ENV"
+              exit 0
+            fi
+          done
+          npx playwright install --with-deps chromium
+      - name: Preserve original runner CJK rendering before environment fix
+        run: node scripts/qa/production/font-evidence.cjs before-cjk
+      - name: Install CI-only CJK fallback (no product changes)
+        timeout-minutes: 5
+        run: |
+          sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=45 -o Acquire::https::Timeout=45 update
+          node scripts/qa/production/install-cjk.cjs
+      - name: Capture readable CJK rendering and actual platform fonts
+        run: node scripts/qa/production/font-evidence.cjs after-cjk
+      - name: Monitor synthetic negative controls (not production acceptance)
+        run: npx playwright test tests/e2e/monitor-controls.spec.cjs --workers=1 --reporter=list --trace on --output=monitor-control-results
+      - name: Verify actual browser dependencies TLS and required application APIs
+        run: node scripts/qa/production/browser-environment.cjs
+      - name: Generate complete seven-part synthetic backup from frozen models
+        run: node --max-old-space-size=4096 scripts/qa/m2/generate-large.cjs "$NEXUS_QA_LARGE_DIR"
+      - name: Record tool and synthetic fixture hashes
+        run: |
+          git rev-parse HEAD
+          sha256sum docs/qa/m2-rc2/fixture-manifest.json docs/qa/m2-rc2/fixtures/*
+          sha256sum "$NEXUS_QA_LARGE_DIR/large-manifest.json" "$NEXUS_QA_LARGE_DIR/"*.nexuspart
+      - name: Actual formal HTTPS hardened acceptance
+        run: npx playwright test tests/e2e/production-legacy.spec.cjs tests/e2e/m2-ui.spec.cjs tests/e2e/qa-fixtures.spec.cjs tests/e2e/document-save-drain.spec.cjs tests/e2e/document.spec.cjs tests/e2e/ci-regressions.spec.cjs --workers=2 --reporter=list --trace on --output=production-https-results
+      - name: Recompute every context raw response and download evidence
+        run: |
+          node scripts/qa/production/verify-monitor.cjs production-https-results > test-results/monitor-integrity.json
+          cat test-results/monitor-integrity.json
+      - name: Raw visual review transport (original PNG bytes, also in artifact)
+        if: always()
+        run: |
+          node scripts/qa/production/print-visual.cjs
+      - name: Require exact M CI success and recheck formal Pages and 32 public assets
+        run: node scripts/qa/production/identity.cjs after
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: NEXUS-3.4.0-M-78e90aec-production-evidence
+          path: |
+            test-results/
+            environment-evidence/
+            production-https-results/
+            monitor-control-results/
+            playwright-report/
+            /tmp/nexus-production-synthetic-complete/
+          retention-days: 30
