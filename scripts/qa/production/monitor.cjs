@@ -1,7 +1,7 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),{createHash}=require('node:crypto');
 const sha=b=>createHash('sha256').update(b).digest('hex');
-const required=r=>['document','script','stylesheet','font'].includes(r.resourceType());
+const required=r=>['document','script','stylesheet','font'].includes(r.resourceType())||/\/(pdfmake-vendor\.js|pdf-model\.js|pdf-noto-tc-(regular|bold)\.ttf|pdf-font-coverage\.json)(\?|$)/.test(r.url());
 async function ready(page){await page.evaluate(async()=>{await document.fonts.ready;await new Promise(ok=>requestAnimationFrame(()=>requestAnimationFrame(ok)));});}
 // One session per test. Install on browser.newContext BEFORE any page/navigation.
 // A supplied fetchResponse is exclusively for separately labelled synthetic negative controls.

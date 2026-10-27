@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),{execFileSync}=require('node:child_process');
 const root=path.resolve(__dirname,'..'),out=path.resolve(process.argv[2]||path.join(root,'dist-preview'));
 if(out===root||root.startsWith(out+path.sep))throw Error('Output must not replace the checkout');
-const files=execFileSync('git',['ls-files','-z'],{cwd:root,encoding:'utf8'}).split('\0').filter(f=>f&&!f.includes('/')&&(f==='.nojekyll'||/\.(html|js|css|woff2|txt)$/.test(f)));
+const files=execFileSync('git',['ls-files','-z'],{cwd:root,encoding:'utf8'}).split('\0').filter(f=>f&&!f.includes('/')&&(f==='.nojekyll'||f==='pdf-font-coverage.json'||/\.(html|js|css|woff2|ttf|txt)$/.test(f)));
 execFileSync('git',['diff','--exit-code','HEAD','--',...files],{cwd:root,stdio:'pipe'});
 const commit=execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim();
 const version=JSON.parse(fs.readFileSync(path.join(root,'package.json'))).version;

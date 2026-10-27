@@ -6,3 +6,6 @@ timing-stress-results/
 environment-evidence/
 monitor-control-results/
 production-https-results/
+
+pdf-*-results/
+m32-*-results/

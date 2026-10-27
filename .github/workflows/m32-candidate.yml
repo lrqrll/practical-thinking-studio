@@ -1,0 +1,80 @@
+name: M3.2 PDF and assembly candidate (developer verification)
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidate:
+    if: github.head_ref == 'codex/nexus-m32-pdf' || github.head_ref == 'codex/nexus-m32-ux' || github.ref == 'refs/heads/codex/nexus-m32-pdf' || github.ref == 'refs/heads/codex/nexus-m32-ux'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      NEXUS_CAPTURE_EVIDENCE: '1'
+      NEXUS_PREVIEW_VERIFY: '1'
+      NEXUS_EXPECTED_ASSETS_FILE: environment-evidence/candidate-assets.json
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Bind own SHA and preview namespace
+        env:
+          TASK_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          if [ "$TASK_BRANCH" = 'codex/nexus-m32-ux' ]; then
+            echo 'NEXUS_M2_SITE_URL=https://lrqrll.github.io/practical-thinking-studio-preview/m32/' >> "$GITHUB_ENV"
+            echo 'NEXUS_PREVIEW_NAMESPACE=m32-integrated' >> "$GITHUB_ENV"
+          else
+            echo 'NEXUS_M2_SITE_URL=https://lrqrll.github.io/practical-thinking-studio-preview/m32-pdf/' >> "$GITHUB_ENV"
+            echo 'NEXUS_PREVIEW_NAMESPACE=m32-pdf' >> "$GITHUB_ENV"
+          fi
+      - run: npm run build:preview
+      - name: Bounded deployment gate before product tests
+        run: |
+          node - <<'JS'
+          const {execFileSync}=require('child_process');const head=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();(async()=>{for(let i=0;i<12;i++){const r=await fetch(process.env.NEXUS_M2_SITE_URL+'deployment.json',{signal:AbortSignal.timeout(10000),cache:'no-store'});if(r.ok&&(await r.json()).commit===head)return;await new Promise(ok=>setTimeout(ok,10000));}throw Error('Preview not deployed at this SHA; environment gate, no product test ran');})().catch(e=>{console.error(e);process.exitCode=1;});
+          JS
+      - run: node scripts/qa/candidate-assets.cjs
+      - name: Existing compatible Chrome and PDF inspection tools
+        timeout-minutes: 5
+        run: |
+          echo 'NEXUS_CHROMIUM=/usr/bin/google-chrome' >> "$GITHUB_ENV"
+          sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=45 -o Acquire::https::Timeout=45 update
+          sudo apt-get -o Acquire::Retries=0 install -y poppler-utils
+          node scripts/qa/production/install-cjk.cjs
+          mkdir -p environment-evidence
+          google-chrome --version > environment-evidence/browser.txt
+          pdftoppm -v 2> environment-evidence/poppler.txt
+      - run: npm run test:unit
+      - name: Real HTTPS PDF and preserved document/assembly workflows
+        run: npx playwright test tests/e2e/pdf.spec.cjs tests/e2e/document.spec.cjs tests/e2e/document-save-drain.spec.cjs tests/e2e/assembly.spec.cjs --workers=2 --reporter=list --trace on --output=m32-https-results
+      - name: Integrated simplified assembly when present
+        if: github.head_ref == 'codex/nexus-m32-ux' || github.ref_name == 'codex/nexus-m32-ux'
+        run: npx playwright test tests/e2e/assembly-ux.spec.cjs --workers=2 --reporter=list --trace on --output=m32-ux-results
+      - name: Separate synthetic negative controls, never product failure evidence
+        run: npx playwright test tests/e2e/pdf-controls.spec.cjs --workers=1 --reporter=list --trace on --output=m32-control-results
+      - name: Recompute all actual loaded bytes and downloads
+        run: |
+          node scripts/qa/production/verify-monitor.cjs m32-https-results > environment-evidence/m32-integrity.json
+          if [ -d m32-ux-results ]; then node scripts/qa/production/verify-monitor.cjs m32-ux-results > environment-evidence/m32-ux-integrity.json; fi
+          node scripts/qa/candidate-assets.cjs
+      - name: PDF hashes and original rendered pages
+        if: always()
+        run: node scripts/qa/m32-evidence.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: M32-developer-evidence
+          path: |
+            environment-evidence/
+            m32-https-results/
+            m32-ux-results/
+            m32-control-results/
+            test-results/
+          retention-days: 30

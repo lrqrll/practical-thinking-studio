@@ -1,5 +1,7 @@
 ## 3.4.0 發布準備（尚未合併／正式部署）
 
+M3.2直接PDF分支驗證規格及實際結果連結見docs/M32-PDF.md與本輪PR。正式3.4.0仍M78e90aec；新候選不是正式發布，不改寫以下原始失敗／補驗歷史。
+
 本輪在凍結rc.2／59dff72的真正HTTPS以隔離合成資料執行21項操作全通過，含確認取消／恢復原ID值、兩實例隔離、固定輸出不變、M2-NAV-01、真正文件保存追加及v1/v2/v3／七包完整還原。這是開發者實際驗證，不是獨立QA；原始run40177583100與下載證據詳[既有結果索引](qa/m2-rc2/RESULTS.md)。
 
 3.4.0分支僅更新版本／資產快取鍵、預覽專用DB／草稿命名空間，並有精確diff守衛；正式nexus-workspace、資料庫版本1、資料模型與所有儲存邏輯未改。新預覽m2-release/使用nexus-preview-workbench-m2-release-workspace／nexus-preview-workbench-m2-release-recovery:，不讀舊預覽或正式資料；同origin不是安全來源邊界。原m2/保持rc.2／59及原資料命名空間。

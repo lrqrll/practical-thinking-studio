@@ -1,0 +1,40 @@
+{
+  "pdfmake": {
+    "version": "0.2.23",
+    "url": "https://registry.npmjs.org/pdfmake/-/pdfmake-0.2.23.tgz",
+    "archiveSha256": "67edefd6e3927941f3fef9481d989662b27b4f890410e082c97aa5734c6ab4a1",
+    "license": "MIT"
+  },
+  "font": {
+    "url": "https://raw.githubusercontent.com/google/fonts/a4c0b21f839d7ac65a7d8b49eb81bddd110774a3/ofl/notosanstc/NotoSansTC%5Bwght%5D.ttf",
+    "sourceSha256": "864727d210d54f2537bbe23b3a839436c3992af72de9322af5270897246bd44f",
+    "license": "SIL OFL 1.1, reserved Source; static renamed NEXUS Noto TC",
+    "transformation": "fontTools 4.61.1 instantiate wght=400/700, deterministic original timestamp, names and weight flags; scripts/pdf/build-fonts.py"
+  },
+  "assets": {
+    "pdfmake-vendor.js": {
+      "bytes": 1399635,
+      "sha256": "4410187c36ed6dd8cbfbaeea5b6fab6244238b3479c6de1cfe125d2c61fc2ba0"
+    },
+    "pdf-noto-tc-regular.ttf": {
+      "bytes": 7149204,
+      "sha256": "4bcb27c73e68b790d3343ba1a057c6c358b735ec18246935cd35f057b32ea63c"
+    },
+    "pdf-noto-tc-bold.ttf": {
+      "bytes": 7143740,
+      "sha256": "4adc5ee4a09121f410df28f39a88f9cfb0e468b5e4217e2210c50c280145dab6"
+    },
+    "pdf-font-coverage.json": {
+      "bytes": 124960,
+      "sha256": "cd2eb8e911f9387c8c37dd4ae3dfdd1e845c3d11bf1d1ad93cc06eefdd7b88a1"
+    },
+    "PDF-FONT-OFL.txt": {
+      "bytes": 4388,
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+    },
+    "PDFMAKE-LICENSE.txt": {
+      "bytes": 1134,
+      "sha256": "963c9bfe4117623556e66c36524176bf38948b749e983c35af93c961caad8ce9"
+    }
+  }
+}

@@ -3,7 +3,7 @@ const {chromium}=require('@playwright/test');
 (async()=>{
  const url=process.env.NEXUS_SITE_URL||'https://lrqrll.github.io/practical-thinking-studio/';
  if(!url.startsWith('https://lrqrll.github.io/'))throw Error('Unexpected deployment host');
- const browser=await chromium.launch();
+ const browser=await chromium.launch(process.env.NEXUS_CHROMIUM?{executablePath:process.env.NEXUS_CHROMIUM,args:['--no-sandbox']}: {});
  try{
   const page=await browser.newPage();const errors=[];
   page.on('pageerror',e=>errors.push(e.message));

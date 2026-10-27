@@ -1,5 +1,5 @@
 'use strict';
-const BRAND=Object.freeze({name:'NEXUS',version:'3.5.0-rc.1'});
+const BRAND=Object.freeze({name:'NEXUS',version:'3.6.0-rc.1'});
 const DEPLOYMENT=Object.freeze(typeof window!=='undefined'&&window.NEXUS_DEPLOYMENT||{channel:'production',commit:null});
 const IS_PREVIEW=DEPLOYMENT.channel==='preview'||(typeof location!=='undefined'&&location.pathname.includes('/practical-thinking-studio-preview/'));
 const PREVIEW_NAMESPACE=typeof DEPLOYMENT.namespace==='string'&&/^[a-z0-9-]{1,60}$/.test(DEPLOYMENT.namespace)?DEPLOYMENT.namespace:'m31-assembly';

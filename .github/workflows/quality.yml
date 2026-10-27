@@ -20,7 +20,20 @@ jobs:
       - run: npm ci --ignore-scripts
       - name: Install Chromium and OS prerequisites
         timeout-minutes: 5
-        run: npx playwright install --with-deps chromium
+        run: |
+          if [ -x /usr/bin/google-chrome ]; then
+            echo 'NEXUS_CHROMIUM=/usr/bin/google-chrome' >> "$GITHUB_ENV"
+            /usr/bin/google-chrome --version
+          else
+            npx playwright install --with-deps chromium
+          fi
+      - name: PDF parser and renderer for actual download tests
+        timeout-minutes: 5
+        run: |
+          if ! command -v pdftoppm >/dev/null; then
+            sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=45 -o Acquire::https::Timeout=45 update
+            sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=45 -o Acquire::https::Timeout=45 install -y poppler-utils
+          fi
       - run: npm test
       - name: Repeat native selection regressions without retries
         run: npx playwright test tests/e2e/ci-regressions.spec.cjs tests/e2e/document.spec.cjs --grep 'native navigation|font, size' --repeat-each=5 --reporter=list --output=timing-stress-results
