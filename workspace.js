@@ -1,7 +1,7 @@
 'use strict';
 let viewLoading=false,viewReadyHash=null;
 let deletedFolders=[],currentFolder='all',selected=new Set(),fileSort='updated',toolCategory='',toolQuery='',fileQuery='',renderToken=0,ready=false;
-const TOOL_ALIASES={document:'word doc docx 文件 編輯器 文字 排版 企劃書 合約',notes:'note memo 記事 筆記 備忘錄 清單 待辦',tasks:'task todo project 專案 待辦 任務 排程 工作 時程',budget:'budget excel xlsx 成本 財務 利潤 報表 預算 損益',quotes:'quote vendor 採購 廠商 比價 報價',slides:'slides ppt powerpoint 簡報 提案 大綱',report:'report 報告 回報 週報 月報 報表',minutes:'minutes meeting 會議 紀錄 決議'};
+const TOOL_ALIASES={'time-records':'time timesheet hours 工時 時間 分鐘 專案 紀錄',document:'word doc docx 文件 編輯器 文字 排版 企劃書 合約',notes:'note memo 記事 筆記 備忘錄 清單 待辦',tasks:'task todo project 專案 待辦 任務 排程 工作 時程',budget:'budget excel xlsx 成本 財務 利潤 報表 預算 損益',quotes:'quote vendor 採購 廠商 比價 報價',slides:'slides ppt powerpoint 簡報 提案 大綱',report:'report 報告 回報 週報 月報 報表',minutes:'minutes meeting 會議 紀錄 決議'};
 function nearWord(a,b){if(Math.abs(a.length-b.length)>1||Math.min(a.length,b.length)<4)return false;if(a.length===b.length){const diff=[];for(let i=0;i<a.length;i++)if(a[i]!==b[i])diff.push(i);return diff.length===1||diff.length===2&&diff[1]===diff[0]+1&&a[diff[0]]===b[diff[1]]&&a[diff[1]]===b[diff[0]];}let i=0,j=0,edits=0;while(i<a.length&&j<b.length){if(a[i]===b[j]){i++;j++;}else{if(++edits>1)return false;if(a.length>b.length)i++;else j++;}}return true;}
 function toolMatches(t,q){q=q.toLowerCase().trim();if(!q)return true;const hay=(t.name+' '+t.desc+' '+TOOL_ALIASES[t.id]).toLowerCase();if(hay.includes(q))return true;const aliases=TOOL_ALIASES[t.id].toLowerCase().split(/\s+/);if(aliases.some(x=>x.length>=2&&q.includes(x)))return true;return hay.split(/\s+/).some(x=>nearWord(q,x));}
 

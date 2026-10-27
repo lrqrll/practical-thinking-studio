@@ -3,10 +3,10 @@ const assert=require('node:assert/strict');
 const vm=require('node:vm');
 const fs=require('node:fs');
 const context=vm.createContext({structuredClone,TextDecoder,crypto,console});
-for(const f of ['media-model.js','document-model.js','storage.js','tools-core.js'])vm.runInContext(fs.readFileSync(f,'utf8'),context);
+for(const f of ['time-model.js','media-model.js','document-model.js','storage.js','tools-core.js'])vm.runInContext(fs.readFileSync(f,'utf8'),context);
 const run=code=>vm.runInContext(code,context);
-test('valid blank records for all eight formal tools',()=>{
- for(const type of ['document','notes','tasks','budget','quotes','slides','report','minutes'])assert.equal(run(`NexusStore.validData('${type}',blankData('${type}'))`),true);
+test('valid blank records for all nine formal tools',()=>{
+ for(const type of ['time-records','document','notes','tasks','budget','quotes','slides','report','minutes'])assert.equal(run(`NexusStore.validData('${type}',blankData('${type}'))`),true);
 });
 test('reject invalid numbers, malformed notes and dangerous links',()=>{
  for(const code of ["({...blankData('budget'),budget:{...blankState().budget,people:1.5}})","({budget:{...blankState().budget,price:Infinity}})"])assert.equal(run(`NexusStore.validData('budget',${code})`),false);
