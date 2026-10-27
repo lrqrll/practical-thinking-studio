@@ -1,6 +1,6 @@
 # NEXUS
 
-正式版本 **3.4.0**，發布提交 `78e90aec61ca825d45534c93515df4d8f949a431`。目前進行驗收補強與必要修補；獨立驗收門檻與原始失敗／未測範圍見 [QA報告](docs/QA-REPORT.md)。M3尚未授權。
+正式版本 **3.4.0**，發布提交 `78e90aec61ca825d45534c93515df4d8f949a431`。Work已對未合併[QA工具PR #17](https://github.com/lrqrll/practical-thinking-studio/pull/17)的工具 `ab0551364946fb11868cc6f5f309ef45dc2fe64d`完成獨立證據／程式／視覺審查，QA-FONT-01與QA-CONTEXT-01結案；不代表親自重演42項操作。現已有限授權A：M3.1文字成果組裝、B：文件維護、C：工時紀錄，分線開發中，不宣稱A／C完成；不是整個M3／M4獲授權，不含合併main、正式部署或auto-merge。範圍見[路線圖](ROADMAP.md)，歷史失敗、未測與後續待辦見[QA報告](docs/QA-REPORT.md)及[已知問題](docs/KNOWN-ISSUES.md)。
 
 專業本機工作工具平台，部署於 GitHub Pages。八個現有工具與架構見 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)，規則見 [AGENTS.md](AGENTS.md)。
 

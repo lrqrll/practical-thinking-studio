@@ -1,18 +1,27 @@
 # 正式3.4.0：目前驗收狀態（2026-10-27）
 
-產品main／正式提交 `78e90aec61ca825d45534c93515df4d8f949a431`，tree `bba3bb3c0ae02afbfcfbeeeb7cee63f216c086b1`；PR #15已一次合併並部署。DOC-STATE-01（P2）：原文件仍稱正式3.3.0／待發布，與實際3.4.0不符。本文件PR只校正現況，沒有產品功能變更，尚未合併／部署。
+產品main／正式提交 `78e90aec61ca825d45534c93515df4d8f949a431`，tree `bba3bb3c0ae02afbfcfbeeeb7cee63f216c086b1`；PR #15已一次合併並部署。文件[PR #16](https://github.com/lrqrll/practical-thinking-studio/pull/16)續作DOC-STATE-01／B維護線，仍為獨立文件候選；[工具PR #17](https://github.com/lrqrll/practical-thinking-studio/pull/17)仍開啟、未合併，工具head `ab0551364946fb11868cc6f5f309ef45dc2fe64d`，不改產品M。A／C開發中，以下正式M結果不能代表新功能候選驗收。
 
 | 證據 | 實際狀態與界線 |
 |---|---|
-| [M main CI](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40428696084) | 開發者：25單元、93瀏覽器通過，1容量fixture分工skipped，15選取回歸、audit0；不把skip算通過 |
+| [M main CI](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40428696084) | 開發者：25單元、93瀏覽器通過，1容量fixture分工skipped，15選取回歸、audit0；skip不算通過 |
 | [M deployment verification](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40428696123)／[Pages](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40428695537) | 對應M成功；32公開資產符合M |
-| [正式37項執行](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40430565458) | **36通過＋1失敗**，不是單輪全綠 |
-| [後續舊文件控制補驗](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40430857549) | 1通過；明確核對原資料未改寫、編輯前後標準化段落與格式，未改正式產品 |
-| Work第一輪獨立核對（使用者回報） | main／parents／tree符合；32資產兩輪符合；19項另寫純模型通過，涵蓋金額、恢復、未知值、範本隔離、固定輸出、七包傳輸。**不代表**瀏覽器保存、真實下載、完整IDB還原或M2-NAV-01通過 |
+| [正式37項執行](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40430565458)／[後續補驗](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40430857549) | 保留36通過＋1失敗／後續1補驗通過，不寫成單輪全綠；正式產品未改 |
+| Work第一輪獨立核對（使用者回報） | main／parents／tree、32資產兩輪與19純模型通過；當時不等於瀏覽器／IDB還原或M2-NAV-01獨立操作通過 |
+| [舊工具41項](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40439317668) | 工具f737d0a616f283e5ddfc861205da0a706a22dfa8的41 Pass及原artifact保留，不與新42項相加；Work證據審查不等於親自重演 |
+| [工具ab055136正式HTTPS](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40458178564) | 開發者驗證：42正式HTTPS Pass／0 Fail／0 skipped／retries=0；另列4工具控制Pass（3預期拒絕＋1正常），不算46項產品案例 |
+| [相應Quality](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40458178558) | 開發者：25單元、99瀏覽器（含4控制）、15選取回歸通過，audit0；5條件skipped保留，不算通過，相應大集合已在正式42項實跑 |
+| Work本輪結案（使用者明確回報） | 對ab055136獨立程式／證據審查42正式項與另列4控制，核對47 context／57 page、2,129資源、29下載的雜湊及映射，目視中文修後、保存等待追加、重開、混合格式；QA-FONT-01／QA-CONTEXT-01 CLOSED，未發現阻擋PR #17的P0／P1或其他明確問題。不是Work親自重演全部42個操作 |
 
-M2-NAV-01保留「未完整獨立驗收」；開發者測試不能自行解除。當前依序補強導航、真正文件含格式保存、多分頁／配額、來源及欄位變動後固定下載不變、舊資料原ID／rev相容、完整備份的實際下載再還原及缺／重／損／混包原子拒絕。新增結果以對應小PR及指定產品／工具SHA為準，不能把計畫當完成。
+[固定工具SHA的操作及取證說明](https://github.com/lrqrll/practical-thinking-studio/blob/ab0551364946fb11868cc6f5f309ef45dc2fe64d/docs/qa/3.4.0-hardening/README.md)與[原artifact 12713237645](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40458178564/artifacts/12713237645)保留；artifact須授權且有保存期限。完整資源／下載bytes及映射在逐案monitor-index；新功能沿用此監測，不另建重複框架。
 
-限制：舊資料使用經3.3.0驗證的合成資料；沒有觸碰真人資料。Safari／Firefox、實機觸控、完整螢幕閱讀器、OS原生選檔視窗與Office／Calc未測。完整備份不含未保存草稿；記憶體／配額與格式上限保留。當前授權不含M3、合併main或再次正式部署。
+QA-FONT-01為runner CJK fallback環境修正，非產品文字遺失或中文斜體字形修復；QA-CONTEXT-01為全context／page監測與工具負控制補強。兩項已結案，不重開全站42項測試專案。保留環境失敗：40456795105與40457556438的Azure字型下載逾時，產品案例未執行；40457032644雖42＋4通過，當時視覺日誌未輸出圖片，不冒稱當時已視覺驗收。舊CI失敗／skipped見下方歷史與PR #17。
+
+M2-NAV-01仍未完整獨立操作，是驗收缺口；歷史產品風險及開發者修正證據保留，不寫成現行已確認未修P1，不無期限阻擋A。後續待辦的分級、驗收條件及回歸觸發見[已知問題](KNOWN-ISSUES.md)。只有已重現P0／P1或其他明確阻擋問題才阻擋受影響發布。
+
+本輪有限授權A：M3.1文字成果組裝、B：文件維護、C：工時紀錄；實作／驗收範圍見[路線圖](../ROADMAP.md)，不代表整個M3／M4獲准，不含合併main、正式部署或auto-merge。B與A／C並行，只做文件diff、連結、SHA與狀態核對，不新增產品測試。新功能須對自己的候選SHA／隔離預覽驗收，不能用正式M的42項冒充。
+
+未測／限制：Safari／Firefox、實機觸控、完整螢幕閱讀器、OS原生選檔、Office／Calc與中文斜體字形；舊資料僅經3.3.0驗證的合成資料，未碰真人設定檔。完整備份不含未保存草稿；格式、記憶體、配額與容量限制仍在。斜體入口退休、舊marks相容保留；Excel產品取消，預算及XLSX保留。
 
 ---
 # 以下為歷史版本、授權與驗證紀錄（非目前狀態）

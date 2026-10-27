@@ -1,10 +1,14 @@
-# 最新接續：3.4.0驗收補強與必要修補，未授權M3
+# 最新接續：有限授權A／B／C，轉向功能交付
 
-先核對main `78e90aec61ca825d45534c93515df4d8f949a431`／tree `bba3bb3c0ae02afbfcfbeeeb7cee63f216c086b1`；若變更，先列diff及受影響驗收，不沿用舊結論。正式已由PR #15一次合併部署，不再依序合併#10～#14。
+先核對main `78e90aec61ca825d45534c93515df4d8f949a431`／tree `bba3bb3c0ae02afbfcfbeeeb7cee63f216c086b1`；正式3.4.0已由PR #15一次合併部署，不重合併#10～#14。工具[PR #17](https://github.com/lrqrll/practical-thinking-studio/pull/17)仍未合併，head `ab0551364946fb11868cc6f5f309ef45dc2fe64d`；文件[PR #16](https://github.com/lrqrll/practical-thinking-studio/pull/16)從 `abee0ab1525cf7b940c2b2e273957ead405a3de3`接續B，最新完整head以PR為準。若基線漂移先列差異，不沿用不符SHA的驗收。
 
-Work回報32正式資產兩輪符合、19純模型通過；不是瀏覽器端到端驗收。原開發者正式紀錄36通過＋1失敗、後續1補驗通過，不能寫成單輪全綠。M2-NAV-01仍待Work對指定SHA完整複驗。
+使用者本輪已有限授權A：M3.1文字成果組裝完整可操作閉環、B：結案文件／待辦分級、C：獨立工時紀錄最小版／adapter；[完整範圍及必要驗收](../ROADMAP.md)。A主要開發，B／C並行，不等B；A／C開發中，不標完成。舊「尚未授權M3」不再阻擋範圍內A，但不是整個M3／M4獲准。允許範圍內實作、修補、測試、分支、小PR及隔離預覽；不合併main、不正式部署、不auto-merge、不增AI／後端／帳號或其他大型功能。main更新會觸發Pages。
 
-本輪授權：獨立小PR處理DOC-STATE-01及瀏覽器保存／還原補證與必要修補；不合併main、不正式部署、不清除真人資料、不開M3。main更新可能立即觸發Pages。證據與狀態見[QA報告](QA-REPORT.md)、[已知問題](KNOWN-ISSUES.md)，新的產品／工具完整SHA與原始CI見各小PR。
+Work已對工具ab055136獨立程式／證據審查：42正式HTTPS項與另列4工具控制，47 context／57 page、2,129資源及29下載雜湊／映射，目視中文修後、保存等待追加、重開及混合格式；QA-FONT-01／QA-CONTEXT-01 CLOSED，未發現阻擋PR #17的P0／P1或其他明確問題。不是Work親自重演42項。保留36通過＋1失敗／後續1補驗通過、舊41、環境失敗／skipped；[QA報告](QA-REPORT.md)含原始CI及證據。
+
+M2-NAV-01仍未完整獨立操作，是驗收缺口，非已確認未修產品P1；不無限期阻擋A。Safari／Firefox、實機觸控、完整螢幕閱讀器、OS原生選檔、Office／Calc、中文斜體字形及其他非阻擋待辦依[分級及具體驗收／回歸觸發](KNOWN-ISSUES.md)追蹤。只有已重現P0／P1或其他明確阻擋問題才阻擋受影響發布。
+
+A／C交付須自己的候選SHA／隔離HTTPS、全新context與合成資料；沿用監測／TLS／retries=0，不拿正式M的42項當新功能通過。先相關測試，共用保存／匯入／導航變更才擴受影響回歸。B只核對文件diff／連結／SHA／狀態，不新增產品測試或再擴42項QA專案。保留八工具、預算XLSX、舊marks與備份相容；Excel取消、斜體入口退休，不宣稱字形修復。交付標「開發者驗證」，Work再做有界複審。
 
 ---
 # 以下為歷史接續紀錄（舊授權不覆蓋目前授權）

@@ -7,7 +7,7 @@
 - 維持 GitHub Pages 純靜態架構；後端、伺服器儲存或其他架構變更須先取得使用者批准。
 - IndexedDB 與 localStorage 都是瀏覽器資料，不得稱為已存到使用者指定資料夾。指定位置只在檔案寫入成功後回報；不支援 API 時提供下載／匯入。
 - 自動保存失敗必須可重試，保護最新草稿、版本衝突與資料獨立性；不能以覆寫最新版本來消除衝突。匯入／復原預設建立副本。
-- 開發分支分階段提交，重大變更使用 PR。禁止直接大量改動 main；P0／P1 未解決不得正式發布。不得刪測試或降低斷言換取通過。
+- 開發分支分階段提交，重大變更使用 PR。禁止直接大量改動 main；已重現P0／P1或其他明確阻擋問題未解決，不得發布受影響部分；一般待辦與缺少獨立重演不自動阻擋新功能。不得刪測試或降低斷言換取通過。
 - 每次修改執行相應測試；發布前執行 `npm ci`、`npm test`、`npm audit --audit-level=high`，並核對 docs/KNOWN-ISSUES.md 與 QA-REPORT.md。瀏覽器需先 `npx playwright install --with-deps chromium`；已有 Chromium 可設定 `NEXUS_CHROMIUM=/usr/bin/chromium`。
 - 不需要打包；`npm run serve` 提供 HTTP 開發服務。不得把測試依賴或 node_modules 提交到網站。
 - 持續更新 ROADMAP.md、docs/QA-REPORT.md、docs/KNOWN-ISSUES.md。列出未測／失敗／通過，不能用計畫代表實作。
@@ -17,5 +17,6 @@
 
 - 使用者已取消獨立Excel／試算表編輯器產品，不再開發網格或列為即將推出。保留既有分支／核心／測試追溯，PR #7不合併；共用核心只能個別驗證後重用。保留預算及XLSX匯出／成果方向。
 - 文件斜體依產品決定撤下按鈕及Ctrl/Cmd+I操作，保留舊文件／匯入／匯出italic相容，不清除marks、不宣稱字形問題修復。
-- 正式版本3.4.0，main基線78e90aec61ca825d45534c93515df4d8f949a431。本輪只授權驗收補強、必要修補、分支／小PR及隔離驗證，不含再次合併main或正式部署；main更新會觸發Pages。M3須另批准。沿用docs/WORKBENCH-M2.md契約，不清除未知欄位、不改寫舊成果。
-- 測試一律標「開發者驗證」。Work的19項純模型通過不代表瀏覽器保存／下載／IDB還原或M2-NAV-01通過。保留36通過＋1失敗／後續1補驗通過的原始紀錄，不寫成單輪全綠；M2-NAV-01直到Work對指定SHA完整複驗前仍待獨立驗收。
+- 正式版本3.4.0，main基線78e90aec61ca825d45534c93515df4d8f949a431／tree bba3bb3c0ae02afbfcfbeeeb7cee63f216c086b1不變。使用者本次已有限授權A：M3.1文字成果組裝完整垂直閉環、B：結案文件及待辦分級、C：獨立工時紀錄最小版及adapter；範圍／驗收見ROADMAP.md。A為主線，B／C並行，不等待B；不把本輪授權擴成整個M3／M4，不含合併main、正式部署、auto-merge或其他大型功能。main更新會觸發Pages。沿用docs/WORKBENCH-M2.md契約，不清除未知欄位、不改寫舊成果。
+- 新結果一律標「開發者驗證」。Work已獨立審查工具ab0551364946fb11868cc6f5f309ef45dc2fe64d的程式、42正式HTTPS項與另列4工具控制之證據，核對47 context／57 page、2,129筆資源及29筆下載與映射並目視中文修後、保存追加／重開／混合格式；QA-FONT-01及QA-CONTEXT-01結案，未發現阻擋PR #17的P0／P1或其他明確問題。PR #17仍未合併，正式產品M未變；不冒稱Work親自重演42項。保留36通過＋1失敗／後續1補驗通過、舊41、環境失敗及skipped。M2-NAV-01未完整獨立操作是驗收缺口，不是已確認未修產品P1，不無限期阻擋A。
+- A／C須使用自己的候選SHA及隔離HTTPS namespace驗收，全新context與合成資料，沿用全context／page監測、TLS及retries=0；先跑相關測試，共用保存／匯入／導航變更才擴到受影響回歸。正式M的42項不得冒充候選驗收。B只做文件diff／連結／SHA／狀態核對，不新增產品測試或重跑42項。
