@@ -23,3 +23,5 @@ Node24、npm ci、Chromium、poppler的pdfinfo/pdffonts/pdftotext/pdftoppm。`NE
 首輪GitHub Quality 40527353382在安裝Playwright OS依賴時，azure.archive.ubuntu.com下載25.9MB用5分3秒，步驟5分鐘上限中止，功能測試尚未執行；同期候選實際HTTPS20項與獨立負控制1項通過。後續quality改用runner既有相容Chrome，保留無Chrome時的有界安裝後備，未跳過瀏覽器或TLS驗證。此為環境修正，非產品修前故障。
 
 補強未知格式防護的未推送本機版本曾2通過／2失敗：正常Tiptap表格自帶align:null，被新白名單誤拒。已納入既有align屬性及合法對齊值，未知值仍拒絕；保留修前trace／錯誤，未將此未發布回歸冒稱正式產品故障。粗體／底線與strike並存時保留全部裝飾，不覆蓋既有標記。
+
+304763d的Quality 40532103248為113通過／1失敗／5條件跳過；失敗在既有容量測試第二空白context的直接readAll早於IndexedDB初始化（storage.js讀取undefined.transaction），不是還原資料比對失敗。相同產品整合d5e5f82的Quality及HTTPS通過。測試補上goto／reload後既有#backup-input就緒斷言再呼叫資料API，未改儲存程式、未增加重試或放寬七包／來源／歷史／完整hash比較。最終工具SHA另以自己CI驗證。
