@@ -19,7 +19,7 @@
 
 A／C候選已實作、開發者驗證通過，待Work有界複審；B不代替其獨立驗收。有限授權及新功能驗收見[路線圖](../ROADMAP.md)。沒有整個M3／M4、AI、後端、帳號或同步授權；不合併main／正式部署／auto-merge。Excel已取消，預算及XLSX保留；斜體入口退休而舊marks相容保留。
 
-A PR #18 `2ff102580ffa22f5f77f65ff54ef10e385597c8d`（base工具ab055136）及C PR #19 `4992808262c81f12e21252b776384a517a130f68`（base A）已實作並通過候選開發者驗證，待Work有界複審；3.5.0-rc.1未合併／未正式部署。A首輪strict monitor缺資產及C首輪alias失敗已保留於[候選QA紀錄](QA-REPORT.md)，後續對應SHA成功；不把首次失敗改寫為通過。
+A PR #18 `b86bd8f5bee8577a44a2d8ee77ea261314e1e151`（base工具ab055136）及C PR #19 `2eee4dc6040f8b9078baa6727d7c11922d8d996b`（base A）已實作，待Work有界複審；最終SHA僅追加schema1混合欄位拒絕保護，最終checks見候選QA紀錄，不套用前一候選成功；3.5.0-rc.1未合併／未正式部署。A首輪strict monitor缺資產及C首輪alias失敗已保留於[候選QA紀錄](QA-REPORT.md)，前一候選對應SHA成功；不把首次失敗改寫為通過。
 
 ---
 # 以下為歷史問題與授權紀錄（非目前狀態）

@@ -21,4 +21,4 @@
 - 新結果一律標「開發者驗證」。Work已獨立審查工具ab0551364946fb11868cc6f5f309ef45dc2fe64d的程式、42正式HTTPS項與另列4工具控制之證據，核對47 context／57 page、2,129筆資源及29筆下載與映射並目視中文修後、保存追加／重開／混合格式；QA-FONT-01及QA-CONTEXT-01結案，未發現阻擋PR #17的P0／P1或其他明確問題。PR #17仍未合併，正式產品M未變；不冒稱Work親自重演42項。保留36通過＋1失敗／後續1補驗通過、舊41、環境失敗及skipped。M2-NAV-01未完整獨立操作是驗收缺口，不是已確認未修產品P1，不無限期阻擋A。
 - A／C須使用自己的候選SHA及隔離HTTPS namespace驗收，全新context與合成資料，沿用全context／page監測、TLS及retries=0；先跑相關測試，共用保存／匯入／導航變更才擴到受影響回歸。正式M的42項不得冒充候選驗收。B只做文件diff／連結／SHA／狀態核對，不新增產品測試或重跑42項。
 
-- 當前已實作候選：A PR #18 `2ff102580ffa22f5f77f65ff54ef10e385597c8d`（base工具ab055136）；C PR #19 `4992808262c81f12e21252b776384a517a130f68`（base A）。皆3.5.0-rc.1開發者驗證、待Work有界複審；預覽／依賴／新CI及首次失敗見ROADMAP.md與docs/QA-REPORT.md，不冒稱正式發布或獨立驗收完成。
+- 當前已實作候選：A PR #18 `b86bd8f5bee8577a44a2d8ee77ea261314e1e151`（base工具ab055136）；C PR #19 `2eee4dc6040f8b9078baa6727d7c11922d8d996b`（base A）。皆3.5.0-rc.1候選、待Work有界複審；最終SHA追加schema1混合欄位拒絕保護，結果見原始checks，不套用前一候選成功；預覽／依賴／新CI及首次失敗見ROADMAP.md與docs/QA-REPORT.md，不冒稱正式發布或獨立驗收完成。
