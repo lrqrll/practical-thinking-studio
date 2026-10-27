@@ -4,7 +4,7 @@ const {DIRECTORY,identity}=require('../../scripts/qa/m2/support.cjs');
 const manifest=JSON.parse(fs.readFileSync(path.join(DIRECTORY,'fixture-manifest.json')));
 const inspect=path.resolve(__dirname,'../../scripts/qa/m2/inspect-backup.js');
 const site=process.env.NEXUS_QA_SITE_URL||'/';
-async function open(page){await page.goto(site+'#backup');await expect(page.locator('#backup-input')).toBeAttached();if(process.env.NEXUS_QA_SITE_URL)expect(await page.evaluate(()=>DEPLOYMENT.commit)).toBe(process.env.NEXUS_M2_EXPECTED_COMMIT||identity.candidateSha);}
+async function open(page){await page.goto(site+'#backup');await expect(page.locator('#backup-input')).toBeAttached();expect(await page.evaluate(()=>({channel:DEPLOYMENT.channel,commit:DEPLOYMENT.commit,version:BRAND.version,db:DATABASE_NAME}))).toEqual({channel:'production',commit:null,version:'3.4.0',db:'nexus-workspace'});}
 async function inspectState(page){await page.addScriptTag({path:inspect});return page.evaluate(async()=>{const x=await NexusStore.snapshot();return{projection:qaBackupProjection(x),relations:qaBackupRelations(x),valid:NexusStore.validateBackup(x)};});}
 for(const name of ['workspace-v1.json','workbench-v2.json','workbench-v3.json','opaque-values-v3.json'])test('synthetic restore, image decode, export and second isolated restore: '+name,async({page,browser},info)=>{
  await open(page);expect(await page.evaluate(()=>NexusStore.readAll('files').then(x=>x.length))).toBe(0);

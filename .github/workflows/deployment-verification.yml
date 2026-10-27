@@ -1,33 +1,47 @@
-name: NEXUS deployed HTTPS verification
+name: NEXUS 3.4.0 exact production acceptance (developer verification)
 on:
   workflow_dispatch:
-  push:
-    branches: [main, codex/nexus-document-selection-followup]
 permissions:
   contents: read
+  actions: read
 jobs:
-  deployed:
+  production:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      NEXUS_M2_SITE_URL: https://lrqrll.github.io/practical-thinking-studio/
+      NEXUS_QA_SITE_URL: https://lrqrll.github.io/practical-thinking-studio/
+      NEXUS_QA_FIXTURE_REF: 59dff72bb55a77c371863d6e8a998529b1997bf0
+      NEXUS_CAPTURE_EVIDENCE: '1'
+      NEXUS_QA_LARGE_DIR: ${{ runner.temp }}/production-synthetic-complete
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
           cache: npm
       - run: npm ci --ignore-scripts
-      - name: Install browser
+      - name: Exact M main/parents/tree/Pages/32 assets and original 3.3.0 compatibility validators
+        run: node scripts/qa/production/identity.cjs before
+      - name: Install actual browser without bypassing TLS
         timeout-minutes: 5
         run: npx playwright install --with-deps chromium
-      - name: Read the production release target
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: node scripts/expected-production-version.cjs
-      - name: Verify production version and browser persistence
-        run: node scripts/live-smoke.cjs
-        env:
-          NEXUS_EXPECTED_VERSION: ${{ env.NEXUS_EXPECTED_PRODUCTION_VERSION }}
-      - name: Verify the current preview identity and browser persistence
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: node scripts/current-preview-smoke.cjs
+      - name: Generate complete seven-part synthetic backup from frozen models
+        run: node --max-old-space-size=4096 scripts/qa/m2/generate-large.cjs "$NEXUS_QA_LARGE_DIR"
+      - name: Actual formal HTTPS old IDs folders documents M2 templates outputs NAV and complete restore
+        run: npx playwright test tests/e2e/production-legacy.spec.cjs tests/e2e/m2-ui.spec.cjs tests/e2e/qa-fixtures.spec.cjs tests/e2e/document-save-drain.spec.cjs tests/e2e/document.spec.cjs tests/e2e/ci-regressions.spec.cjs --workers=2 --reporter=list --trace on --output=production-https-results
+      - name: Require exact M CI success and recheck formal Pages and 32 public assets
+        run: node scripts/qa/production/identity.cjs after
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: NEXUS-3.4.0-M-78e90aec-production-evidence
+          path: |
+            test-results/
+            production-https-results/
+            playwright-report/
+            ${{ runner.temp }}/production-synthetic-complete/
+          retention-days: 30
