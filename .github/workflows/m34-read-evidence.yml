@@ -15,17 +15,22 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: M34-visual-developer-evidence
-          run-id: 40657088901
+          run-id: 40658910604
           github-token: ${{ github.token }}
           path: /tmp/m34-original
       - run: |
           python3 - <<'PY'
           from pathlib import Path
           import shutil,json
-          root=Path('/tmp/m34-original');out=Path('diagnostic-evidence');out.mkdir(exist_ok=True)
+          import hashlib
+          root=Path('/tmp/m34-original');out=Path('diagnostic-evidence/final-c712bd6');out.mkdir(parents=True,exist_ok=True)
+          names={'dashboard-390-light.png','dashboard-390-dark.png','dashboard-1440-light.png','dashboard-1440-dark.png'}
+          manifest={}
           for f in root.rglob('*'):
-            if f.name=='m34-full.json':shutil.copyfile(f,out/f.name)
-            if 'm2-ui-templates' in str(f) and f.name in ['trace.zip','error-context.md','monitor-index.json']:shutil.copyfile(f,out/f.name)
+            if f.is_file() and (f.name in ['m34-full.json','m34-selection.json','m34-https.json','m34-integrity.json','candidate-assets.json'] or ('m34-https-results' in str(f) and f.name in names)):
+              shutil.copyfile(f,out/f.name);b=f.read_bytes();manifest[f.name]={'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'originalPath':str(f.relative_to(root))}
+          assert names.issubset(manifest), 'Missing exact HTTPS screenshots'
+          json.dump({'role':'開發者原始HTTPS取證，非獨立QA','product':'c712bd62c7a77d812542d1138f2edd2ef0045f00','run':40658910604,'files':manifest},open(out/'manifest.json','w'),ensure_ascii=False,indent=2)
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
