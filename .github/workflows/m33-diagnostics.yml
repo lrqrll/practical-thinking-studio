@@ -1,0 +1,51 @@
+name: M3.3 retrieve existing developer evidence
+on:
+  push:
+    branches: [codex/nexus-m33-diagnostics]
+permissions:
+  actions: read
+  contents: write
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: M33-developer-evidence
+          run-id: 40622143781
+          github-token: ${{ github.token }}
+          path: /tmp/m33-existing
+      - name: Extract original failures and screenshots without re-running tests
+        run: |
+          python3 - <<'PY'
+          import os,json,glob,shutil
+          root='/tmp/m33-existing'; out='diagnostic-evidence';os.makedirs(out,exist_ok=True)
+          summary={}
+          for f in glob.glob(root+'/**/m33-*.json',recursive=True):
+            if os.path.basename(f) not in ['m33-full.json','m33-selection.json','m33-https.json','m33-summary.json']: continue
+            d=json.load(open(f)); summary[os.path.relpath(f,root)]={'stats':d.get('stats'), 'errors':d.get('errors')}
+            def walk(s):
+              for spec in s.get('specs',[]):
+                for t in spec.get('tests',[]):
+                  if t.get('status') not in ['expected','skipped']:
+                    summary.setdefault('failures',[]).append({'title':spec.get('title'),'file':spec.get('file'),'test':t})
+              for child in s.get('suites',[]):walk(child)
+            walk(d)
+          for f in glob.glob(root+'/**/monitor-index.json',recursive=True):
+            d=json.load(open(f))
+            if d.get('errors'):summary.setdefault('monitorErrors',[]).append({'file':os.path.relpath(f,root),'errors':d['errors']})
+          assets=glob.glob(root+'/**/candidate-assets.json',recursive=True)
+          if assets:shutil.copyfile(assets[0],out+'/candidate-assets.json')
+          for f in glob.glob(root+'/**/categories-*.png',recursive=True):shutil.copyfile(f,out+'/'+os.path.basename(f))
+          json.dump(summary,open(out+'/original-run-40622143781.json','w'),ensure_ascii=False,indent=2)
+          print(json.dumps(summary,ensure_ascii=False)[:60000])
+          PY
+      - name: Preserve synthetic diagnostic evidence on this branch only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add diagnostic-evidence
+          git commit -m 'Preserve original M3.3 HTTPS diagnostic evidence, without rerun'
+          git push origin HEAD:codex/nexus-m33-diagnostics
