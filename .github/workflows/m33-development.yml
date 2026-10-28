@@ -1,0 +1,38 @@
+name: M3.3 development checks (developer verification)
+on:
+  push:
+    branches: [codex/nexus-m33-categories, codex/nexus-m33-storage, codex/nexus-m33-interface]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  development:
+    if: startsWith(github.head_ref || github.ref_name, 'codex/nexus-m33-')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run test:unit
+      - name: Existing compatible Chrome
+        if: (github.head_ref || github.ref_name) != 'codex/nexus-m33-categories'
+        run: |
+          if [ -x /usr/bin/google-chrome ]; then echo 'NEXUS_CHROMIUM=/usr/bin/google-chrome' >> "$GITHUB_ENV"; else npx playwright install --with-deps chromium; fi
+      - name: Layout persistence, upgrade, references and complete backups
+        if: (github.head_ref || github.ref_name) != 'codex/nexus-m33-categories'
+        run: npx playwright test tests/e2e/categories-storage.spec.cjs tests/e2e/m2-storage.spec.cjs tests/e2e/workbench.spec.cjs tests/e2e/qa-fixtures.spec.cjs --workers=2 --reporter=list --trace on --output=m33-storage-results
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: M33-development-evidence
+          path: |
+            m33-storage-results/
+            test-results/
+          retention-days: 30
