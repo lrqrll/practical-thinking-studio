@@ -1,0 +1,29 @@
+name: M3.3 create authorized development PR
+on:
+  push:
+    branches: [codex/nexus-m33-categories, codex/nexus-m33-storage, codex/nexus-m33-interface]
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  create-pr:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const branch=context.ref.replace('refs/heads/','');
+            const configuration={
+              'codex/nexus-m33-categories':['codex/nexus-m32-ux','feat: M3.3 stable category layout contract'],
+              'codex/nexus-m33-storage':['codex/nexus-m33-categories','feat: M3.3 atomic layout storage and complete v4 backups'],
+              'codex/nexus-m33-interface':['codex/nexus-m33-storage','feat: M3.3 custom category workbenches with nine existing tools']
+            }[branch];
+            if(!configuration)throw Error('Unauthorized branch');
+            const {owner,repo}=context.repo;
+            const existing=await github.rest.pulls.list({owner,repo,head:owner+':'+branch,state:'open'});
+            if(existing.data.length){core.info(existing.data[0].html_url);return;}
+            const [base,title]=configuration;
+            const body=`M3.3 第一階段已獲使用者批准：分類新增、改名、排序，九工具重用與保存重開。限定資料契約（meta配置、DB1→2原stores保留、v4備份向後讀v1-v3）另已明確批准。\n\nHead: ${context.sha}\nBase: ${base}\n\n本PR為線性相依的一個小階段，完整可操作候選在介面PR；不修改#16～21或M3.2發布候選，不合併main、不正式部署、不開auto-merge／M3.4。資料與驗證規格見docs/M33-CATEGORIES.md。測試一律標示開發者驗證，不代替Work獨立QA。CI／隔離預覽與原始證據在完成後更新。`;
+            const result=await github.rest.pulls.create({owner,repo,base,head:branch,title,body});
+            core.info(result.data.html_url);
+            await core.summary.addLink('Authorized M3.3 development PR',result.data.html_url).write();
