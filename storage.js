@@ -8,7 +8,14 @@ const RECOVERY_PREFIX=IS_PREVIEW?'nexus-preview-'+PREVIEW_NAMESPACE+'-recovery:'
 const NexusStore=(()=>{let db;const clone=x=>structuredClone(x);const uid=()=>crypto.randomUUID();const stamp=()=>new Date().toISOString();
 function request(r){return new Promise((ok,no)=>{r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error);});}
 function complete(tx){return new Promise((ok,no)=>{tx.oncomplete=()=>ok();tx.onabort=tx.onerror=()=>no(tx.error||Error('儲存交易未完成'));});}
-async function open(){if(!window.indexedDB)throw Error('此瀏覽器不支援 IndexedDB，工作空間無法啟用。');db=await new Promise((ok,no)=>{const r=indexedDB.open(DATABASE_NAME,1);r.onupgradeneeded=()=>{for(const name of ['files','folders','meta'])r.result.createObjectStore(name,{keyPath:'id'});};r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error);r.onblocked=()=>no(Error('儲存升級被其他分頁阻擋，請關閉其他 NEXUS 分頁後重新整理。'));});db.onversionchange=()=>db.close();return db;}
+async function open(){
+ if(!window.indexedDB)throw Error('此瀏覽器不支援 IndexedDB，工作空間無法啟用。');
+ db=await new Promise((ok,no)=>{let blocked=false;const r=indexedDB.open(DATABASE_NAME,2);
+  r.onupgradeneeded=()=>{for(const name of ['files','folders','meta'])if(!r.result.objectStoreNames.contains(name))r.result.createObjectStore(name,{keyPath:'id'});};
+  r.onsuccess=()=>{if(blocked){r.result.close();return;}ok(r.result);};r.onerror=()=>no(r.error);
+  r.onblocked=()=>{blocked=true;no(Error('工作空間版本更新被舊分頁阻擋；請先保留輸入、關閉其他 NEXUS 分頁後重試。原資料未清除。'));};
+ });db.onversionchange=()=>{db.close();window.dispatchEvent(new Event('nexus-database-versionchange'));};return db;
+}
 async function readAll(store){return request(db.transaction(store).objectStore(store).getAll());}
 async function get(store,id){return request(db.transaction(store).objectStore(store).get(id));}
 async function write(store,item){const tx=db.transaction(store,'readwrite'),done=complete(tx);tx.objectStore(store).put(clone(item));await done;return item;}
@@ -25,7 +32,7 @@ async function editToolPrefs(action,id){const tx=db.transaction('meta','readwrit
 const workbenchKey=id=>typeof id==='string'&&id.startsWith('workbench:');
 const snapshotKey=id=>typeof id==='string'&&id.startsWith('workbench-snapshot:');
 function metaRange(prefix){return IDBKeyRange.bound(prefix,prefix+'\uffff');}
-async function readMetaPrefix(prefix){if(!['workbench:','workbench-snapshot:','workbench-template:'].includes(prefix))throw Error('不支援的資料範圍');return request(db.transaction('meta').objectStore('meta').getAll(metaRange(prefix)));}
+async function readMetaPrefix(prefix){if(!['workbench:','workbench-snapshot:','workbench-template:','workbench-layout:'].includes(prefix))throw Error('不支援的資料範圍');return request(db.transaction('meta').objectStore('meta').getAll(metaRange(prefix)));}
 async function workbenchTransaction(action,withFolders=false){
  const tx=db.transaction(withFolders?['files','folders','meta']:['files','meta'],'readwrite'),done=complete(tx);done.catch(()=>{});
  try{const result=await action(tx.objectStore('files'),tx.objectStore('meta'));await done;return result;}
@@ -33,6 +40,21 @@ async function workbenchTransaction(action,withFolders=false){
 }
 function requireWorkbench(w,expected){if(!NexusWorkbench.valid(w))throw Error('工作台不存在或格式不符');if(w.rev!==expected)throw Error('工作台已在其他分頁更新，請重新讀取；未覆寫新版本');}
 async function createWorkbench(name){return workbenchTransaction(async(_files,meta)=>{const count=await request(meta.count(metaRange('workbench:')));if(count>=100)throw Error('工作台上限100，請先備份管理');const at=stamp(),w={id:'workbench:'+uid(),schemaVersion:1,rev:1,name:name.trim(),createdAt:at,updatedAt:at,deletedAt:null,modules:[]};if(!NexusWorkbench.valid(w))throw Error('請填寫180字內工作台名稱');meta.add(w);return clone(w);});}
+async function createCategorizedWorkbench(name){return workbenchTransaction(async(_files,meta)=>{
+ const count=await request(meta.count(metaRange('workbench:')));if(count>=100)throw Error('工作台上限100，請先備份管理');
+ const at=stamp(),w={id:'workbench:'+uid(),schemaVersion:1,rev:1,name:typeof name==='string'?name.trim():'',createdAt:at,updatedAt:at,deletedAt:null,modules:[]};
+ if(!NexusWorkbench.valid(w))throw Error('請填寫180字內工作台名稱');const layout=NexusCategories.create(w.id,at);meta.add(w);meta.add(layout);return {workbench:clone(w),layout:clone(layout)};
+});}
+async function editCategories(workbenchId,expected,operation,payload){return workbenchTransaction(async(files,meta)=>{
+ const w=await request(meta.get(workbenchId));if(!NexusWorkbench.valid(w)||w.deletedAt)throw Error('工作台不存在或在垃圾桶');
+ const current=await request(meta.get(NexusCategories.key(workbenchId)));if(!NexusCategories.valid(current))throw Error('分類配置未知，請完整備份；未改寫');if(current.rev!==expected)throw Error('分類已在其他分頁更新；保留您的輸入，請重新讀取後重試');
+ let file=null,parameters=clone(payload);
+ if(operation==='add-item'){
+  if(!NexusCategories.kinds.includes(payload.toolType))throw Error('工具尚未完成或不支援');
+  file=record(payload.toolType,payload.name,blankData(payload.toolType));parameters.fileId=file.id;
+ }
+ const layout=NexusCategories.change(current,operation,parameters,{uid,now:stamp});if(file)files.add(file);meta.put(layout);return {layout:clone(layout),file:clone(file)};
+});}
 async function updateWorkbench(id,expected,change){return workbenchTransaction(async(files,meta)=>{
  const old=await request(meta.get(id));requireWorkbench(old,expected);
  const w={...old,name:change.name===undefined?old.name:change.name.trim(),modules:change.modules===undefined?old.modules:clone(change.modules),deletedAt:change.deletedAt===undefined?old.deletedAt:change.deletedAt,rev:old.rev+1,updatedAt:stamp()};
@@ -50,8 +72,14 @@ async function createWorkbenchSnapshot(id,expected){return workbenchTransaction(
  const sources=[];for(const m of w.modules){const f=await request(files.get(m.sourceId));if(f&&!validData(f.type,f.data))throw Error('來源資料格式不符');sources.push(f);}
  const s=NexusWorkbench.makeSnapshot(w,sources.filter(Boolean),'workbench-snapshot:'+uid(),stamp());meta.add(s);return clone(s);
  });}
-async function purgeWorkbench(id,expected){return workbenchTransaction(async(_files,meta)=>{const w=await request(meta.get(id));requireWorkbench(w,expected);if(!w.deletedAt)throw Error('請先將工作台移至垃圾桶');for(const s of await request(meta.getAll(metaRange('workbench-snapshot:'))))if(s.workbenchId===w.id)meta.delete(s.id);meta.delete(w.id);});}
-async function assertUnreferenced(meta,ids){const set=new Set(ids);if(!set.size)return;const refs=(await request(meta.getAll(metaRange('workbench:')))).filter(w=>Array.isArray(w.modules)&&w.modules.some(m=>set.has(m.sourceId)));if(refs.length)throw Error('來源仍被工作台引用：'+refs.slice(0,3).map(w=>w.name).join('、')+'（含垃圾桶工作台），請先解除連結；未永久刪除');}
+async function purgeWorkbench(id,expected){return workbenchTransaction(async(_files,meta)=>{const w=await request(meta.get(id));requireWorkbench(w,expected);if(!w.deletedAt)throw Error('請先將工作台移至垃圾桶');for(const s of await request(meta.getAll(metaRange('workbench-snapshot:'))))if(s.workbenchId===w.id)meta.delete(s.id);meta.delete(NexusCategories.key(w.id));meta.delete(w.id);});}
+async function assertUnreferenced(meta,ids){const set=new Set(ids);if(!set.size)return;
+ const refs=(await request(meta.getAll(metaRange('workbench:')))).filter(w=>Array.isArray(w.modules)&&w.modules.some(m=>set.has(m.sourceId)));
+ const layouts=await request(meta.getAll(metaRange('workbench-layout:')));
+ if(layouts.some(l=>!NexusCategories.valid(l)))throw Error('有未知分類配置，請完整備份並更新程式；未永久刪除任何檔案');
+ const linked=layouts.filter(l=>l.items.some(i=>set.has(i.fileId)));
+ if(refs.length||linked.length)throw Error('來源仍被工作台引用（含垃圾桶工作台），請先保留完整備份；未永久刪除');
+}
 
 async function editWorkbenchFields(id,expected,operation,payload){return workbenchTransaction(async(_files,meta)=>{const old=await request(meta.get(id));requireWorkbench(old,expected);if(old.deletedAt)throw Error('請先還原工作台');const w={...NexusFields.change(old,operation,payload,{uid,now:stamp()}),rev:old.rev+1,updatedAt:stamp()};if(!NexusWorkbench.valid(w))throw Error('欄位設定不符');meta.put(w);return clone(w);});}
 async function createWorkbenchTemplate(id,expected,name){return workbenchTransaction(async(_files,meta)=>{const w=await request(meta.get(id));requireWorkbench(w,expected);if(w.deletedAt)throw Error('請先還原工作台');if(await request(meta.count(metaRange('workbench-template:')))>=100)throw Error('範本上限100（含垃圾桶），請先完整備份');const t=NexusFields.makeTemplate(w,name,{uid,now:stamp()});meta.add(t);return clone(t);});}
@@ -75,9 +103,17 @@ async function readAssemblySources(refs){
  await done;return values.map((record,i)=>{const r=refs[i];if(!record||record.deletedAt||r.kind==='snapshot'&&(!parents[i]||parents[i].deletedAt))throw Error('來源已失效或移至垃圾桶，請重新選擇');if((r.kind==='notes'?record.rev:record.workbenchRev)!==r.rev)throw Error('來源已在其他畫面更新，請重新選擇已保存版本');if(r.kind==='notes'&&!validData('notes',record.data))throw Error('備忘錄格式不符，請重新選擇');NexusAssembly.validate(r.kind,record);return{kind:r.kind,record:clone(record)};});
  }catch(e){try{tx.abort();}catch{}await done.catch(()=>{});throw e;}
 }
-async function snapshot(){const tx=db.transaction(['files','folders','meta'],'readonly');const [files,folders,meta]=await Promise.all(['files','folders','meta'].map(s=>request(tx.objectStore(s).getAll())));const workbenches=meta.filter(x=>workbenchKey(x.id)),workbenchSnapshots=meta.filter(x=>snapshotKey(x.id)),workbenchTemplates=meta.filter(x=>x.id.startsWith('workbench-template:')),m2=workbenchTemplates.length||workbenches.some(w=>w.schemaVersion===2)||workbenchSnapshots.some(s=>s.schemaVersion===2);return {kind:'nexus-workspace',version:m2?3:workbenches.length||workbenchSnapshots.length?2:1,exportedAt:stamp(),files,folders,archives:meta.filter(x=>x.id.startsWith('archive:')),preferences:meta.find(x=>x.id==='tool-preferences')||null,histories:meta.filter(x=>x.id.startsWith('history:')&&files.some(f=>x.id==='history:'+f.id)),...(m2||workbenches.length||workbenchSnapshots.length?{workbenches,workbenchSnapshots}:{}),...(m2?{workbenchTemplates}:{})};}
+async function snapshot(){const tx=db.transaction(['files','folders','meta'],'readonly'),done=complete(tx);done.catch(()=>{});const [files,folders,meta]=await Promise.all(['files','folders','meta'].map(s=>request(tx.objectStore(s).getAll())));await done;
+ const workbenches=meta.filter(x=>workbenchKey(x.id)),workbenchSnapshots=meta.filter(x=>snapshotKey(x.id)),workbenchTemplates=meta.filter(x=>x.id.startsWith('workbench-template:')),workbenchLayouts=meta.filter(x=>x.id.startsWith('workbench-layout:')),m2=workbenchLayouts.length||workbenchTemplates.length||workbenches.some(w=>w.schemaVersion===2)||workbenchSnapshots.some(s=>s.schemaVersion===2);
+ return {kind:'nexus-workspace',version:workbenchLayouts.length?4:m2?3:workbenches.length||workbenchSnapshots.length?2:1,exportedAt:stamp(),files,folders,archives:meta.filter(x=>x.id.startsWith('archive:')),preferences:meta.find(x=>x.id==='tool-preferences')||null,histories:meta.filter(x=>x.id.startsWith('history:')&&files.some(f=>x.id==='history:'+f.id)),...(m2||workbenches.length||workbenchSnapshots.length?{workbenches,workbenchSnapshots}:{}),...(m2?{workbenchTemplates}:{}),...(workbenchLayouts.length?{workbenchLayouts}:{})};
+}
 function validateBackupV1(x){const ids=new Set();if(!x||x.kind!=='nexus-workspace'||x.version!==1||!Array.isArray(x.files)||x.files.length>5000||!Array.isArray(x.folders)||!Array.isArray(x.archives))return false;if(x.preferences&&(!Array.isArray(x.preferences.favorites)||x.preferences.favorites.some(v=>typeof v!=='string')||!Array.isArray(x.preferences.recent)||x.preferences.recent.some(v=>!v||typeof v.id!=='string'||typeof v.at!=='string')))return false;if(x.folders.some(f=>!f||typeof f.id!=='string')||x.archives.some(a=>!a))return false;if(x.histories&&(!Array.isArray(x.histories)||x.histories.some(h=>!h||typeof h.id!=='string'||!Array.isArray(h.versions)||h.versions.length>10||!h.versions.every(v=>{const f=x.files.find(f=>f&&h.id==='history:'+f.id);return f&&v&&typeof v.name==='string'&&typeof v.at==='string'&&Number.isSafeInteger(v.rev)&&v.rev>0&&v.rev<Number.MAX_SAFE_INTEGER&&validData(f.type,v.data);}))))return false;const folders=new Set(x.folders.map(f=>f.id));if(folders.size!==x.folders.length)return false;return x.folders.every(f=>f&&typeof f.id==='string'&&typeof f.name==='string'&&f.name.length<=180)&&x.archives.every(a=>a&&typeof a.raw==='string')&&x.files.every(f=>{if(!f||typeof f.id!=='string'||ids.has(f.id)||typeof f.name!=='string'||f.name.length>180||!validData(f.type,f.data)||f.folderId!==null&&!folders.has(f.folderId))return false;ids.add(f.id);return true;});}
 function validateBackup(x){
+ if(x?.version===4){
+  if(!Array.isArray(x.workbenchLayouts)||!x.workbenchLayouts.length||x.workbenchLayouts.length>100||!validateBackup({...x,version:3,workbenchLayouts:undefined}))return false;
+  try{const files=new Map(x.files.map(f=>[f.id,f])),benches=new Set(x.workbenches.map(w=>w.id));return new Set(x.workbenchLayouts.map(l=>l?.id)).size===x.workbenchLayouts.length&&new Set(x.workbenchLayouts.flatMap(l=>l?.items?.map(i=>i.fileId)||[])).size===x.workbenchLayouts.reduce((n,l)=>n+(l.items?.length||0),0)&&x.workbenchLayouts.every(l=>NexusCategories.valid(l)&&benches.has(l.workbenchId)&&l.items.every(i=>files.get(i.fileId)?.type===i.toolType));}catch{return false;}
+ }
+ if(x?.workbenchLayouts!==undefined)return false;
  if(x?.version===1)return !x.workbenches&&!x.workbenchSnapshots&&!x.workbenchTemplates&&validateBackupV1(x);
  if(![2,3].includes(x?.version)||!validateBackupV1({...x,version:1})||!Array.isArray(x.workbenches)||x.workbenches.length>100||!Array.isArray(x.workbenchSnapshots)||x.workbenchSnapshots.length>200)return false;
  if(x.version===2&&(x.workbenchTemplates||x.workbenches.some(w=>w?.schemaVersion!==1)||x.workbenchSnapshots.some(s=>s?.schemaVersion!==1)))return false;
@@ -99,8 +135,9 @@ async function importBackup(x){
   if(x.preferences){const p=await request(meta.get('tool-preferences'))||{favorites:[],recent:[]};meta.put({id:'tool-preferences',favorites:[...new Set([...p.favorites,...x.preferences.favorites])],recent:[...p.recent,...x.preferences.recent].filter((v,i,a)=>a.findIndex(y=>y.id===v.id)===i).slice(0,8)});}
   for(const w of x.workbenches||[]){const id='workbench:'+uid();benchMap.set(w.id,id);const copied=w.schemaVersion===2?NexusFields.remapState(w,fieldMap(w.id)):clone(w);meta.add({...copied,id,name:(w.name+' 還原副本').slice(0,180),modules:w.modules.map(m=>({...m,id:fresh(moduleMap,m.id),sourceId:fileMap.get(m.sourceId)}))});}
   for(const s of x.workbenchSnapshots||[]){const imported=clone(s);if(s.schemaVersion===2)imported.customFields=NexusFields.remapCaptured(s.customFields,fieldMap(s.workbenchId));imported.id='workbench-snapshot:'+uid();imported.workbenchId=benchMap.get(s.workbenchId);imported.sourceVersions=imported.sourceVersions.map(v=>({...v,moduleId:fresh(moduleMap,v.moduleId),fileId:fresh(fileMap,v.fileId)}));meta.add(imported);}
+  for(const layout of x.workbenchLayouts||[]){const copy=NexusCategories.remap(layout,benchMap.get(layout.workbenchId),fileMap,uid);meta.add(copy);}
   for(const t of x.workbenchTemplates||[]){const copy=NexusFields.remapState(t,NexusFields.mapper(uid),'defaults');copy.id='workbench-template:'+uid();meta.add(copy);}
  },true);
 }
 async function initialize(legacy,extract,names={}){if(await get('meta','initialized'))return;let imported=[],legacyTheme='light';if(legacy){let parsed;try{parsed=JSON.parse(legacy);}catch{}if(parsed&&parsed.version===1){if(['light','dark'].includes(parsed.theme))legacyTheme=parsed.theme;for(const type of ['budget','tasks','report','quotes','slides','minutes']){const data=extract(type,parsed);if(validData(type,data))imported.push(record(type,(names[type]||type)+'（原工作資料）',data));}}}const tx=db.transaction(['files','meta'],'readwrite'),done=complete(tx);if(await request(tx.objectStore('meta').get('initialized'))){await done;return;}if(legacy)tx.objectStore('meta').put({id:'archive:legacy-v1',raw:legacy,createdAt:stamp()});for(const f of imported)tx.objectStore('files').put(f);tx.objectStore('meta').put({id:'settings',theme:legacyTheme});tx.objectStore('meta').put({id:'initialized',at:stamp()});await done;}
-return {readAssemblySources,createM2Recovery,editWorkbenchFields,createWorkbenchTemplate,saveWorkbenchTemplate,createWorkbenchFromTemplate,readMetaPrefix,createWorkbench,updateWorkbench,createWorkbenchSource,createWorkbenchSnapshot,purgeWorkbench,emptyTrash,editToolPrefs,touch,removeEmptyFolder,open,readAll,get,write,create,update,batchFiles,mutateSelection,snapshot,validateBackup,importBackup,initialize,uid,stamp,record,validData};})();
+return {createCategorizedWorkbench,editCategories,readAssemblySources,createM2Recovery,editWorkbenchFields,createWorkbenchTemplate,saveWorkbenchTemplate,createWorkbenchFromTemplate,readMetaPrefix,createWorkbench,updateWorkbench,createWorkbenchSource,createWorkbenchSnapshot,purgeWorkbench,emptyTrash,editToolPrefs,touch,removeEmptyFolder,open,readAll,get,write,create,update,batchFiles,mutateSelection,snapshot,validateBackup,importBackup,initialize,uid,stamp,record,validData};})();
