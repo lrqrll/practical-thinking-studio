@@ -1,0 +1,288 @@
+{
+  "role": "開發者實際驗證",
+  "product": null,
+  "contexts": [
+    {
+      "id": "c1",
+      "closed": true
+    }
+  ],
+  "pages": [
+    {
+      "contextId": "c1",
+      "pageId": "p1"
+    }
+  ],
+  "events": [
+    {
+      "event": "page-created",
+      "contextId": "c1",
+      "pageId": "p1"
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/style.css?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/time-records.css?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/visual-system.css?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/ptm-grotesk.woff2",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/money-model.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/field-model.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/deployment.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/ptm-tc.woff2",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/backup-format.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/media-model.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/workbench-model.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/time-model.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/category-model.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/tool-registry.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/document-model.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/storage.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/workbench.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/tools-core.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/pdf-export.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/document-export.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/excel-export.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/media-tools.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/local-files.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/document-editor.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/field-ui.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/category-ui.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/workbench-ui.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/time-ui.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/assembly-model.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/assembly-ui.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/app-shell.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    },
+    {
+      "event": "browser-response",
+      "contextId": "c1",
+      "pageId": "p1",
+      "url": "http://127.0.0.1:8000/workspace.js?v=3.8.0-rc.1",
+      "status": 200,
+      "requestId": null
+    }
+  ],
+  "errors": []
+}
