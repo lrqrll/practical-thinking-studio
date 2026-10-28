@@ -169,3 +169,5 @@ PR #4 已批准合併部署；PR #5 追加修正尚未批准。完成追加發�
 Work確認394acbf的選取匯出展開v4 snapshot而誤帶workbenchLayouts，v1驗證器正確拒絕。改為kind/version/exportedAt/files/folders/archives/histories明確組裝，不修改驗證器。開發者本機有／無分類兩案真下載、空白context匯入、歷史逐值比較及保存重開2通過；CI以增量PR自身SHA為準。原有有界QA與skipped界線保留。
 
 該修復首輪CI40649967764為1通過／1失敗：合成資料建立早於IndexedDB啟用，工具呼叫db.transaction時db尚未存在。本機較快而未重現；已明確等待工作空間就緒才植入fixture，不更改產品、不增加重試或放寬斷言。新SHA結果另列，保留原失敗。
+
+M3.4獨立候選：初次外觀4pass/1fail（可見名稱與ARIA不一致）修正後，四寬度／主題／原分類重點15pass。首輪失敗保留於交付說明；完整回歸與最終SHA HTTPS以新PR原始CI為準。開發者驗證，不解除M2-NAV-01獨立驗收門檻。

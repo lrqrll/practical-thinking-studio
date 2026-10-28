@@ -1,0 +1,83 @@
+name: M3.4 visual system (developer verification)
+on:
+  push:
+    branches: [codex/nexus-m34-visual]
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run test:unit
+      - name: Existing browser, CJK fallback and PDF inspection
+        run: |
+          echo 'NEXUS_CHROMIUM=/usr/bin/google-chrome' >> "$GITHUB_ENV"
+          node scripts/qa/production/install-cjk.cjs
+          sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=45 -o Acquire::https::Timeout=45 update
+          sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=45 -o Acquire::https::Timeout=45 install -y poppler-utils
+          node scripts/qa/m33-legacy.cjs
+      - name: Full existing and changed UI regression
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: test-results/m34-full.json
+        run: npx playwright test --workers=2 --reporter=list,json --output=m34-full-results
+      - name: Native document selection regression
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: test-results/m34-selection.json
+        run: npx playwright test tests/e2e/ci-regressions.spec.cjs tests/e2e/document.spec.cjs --grep 'native navigation|font, size' --repeat-each=5 --reporter=list,json --output=m34-selection-results
+      - name: Bind separate visual preview
+        run: |
+          echo 'NEXUS_M2_SITE_URL=https://lrqrll.github.io/practical-thinking-studio-preview/m34/' >> "$GITHUB_ENV"
+          echo 'NEXUS_PREVIEW_NAMESPACE=m34-visual' >> "$GITHUB_ENV"
+          echo 'NEXUS_PREVIEW_VERIFY=1' >> "$GITHUB_ENV"
+          echo 'NEXUS_CAPTURE_EVIDENCE=1' >> "$GITHUB_ENV"
+          echo 'NEXUS_EXPECTED_ASSETS_FILE=environment-evidence/candidate-assets.json' >> "$GITHUB_ENV"
+          NEXUS_PREVIEW_NAMESPACE=m34-visual node scripts/build-preview.cjs
+      - name: Real HTTPS assets and changed workflows
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: test-results/m34-https.json
+        run: |
+          node - <<'JS'
+          (async()=>{for(let i=0;i<12;i++){try{const r=await fetch(process.env.NEXUS_M2_SITE_URL+'deployment.json',{signal:AbortSignal.timeout(10000),cache:'no-store'});if(r.ok&&(await r.json()).commit===process.env.GITHUB_SHA)return;}catch(e){console.log(e.message);}await new Promise(ok=>setTimeout(ok,10000));}throw Error('Visual preview SHA not ready');})().catch(e=>{console.error('::error::'+e.message);process.exitCode=1;});
+          JS
+          mkdir -p environment-evidence
+          node scripts/qa/candidate-assets.cjs > environment-evidence/assets-before.log 2>&1 || { cat environment-evidence/assets-before.log; echo '::error::Exact candidate assets differ'; exit 1; }
+          npx playwright test tests/e2e/visual-system.spec.cjs tests/e2e/categories-organize.spec.cjs tests/e2e/categories-selected.spec.cjs tests/e2e/tools.spec.cjs tests/e2e/time-records.spec.cjs tests/e2e/document-save-drain.spec.cjs tests/e2e/pdf.spec.cjs tests/e2e/assembly.spec.cjs --workers=2 --trace on --reporter=list,json --output=m34-https-results
+          node scripts/qa/production/verify-monitor.cjs m34-https-results > environment-evidence/m34-integrity.json
+          node scripts/qa/candidate-assets.cjs
+      - run: npm audit --audit-level=high
+      - uses: actions/upload-artifact@v4
+        id: evidence
+        if: always()
+        with:
+          name: M34-visual-developer-evidence
+          path: |
+            m34-full-results/
+            m34-selection-results/
+            m34-https-results/
+            environment-evidence/
+            test-results/
+          retention-days: 30
+      - name: Create or update authorized visual PR with actual evidence
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          ARTIFACT: ${{ steps.evidence.outputs.artifact-url }}
+          DIGEST: ${{ steps.evidence.outputs.artifact-digest }}
+        with:
+          script: |
+            const fs=require('fs'),{owner,repo}=context.repo,head='codex/nexus-m34-visual',base='codex/nexus-m33-organize',reports={};
+            function failures(s){for(const p of s.specs||[])for(const t of p.tests||[])if(t.status==='unexpected')for(const r of t.results||[])for(const e of r.errors||[])core.warning(p.title+' '+e.message?.slice(0,2500));for(const c of s.suites||[])failures(c);}
+            for(const k of ['full','selection','https']){const p='test-results/m34-'+k+'.json';if(fs.existsSync(p)){const r=JSON.parse(fs.readFileSync(p));reports[k]=r.stats;failures(r);}}
+            const b=await github.rest.git.getRef({owner,repo,ref:'heads/'+base});
+            const body=`M3.4 開發者候選，待Work有界獨立複驗。\n\nHead: ${context.sha}\nBase: ${base} / ${b.data.object.sha}\n\n實際改版：九色語意token與暖白／炭灰藍主題、light/dark/system偏好、桌面側邊欄／手機焦點導覽、真實最近資料首頁、獨立資料／工具入口、工作台卡片與原列表、九工具共用頁首、來源與保存狀態、DOM不重建的專注與手機格式工具收合。舊#work相容入口、九工具、M3.3分類功能及全部匯出保留。\n\n資料：DB2／layout schema1／v1-v4備份不變；僅既有settings.theme允許system，交易合併保護未知屬性，失敗不套用假偏好。無卡片排序／隱藏持久配置，無資料遷移。\n\n預覽 https://lrqrll.github.io/practical-thinking-studio-preview/m34/ （namespace m34-visual，獨立DB；同origin不是權限隔離）。原m33／m33-organize與正式站不動。\n\nCI https://github.com/${owner}/${repo}/actions/runs/${context.runId}\nArtifact ${process.env.ARTIFACT}\nGitHub ZIP digest（非本機重算）${process.env.DIGEST}\n\n原始觀測，skipped不是pass：\n\n\`\`\`json\n${JSON.stringify(reports,null,2)}\n\`\`\`\n\nPNG（四寬度／淺深中文）、trace、真下載與SHA、每context/page HTML/JS/CSS/font原始bytes、資產前後比對及取證完整性皆在artifact。TLS開啟、retries0、全新合成context。原失敗／版本遷移測試更新／可重跑指令見docs/M34-VISUAL.md及.github/workflows/m34-visual.yml。\n\n未測：真手機觸控、Firefox/Safari、完整讀屏、OS選檔、Office/Calc；M2-NAV-01完整獨立操作缺口、歷史失敗與條件skipped保留。未新增卡片配置／跨台共用／AI／後端／Excel／斜體入口。不合併main、不正式部署、不auto-merge、不擴充後續里程碑。`;
+            const prs=await github.rest.pulls.list({owner,repo,head:owner+':'+head,state:'open'});const result=prs.data.length?await github.rest.pulls.update({owner,repo,pull_number:prs.data[0].number,body}):await github.rest.pulls.create({owner,repo,head,base,title:'feat: M3.4 visual system and focused workbench experience',body});core.notice(result.data.html_url);
