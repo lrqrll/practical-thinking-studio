@@ -167,3 +167,5 @@ PR #4 已批准合併部署；PR #5 追加修正尚未批准。完成追加發�
 ## QA-M33-SELECTED-01 / P2（增量分支）
 
 Work確認394acbf的選取匯出展開v4 snapshot而誤帶workbenchLayouts，v1驗證器正確拒絕。改為kind/version/exportedAt/files/folders/archives/histories明確組裝，不修改驗證器。開發者本機有／無分類兩案真下載、空白context匯入、歷史逐值比較及保存重開2通過；CI以增量PR自身SHA為準。原有有界QA與skipped界線保留。
+
+該修復首輪CI40649967764為1通過／1失敗：合成資料建立早於IndexedDB啟用，工具呼叫db.transaction時db尚未存在。本機較快而未重現；已明確等待工作空間就緒才植入fixture，不更改產品、不增加重試或放寬斷言。新SHA結果另列，保留原失敗。
