@@ -54,6 +54,13 @@ async function editCategories(workbenchId,expected,operation,payload){return wor
   if(!NexusCategories.kinds.includes(payload.toolType))throw Error('工具尚未完成或不支援');
   file=record(payload.toolType,payload.name,blankData(payload.toolType));parameters.fileId=file.id;
  }
+ if(operation==='link-item'){
+  const source=await request(files.get(payload.fileId));if(!source||source.deletedAt||(!NexusCategories.kinds.includes(source.type)||!validData(source.type,source.data)))throw Error('來源不存在、在垃圾桶或工具不支援');
+  const layouts=await request(meta.getAll(metaRange('workbench-layout:')));
+  if(layouts.some(l=>!NexusCategories.valid(l)))throw Error('含未知分類配置，請先完整備份；未修改來源');
+  for(const l of layouts)if(l.items.some(i=>i.fileId===source.id)){const owner=await request(meta.get(l.workbenchId));throw Error('內容已有歸屬：'+(owner?.name||'工作台')+'；不會自動搬移或複製');}
+  operation='add-item';parameters={...parameters,toolType:source.type};
+ }
  const layout=NexusCategories.change(current,operation,parameters,{uid,now:stamp});if(file)files.add(file);meta.put(layout);return {layout:clone(layout),file:clone(file)};
 });}
 async function updateWorkbench(id,expected,change){return workbenchTransaction(async(files,meta)=>{
