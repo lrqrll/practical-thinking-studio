@@ -65,7 +65,7 @@ test('history retention is bounded and import preserves snapshot values',async({
 });
 test('legacy migration preserves original local data and runs only once',async({page})=>{
  await page.addInitScript(()=>{localStorage.setItem('thinking-studio-v1',JSON.stringify({version:1,theme:'dark',budget:{fixed:0,price:100,variable:20,people:10,rows:[['場租',200]]},tasks:[{name:'舊任務',owner:'甲',due:'',depends:'',status:'未開始'}],drafts:{'report-result':'舊版報告'}}));});
- await page.goto('/');await expect(page.locator('#new-file-type')).toBeVisible();
+ await page.goto('/#work');await expect(page.locator('#new-file-type')).toBeVisible();
  const result=await page.evaluate(async()=>({files:await NexusStore.readAll('files'),archive:await NexusStore.get('meta','archive:legacy-v1'),original:localStorage.getItem('thinking-studio-v1')}));expect(result.files).toHaveLength(6);expect(result.archive.raw).toBe(result.original);expect(JSON.stringify(result.files)).toContain('舊版報告');expect(result.files.find(f=>f.type==='budget').data.budget.price).toBe(100);await page.reload();await expect(page.locator('#new-file-type')).toBeVisible();expect(await page.evaluate(()=>NexusStore.readAll('files').then(f=>f.length))).toBe(6);
 });
 test('restored history keeps revisions increasing on the next edit',async({page})=>{
