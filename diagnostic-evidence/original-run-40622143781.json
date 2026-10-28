@@ -1,0 +1,106 @@
+{
+  "test-results/m33-full.json": {
+    "stats": {
+      "startTime": "2026-10-28T02:39:16.224Z",
+      "duration": 222414.80299999999,
+      "expected": 129,
+      "skipped": 5,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "errors": []
+  },
+  "test-results/m33-https.json": {
+    "stats": {
+      "startTime": "2026-10-28T02:43:24.754Z",
+      "duration": 97342.033,
+      "expected": 25,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "errors": []
+  },
+  "failures": [
+    {
+      "title": "cancel leaving preserves URL/raw settings, reload offers recovery without silently saving; reorder keeps other unsaved names",
+      "file": "categories-ui.spec.cjs",
+      "test": {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "timedOut",
+            "duration": 60008,
+            "error": {
+              "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+              "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+            },
+            "errors": [
+              {
+                "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+              },
+              {
+                "message": "\u001b[31mTearing down \"context\" exceeded the test timeout of 30000ms.\u001b[39m"
+              },
+              {
+                "location": {
+                  "file": "/home/runner/work/practical-thinking-studio/practical-thinking-studio/tests/e2e/categories-ui.spec.cjs",
+                  "column": 661,
+                  "line": 9
+                },
+                "message": "Error: page.reload: Test ended.\nCall log:\n\u001b[2m  - waiting for navigation until \"load\"\u001b[22m\n\n\n   7 | test('two workbenches own separate files, all nine tool cards open existing editors and assembly excludes other workbench notes',async({page})=>{test.setTimeout(90000);const a=await create(page,'合成A'),cat=await addCategory(page,'工具');const types=await page.locator('[data-category-tool-form] select option').evaluateAll(nodes=>nodes.map(n=>n.value));expect(types).toHaveLength(9);for(const type of types)await addItem(page,cat,type,'A-'+type);const aFiles=await page.evaluate(async()=>{const l=(await NexusStore.readMetaPrefix('workbench-layout:'))[0];return l.items.map(i=>i.fileId);});for(const type of types){await page.locator('[data-category-id=\"'+cat+'\"] [data-category-file]').filter({hasText:'A-'+type}).click();await expect(page.locator('a.back')).toHaveText('← 返回工作台');await expect(page.locator('#save-status')).toBeAttached();await page.locator('a.back').click();await expect(page.locator('.category-workbench h1')).toHaveText('合成A');}const b=await create(page,'合成B'),other=await addCategory(page,'獨立');await addItem(page,other,'notes','B-notes');const bFile=await page.locator('[data-category-file]').getAttribute('data-category-file');expect(aFiles).not.toContain(bFile);await page.getByRole('link',{name:'組裝成果',exact:true}).click();await expect(page.locator('#assembly-source option').filter({hasText:'B-notes'})).toHaveCount(1);await expect(page.locator('#assembly-source option').filter({hasText:'A-notes'})).toHaveCount(0);await page.goto(a);await expect(page.locator('[data-category-file]')).toHaveCount(9);await page.goto(b);await expect(page.locator('[data-category-file]')).toHaveCount(1);});\n   8 | test('CAS/quota retain latest raw inputs and downloadable drafts; explicit reload permits reviewed retry',async({page,context},info)=>{const url=await create(page,'合成失敗重試'),cat=await addCategory(page,'原分類');const other=await context.newPage();await other.goto(url);await expect(other.locator('.category-panel')).toBeVisible();const name=page.locator('[data-category-rename] input');await name.fill('勝方名稱');await page.locator('[data-category-rename] button').click();await other.locator('[data-category-rename] input').fill('敗方輸入');await other.locator('[data-category-rename] button').click();await expect(other.locator('#bench-save-status')).toContainText('未保存');await expect(other.locator('[data-category-rename] input')).toHaveValue('敗方輸入');const wait=other.waitForEvent('download');await other.locator('#category-draft-download').click();const d=await wait,file=info.outputPath('category-cas-draft.json');await d.saveAs(file);expect(fs.readFileSync(file,'utf8')).toContain('敗方輸入');await other.close();await page.reload();await expect(page.locator('.category-panel h2')).toHaveText('勝方名稱');await page.evaluate(()=>{window.originalCategoryEdit=NexusStore.editCategories;NexusStore.editCategories=async()=>{throw new DOMException('合成配額不足','QuotaExceededError');};});await page.locator('#category-new-name').fill('配額時原輸入');await page.locator('#category-add-form button').click();await expect(page.locator('#bench-save-status')).toContainText('合成配額不足');await page.locator('#category-new-name').fill('配額解除前最新輸入');await page.evaluate(()=>NexusStore.editCategories=window.originalCategoryEdit);await page.locator('#category-retry').click();await expect(page.locator('.category-panel h2').filter({hasText:'配額解除前最新輸入'})).toBeVisible();await page.reload();await expect(page.locator('.category-panel h2').filter({hasText:'配額解除前最新輸入'})).toBeVisible();expect(cat).toBeTruthy();});\n>  9 | test('cancel leaving preserves URL/raw settings, reload offers recovery without silently saving; reorder keeps other unsaved names',async({page})=>{const url=await create(page,'合成草稿'),one=await addCategory(page,'第一類'),two=await addCategory(page,'第二類');await page.locator('#category-name-'+one).fill('尚未保存的新名');await page.getByRole('button',{name:'上移分類 第二類',exact:true}).click();await expect(page.locator('#category-name-'+one)).toHaveValue('尚未保存的新名');page.once('dialog',d=>d.dismiss());await page.getByRole('link',{name:'← 返回工作台管理'}).click();await expect(page).toHaveURL(url);await expect(page.locator('#category-name-'+one)).toHaveValue('尚未保存的新名');await page.reload();await expect(page.getByRole('button',{name:'恢復未保存分類輸入'}).first()).toBeVisible();await expect(page.locator('.category-panel h2').filter({hasText:'第一類'})).toBeVisible();await page.getByRole('button',{name:'恢復未保存分類輸入'}).first().click();await expect(page.locator('#category-name-'+one)).toHaveValue('尚未保存的新名');expect(await page.evaluate(async id=>(await NexusStore.readMetaPrefix('workbench-layout:'))[0].categories.find(c=>c.id===id).name,one)).toBe('第一類');await page.locator('[data-category-rename=\"'+one+'\"] button').click();await expect(page.locator('#category-heading-'+one)).toHaveText('尚未保存的新名');expect(two).toBeTruthy();});\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^\n  10 | test('fresh disposable browser profile closes and reopens with identical saved workbench/category/file data',async({playwright,monitor},info)=>{const os=require('node:os'),path=require('node:path'),profile=fs.mkdtempSync(path.join(os.tmpdir(),'nexus-m33-persistent-')),options={headless:true,ignoreHTTPSErrors:false,...(process.env.NEXUS_CHROMIUM?{executablePath:process.env.NEXUS_CHROMIUM,args:['--no-sandbox']}: {})};let context;try{context=await playwright.chromium.launchPersistentContext(profile,options);await monitor.install(context);let page=context.pages()[0];const url=await create(page,'合成真正重開'),cat=await addCategory(page,'保留分類');await addItem(page,cat,'notes','保留內容');await page.locator('[data-category-file]').click();await page.locator('#note-body').fill('關閉瀏覽器後仍保留的合成文字');await expect(page.locator('#save-status')).toHaveText('已保存至此瀏覽器');await page.locator('a.back').click();await expect(page.locator('.category-workbench')).toBeVisible();const before=await page.evaluate(async()=>{const x=await NexusStore.snapshot();delete x.exportedAt;return x;});await context.close();context=null;context=await playwright.chromium.launchPersistentContext(profile,options);await monitor.install(context);page=context.pages()[0];await page.goto(url);await expect(page.locator('.category-panel h2')).toHaveText('保留分類');const after=await page.evaluate(async()=>{const x=await NexusStore.snapshot();delete x.exportedAt;return x;});expect(after).toEqual(before);expect(after.files[0].data.note.text).toBe('關閉瀏覽器後仍保留的合成文字');fs.writeFileSync(info.outputPath('reopen-proof.json'),JSON.stringify({role:'開發者驗證，專用合成profile，非使用者profile',before,after},null,2));}finally{if(context)await context.close();fs.rmSync(profile,{recursive:true,force:true});}});\n  11 |\n    at /home/runner/work/practical-thinking-studio/practical-thinking-studio/tests/e2e/categories-ui.spec.cjs:9:661"
+              },
+              {
+                "location": {
+                  "file": "/home/runner/work/practical-thinking-studio/practical-thinking-studio/scripts/qa/production/monitor.cjs",
+                  "column": 4,
+                  "line": 37
+                },
+                "message": "Error: browserContext.close: Test timeout of 30000ms exceeded.\n\n   at ../../scripts/qa/production/monitor.cjs:37\n\n  35 |    try{await screenshot(p,pages.get(p),'final-screen');if((formal||preview)&&p.url().startsWith(expected.site)){const identity=await p.evaluate(()=>({channel:DEPLOYMENT.channel,commit:DEPLOYMENT.commit,version:BRAND.version,db:DATABASE_NAME}));record('identity',pages.get(p),identity);if(JSON.stringify(identity)!==JSON.stringify(expected.identity||{channel:'production',commit:null,version:'3.4.0',db:'nexus-workspace'}))throw Error('Production identity mismatch');}}\n  36 |    catch(e){errors.push({...pages.get(p),kind:'final-evidence',message:e.message});}\n> 37 |   }await close(options);cs.closed=true;await drain();await report();assertClean();};return context;\n     |    ^\n  38 |  }\n  39 |  async function report(attach=false){await drain();fs.mkdirSync(info.outputPath('response-bytes'),{recursive:true});const body=JSON.stringify({role:control?'測試工具負控制':'開發者實際驗證',product:expected?.M||null,contexts:[...contexts.values()],pages:[...pages.values()],events,errors},null,2);fs.writeFileSync(info.outputPath('monitor-index.json'),body);if(attach)await info.attach('context-page-monitor-index',{body,contentType:'application/json'});}\n  40 |  async function finish(){for(const [context,cs]of contexts)if(!cs.closed){try{await context.close();}catch(e){if(!errors.length)errors.push({kind:'close',message:e.message});}}await report(true);assertClean();}\n    at _BrowserContext.context.close (/home/runner/work/practical-thinking-studio/practical-thinking-studio/scripts/qa/production/monitor.cjs:37:4)"
+              }
+            ],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-28T02:43:56.802Z",
+            "annotations": [],
+            "attachments": [
+              {
+                "name": "error-context",
+                "contentType": "text/markdown",
+                "path": "/home/runner/work/practical-thinking-studio/practical-thinking-studio/m33-https-results/categories-ui-cancel-leavi-f4a26-r-keeps-other-unsaved-names/error-context.md"
+              },
+              {
+                "name": "trace",
+                "contentType": "application/zip",
+                "path": "/home/runner/work/practical-thinking-studio/practical-thinking-studio/m33-https-results/categories-ui-cancel-leavi-f4a26-r-keeps-other-unsaved-names/trace.zip"
+              }
+            ]
+          }
+        ],
+        "status": "unexpected"
+      }
+    }
+  ],
+  "test-results/m33-selection.json": {
+    "stats": {
+      "startTime": "2026-10-28T02:42:59.269Z",
+      "duration": 18037.102,
+      "expected": 15,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "errors": []
+  },
+  "environment-evidence/m33-summary.json": {
+    "stats": null,
+    "errors": null
+  }
+}
