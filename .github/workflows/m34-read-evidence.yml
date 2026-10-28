@@ -1,0 +1,35 @@
+name: Read existing M3.4 failure evidence only
+on:
+  push:
+    branches: [codex/nexus-m34-evidence]
+    paths: [.github/workflows/m34-read-evidence.yml]
+permissions:
+  actions: read
+  contents: write
+jobs:
+  extract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: M34-visual-developer-evidence
+          run-id: 40657088901
+          github-token: ${{ github.token }}
+          path: /tmp/m34-original
+      - run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import shutil,json
+          root=Path('/tmp/m34-original');out=Path('diagnostic-evidence');out.mkdir(exist_ok=True)
+          for f in root.rglob('*'):
+            if f.name=='m34-full.json':shutil.copyfile(f,out/f.name)
+            if 'm2-ui-templates' in str(f) and f.name in ['trace.zip','error-context.md','monitor-index.json']:shutil.copyfile(f,out/f.name)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add diagnostic-evidence
+          git diff --cached --quiet && exit 0
+          git commit -m 'Preserve original M3.4 template-case failure, no test rerun'
+          git push origin HEAD:codex/nexus-m34-evidence
