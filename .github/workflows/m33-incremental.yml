@@ -1,0 +1,72 @@
+name: M3.3 incremental delivery (developer verification)
+on:
+  push:
+    branches: [codex/nexus-m33-selected-fix, codex/nexus-m33-organize]
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run test:unit
+      - name: Browser and font prerequisites
+        run: |
+          echo 'NEXUS_CHROMIUM=/usr/bin/google-chrome' >> "$GITHUB_ENV"
+          node scripts/qa/production/install-cjk.cjs
+      - name: Selected backup regression
+        if: github.ref_name == 'codex/nexus-m33-selected-fix'
+        run: npx playwright test tests/e2e/categories-selected.spec.cjs --workers=1 --trace on --output=m33-increment-results
+      - name: Bind isolated organization preview
+        if: github.ref_name == 'codex/nexus-m33-organize'
+        run: |
+          echo 'NEXUS_M2_SITE_URL=https://lrqrll.github.io/practical-thinking-studio-preview/m33-organize/' >> "$GITHUB_ENV"
+          echo 'NEXUS_PREVIEW_NAMESPACE=m33-organize' >> "$GITHUB_ENV"
+          echo 'NEXUS_PREVIEW_VERIFY=1' >> "$GITHUB_ENV"
+          echo 'NEXUS_CAPTURE_EVIDENCE=1' >> "$GITHUB_ENV"
+          echo 'NEXUS_EXPECTED_ASSETS_FILE=environment-evidence/candidate-assets.json' >> "$GITHUB_ENV"
+          NEXUS_PREVIEW_NAMESPACE=m33-organize node scripts/build-preview.cjs
+      - name: Exact HTTPS assets and bounded changed-flow regression
+        if: github.ref_name == 'codex/nexus-m33-organize'
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: test-results/m33-https.json
+        run: |
+          node scripts/qa/candidate-assets.cjs
+          npx playwright test tests/e2e/categories-selected.spec.cjs tests/e2e/categories-organize.spec.cjs tests/e2e/categories-storage.spec.cjs tests/e2e/categories-ui.spec.cjs tests/e2e/categories-capacity.spec.cjs tests/e2e/assembly.spec.cjs tests/e2e/document-save-drain.spec.cjs --workers=2 --trace on --reporter=list,json --output=m33-increment-results
+          node scripts/qa/production/verify-monitor.cjs m33-increment-results > environment-evidence/integrity.json
+          node scripts/qa/candidate-assets.cjs
+      - run: npm audit --audit-level=high
+      - uses: actions/upload-artifact@v4
+        id: evidence
+        if: always()
+        with:
+          name: M33-incremental-evidence
+          path: |
+            m33-increment-results/
+            environment-evidence/
+            test-results/
+          retention-days: 30
+      - name: Create or update only this authorized incremental PR
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          ARTIFACT: ${{ steps.evidence.outputs.artifact-url }}
+          DIGEST: ${{ steps.evidence.outputs.artifact-digest }}
+        with:
+          script: |
+            const fs=require('fs'),{owner,repo}=context.repo,head=context.ref.slice(11),fix=head==='codex/nexus-m33-selected-fix',base=fix?'codex/nexus-m33-interface':'codex/nexus-m33-selected-fix';
+            const report=fs.existsSync('test-results/m33-https.json')?JSON.parse(fs.readFileSync('test-results/m33-https.json')):null;
+            function failures(s){for(const p of s.specs||[])for(const t of p.tests||[])if(t.status==='unexpected')for(const r of t.results||[])for(const e of r.errors||[])core.warning(p.title+' '+e.message?.slice(0,2500));for(const c of s.suites||[])failures(c);}if(report)failures(report);
+            const title=fix?'fix: QA-M33-SELECTED-01 allowlisted selected backups':'feat: organize existing content with workbench tool cards';
+            const body=`開發者驗證，待Work有界獨立複驗。\n\nHead: ${context.sha}\nBase: ${base}\nCI: https://github.com/${owner}/${repo}/actions/runs/${context.runId}\nArtifact: ${process.env.ARTIFACT}\nGitHub ZIP digest: ${process.env.DIGEST}\n\n${fix?'選取備份只明確組裝v1必要欄位，不展開完整snapshot；有／無分類均真下載並於空白context還原、保存重開，原資料／歷史保留。':'既有內容搜尋與單一歸屬加入、同台移動、解除關聯保留原檔；交易內CAS／全域歸屬檢查、quota可重試。首頁以有效內容衍生工具卡片，列表搜尋／排序、分類設定次要入口；不另存卡片配置、不改schema。預覽 https://lrqrll.github.io/practical-thinking-studio-preview/m33-organize/ ，namespace=m33-organize，DB獨立；原m33候選保持不變。'}\n\nObserved HTTPS stats: ${JSON.stringify(report?.stats||null)}\n\n差異與限制見docs/M33-ORGANIZE.md（功能分支）；所有實測是開發者驗證。TLS開啟、retries0、合成隔離資料；保留原skipped、M2-NAV-01完整獨立操作缺口。沒有main合併、正式部署、auto-merge、跨台共用或下一階段授權。`;
+            const prs=await github.rest.pulls.list({owner,repo,head:owner+':'+head,state:'open'});
+            const result=prs.data.length?await github.rest.pulls.update({owner,repo,pull_number:prs.data[0].number,body}):await github.rest.pulls.create({owner,repo,head,base,title,body});core.notice(result.data.html_url);
