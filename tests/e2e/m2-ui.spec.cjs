@@ -5,7 +5,21 @@ async function ready(page){await expect.poll(()=>page.evaluate(()=>!document.que
 async function bench(page,name='自訂採購'){await open(page);await page.locator('#new-workbench-name').fill(name);await page.locator('#new-workbench-form button').click();await expect(page.locator('.workbench-detail h1')).toHaveText(name);await ready(page);return page.url();}
 async function add(page,label,type='text',options='北\n南'){await page.locator('#m2-field-label').fill(label);await page.locator('#m2-field-type').selectOption(type);if(type==='select')await page.locator('#m2-field-options').fill(options);await page.locator('#field-add-form button').click();await expect(page.getByLabel(label,{exact:true})).toBeVisible();await ready(page);}
 async function saveFields(page){await page.locator('#save-custom-values').click();await ready(page);await expect(page.locator('#m2-draft-status')).not.toContainText('尚未保存');}
-async function sources(page){await page.locator('[data-bench-new=quotes]').click();for(let i=0;i<2;i++)for(const [key,value]of Object.entries({name:'廠商'+i,base:'0.1',delivery:'0.2',extra:'0',tax:'0',terms:'PRIVATE_TERMS'}))await page.locator(`[data-quote="${i}"][data-key="${key}"]`).fill(value);await saved(page);await page.locator('a.back').click();await page.locator('[data-bench-new=notes]').click();await page.locator('#note-body').fill('PRIVATE_SOURCE');await saved(page);await page.locator('a.back').click();}
+async function sources(page){
+ await page.locator('[data-bench-new=quotes]').click();
+ await expect(page.locator('#q-0-name')).toBeVisible();await ready(page);
+ for(let i=0;i<2;i++){
+  for(const [key,value]of Object.entries({name:'廠商'+i,base:'0.1',delivery:'0.2',extra:'0',tax:'0',terms:'PRIVATE_TERMS'})){
+   const field=page.locator(`[data-quote="${i}"][data-key="${key}"]`);
+   await field.fill(value);await expect(field).toHaveValue(value);
+  }
+ }
+ await saved(page);await page.locator('a.back').click();
+ await page.locator('[data-bench-new=notes]').click();
+ await expect(page.locator('#note-body')).toBeVisible();await ready(page);
+ await page.locator('#note-body').fill('PRIVATE_SOURCE');await expect(page.locator('#note-body')).toHaveValue('PRIVATE_SOURCE');
+ await saved(page);await page.locator('a.back').click();
+}
 async function bytes(d){const a=[];for await(const c of await d.createReadStream())a.push(c);return Buffer.concat(a);}
 async function download(page,selector){const p=page.waitForEvent('download');await page.locator(selector).click();return bytes(await p);}
 async function namedDialog(page,name,target='template'){await page.locator('#dialog-name').fill(name);await page.getByRole('button',{name:'儲存名稱',exact:true}).click();await expect.poll(()=>page.evaluate(()=>benchPending)).toBe(0);if(target==='template')await expect(page.locator('#template-name')).toHaveValue(name);else if(target==='field')await expect(page.getByLabel(name,{exact:true})).toBeVisible();else await expect(page.locator('.workbench-detail h1')).toHaveText(name);await ready(page);}
