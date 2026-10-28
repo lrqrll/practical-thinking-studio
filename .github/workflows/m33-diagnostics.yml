@@ -2,6 +2,7 @@ name: M3.3 retrieve existing developer evidence
 on:
   push:
     branches: [codex/nexus-m33-diagnostics]
+    paths: [.github/workflows/m33-diagnostics.yml]
 permissions:
   actions: read
   contents: write
@@ -48,9 +49,9 @@ jobs:
             d=json.load(open(f))
             if d.get('errors'):summary.setdefault('monitorErrors',[]).append({'file':os.path.relpath(f,root),'errors':d['errors']})
             if 'cancel-leavi' in f:
-              shutil.copyfile(f,out+'/failed-monitor-index.json')
+              shutil.copyfile(f,out+'/run-40645014438-monitor-index.json')
           for f in glob.glob(root+'/**/trace.zip',recursive=True):
-            if 'cancel-leavi' in f:shutil.copyfile(f,out+'/failed-trace.zip')
+            if 'cancel-leavi' in f:shutil.copyfile(f,out+'/run-40645014438-cancel-reload-trace.zip')
           assets=glob.glob(root+'/**/candidate-assets.json',recursive=True)
           if assets:shutil.copyfile(assets[0],out+'/candidate-assets.json')
           for f in glob.glob(root+'/**/categories-*.png',recursive=True):shutil.copyfile(f,out+'/'+os.path.basename(f))
