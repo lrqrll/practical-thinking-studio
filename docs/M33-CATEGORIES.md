@@ -1,78 +1,46 @@
-<!-- 本輪使用者已批准：M3.3第一階段、meta分類配置、DB1→2保留stores、v4備份與v1-v3讀取。下列原提案需確認的字樣保留方案脈絡，不表示再次等待一般授權。 -->
-# M3.3 自訂分類智慧工作台 MVP（第一階段已批准分支開發）
+# M3.3 自訂分類工作台：第一階段候選
 
-## 第一階段：必須交付的完整操作
+使用者已明確批准分支開發／測試／PR／隔離預覽，以及限定資料契約：既有meta新增workbench-layout配置、DB1→2保留三個stores、不批次轉寫資料、備份v4向後讀v1-v3。沒有main合併、正式部署、auto-merge或M3.4授權。正式基線M78e90aec／3.4.0；M3.2 #16～21仍凍結。本輪從8df0db6112394e87876fe0358bbd370d0f78e78f另開三條線性相依分支，候選3.7.0-rc.1，不把新功能放回M3.2候選。
 
-使用者建立「自由工作台」→新增自己命名的分類→選九工具之一建立獨立內容→開啟編輯→保存→離開重開，分類／內容ID、順序和數據不變。工作台仍在同一列表，原「採購報價＋決策備忘」流程、M2欄位與範本保留；新用戶不先進固定職業範本。分類不是首頁工具分類，不新增「全部工具」。
+## 實際操作
 
-- 分類新增／改名／上移下移，穩定ID與名稱分離；同一工作台名稱trim後不可重複，1–40字，提案上限20分類／100內容項，具體限制在批准契約後固定。排序只改順序，不生成新ID、不改來源檔。
-- 新增內容：選現有九工具類型，以現有blankData／編輯器建立新fileId，類別項目指向fileId。預設每次新建，工作台A/B不意外共用來源；同一工作台不可重複加入同一fileId。首版不開放跨台連結私人既有內容，避免假隔離；全域工作空間仍可找同一份檔案，這不是獨立安全邊界。
-- 保存重開、手機390px與桌面1280px、深淺模式、鍵盤操作、錯誤及空白指引。一個「新增分類」及分類內「新增內容」，進階設定不占首屏；上／下移按鈕即可，不把拖曳當唯一操作。
-- 工作台內提供「組裝成果」入口。只列目前工作台可支援的已保存備忘／相容固定成果，預設不混其他工作台來源；全域組裝原流程保留。九工具均可分類與開啟，不等於九種資料都新增組裝adapter；首版不把預算或工時變成假文件／假試算表。
+工作台列表新增「建立自由工作台」→自己命名分類→從九工具選擇並新增獨立內容→卡片開啟原編輯器→保存→返回工作台。舊採購工作台、M2欄位／範本與九種獨立工具保留。分類可改名、上下排序；手機／桌面、鍵盤、深淺模式可用。分類不是檔案資料夾或權限邊界，工作空間仍能管理同一份檔案。新建不同工作台的內容預設是不同fileId，不意外共用。
 
-## 延後／不建議
+「組裝成果」在自由工作台僅列本台支援的已保存備忘及相容固定成果，全域入口保留原跨來源流程；沒有冒稱九種資料全有組裝adapter。M3.2的PDF／DOCX／HTML、工時CSV、預算XLSX沿用，舊快照不改。
 
-下一階段：跨分類移動、分類隱藏／恢復、含內容分類移除與恢復、項目重排、明確複製／連結既有檔案、自由工作台範本、其他工具的組裝adapter。原有M2採購範本照舊，不假稱已能複製新分類結構。
+## 資料契約
 
-不做：Excel網格、AI、帳號、同步、後端、付費API、固定職業平台大改、全面重寫workspace/storage、分類當作資料權限、移除分類時自動刪原檔。分類隱藏／移除尚未做就不顯示未完成入口。
+- meta `workbench-layout:<bench-key>`：schemaVersion1、workbenchId、rev、categories[{id,name}]、items[{id,categoryId,fileId,toolType}]、createdAt、updatedAt。陣列代表順序，關聯使用ID；分類名trim後1–40字、同台不可同名，最多20分類／100項目。新建分類內容另受既有完整備份的5000全域檔案上限保護，超限保留表單／不建半檔，不截短。
+- 原workbench schema1/2、最多兩個採購modules、M2欄位／範本、舊成果schema1/2、file.data/rev/history不改。自由工作台以新layout區分；啟動不大量轉換舊工作台。建立w+layout、建立file+layout item都在一個交易，CAS比較layout.rev，quota／CAS失敗整筆abort。
+- 改名／排序保留category/item/file IDs；不改file.data/rev、不改既有快照。來源仍被layout引用（含工作台垃圾桶）禁止永久刪除；軟刪來源仍留卡片關聯與還原指引。永久刪工作台原功能只清工作台配置／成果，來源檔仍保留，須使用者原確認流程。
+- 未知屬性以clone/spread保留；未知layout/schema唯讀且阻擋危險永久刪檔，不默默清空。未支援的備份先整份拒絕，沒有部分寫入。
+- DB2只用於版本防護，原stores不存在才建立，不刪／重建／搬移。舊分頁onversionchange關閉writer；blocked顯示保留輸入、關閉舊分頁並重試。舊程式不能靠open(version1)誤寫DB2；不得為回退刪庫。真正舊3.6來源以同origin測試fixture驗證關閉連線後仍可下載最新草稿，原已保存資料不變；此是local歷史相容試驗，不冒充正式HTTPS。
+- 有layout才輸出完整備份v4（workbenchLayouts）；無layout仍照既有v1-v3。新程式讀v1-v4；舊版對v4必須整份拒絕。原分包傳輸version1不改。副本還原重映射workbench／category／item／file ID並保持所有關聯；來源data/rev、歷史與舊成果保留，兩次還原不共用ID。缺包／損毀／非法引用不部分寫入。
 
-## 建議資料設計（需使用者確認）
+## 未保存輸入
 
-原workbench-model.js僅允許quotes/notes、最多兩模組；不能擴大modules陣列再假稱舊規格相容。採外加配置記錄，原工作台schema1/2、modules、M2欄位／範本、舊成果schema1/2均不改。
+表單原值、配額失敗後追加輸入仍保留，可重試與下載分類草稿；CAS不覆寫勝方，重新讀取會保留輸入供明確核對。排序不吃掉別的未保存名稱。離開可取消且網址／輸入不變；分頁隔離草稿可在reload後明確恢復，恢復不自動保存、不當完整備份；不自動移除其他分頁的草稿。真正瀏覽器關閉與重開測試使用專用新建/tmp profile，不碰使用者profile。
 
-```json
-{
-  "id": "workbench-layout:<stable-key>",
-  "schemaVersion": 1,
-  "rev": 1,
-  "workbenchId": "workbench:<existing-or-new-id>",
-  "categories": [{"id":"category-uuid","name":"活動流程"}],
-  "items": [{"id":"item-uuid","categoryId":"category-uuid","fileId":"file-uuid","toolType":"tasks"}],
-  "createdAt":"ISO timestamp",
-  "updatedAt":"ISO timestamp"
-}
+## 小PR與驗證
+
+分類模型→保存／DB2／v4→UI整合，base依序相依，共用檔案由同一整合分支處理。完整SHA、PR、CI及預覽以交付PR正文為準，不寫死未建立的PR號。
+
+`npm ci --ignore-scripts; npm run test:unit`。瀏覽器須Chromium及poppler（只供開發驗證，不要求終端安裝）：
+```
+node scripts/qa/m33-legacy.cjs
+NEXUS_CHROMIUM=/usr/bin/chromium npx playwright test tests/e2e/categories-storage.spec.cjs tests/e2e/categories-ui.spec.cjs tests/e2e/categories-compat.spec.cjs tests/e2e/categories-capacity.spec.cjs --workers=1 --trace on
 ```
 
-陣列代表顯示順序；不可用名稱或陣列index當關聯鍵。新自由工作台與空layout同交易建立，既有工作台沒有layout仍走原流程；不在啟動時大量轉換舊資料。先不提供舊工作台轉換，保留原ID與關聯。新分類和項目只新增記錄；rename/reorder不改檔案data/rev/history，不回寫既有快照或解析正文ID。
+驗證含穩定ID、九卡片原編輯器、390/1280兩主題／基本axe、CAS／quota最新輸入／恢復、真正關閉重開、DB1原地升級、舊分頁writer關閉、混合M2/v4副本還原、超100MB／150成果七包v4完整還原及圖片解碼、原保存及PDF回歸。沿用全context/page監測；HTTPS用自己SHA及新namespace，TLS驗證開啟、retries0。原始fixture／trace／下載／hash／CI是開發者驗證，待Work有界複驗。
 
-layout用獨立rev CAS；同一files/meta交易讀工作台是否存在／非垃圾桶、驗證layout.rev，必要時新增file及layout一起提交。quota／CAS失敗整筆abort，不留下孤兒file／項目，保留表單與草稿並可重試。工作台改名仍走原workbench.rev CAS；檔案編輯仍走原file.rev及歷史機制，沒有共享隱藏內容副本。
+本機第一個persistent-profile測試因Playwright已自動開始trace、工具重複tracing.start而失敗，功能尚未跑；移除重複初始化、沿用原trace後關閉重開與完整snapshot比較通過，未放寬資料比較。
 
-永久刪除引用檢查需涵蓋layout（含垃圾桶工作台），不只舊modules。檔案進垃圾桶仍保留layout項目並顯示還原入口；未知屬性原樣保留、未知schema唯讀，不默默清空。新草稿沿用分頁隔離命名與保存失敗流程；不是完整備份替代品。
+## 未完成及界線
 
-### 舊分頁防護：建議 IndexedDB 版本1→2，stores不變
+分類移動／隱藏／刪除恢復、自由工作台範本、跨台既有檔案連結／複製、更多組裝adapter留後續確認；不顯示未完成入口。Safari／Firefox、真手機觸控、完整螢幕閱讀器、OS原生選檔及Office／Calc未測。M2-NAV-01完整獨立操作缺口保留，不冒稱已完成Work獨立驗收。Excel維持取消，斜體入口不恢復，保留舊marks／匯入匯出。DB2／v4回復需相容讀取器，不可自動部署舊程式或降版刪資料。
 
-新metadata若仍用version1，舊3.6分頁不知道layout引用，可能從舊垃圾桶永久刪除新分類使用的file。只加BroadcastChannel不能管住不認識新協定的舊程式。
+## 首輪公開 HTTPS 原始結果與工具修正
 
-建議只用DB版本升級讓既有onversionchange關閉舊連線；不搬資料、不新增store、不刪／重建DB。現有onupgradeneeded直接create三個store，必須改成只在store不存在時建立，否則升級會撞名。blocked顯示請先保留輸入／關閉其他分頁並可重試，不強制清資料。舊分頁關閉連線後失敗輸入仍須可保留／下載草稿；舊版重新open(version1)應安全拒絕寫入，而非清DB降版。新版記錄完整就緒狀態與可恢復錯誤。
+候選3727e6f39b0114298bffa3278afac9fa95025c0d的run [40622143781](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40622143781)：44單元通過、全站129通過／5條件跳過、文件選取15通過；HTTPS專項25通過／1逾時，不能記為全綠。公開49資產已逐bytes符合該SHA。原始artifact 12788036646（GitHub ZIP digest `454157520b00ccf8eacbb7ef768243ab00b43e1ce2487e952342219697e12ae6`）。
 
-使用者已於本輪明確批准此限定資料契約與版本防護；不是M3.2發布的一部分。若使用者不接受此版本防護，需先解決同等安全的舊客戶端隔離方案，不能直接上線有刪除風險的layout。
-
-### 備份：建議新增v4，保留讀v1/v2/v3
-
-目前snapshot只收指定meta前綴，會漏掉layout。不能只在v3加欄位：舊3.6的validator可能接受額外欄位但import不還原，造成分類靜默消失。
-
-建議有layout時完整備份version4，新增workbenchLayouts；沒有layout仍照既有v1-v3選版。分包傳輸版本不變（它包bytes／hash，與內容版本分開）。新程式讀v1-v4，舊程式必須在未知version4整份拒絕；不能用不完整v3當完整替代。
-
-副本還原先整份驗證、同一交易提交：工作台／file／category／item用一致mapping建立新ID，layout.workbenchId／categoryId／fileId全數映射，來源data／rev／歷史、舊快照與模板不改；兩次還原不得共用ID。缺包、混包、損毀、非法引用一律零部分寫入。現有超100MB與舊超限單JSON安全恢復仍可使用，沒有截短／刪除策略。
-
-### 回復風險
-
-DB升到2不能讓舊程式靠刪庫回1；舊3.6也不會完整備份layout。M3.3發布前須有DB2／v4相容讀取及恢復候選、混版分頁測試與備份出口。優先可讀取的修補，不將舊客戶端當無條件回復方案。回復／正式部署仍另要批准。
-
-## 小PR與檔案責任
-
-線性相依三個PR，同一整合負責人，不同代理不得同時改storage/workspace。使用者一次確認第一階段後可持續做到可操作候選，不每個PR停等。
-
-1. 契約與pure layout-model＋模型測試：ID、命名、順序、驗證、未知值保護；無工具入口、無正式發布。
-2. 小範圍儲存整合：DB2防護、CAS原子新增、引用保護、v4完整／分包備份與副本還原、舊資料相容。此PR對模型PR有依賴，尚不讓半成品上正式。
-3. 工作台UI與九工具串接：建立自由工作台、分類與卡片、返回工作台的安全關聯、組裝支援來源篩選、手機／鍵盤／深淺色、實際保存重開與證據。最後才形成可獨立QA的完整MVP。
-
-不得把新內容推回#16～21或release分支。建議目前以8df0db6112394e87876fe0358bbd370d0f78e78f另開M3.3分支；若正式release R已就緒，先核對diff再更新基線，不盲目依賴main。A線等待發布不阻止B線在批准後開發；兩線只有明確基線整合，不互相夾帶。
-
-## 下一輪可驗收條件
-
-建立兩個自由工作台，分別新增三分類與不同工具；改名／排序後reload仍保留全部ID／內容／順序，彼此不共用新檔案。九工具都能由卡片進入既有編輯器；重點完整操作tasks/notes/budget/time並保留其他工具契約，不重建工具。備忘來源能進組裝並保存重開；不支援工具不假稱可組裝。
-
-CAS另一分頁勝方不被覆寫，敗方保留草稿；quota故障新增不留半檔，解除可重試；舊3.6分頁遇DB2正確關閉／禁止錯誤刪除，未保存輸入不消失；3.6合成資料原ID/data/rev/history不被啟動轉寫。v1-v3與新v4副本還原、分類file映射、圖片／歷史／成果、七包完整集合與損毀零寫入均有適當證據。
-
-390/1280主要操作無整頁橫向捲動，鍵盤上下移後焦點合理，兩主題清楚。提供隔離新namespace預覽、完整產品／工具SHA、真實下載與hash、CI原始證據、Pass/Fail/Skipped/未測；開發者通過不等於獨立QA通過。沿用既有監測器，不重造QA平台或無限擴測。沒有M3.3合併／正式部署授權。
+原始trace顯示取消離開的confirm已正確dismiss，緊接reload觸發beforeunload，但取證監測器監聽dialog後，測試沒有接受第二個提示，因此停在reload直到30秒上限。這是測試對話框控制缺口，沒有資料遺失證據；不修改產品、不移除確認、不延長上限。測試現明確斷言第二提示是beforeunload並accept，再繼續既有原值／ID／恢復不自動保存斷言。本機針對性案例1通過；新完整工具SHA的HTTPS結果另以其CI為準。原始失敗trace及JSON另保存在隔離診斷分支codex/nexus-m33-diagnostics，未混入產品分支／正式部署。

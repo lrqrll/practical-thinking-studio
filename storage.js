@@ -1,5 +1,5 @@
 'use strict';
-const BRAND=Object.freeze({name:'NEXUS',version:'3.6.0-rc.1'});
+const BRAND=Object.freeze({name:'NEXUS',version:'3.7.0-rc.1'});
 const DEPLOYMENT=Object.freeze(typeof window!=='undefined'&&window.NEXUS_DEPLOYMENT||{channel:'production',commit:null});
 const IS_PREVIEW=DEPLOYMENT.channel==='preview'||(typeof location!=='undefined'&&location.pathname.includes('/practical-thinking-studio-preview/'));
 const PREVIEW_NAMESPACE=typeof DEPLOYMENT.namespace==='string'&&/^[a-z0-9-]{1,60}$/.test(DEPLOYMENT.namespace)?DEPLOYMENT.namespace:'m31-assembly';
@@ -50,6 +50,7 @@ async function editCategories(workbenchId,expected,operation,payload){return wor
  const current=await request(meta.get(NexusCategories.key(workbenchId)));if(!NexusCategories.valid(current))throw Error('分類配置未知，請完整備份；未改寫');if(current.rev!==expected)throw Error('分類已在其他分頁更新；保留您的輸入，請重新讀取後重試');
  let file=null,parameters=clone(payload);
  if(operation==='add-item'){
+  if(await request(files.count())>=5000)throw Error('檔案已達完整備份支援上限5000；未建立半份內容，請先完整備份及整理');
   if(!NexusCategories.kinds.includes(payload.toolType))throw Error('工具尚未完成或不支援');
   file=record(payload.toolType,payload.name,blankData(payload.toolType));parameters.fileId=file.id;
  }
