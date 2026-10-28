@@ -28,3 +28,5 @@ QA-M33-SELECTED-01另以先行修復PR處理：v1輸出allowlist為kind/version/
 原5個條件式skipped、36+1／補驗1、41、M2-NAV-01未完整獨立操作等歷史與限制均保留。Safari／Firefox、真手機觸控、完整讀屏、OS原生選檔及Office／Calc未測；390/1280瀏覽器不是實機認證。九工具／M2／PDF／DOCX／HTML／CSV／預算XLSX保留，Excel仍取消、斜體入口不恢復。
 
 後續（本輪不做）：同瀏覽器跨台共用同fileId、引用位置／共用標示、獨立副本；需另設計衝突與備份規則並取得授權，不是雲端同步。可先優先評估分類隱藏與整理，非本次發布承諾。
+
+首輪增量HTTPS CI40650781591止於資產比對，尚未跑功能：build同一步只將namespace寫入GITHUB_ENV，未套用到當步建置，導致預期deployment.js仍使用預設m31 namespace。改為當步明確傳入m33-organize，加入有限SHA就緒檢查及資產原始錯誤log；不是產品或資料損壞，不放寬bytes比較。修後以新的完整工具SHA重跑本次有界專項。
