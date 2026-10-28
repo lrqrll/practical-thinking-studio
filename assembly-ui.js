@@ -4,7 +4,8 @@ const assemblyTabDrafts=new Map();let assemblyDownloadTarget;
 function runAssemblyDownload(fileId){const target=assemblyDownloadTarget;assemblyDownloadTarget=null;if(target?.fileId===fileId&&Date.now()-target.at<15000)queueMicrotask(()=>$('#doc-'+target.format)?.click());}
 async function assemblyCatalog(benchId){
  const [files,snapshots,benches]=await Promise.all([NexusStore.readAll('files'),NexusStore.readMetaPrefix('workbench-snapshot:'),NexusStore.readMetaPrefix('workbench:')]);
- return [...snapshots.filter(s=>(!benchId||s.workbenchId===benchId)&&benches.some(w=>w.id===s.workbenchId&&!w.deletedAt)).map(record=>({kind:'snapshot',record})),...files.filter(f=>f.type==='notes'&&!f.deletedAt).map(record=>({kind:'notes',record}))];
+ const layout=benchId?await NexusStore.get('meta',NexusCategories.key(benchId)):null;if(layout&&!NexusCategories.valid(layout))throw Error('工作台分類配置未知，未讀取不完整來源');
+ return [...snapshots.filter(s=>(!benchId||s.workbenchId===benchId)&&benches.some(w=>w.id===s.workbenchId&&!w.deletedAt)).map(record=>({kind:'snapshot',record})),...files.filter(f=>f.type==='notes'&&!f.deletedAt&&(!layout||layout.items.some(i=>i.fileId===f.id))).map(record=>({kind:'notes',record}))];
 }
 async function renderAssembly(benchId,isCurrent){
  const key=benchId||'workspace';let draft=assemblyTabDrafts.get(key);

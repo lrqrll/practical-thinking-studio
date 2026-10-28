@@ -72,3 +72,11 @@ h1,.article h1{font-size:24px;line-height:1.5;letter-spacing:0;margin-bottom:18p
 #assembly-options {display:flex;gap:.75rem;flex-wrap:wrap;margin:1rem 0}
 #assembly-success .button {display:inline-block;margin-bottom:1rem}
 #assembly-refresh-panel:not(:empty) {border:1px solid var(--line);padding:1rem;margin:1rem 0}
+
+.category-workbench,.category-panel,.category-items {min-width:0;max-width:100%;overflow-wrap:anywhere}
+.category-workbench .actions {flex-wrap:wrap}
+.category-workbench input,.category-workbench select {box-sizing:border-box;min-width:0;max-width:100%}
+.category-tool-form {display:grid;grid-template-columns:minmax(0,1fr);gap:.5rem;margin-top:1rem}
+.category-item {display:flex;flex-direction:column;gap:.25rem;margin:1rem 0}
+.category-item a {overflow-wrap:anywhere}
+@media(min-width:800px){.category-tool-form {grid-template-columns:auto minmax(0,1fr);align-items:center}.category-tool-form button {grid-column:2}}

@@ -2,14 +2,19 @@ name: M3.3 development checks (developer verification)
 on:
   push:
     branches: [codex/nexus-m33-categories, codex/nexus-m33-storage, codex/nexus-m33-interface]
-  pull_request:
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
   development:
     if: startsWith(github.head_ref || github.ref_name, 'codex/nexus-m33-')
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: write
+    timeout-minutes: 30
+    env:
+      NEXUS_EXPECTED_ASSETS_FILE: environment-evidence/candidate-assets.json
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,19 +25,104 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci --ignore-scripts
-      - run: npm run test:unit
+      - name: Model and existing tool unit tests
+        run: |
+          set -o pipefail
+          mkdir -p environment-evidence
+          npm run test:unit | tee environment-evidence/unit.log
       - name: Existing compatible Chrome
         if: (github.head_ref || github.ref_name) != 'codex/nexus-m33-categories'
         run: |
           if [ -x /usr/bin/google-chrome ]; then echo 'NEXUS_CHROMIUM=/usr/bin/google-chrome' >> "$GITHUB_ENV"; else npx playwright install --with-deps chromium; fi
-      - name: Layout persistence, upgrade, references and complete backups
-        if: (github.head_ref || github.ref_name) != 'codex/nexus-m33-categories'
+      - name: PDF inspection tools and verified CJK fallback
+        if: (github.head_ref || github.ref_name) == 'codex/nexus-m33-interface'
+        timeout-minutes: 5
+        run: |
+          sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=45 -o Acquire::https::Timeout=45 update
+          sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=45 -o Acquire::https::Timeout=45 install -y poppler-utils
+          node scripts/qa/production/install-cjk.cjs
+          google-chrome --version > environment-evidence/browser.txt
+          pdftoppm -v 2> environment-evidence/poppler.txt
+      - name: Parent storage compatibility checks
+        if: (github.head_ref || github.ref_name) == 'codex/nexus-m33-storage'
         run: npx playwright test tests/e2e/categories-storage.spec.cjs tests/e2e/m2-storage.spec.cjs tests/e2e/workbench.spec.cjs tests/e2e/qa-fixtures.spec.cjs --workers=2 --reporter=list --trace on --output=m33-storage-results
+      - name: Original 3.6 same-origin compatibility fixture
+        if: (github.head_ref || github.ref_name) == 'codex/nexus-m33-interface'
+        run: node scripts/qa/m33-legacy.cjs
+      - name: Full existing and M3.3 local regression without retries
+        if: (github.head_ref || github.ref_name) == 'codex/nexus-m33-interface'
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: test-results/m33-full.json
+        run: |
+          set -o pipefail
+          npx playwright test --workers=1 --reporter=list,json --output=m33-full-results | tee environment-evidence/full.log
+      - name: Preserve original native document selection regressions
+        if: (github.head_ref || github.ref_name) == 'codex/nexus-m33-interface'
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: test-results/m33-selection.json
+        run: npx playwright test tests/e2e/ci-regressions.spec.cjs tests/e2e/document.spec.cjs --grep 'native navigation|font, size' --repeat-each=5 --reporter=list,json --output=m33-selection-results
+      - name: Bind the separate M3.3 preview, never m31 or m32
+        if: (github.head_ref || github.ref_name) == 'codex/nexus-m33-interface'
+        run: |
+          echo 'NEXUS_M2_SITE_URL=https://lrqrll.github.io/practical-thinking-studio-preview/m33/' >> "$GITHUB_ENV"
+          echo 'NEXUS_PREVIEW_NAMESPACE=m33-categories' >> "$GITHUB_ENV"
+          echo "NEXUS_M2_EXPECTED_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          NEXUS_PREVIEW_NAMESPACE=m33-categories npm run build:preview
+      - name: Bounded Pages readiness gate
+        if: (github.head_ref || github.ref_name) == 'codex/nexus-m33-interface'
+        run: |
+          node - <<'JS'
+          (async()=>{for(let i=0;i<12;i++){const r=await fetch(process.env.NEXUS_M2_SITE_URL+'deployment.json',{signal:AbortSignal.timeout(10000),cache:'no-store'});if(r.ok&&(await r.json()).commit===process.env.NEXUS_M2_EXPECTED_COMMIT)return;await new Promise(ok=>setTimeout(ok,10000));}throw Error('M3.3 preview SHA not deployed; no HTTPS functional acceptance ran');})().catch(e=>{console.error(e);process.exitCode=1;});
+          JS
+      - name: Exact live assets then real HTTPS core acceptance
+        if: (github.head_ref || github.ref_name) == 'codex/nexus-m33-interface'
+        env:
+          NEXUS_PREVIEW_VERIFY: '1'
+          NEXUS_CAPTURE_EVIDENCE: '1'
+          PLAYWRIGHT_JSON_OUTPUT_NAME: test-results/m33-https.json
+        run: |
+          node scripts/qa/candidate-assets.cjs
+          npx playwright test tests/e2e/categories-storage.spec.cjs tests/e2e/categories-ui.spec.cjs tests/e2e/categories-capacity.spec.cjs tests/e2e/assembly.spec.cjs tests/e2e/document-save-drain.spec.cjs tests/e2e/pdf.spec.cjs tests/e2e/time-records.spec.cjs --workers=2 --reporter=list,json --trace on --output=m33-https-results
+          node scripts/qa/production/verify-monitor.cjs m33-https-results > environment-evidence/m33-https-integrity.json
+          node scripts/qa/candidate-assets.cjs
+      - run: npm audit --audit-level=high
+      - name: Evidence manifest and readable CI summary
+        if: always() && (github.head_ref || github.ref_name) == 'codex/nexus-m33-interface'
+        run: node scripts/qa/m33-evidence.cjs
       - uses: actions/upload-artifact@v4
+        id: evidence
         if: always()
         with:
-          name: M33-development-evidence
+          name: M33-developer-evidence
           path: |
+            environment-evidence/
             m33-storage-results/
+            m33-https-results/
+            m33-full-results/**/reopen-proof.json
+            m33-full-results/**/v4-capacity-proof.json
+            m33-full-results/**/old-client-latest-draft.json
+            m33-legacy-fixture/source-manifest.json
             test-results/
           retention-days: 30
+      - name: Raw artifact identity
+        if: always()
+        run: |
+          printf '\nArtifact: %s\nGitHub ZIP digest: %s\n' '${{ steps.evidence.outputs.artifact-url }}' '${{ steps.evidence.outputs.artifact-digest }}' >> "$GITHUB_STEP_SUMMARY"
+      - name: Update authorized M3.3 PR delivery evidence only
+        if: always() && (github.head_ref || github.ref_name) == 'codex/nexus-m33-interface'
+        uses: actions/github-script@v7
+        env:
+          M33_ARTIFACT: ${{ steps.evidence.outputs.artifact-url }}
+          M33_DIGEST: ${{ steps.evidence.outputs.artifact-digest }}
+        with:
+          script: |
+            const fs=require('fs');
+            const report=fs.existsSync('environment-evidence/m33-summary.json')?JSON.parse(fs.readFileSync('environment-evidence/m33-summary.json')):null;
+            const {owner,repo}=context.repo;
+            const branch='codex/nexus-m33-interface';
+            const list=await github.rest.pulls.list({owner,repo,head:owner+':'+branch,state:'open'});
+            if(!list.data.length){core.warning('No M3.3 interface PR exists: PR-creation permission remains a delivery blocker; tests are reported separately.');return;}
+            const pr=list.data[0];if(pr.head.sha!==context.sha)throw Error('Do not overwrite a newer PR head evidence');
+            const body=`M3.3 第一階段實際功能候選（開發者驗證，待Work獨立複驗）。\n\nHead: ${context.sha}\nBase: ${pr.base.ref} / ${pr.base.sha}\n\n新增自由工作台、穩定ID自訂分類新增／改名／上下排序、九工具獨立內容與原編輯器、手機／桌面／鍵盤／兩主題、組裝器的本台來源篩選。原採購工作台、M2欄位／範本、PDF／DOCX／HTML／CSV／XLSX保留，#16～21凍結。\n\n使用者另明確批准meta分類配置、DB1→2保留原stores／不批次改寫、v4完整備份向後讀v1-v3，分包格式不變。CAS／quota原子失敗保留最新輸入／可下載草稿；分類引用含垃圾桶保護永久刪檔。5000全域file上限與既有備份一致，未截短。\n\n預覽：https://lrqrll.github.io/practical-thinking-studio-preview/m33/ （namespace=m33-categories，DB=nexus-preview-m33-categories-workspace，正式站／m31／m32不變，同origin不是安全權限隔離）。自己SHA的公開資產前後比對及每context/page實際bytes/hash、真下載、trace在原始證據。\n\nCI: https://github.com/${owner}/${repo}/actions/runs/${context.runId}\n原始artifact: ${process.env.M33_ARTIFACT||'artifact step did not complete'}\nGitHub ZIP digest: ${process.env.M33_DIGEST||'not available'}（非本機重算ZIP）。\n觀測結果（skipped不算pass）：\n\n\`\`\`json\n${JSON.stringify(report?.reports||{},null,2)}\n\`\`\`\n\n實測專用profile關閉瀏覽器再開的完整snapshot比較；真實舊3.6同origin分頁writer在DB2升級關閉後保留／下載最後草稿；混合M2＋v4副本映射；超100MB／150成果七包v4完整還原與圖片解碼。原始控制案例是local歷史版本相容驗證，不冒稱正式HTTPS舊站。來源SHA、測試／環境、PNG、下載hash及raw bytes另見artifact與job summary。\n\n可重跑：checkout本head，npm ci --ignore-scripts；npm run test:unit；node scripts/qa/m33-legacy.cjs；NEXUS_CHROMIUM=/usr/bin/chromium npx playwright test --workers=1（PDF解析需poppler）。HTTPS指令、namespace／SHA綁定及取證詳.github/workflows/m33-development.yml與docs/M33-CATEGORIES.md。retries=0，TLS驗證開啟，合成隔離資料。\n\n尚未完成：分類跨類移動／隱藏／移除恢復、自由工作台範本、既有來源跨台連結、更多組裝adapter。Safari／Firefox／真手機觸控／完整讀屏／OS選檔／Office/Calc未測；M2-NAV-01完整獨立操作缺口保留。DB2/v4回退需相容讀取器，不可刪庫降版。沒有main合併／正式部署／auto-merge／M3.4授權。`;
+            await github.rest.pulls.update({owner,repo,pull_number:pr.number,body});
+            core.info(pr.html_url);

@@ -1,13 +1,14 @@
 {
   "name": "nexus-quality",
   "private": true,
-  "version": "3.6.0-rc.1",
+  "version": "3.7.0-rc.1",
   "scripts": {
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "node --test tests/unit/*.test.cjs",
     "test:e2e": "playwright test",
     "serve": "python3 -m http.server 8000 --bind 127.0.0.1",
-    "build:preview": "node scripts/build-preview.cjs"
+    "build:preview": "node scripts/build-preview.cjs",
+    "pretest": "node scripts/qa/m33-legacy.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",

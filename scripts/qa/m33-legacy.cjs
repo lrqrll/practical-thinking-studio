@@ -1,0 +1,4 @@
+'use strict';
+// Historical compatibility fixture only; never used to replace a current HTTPS candidate response.
+const fs=require('fs'),path=require('path'),{execFileSync}=require('child_process'),{createHash}=require('crypto');
+const commit='8df0db6112394e87876fe0358bbd370d0f78e78f',out='m33-legacy-fixture';fs.mkdirSync(out,{recursive:true});const files=execFileSync('git',['ls-tree','--name-only',commit],{encoding:'utf8'}).trim().split('\n').filter(f=>/\.(html|js|css|woff2|ttf|txt)$/.test(f));const manifest=[];for(const file of files){const bytes=execFileSync('git',['show',commit+':'+file],{maxBuffer:20000000});fs.writeFileSync(path.join(out,file),bytes);manifest.push({file,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')});}fs.writeFileSync(path.join(out,'source-manifest.json'),JSON.stringify({role:'歷史3.6原始碼相容測試fixture，非目前正式HTTPS驗收',commit,assets:manifest},null,2));console.log('Prepared exact historical source',commit,files.length);
