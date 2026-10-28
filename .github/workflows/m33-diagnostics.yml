@@ -11,10 +11,20 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+      - name: Wait for the specified current run to complete, bounded
+        uses: actions/github-script@v7
+        with:
+          script: |
+            for(let i=0;i<18;i++){
+              const r=await github.rest.actions.getWorkflowRun({...context.repo,run_id:40645014438});
+              if(r.data.status==='completed')return;
+              await new Promise(ok=>setTimeout(ok,10000));
+            }
+            throw Error('Specified CI still running; no evidence downloaded');
       - uses: actions/download-artifact@v4
         with:
           name: M33-developer-evidence
-          run-id: 40622143781
+          run-id: 40645014438
           github-token: ${{ github.token }}
           path: /tmp/m33-existing
       - name: Extract original failures and screenshots without re-running tests
@@ -24,8 +34,9 @@ jobs:
           root='/tmp/m33-existing'; out='diagnostic-evidence';os.makedirs(out,exist_ok=True)
           summary={}
           for f in glob.glob(root+'/**/m33-*.json',recursive=True):
-            if os.path.basename(f) not in ['m33-full.json','m33-selection.json','m33-https.json','m33-summary.json']: continue
+            if os.path.basename(f) not in ['m33-full.json','m33-selection.json','m33-https.json','m33-summary.json','m33-https-integrity.json']: continue
             d=json.load(open(f)); summary[os.path.relpath(f,root)]={'stats':d.get('stats'), 'errors':d.get('errors')}
+            if os.path.basename(f) in ['m33-summary.json','m33-https-integrity.json']:summary[os.path.relpath(f,root)]=d
             def walk(s):
               for spec in s.get('specs',[]):
                 for t in spec.get('tests',[]):
@@ -43,7 +54,7 @@ jobs:
           assets=glob.glob(root+'/**/candidate-assets.json',recursive=True)
           if assets:shutil.copyfile(assets[0],out+'/candidate-assets.json')
           for f in glob.glob(root+'/**/categories-*.png',recursive=True):shutil.copyfile(f,out+'/'+os.path.basename(f))
-          json.dump(summary,open(out+'/original-run-40622143781.json','w'),ensure_ascii=False,indent=2)
+          json.dump(summary,open(out+'/run-40645014438.json','w'),ensure_ascii=False,indent=2)
           print(json.dumps(summary,ensure_ascii=False)[:60000])
           PY
       - name: Preserve synthetic diagnostic evidence on this branch only
