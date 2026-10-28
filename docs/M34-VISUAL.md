@@ -38,3 +38,5 @@ DB2、三stores、layout schema1、v1-v4備份完全不變，沒有資料遷移�
 中間CI40657088901另有範本fixture失敗，讀取原始trace後確認：sources helper在報價編輯器main仍inert／aria-busy=true時fill第一個廠商名稱，該筆輸入未進入欄位，後續成果按正確驗證拒絕「請填寫廠商1名稱」。不是已保存正文被改寫；原trace在獨立codex/nexus-m34-evidence分支留存。helper現先確認目標編輯器可見且既有ready條件成立，再逐欄fill並斷言原值；備忘來源同樣處理。不改產品載入鎖、不延長timeout、不刪後續成果／範本隔離斷言；刻意延遲／追加輸入的故障注入案例保留原流程。
 
 補強helper時的首個本機版本漏了for區塊，三案因i未定義而在工具端中止，未形成產品結論；已改為明確區塊並保留逐欄原值斷言。就緒修正後，完整範本隔離流程有限重複3次，全數通過。該提交只有測試與紀錄差異，產品資產與c3f6adf相同（預覽SHA標記依工具提交更新）。
+
+產品c3f6adf的完整回歸與原生選取通過，HTTPS專項僅新外觀／專注案例停在doc-save後立刻reload；其餘35案通過。該測試未等文件保存結束，觸發正常beforeunload而被取證dialog listener保留，並非已證實保存失敗。現核對dirty/pending/timer/saveError全解除及UI已保存後才reload；保留正文、粗體marks、DOM身分及重新開啟的全部斷言，不改產品保存／確認機制。修後自己的工具SHA以最後CI為準，中間測試提交不新增產品內容。
