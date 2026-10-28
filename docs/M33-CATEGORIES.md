@@ -38,3 +38,9 @@ NEXUS_CHROMIUM=/usr/bin/chromium npx playwright test tests/e2e/categories-storag
 ## 未完成及界線
 
 分類移動／隱藏／刪除恢復、自由工作台範本、跨台既有檔案連結／複製、更多組裝adapter留後續確認；不顯示未完成入口。Safari／Firefox、真手機觸控、完整螢幕閱讀器、OS原生選檔及Office／Calc未測。M2-NAV-01完整獨立操作缺口保留，不冒稱已完成Work獨立驗收。Excel維持取消，斜體入口不恢復，保留舊marks／匯入匯出。DB2／v4回復需相容讀取器，不可自動部署舊程式或降版刪資料。
+
+## 首輪公開 HTTPS 原始結果與工具修正
+
+候選3727e6f39b0114298bffa3278afac9fa95025c0d的run [40622143781](https://github.com/lrqrll/practical-thinking-studio/actions/runs/40622143781)：44單元通過、全站129通過／5條件跳過、文件選取15通過；HTTPS專項25通過／1逾時，不能記為全綠。公開49資產已逐bytes符合該SHA。原始artifact 12788036646（GitHub ZIP digest `454157520b00ccf8eacbb7ef768243ab00b43e1ce2487e952342219697e12ae6`）。
+
+原始trace顯示取消離開的confirm已正確dismiss，緊接reload觸發beforeunload，但取證監測器監聽dialog後，測試沒有接受第二個提示，因此停在reload直到30秒上限。這是測試對話框控制缺口，沒有資料遺失證據；不修改產品、不移除確認、不延長上限。測試現明確斷言第二提示是beforeunload並accept，再繼續既有原值／ID／恢復不自動保存斷言。本機針對性案例1通過；新完整工具SHA的HTTPS結果另以其CI為準。原始失敗trace及JSON另保存在隔離診斷分支codex/nexus-m33-diagnostics，未混入產品分支／正式部署。
