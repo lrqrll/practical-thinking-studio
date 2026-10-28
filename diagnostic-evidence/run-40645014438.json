@@ -1,0 +1,278 @@
+{
+  "test-results/m33-full.json": {
+    "stats": {
+      "startTime": "2026-10-28T06:38:20.716Z",
+      "duration": 246304.305,
+      "expected": 129,
+      "skipped": 5,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "errors": []
+  },
+  "test-results/m33-selection.json": {
+    "stats": {
+      "startTime": "2026-10-28T06:42:27.863Z",
+      "duration": 22743.138,
+      "expected": 15,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "errors": []
+  },
+  "test-results/m33-https.json": {
+    "stats": {
+      "startTime": "2026-10-28T06:42:57.489Z",
+      "duration": 77177.464,
+      "expected": 26,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "errors": []
+  },
+  "environment-evidence/m33-summary.json": {
+    "role": "開發者驗證，非獨立QA",
+    "head": "394acbfb1bb8e30041b440e0b3267a57ec9e51d0",
+    "reports": {
+      "full": {
+        "startTime": "2026-10-28T06:38:20.716Z",
+        "duration": 246304.305,
+        "expected": 129,
+        "skipped": 5,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "selection": {
+        "startTime": "2026-10-28T06:42:27.863Z",
+        "duration": 22743.138,
+        "expected": 15,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "https": {
+        "startTime": "2026-10-28T06:42:57.489Z",
+        "duration": 77177.464,
+        "expected": 26,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "images": [
+      {
+        "file": "m33-https-results/categories-ui-custom-categ-00eff-r-assembly-save-reopen-1280/categories-1280-dark.png",
+        "bytes": 127710,
+        "sha256": "9dfa7889a221bc5770a6e94f1828c4e6e760f05b5236404a91636981ecdb0384"
+      },
+      {
+        "file": "m33-https-results/categories-ui-custom-categ-00eff-r-assembly-save-reopen-1280/categories-1280-light.png",
+        "bytes": 132910,
+        "sha256": "233ccdd931c681a6d58fcf9cf5fdad79344ddd1492f79dc7667b9e821d22ac7a"
+      },
+      {
+        "file": "m33-https-results/categories-ui-custom-categ-9b61b-or-assembly-save-reopen-390/categories-390-dark.png",
+        "bytes": 117931,
+        "sha256": "db2c36da33f3b8f6c22f62e6f54a6288e6b23e3d97864e9571f3cf88b46c9a3e"
+      },
+      {
+        "file": "m33-https-results/categories-ui-custom-categ-9b61b-or-assembly-save-reopen-390/categories-390-light.png",
+        "bytes": 123466,
+        "sha256": "978dd53f3e7662e2674876e4b73c9f61d0df94c706e07b05ffa468c3b3ac76b1"
+      }
+    ]
+  },
+  "environment-evidence/m33-https-integrity.json": {
+    "role": "開發者取證完整性檢查（非獨立QA）",
+    "M": "394acbfb1bb8e30041b440e0b3267a57ec9e51d0",
+    "indexes": 26,
+    "responses": 2016,
+    "downloads": 29,
+    "reports": [
+      {
+        "index": "assembly-assembled-actual--c8127-nput-and-downloadable-draft/monitor-index.json",
+        "contexts": 1,
+        "pages": 2,
+        "responses": 105,
+        "errors": 0
+      },
+      {
+        "index": "assembly-assembly-two-sour-4d46c-olated-complete-restore-390/monitor-index.json",
+        "contexts": 2,
+        "pages": 2,
+        "responses": 175,
+        "errors": 0
+      },
+      {
+        "index": "assembly-assembly-two-sour-71d1b-lated-complete-restore-1280/monitor-index.json",
+        "contexts": 2,
+        "pages": 2,
+        "responses": 175,
+        "errors": 0
+      },
+      {
+        "index": "assembly-selection-cancell-b1445-urce-never-create-half-file/monitor-index.json",
+        "contexts": 1,
+        "pages": 1,
+        "responses": 31,
+        "errors": 0
+      },
+      {
+        "index": "assembly-source-HTML-is-li-023fb-e-further-editing-continues/monitor-index.json",
+        "contexts": 1,
+        "pages": 1,
+        "responses": 70,
+        "errors": 0
+      },
+      {
+        "index": "categories-capacity-v4-cat-01fa9-re-images-history-relations/monitor-index.json",
+        "contexts": 2,
+        "pages": 2,
+        "responses": 93,
+        "errors": 0
+      },
+      {
+        "index": "categories-storage-DB1-upg-94959-erves-original-IDs-rev-data/monitor-index.json",
+        "contexts": 1,
+        "pages": 1,
+        "responses": 31,
+        "errors": 0
+      },
+      {
+        "index": "categories-storage-categor-7f269-ith-all-references-remapped/monitor-index.json",
+        "contexts": 2,
+        "pages": 2,
+        "responses": 93,
+        "errors": 0
+      },
+      {
+        "index": "categories-storage-layout--0907c--and-never-leave-half-files/monitor-index.json",
+        "contexts": 1,
+        "pages": 1,
+        "responses": 31,
+        "errors": 0
+      },
+      {
+        "index": "categories-ui-CAS-quota-re-c4a82-load-permits-reviewed-retry/monitor-index.json",
+        "contexts": 1,
+        "pages": 2,
+        "responses": 124,
+        "errors": 0
+      },
+      {
+        "index": "categories-ui-cancel-leavi-f4a26-r-keeps-other-unsaved-names/monitor-index.json",
+        "contexts": 1,
+        "pages": 1,
+        "responses": 62,
+        "errors": 0
+      },
+      {
+        "index": "categories-ui-custom-categ-00eff-r-assembly-save-reopen-1280/monitor-index.json",
+        "contexts": 1,
+        "pages": 3,
+        "responses": 101,
+        "errors": 0
+      },
+      {
+        "index": "categories-ui-custom-categ-9b61b-or-assembly-save-reopen-390/monitor-index.json",
+        "contexts": 1,
+        "pages": 3,
+        "responses": 101,
+        "errors": 0
+      },
+      {
+        "index": "categories-ui-fresh-dispos-e390c-orkbench-category-file-data/monitor-index.json",
+        "contexts": 2,
+        "pages": 2,
+        "responses": 62,
+        "errors": 0
+      },
+      {
+        "index": "categories-ui-two-workbenc-61249-ludes-other-workbench-notes/monitor-index.json",
+        "contexts": 1,
+        "pages": 1,
+        "responses": 35,
+        "errors": 0
+      },
+      {
+        "index": "document-save-drain-CJK-vi-2cb8d-fter-save-reopen-and-reload/monitor-index.json",
+        "contexts": 1,
+        "pages": 1,
+        "responses": 70,
+        "errors": 0
+      },
+      {
+        "index": "document-save-drain-actual-32c0d-waits-for-an-in-flight-save/monitor-index.json",
+        "contexts": 1,
+        "pages": 1,
+        "responses": 70,
+        "errors": 0
+      },
+      {
+        "index": "pdf-PDF-missing-glyph-canc-d6306-uota-stop-output-then-retry/monitor-index.json",
+        "contexts": 1,
+        "pages": 1,
+        "responses": 88,
+        "errors": 0
+      },
+      {
+        "index": "pdf-PDF-uses-frozen-saved-rev-while-editing-continues/monitor-index.json",
+        "contexts": 1,
+        "pages": 1,
+        "responses": 76,
+        "errors": 0
+      },
+      {
+        "index": "pdf-actual-PDF-Chinese-sel-105f3-d-font-repeat-header-single/monitor-index.json",
+        "contexts": 1,
+        "pages": 1,
+        "responses": 41,
+        "errors": 0
+      },
+      {
+        "index": "pdf-actual-PDF-Chinese-sel-69e22-ed-font-repeat-header-multi/monitor-index.json",
+        "contexts": 1,
+        "pages": 1,
+        "responses": 41,
+        "errors": 0
+      },
+      {
+        "index": "time-records-time-records--24588--histories-and-editable-CSV/monitor-index.json",
+        "contexts": 2,
+        "pages": 2,
+        "responses": 62,
+        "errors": 0
+      },
+      {
+        "index": "time-records-time-records--3a063-eal-CSV-and-accessible-1280/monitor-index.json",
+        "contexts": 1,
+        "pages": 3,
+        "responses": 62,
+        "errors": 0
+      },
+      {
+        "index": "time-records-time-records--55638-and-CAS-without-overwriting/monitor-index.json",
+        "contexts": 1,
+        "pages": 2,
+        "responses": 124,
+        "errors": 0
+      },
+      {
+        "index": "time-records-time-records--ca0e3-real-CSV-and-accessible-390/monitor-index.json",
+        "contexts": 1,
+        "pages": 3,
+        "responses": 62,
+        "errors": 0
+      },
+      {
+        "index": "time-records-time-type-sup-5baf7-tory-and-all-original-tools/monitor-index.json",
+        "contexts": 1,
+        "pages": 1,
+        "responses": 31,
+        "errors": 0
+      }
+    ]
+  }
+}

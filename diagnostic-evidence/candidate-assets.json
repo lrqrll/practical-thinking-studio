@@ -1,6 +1,6 @@
 {
   "role": "開發者候選HTTPS逐資產驗證",
-  "M": "3727e6f39b0114298bffa3278afac9fa95025c0d",
+  "M": "394acbfb1bb8e30041b440e0b3267a57ec9e51d0",
   "site": "https://lrqrll.github.io/practical-thinking-studio-preview/m33/",
   "assets": {
     ".nojekyll": {
@@ -9,7 +9,7 @@
     },
     "OPEN-PREVIEW.txt": {
       "bytes": 334,
-      "sha256": "86de0a0555a46c91533b64f4a5218513cfd60fd100a5fe9a992ebe6483d56171"
+      "sha256": "beb8fb3b1e4262c36c6f6671b28c8d7bd4e4fa8ff833449de43775e9ba369871"
     },
     "PDF-FONT-OFL.txt": {
       "bytes": 4388,
@@ -45,7 +45,7 @@
     },
     "deployment.js": {
       "bytes": 289,
-      "sha256": "bbea15f71db31edde287c2e3153278ec9f38bfa400b0587eba8f8fd7627581a9"
+      "sha256": "c8c9a69542b8ce870ff650e7b3ce8ec645ec84d00b763b67e7dd3b278df8a185"
     },
     "document-editor.js": {
       "bytes": 27903,
@@ -85,7 +85,7 @@
     },
     "index.html": {
       "bytes": 3484,
-      "sha256": "f555aed00dc07ca241daa393d121bcf580fae1a7464e176fe4c5a564aaef16d4"
+      "sha256": "ae5a8944396ea4a39f1e908be278ea4066fe3a3e9e25a5da4140b97b6c8c920c"
     },
     "local-files.js": {
       "bytes": 3995,
@@ -202,7 +202,7 @@
   },
   "identity": {
     "channel": "preview",
-    "commit": "3727e6f39b0114298bffa3278afac9fa95025c0d",
+    "commit": "394acbfb1bb8e30041b440e0b3267a57ec9e51d0",
     "version": "3.7.0-rc.1",
     "db": "nexus-preview-m33-categories-workspace"
   }
