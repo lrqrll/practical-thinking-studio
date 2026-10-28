@@ -30,3 +30,5 @@ QA-M33-SELECTED-01另以先行修復PR處理：v1輸出allowlist為kind/version/
 後續（本輪不做）：同瀏覽器跨台共用同fileId、引用位置／共用標示、獨立副本；需另設計衝突與備份規則並取得授權，不是雲端同步。可先優先評估分類隱藏與整理，非本次發布承諾。
 
 首輪增量HTTPS CI40650781591止於資產比對，尚未跑功能：build同一步只將namespace寫入GITHUB_ENV，未套用到當步建置，導致預期deployment.js仍使用預設m31 namespace。改為當步明確傳入m33-organize，加入有限SHA就緒檢查及資產原始錯誤log；不是產品或資料損壞，不放寬bytes比較。修後以新的完整工具SHA重跑本次有界專項。
+
+次輪HTTPS40651017240：21通過／2逾時，兩種寬度都停在移動後的reload。舊測試對整個列表斷言「執行」，卻已能匹配尚未提交前的目標select選項，故提早在benchPending期間reload而觸發正常beforeunload。改為核對內容列的實際分類段落並確認pending已結束才重開；不更改產品、不移除確認、不拉長timeout。保留該次21+2原始證據，修後結果以新SHA為準。
