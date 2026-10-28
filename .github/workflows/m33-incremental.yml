@@ -40,7 +40,11 @@ jobs:
         env:
           PLAYWRIGHT_JSON_OUTPUT_NAME: test-results/m33-https.json
         run: |
-          node scripts/qa/candidate-assets.cjs
+          node - <<'JS'
+          (async()=>{for(let i=0;i<12;i++){try{const r=await fetch(process.env.NEXUS_M2_SITE_URL+'deployment.json',{signal:AbortSignal.timeout(10000),cache:'no-store'});if(r.ok&&(await r.json()).commit===process.env.GITHUB_SHA)return;}catch(e){console.log(e.message);}await new Promise(ok=>setTimeout(ok,10000));}throw Error('Preview SHA not ready within bounded gate');})().catch(e=>{console.error('::error::'+e.message);process.exitCode=1;});
+          JS
+          mkdir -p environment-evidence
+          node scripts/qa/candidate-assets.cjs > environment-evidence/assets-before.log 2>&1 || { cat environment-evidence/assets-before.log; echo '::error::Candidate asset mismatch; inspect assets-before.log in artifact'; exit 1; }
           npx playwright test tests/e2e/categories-selected.spec.cjs tests/e2e/categories-organize.spec.cjs tests/e2e/categories-storage.spec.cjs tests/e2e/categories-ui.spec.cjs tests/e2e/categories-capacity.spec.cjs tests/e2e/assembly.spec.cjs tests/e2e/document-save-drain.spec.cjs --workers=2 --trace on --reporter=list,json --output=m33-increment-results
           node scripts/qa/production/verify-monitor.cjs m33-increment-results > environment-evidence/integrity.json
           node scripts/qa/candidate-assets.cjs

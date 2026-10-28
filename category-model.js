@@ -13,6 +13,8 @@ const NexusCategories=(()=>{
   else if(operation==='rename-category'){if(!c)throw Error('分類不存在，請重新讀取');c.name=name();}
   else if(operation==='move-category'){const i=l.categories.findIndex(x=>x.id===payload.categoryId),j=i+payload.direction;if(i<0||![-1,1].includes(payload.direction)||j<0||j>=l.categories.length)throw Error('無法移動此分類');[l.categories[i],l.categories[j]]=[l.categories[j],l.categories[i]];}
   else if(operation==='add-item'){if(!c||!kinds.includes(payload.toolType)||!id(payload.fileId))throw Error('請選擇有效分類與工具');if(l.items.length>=100)throw Error('每工作台最多100個內容項目');if(l.items.some(i=>i.fileId===payload.fileId))throw Error('檔案已在此工作台');l.items.push({id:uid(),categoryId:c.id,fileId:payload.fileId,toolType:payload.toolType});}
+  else if(operation==='move-item'){const item=l.items.find(i=>i.id===payload.itemId);if(!item||!c)throw Error('內容或目標分類不存在');item.categoryId=c.id;}
+  else if(operation==='remove-item'){if(!l.items.some(i=>i.id===payload.itemId))throw Error('內容關聯不存在');l.items=l.items.filter(i=>i.id!==payload.itemId);}
   else throw Error('不支援的分類操作');
   l.rev++;l.updatedAt=now();if(!valid(l))throw Error('分類設定不符，未保存');return l;
  }

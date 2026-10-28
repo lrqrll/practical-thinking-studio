@@ -80,3 +80,4 @@ h1,.article h1{font-size:24px;line-height:1.5;letter-spacing:0;margin-bottom:18p
 .category-item {display:flex;flex-direction:column;gap:.25rem;margin:1rem 0}
 .category-item a {overflow-wrap:anywhere}
 @media(min-width:800px){.category-tool-form {grid-template-columns:auto minmax(0,1fr);align-items:center}.category-tool-form button {grid-column:2}}
+.existing-option{display:flex;gap:.7rem;align-items:center;overflow-wrap:anywhere;margin:.8rem 0}.category-workbench input,.category-workbench select{max-width:100%;min-width:0}.category-workbench .panel{overflow-wrap:anywhere}
