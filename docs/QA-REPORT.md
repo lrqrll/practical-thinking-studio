@@ -163,3 +163,7 @@ PR #4 已批准合併部署；PR #5 追加修正尚未批准。完成追加發�
 使用者回報獨立QA已核對程式／依賴／原始CI並重跑10項模型測試通過；因缺受控瀏覽器，完整操作仍未測，不是已確認功能失敗。#10 ede75bd60e905f65fbc01f03b4e4806ea89097ef、#11 2381aeb6a484daa4ee2e076bd202b3f3d6498593、#12 59dff72bb55a77c371863d6e8a998529b1997bf0保持凍結。M2-NAV-01獨立瀏覽器複審門檻有效。
 
 [可下載合成v1/v2/v3備份、逐項操作、內容manifest、負控制與原始證據](qa/m2-rc2/README.md) 已在獨立材料分支整理；不修改產品程式／依賴、版本、預覽來源SHA或正式站。新增7項fixture瀏覽器測試在本機開發者環境全通過，含108,082,768bytes／7包／151成果全新context還原；雙SHA負控制確認舊版可focus／rc.2不可focus。開發者證據見材料索引，不稱獨立QA通過。
+
+## QA-M33-SELECTED-01 / P2（增量分支）
+
+Work確認394acbf的選取匯出展開v4 snapshot而誤帶workbenchLayouts，v1驗證器正確拒絕。改為kind/version/exportedAt/files/folders/archives/histories明確組裝，不修改驗證器。開發者本機有／無分類兩案真下載、空白context匯入、歷史逐值比較及保存重開2通過；CI以增量PR自身SHA為準。原有有界QA與skipped界線保留。
